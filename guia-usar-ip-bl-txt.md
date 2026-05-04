@@ -6,7 +6,6 @@
 >
 > Ficheiro: `https://raw.githubusercontent.com/runtechx/Openfirst/master/blocklists/ip-bl.txt`
 
----
 
 ## 1. Instalar EPEL e Fail2ban
 
@@ -24,7 +23,6 @@ systemctl enable --now fail2ban
 systemctl status fail2ban
 ```
 
----
 
 ## 2. Configurar o Fail2ban
 
@@ -52,7 +50,6 @@ systemctl restart fail2ban
 fail2ban-client status
 ```
 
----
 
 ## 3. Script de importação automática da ip-bl.txt
 
@@ -87,6 +84,7 @@ done < "$TMP_FILE"
 rm -f "$TMP_FILE"
 echo "[$(date)] Importados $COUNT IPs com sucesso." >> "$LOG"
 ```
+
 
 ## 4. Crontab a cada 1 hora (Agendar a execução da tarefa)
 
