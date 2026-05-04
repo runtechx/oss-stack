@@ -47,6 +47,9 @@ Recarregar após configurar:
 
 ```bash
 systemctl restart fail2ban
+```
+
+```bash
 fail2ban-client status
 ```
 
