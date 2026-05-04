@@ -68,7 +68,10 @@ LOG="/var/log/import-ip-bl.log"
 echo "[$(date)] A importar blocklist..." >> "$LOG"
 
 # Descarregar a lista
-curl -fsSL "$BLOCKLIST_URL" -o "$TMP_FILE"
+if ! curl -fsSL "$BLOCKLIST_URL" -o "$TMP_FILE"; then
+    echo "[$(date)] Erro ao descarregar blocklist." >> "$LOG"
+    exit 1
+fi
 
 # Obter jails activas
 JAILS=$(fail2ban-client status | grep "Jail list" | cut -d: -f2 | tr ',' ' ')
@@ -78,14 +81,18 @@ COUNT=0
 while read -r ip; do
     [[ -z "$ip" ]] && continue
     echo "$ip" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' || continue
+
     for jail in $JAILS; do
         fail2ban-client set "$jail" banip "$ip" 2>/dev/null || true
     done
-    ((COUNT++))
+
+    ((COUNT++)) || true
 done < "$TMP_FILE"
 
 rm -f "$TMP_FILE"
+
 echo "[$(date)] Importados $COUNT IPs com sucesso." >> "$LOG"
+EOF
 ```
 
 
