@@ -142,4 +142,5 @@ sudo fail2ban-client status sshd
 Desbloquear todos IPs 
 ```bash
 sudo fail2ban-client unban --all
+sudo systemctl restart fail2ban
 ```
