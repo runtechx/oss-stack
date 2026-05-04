@@ -6,6 +6,12 @@
 >
 > Ficheiro: `https://raw.githubusercontent.com/runtechx/Openfirst/master/blocklists/ip-bl.txt`
 
+>[!IMPORTANT]
+> Usa a conta root caso não for possível 
+>```bash
+>su - root
+>```
+>adicione `sudo` antes de cada comando
 
 ## 1. Instalar EPEL e Fail2ban
 
@@ -110,8 +116,30 @@ Adiciona directamente a tarefa sem abrir o editor crontab -e
 echo "0 * * * * /usr/local/bin/import-ip-bl.sh >> /var/log/import-ip-bl.log 2>&1") | crontab -
 ```
 
-Verificar se ficou guardado:
+Verificar se ficou guardado
 
 ```bash
 crontab -l
+```
+
+## 5. Outros comandos 
+
+Bloquear IP 
+```bash
+sudo fail2ban-client set sshd banip x.x.x.x
+```
+
+Desbloquear IP 
+```bash
+sudo fail2ban-client set sshd unbanip x.x.x.x
+```
+
+Ver IP bloqueados 
+```bash
+sudo fail2ban-client status sshd
+```
+
+Desbloquear todos IPs 
+```bash
+sudo fail2ban-client unban --all
 ```
