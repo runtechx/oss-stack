@@ -95,6 +95,11 @@ echo "[$(date)] Importados $COUNT IPs com sucesso." >> "$LOG"
 EOF
 ```
 
+Tornar executável 
+
+```bash
+chmod +x /usr/local/bin/import-ip-bl.sh
+```
 
 ## 4. Crontab a cada 1 hora (Agendar a execução da tarefa)
 
@@ -108,5 +113,5 @@ echo "0 * * * * /usr/local/bin/import-ip-bl.sh >> /var/log/import-ip-bl.log 2>&1
 Verificar se ficou guardado:
 
 ```bash
-
+crontab -l
 ```
