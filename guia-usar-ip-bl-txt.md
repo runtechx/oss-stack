@@ -1,7 +1,9 @@
 # Guia — Como usar ip-bl.txt com Fail2ban
 
 > Lista de bloqueio centralizada distribuída via GitHub  
+>
 > Fonte: [Política OpenFirst da RunTech](https://github.com/runtechx) 
+>
 > Ficheiro: `https://raw.githubusercontent.com/runtechx/Openfirst/master/blocklists/ip-bl.txt`
 
 ---
