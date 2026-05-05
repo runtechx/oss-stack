@@ -3,6 +3,7 @@
 
 ###
 ```bash
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/zabbix_al10.sh -o zabbix.sh && bash zabbix.sh
 
 ```
 
