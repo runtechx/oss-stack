@@ -149,7 +149,7 @@ Para mostrar caracteres especiais:
 ```md
 
 > [!TIP]
-> Dicas 
+> Dica útil
 
 > [!NOTE]
 > Nota importante
@@ -159,6 +159,9 @@ Para mostrar caracteres especiais:
 
 > [!IMPORTANT]
 > Informação crítica
+
+>[!CAUTION]
+>aviso de cuidado — algo que pode dar problema
 
 ```
 
@@ -173,6 +176,9 @@ Para mostrar caracteres especiais:
 
 > [!IMPORTANT]
 > Informação crítica
+
+>[!CAUTION]
+>aviso de cuidado — algo que pode dar problema
 
 ## Dicas
 
