@@ -60,4 +60,5 @@ Todas as contribuições são bem-vindas, especialmente quando:
 | [Wazuh](https://wazuh.com/)| Plataforma de segurança e monitoramento (SIEM/XDR)|
 | [Issabel](https://www.issabel.com)| Plataforma de comunicações unificadas (VoIP, PBX, call center)|
 | [Odoo](https://www.odoo.com/)| ERP open source para gestão empresarial|
+| [Wordpress](https://wordpress.com/)| Sistema de gestão de conteúdos (CMS) para criação de sites e blogs|
 
