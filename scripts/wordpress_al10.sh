@@ -29,7 +29,7 @@ echo "============================================================"
 echo "[1/8] Updating system..."
 dnf update -y >> "$LOG" 2>&1
 # Install req. tools
-dnf install -y tar
+dnf install -y tar curl 
 # -----------------------------
 # STEP 2: Install Apache
 # -----------------------------
