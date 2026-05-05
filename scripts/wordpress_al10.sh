@@ -11,8 +11,10 @@ set -e
 # -----------------------------
 WP_DB_NAME="wordpress"
 WP_DB_USER="wpuser"
-WP_DB_PASS=$(openssl rand -base64 16)
-WP_DB_ROOT_PASS=$(openssl rand -base64 16)
+WP_DB_PASS=$(head -c 16 /dev/urandom | base64)
+WP_DB_ROOT_PASS=$(head -c 16 /dev/urandom | base64)
+#WP_DB_PASS=$(openssl rand -base64 16)
+#WP_DB_ROOT_PASS=$(openssl rand -base64 16)
 WP_DIR="/var/www/html/wordpress"
 SERVER_IP=$(hostname -I | awk '{print $1}')
 LOG="/var/log/deploy-wordpress.log"
