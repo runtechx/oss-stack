@@ -79,18 +79,19 @@ Os ficheiros têm a extensão **`.md` (Markdown)**
 ```md
 Use `codigo` dentro da frase
 ```
+Use `codigo` dentro da frase
 
 ### Bloco de código
 
 ````md
 ```bash
 echo "Olá Mundo"
-
+```
 ````
 
-````
-
----
+```bash
+echo "Olá Mundo"
+```
 
 ## Tabelas
 
@@ -101,7 +102,10 @@ echo "Olá Mundo"
 | Maria    | 30    |
 ````
 
----
+| Nome     | Idade |
+|----------|-------|
+| João     | 25    |
+| Maria    | 30    |
 
 ## Citações (Blockquote)
 
@@ -109,7 +113,8 @@ echo "Olá Mundo"
 > Isto é uma citação
 ```
 
----
+> Isto é uma citação
+
 
 ## Linha Horizontal
 
@@ -125,8 +130,8 @@ echo "Olá Mundo"
 - [x] Tarefa concluída
 - [ ] Tarefa pendente
 ```
-
----
+- [x] Tarefa concluída
+- [ ] Tarefa pendente
 
 ## Escape de caracteres
 
@@ -136,7 +141,38 @@ Para mostrar caracteres especiais:
 \* não itálico \*
 ```
 
----
+\* não itálico \*
+
+
+## Admonition / Callout
+
+```md
+
+> [!TIP]
+> Dicas 
+
+> [!NOTE]
+> Nota importante
+
+> [!WARNING]
+> Atenção!
+
+> [!IMPORTANT]
+> Informação crítica
+
+```
+
+> [!TIP]
+> Dicas em markdown.
+
+> [!NOTE]
+> Nota importante
+
+> [!WARNING]
+> Atenção!
+
+> [!IMPORTANT]
+> Informação crítica
 
 ## Dicas
 
