@@ -35,7 +35,9 @@ Todas as contribuições são bem-vindas, especialmente quando:
 
 ## Tecnologias adotadas
 
-[Ver os comandos para instalar as funções no almalinux 10+](/COMANDOS.md)
+>[!TIP]
+>Instale rapidamente as funcionalidades no AlmaLinux 10+ utilizando os comandos disponíveis:  
+>[Aceder aos comandos](/COMANDOS.md)
 
 ### Base
 
