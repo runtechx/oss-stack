@@ -286,22 +286,34 @@ cat > "$CRED_FILE" << CREDS
   ${MSG_GENERATED}: $(date)
 ============================================================
 
-  ${MSG_URL}               : http://${SERVER_IP}/wordpress
-  ${MSG_WIZARD}            : http://${SERVER_IP}/wordpress/wp-admin/install.php
+  ${MSG_URL}:
+  http://${SERVER_IP}/wordpress
+  ${MSG_WIZARD}:
+  http://${SERVER_IP}/wordpress/wp-admin/install.php
 
   ${MSG_DBSECTION}
-  ${MSG_DBNAME}            : ${WP_DB_NAME}
-  ${MSG_DBUSER}            : ${WP_DB_USER}
-  ${MSG_DBPASS}            : ${WP_DB_PASS}
-  ${MSG_DBROOTPASS}        : ${WP_DB_ROOT_PASS}
-  ${MSG_DBHOST}            : localhost
+  ${MSG_DBNAME}:
+  ${WP_DB_NAME}
+  ${MSG_DBUSER}:
+  ${WP_DB_USER}
+  ${MSG_DBPASS}:
+  ${WP_DB_PASS}
+  ${MSG_DBROOTPASS}:
+  ${WP_DB_ROOT_PASS}
+  ${MSG_DBHOST}:
+  localhost
 
   ${MSG_SRVSECTION}
-  ${MSG_SERVERIP}          : ${SERVER_IP}
-  ${MSG_WPPATH}            : ${WP_DIR}
-  ${MSG_APACHECONF}        : /etc/httpd/conf.d/wordpress.conf
-  ${MSG_LOG}               : ${LOG}
-  ${MSG_CREDS}             : ${CRED_FILE}
+  ${MSG_SERVERIP}:
+  ${SERVER_IP}
+  ${MSG_WPPATH}:
+  ${WP_DIR}
+  ${MSG_APACHECONF}:
+  /etc/httpd/conf.d/wordpress.conf
+  ${MSG_LOG}:
+  ${LOG}
+  ${MSG_CREDS}:
+  ${CRED_FILE}
 
 ============================================================
   ${MSG_KEEPFILE}
@@ -320,17 +332,26 @@ echo "============================================================"
 echo "  ${MSG_DONE}"
 echo "============================================================"
 echo ""
-echo "  ${MSG_URL}             : http://${SERVER_IP}/wordpress"
-echo "  ${MSG_WIZARD}          : http://${SERVER_IP}/wordpress/wp-admin/install.php"
+echo "  ${MSG_URL}:"
+echo "  http://${SERVER_IP}/wordpress"
+echo "  ${MSG_WIZARD}:"
+echo "  http://${SERVER_IP}/wordpress/wp-admin/install.php"
 echo ""
-echo "  ${MSG_DBNAME}          : ${WP_DB_NAME}"
-echo "  ${MSG_DBUSER}          : ${WP_DB_USER}"
-echo "  ${MSG_DBPASS}          : ${WP_DB_PASS}"
-echo "  ${MSG_DBROOTPASS}      : ${WP_DB_ROOT_PASS}"
+echo "  ${MSG_DBNAME}:"
+echo "  ${WP_DB_NAME}"
+echo "  ${MSG_DBUSER}:"
+echo "  ${WP_DB_USER}"
+echo "  ${MSG_DBPASS}:"
+echo "  ${WP_DB_PASS}"
+echo "  ${MSG_DBROOTPASS}:"
+echo "  ${WP_DB_ROOT_PASS}"
 echo ""
-echo "  ${MSG_WPPATH}          : ${WP_DIR}"
-echo "  ${MSG_LOG}             : ${LOG}"
-echo "  ${MSG_CREDS}           : ${CRED_FILE}"
+echo "  ${MSG_WPPATH}:"
+echo "  ${WP_DIR}"
+echo "  ${MSG_LOG}:"
+echo "  ${LOG}"
+echo "  ${MSG_CREDS}:"
+echo "  ${CRED_FILE}"
 echo ""
 echo "  ${MSG_NEXTSTEP}"
 echo "============================================================"
