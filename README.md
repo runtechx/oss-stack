@@ -35,6 +35,7 @@ Todas as contribuições são bem-vindas, especialmente quando:
 
 ## Tecnologias adotadas
 
+[Ver os comandos para instalar as funções no almalinux 10+](/COMANDOS.md)
 
 ### Base
 
