@@ -55,8 +55,11 @@ Os ficheiros têm a extensão **`.md` (Markdown)**
 ## Links
 
 ```md
-[Texto do link](https://exemplo.com)
+[Runtech](https://www.runtech.ao)
 ```
+
+[Runtech](https://www.runtech.ao)
+
 
 ---
 
@@ -65,8 +68,9 @@ Os ficheiros têm a extensão **`.md` (Markdown)**
 ```md
 ![Texto alternativo](https://url-da-imagem.com/imagem.png)
 ```
+![Texto alternativo](https://url-da-imagem.com/imagem.png)
 
----
+
 
 ## Código
 
@@ -81,6 +85,7 @@ Use `codigo` dentro da frase
 ````md
 ```bash
 echo "Olá Mundo"
+
 ````
 
 ````
