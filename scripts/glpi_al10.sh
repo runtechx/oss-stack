@@ -176,7 +176,8 @@ log_section "STEP 1: Prerequisites & PHP 8.5"
     # PHP packages are available directly from the non-modular Remi repo.
     dnf config-manager --set-disabled remi-modular || true
 
-    dnf install -y php php-{mbstring,mysqli,xml,cli,ldap,openssl,xmlrpc,pecl-apcu,zip,curl,gd,json,session,imap,intl,zlib,redis,bcmath}
+#xmlrpc,imap
+    dnf install -y php php-{mbstring,mysqli,xml,cli,ldap,openssl,pecl-apcu,zip,curl,gd,json,session,intl,zlib,redis,bcmath}
 } >> "$LOG" 2>&1
 
 # -----------------------------
