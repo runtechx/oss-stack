@@ -3,7 +3,7 @@ set -e
 
 # ============================================================
 #  GLPI Deployment Script — AlmaLinux 10
-#  Installs: Apache, MariaDB, PHP 8.5 (Remi), GLPI (latest)
+#  Installs: Apache, MariaDB, PHP (AppStream), GLPI (latest)
 # ============================================================
 
 # -----------------------------
@@ -25,7 +25,7 @@ read -rp "  > " LANG_CHOICE
 case "$LANG_CHOICE" in
     1)
         MSG_TITLE="Instalação GLPI — AlmaLinux 10"
-        MSG_STEP1="[1/5] A instalar pré-requisitos e PHP 8.5..."
+        MSG_STEP1="[1/5] A instalar pré-requisitos e PHP..."
         MSG_STEP2="[2/5] A instalar o MariaDB..."
         MSG_STEP3="[3/5] A instalar o GLPI..."
         MSG_STEP4="[4/5] A configurar o Apache..."
@@ -57,7 +57,7 @@ case "$LANG_CHOICE" in
         ;;
     3)
         MSG_TITLE="Installation GLPI — AlmaLinux 10"
-        MSG_STEP1="[1/5] Installation des prérequis et PHP 8.5..."
+        MSG_STEP1="[1/5] Installation des prérequis et PHP..."
         MSG_STEP2="[2/5] Installation de MariaDB..."
         MSG_STEP3="[3/5] Installation de GLPI..."
         MSG_STEP4="[4/5] Configuration d'Apache..."
@@ -90,7 +90,7 @@ case "$LANG_CHOICE" in
     *)
         # Default: English (option 2 or any invalid input)
         MSG_TITLE="GLPI Deployment — AlmaLinux 10"
-        MSG_STEP1="[1/5] Installing prerequisites and PHP 8.5..."
+        MSG_STEP1="[1/5] Installing prerequisites and PHP..."
         MSG_STEP2="[2/5] Installing MariaDB..."
         MSG_STEP3="[3/5] Installing GLPI..."
         MSG_STEP4="[4/5] Configuring Apache..."
@@ -163,20 +163,34 @@ echo "  ${MSG_ACCESSURL}: ${ACCESS_URL}" | tee -a "$LOG"
 echo ""
 
 # -----------------------------
-# STEP 1: Prerequisites & PHP 8.5
+# STEP 1: Prerequisites & PHP
 # -----------------------------
 echo "${MSG_STEP1}"
-log_section "STEP 1: Prerequisites & PHP 8.5"
+log_section "STEP 1: Prerequisites & PHP"
 {
     dnf install -y epel-release
     dnf install -y wget tar unzip net-tools bzip2 policycoreutils-python-utils httpd mod_ssl
-    dnf install -y https://rpms.remirepo.net/enterprise/remi-release-10.rpm
 
-    # Disable the modular repo — it returns 403 on EL10 and is deprecated in DNF5.
-    # PHP packages are available directly from the non-modular Remi repo.
-    dnf config-manager --set-disabled remi-modular || true
+    # PHP from AlmaLinux 10 AppStream — no external repo needed.
+    # AppStream ships PHP 8.2/8.3; GLPI 10.x is fully compatible.
+    dnf install -y \
+        php \
+        php-mbstring \
+        php-mysqli \
+        php-xml \
+        php-cli \
+        php-ldap \
+        php-zip \
+        php-curl \
+        php-gd \
+        php-intl \
+        php-bcmath \
+        php-opcache \
+        php-fpm \
+        php-pecl-apcu \
+        php-imap
 
-    dnf install -y php php-{mbstring,mysqli,xml,cli,ldap,openssl,xmlrpc,pecl-apcu,zip,curl,gd,json,session,imap,intl,zlib,redis,bcmath}
+    systemctl enable --now php-fpm
 } >> "$LOG" 2>&1
 
 # -----------------------------
