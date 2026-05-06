@@ -120,8 +120,8 @@ esac
 # -----------------------------
 WP_DB_NAME="wordpress"
 WP_DB_USER="wpuser"
-WP_DB_PASS=$(head -c 16 /dev/urandom | base64)
-WP_DB_ROOT_PASS=$(head -c 16 /dev/urandom | base64)
+WP_DB_PASS=$(head -c 32 /dev/urandom | tr -dc 'A-Za-z0-9!@#%^_-' | head -c 16)
+WP_DB_ROOT_PASS=$(head -c 32 /dev/urandom | tr -dc 'A-Za-z0-9!@#%^_-' | head -c 16)
 #WP_DB_PASS=$(openssl rand -base64 16)
 #WP_DB_ROOT_PASS=$(openssl rand -base64 16)
 WP_DIR="/var/www/html/wordpress"
