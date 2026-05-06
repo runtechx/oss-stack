@@ -3,13 +3,13 @@ set -e
 
 # ============================================================
 #  Zabbix Deployment Script — AlmaLinux 10
-#  Installs: PostgreSQL, Zabbix Server, Zabbix Frontend,
-#            Zabbix Agent, Apache
+#  Installs: Nginx, PostgreSQL 18, PHP-FPM, Zabbix 7.4
 # ============================================================
 
 # -----------------------------
 # LANGUAGE SELECTION
 # -----------------------------
+clear
 echo "============================================================"
 echo "  Zabbix Deployment — AlmaLinux 10"
 echo "============================================================"
@@ -25,117 +25,111 @@ read -rp "  > " LANG_CHOICE
 case "$LANG_CHOICE" in
     1)
         MSG_TITLE="Instalação Zabbix — AlmaLinux 10"
-        MSG_STEP1="[1/9] A actualizar o sistema..."
-        MSG_STEP2="[2/9] A instalar o PostgreSQL..."
-        MSG_STEP3="[3/9] A configurar a base de dados Zabbix..."
-        MSG_STEP4="[4/9] A adicionar o repositório Zabbix..."
-        MSG_STEP5="[5/9] A instalar o Zabbix Server e Frontend..."
-        MSG_STEP6="[6/9] A importar o esquema da base de dados..."
-        MSG_STEP7="[7/9] A configurar o Zabbix Server..."
-        MSG_STEP8="[8/9] A configurar o Apache e o Frontend..."
-        MSG_STEP9="[9/9] A iniciar os serviços..."
+        MSG_STEP1="[1/4] A actualizar o sistema e a instalar pré-requisitos..."
+        MSG_STEP2="[2/4] A instalar o PostgreSQL 18..."
+        MSG_STEP3="[3/4] A instalar o Zabbix 7.4..."
+        MSG_STEP4="[4/4] A configurar o firewall..."
         MSG_DONE="INSTALAÇÃO DO ZABBIX CONCLUÍDA"
-        MSG_NEXTSTEP="Próximo passo: Abra o URL do frontend no seu browser e faça login"
+        MSG_URL="URL"
+        MSG_IP="IP do Servidor"
+        MSG_WPPATH="Directório Zabbix"
+        MSG_LOG="Registo de instalação"
+        MSG_CREDS="Ficheiro de credenciais"
+        MSG_NEXTSTEP="Próximo passo: Abra o URL no seu browser e inicie sessão com Admin / zabbix"
         MSG_CREDTITLE="Instalação Zabbix — Credenciais"
         MSG_GENERATED="Gerado em"
-        MSG_ZBXSECTION="-- Zabbix --"
-        MSG_DBSECTION="-- Base de Dados (PostgreSQL) --"
+        MSG_DBSECTION="-- Base de Dados --"
         MSG_SRVSECTION="-- Servidor --"
-        MSG_ZBXURL="URL do Frontend"
-        MSG_ZBXUSER="Utilizador Web (padrão)"
-        MSG_ZBXPASS="Password Web (padrão)"
         MSG_DBNAME="Nome da BD"
         MSG_DBUSER="Utilizador BD"
         MSG_DBPASS="Password BD"
+        MSG_DBHOST="Servidor BD"
         MSG_SERVERIP="IP do Servidor"
-        MSG_LOG="Registo de instalação"
-        MSG_CREDS="Credenciais"
-        MSG_APACHECONF="Config Apache"
-        MSG_ZBXCONF="Config Zabbix Server"
+        MSG_ACCESSURL="URL de Acesso"
+        MSG_ZBXVER="Versão Zabbix"
+        MSG_DEFLOGIN="Login padrão"
+        MSG_DEFPASS="Password padrão"
+        MSG_APACHECONF="Config Nginx"
         MSG_KEEPFILE="GUARDE ESTE FICHEIRO — ELIMINE APÓS ANOTAR AS CREDENCIAIS"
+        MSG_PROMPT_IP="Endereço IP do servidor"
+        MSG_PROMPT_URL="URL de acesso (FQDN ou IP)"
         ;;
     3)
         MSG_TITLE="Installation Zabbix — AlmaLinux 10"
-        MSG_STEP1="[1/9] Mise à jour du système..."
-        MSG_STEP2="[2/9] Installation de PostgreSQL..."
-        MSG_STEP3="[3/9] Configuration de la base de données Zabbix..."
-        MSG_STEP4="[4/9] Ajout du dépôt Zabbix..."
-        MSG_STEP5="[5/9] Installation de Zabbix Server et Frontend..."
-        MSG_STEP6="[6/9] Import du schéma de base de données..."
-        MSG_STEP7="[7/9] Configuration de Zabbix Server..."
-        MSG_STEP8="[8/9] Configuration d'Apache et du Frontend..."
-        MSG_STEP9="[9/9] Démarrage des services..."
+        MSG_STEP1="[1/4] Mise à jour du système et installation des prérequis..."
+        MSG_STEP2="[2/4] Installation de PostgreSQL 18..."
+        MSG_STEP3="[3/4] Installation de Zabbix 7.4..."
+        MSG_STEP4="[4/4] Configuration du pare-feu..."
         MSG_DONE="INSTALLATION DE ZABBIX TERMINÉE"
-        MSG_NEXTSTEP="Prochaine étape : Ouvrez l'URL du frontend dans votre navigateur et connectez-vous"
+        MSG_URL="URL"
+        MSG_IP="IP Serveur"
+        MSG_WPPATH="Répertoire Zabbix"
+        MSG_LOG="Journal d'installation"
+        MSG_CREDS="Fichier d'identifiants"
+        MSG_NEXTSTEP="Prochaine étape : Ouvrez l'URL dans votre navigateur et connectez-vous avec Admin / zabbix"
         MSG_CREDTITLE="Installation Zabbix — Identifiants"
         MSG_GENERATED="Généré le"
-        MSG_ZBXSECTION="-- Zabbix --"
-        MSG_DBSECTION="-- Base de Données (PostgreSQL) --"
+        MSG_DBSECTION="-- Base de Données --"
         MSG_SRVSECTION="-- Serveur --"
-        MSG_ZBXURL="URL du Frontend"
-        MSG_ZBXUSER="Utilisateur Web (défaut)"
-        MSG_ZBXPASS="Mot de passe Web (défaut)"
         MSG_DBNAME="Nom de la BD"
         MSG_DBUSER="Utilisateur BD"
         MSG_DBPASS="Mot de passe BD"
+        MSG_DBHOST="Hôte BD"
         MSG_SERVERIP="IP Serveur"
-        MSG_LOG="Journal d'installation"
-        MSG_CREDS="Identifiants"
-        MSG_APACHECONF="Config Apache"
-        MSG_ZBXCONF="Config Zabbix Server"
+        MSG_ACCESSURL="URL d'accès"
+        MSG_ZBXVER="Version Zabbix"
+        MSG_DEFLOGIN="Login par défaut"
+        MSG_DEFPASS="Mot de passe par défaut"
+        MSG_APACHECONF="Config Nginx"
         MSG_KEEPFILE="CONSERVEZ CE FICHIER — SUPPRIMEZ-LE APRÈS AVOIR NOTÉ LES IDENTIFIANTS"
+        MSG_PROMPT_IP="Adresse IP du serveur"
+        MSG_PROMPT_URL="URL d'accès (FQDN ou IP)"
         ;;
     *)
         # Default: English (option 2 or any invalid input)
         MSG_TITLE="Zabbix Deployment — AlmaLinux 10"
-        MSG_STEP1="[1/9] Updating system..."
-        MSG_STEP2="[2/9] Installing PostgreSQL..."
-        MSG_STEP3="[3/9] Configuring Zabbix database..."
-        MSG_STEP4="[4/9] Adding Zabbix repository..."
-        MSG_STEP5="[5/9] Installing Zabbix Server and Frontend..."
-        MSG_STEP6="[6/9] Importing database schema..."
-        MSG_STEP7="[7/9] Configuring Zabbix Server..."
-        MSG_STEP8="[8/9] Configuring Apache and Frontend..."
-        MSG_STEP9="[9/9] Starting services..."
+        MSG_STEP1="[1/4] Updating system and installing prerequisites..."
+        MSG_STEP2="[2/4] Installing PostgreSQL 18..."
+        MSG_STEP3="[3/4] Installing Zabbix 7.4..."
+        MSG_STEP4="[4/4] Configuring firewall..."
         MSG_DONE="ZABBIX DEPLOYMENT COMPLETE"
-        MSG_NEXTSTEP="Next step: Open the frontend URL in your browser and log in"
+        MSG_URL="URL"
+        MSG_IP="Server IP"
+        MSG_WPPATH="Zabbix Path"
+        MSG_LOG="Deploy Log"
+        MSG_CREDS="Credentials File"
+        MSG_NEXTSTEP="Next step: Open the URL in your browser and log in with Admin / zabbix"
         MSG_CREDTITLE="Zabbix Installation — Credentials"
         MSG_GENERATED="Generated"
-        MSG_ZBXSECTION="-- Zabbix --"
-        MSG_DBSECTION="-- Database (PostgreSQL) --"
+        MSG_DBSECTION="-- Database --"
         MSG_SRVSECTION="-- Server --"
-        MSG_ZBXURL="Frontend URL"
-        MSG_ZBXUSER="Web User (default)"
-        MSG_ZBXPASS="Web Password (default)"
         MSG_DBNAME="DB Name"
         MSG_DBUSER="DB User"
         MSG_DBPASS="DB Password"
+        MSG_DBHOST="DB Host"
         MSG_SERVERIP="Server IP"
-        MSG_LOG="Deploy Log"
-        MSG_CREDS="Credentials"
-        MSG_APACHECONF="Apache Config"
-        MSG_ZBXCONF="Zabbix Server Config"
+        MSG_ACCESSURL="Access URL"
+        MSG_ZBXVER="Zabbix Version"
+        MSG_DEFLOGIN="Default Login"
+        MSG_DEFPASS="Default Password"
+        MSG_APACHECONF="Nginx Config"
         MSG_KEEPFILE="KEEP THIS FILE SAFE — DELETE AFTER NOTING CREDENTIALS"
+        MSG_PROMPT_IP="Server IP address"
+        MSG_PROMPT_URL="Access URL (FQDN or IP)"
         ;;
 esac
 
 # -----------------------------
 # CONFIGURATION — CHANGE ME
 # -----------------------------
-ZBX_DB_NAME="zabbix"
-ZBX_DB_USER="zabbix"
-ZBX_DB_PASS=$(head -c 16 /dev/urandom | base64)
-#ZBX_DB_PASS=$(openssl rand -base64 16)
-ZBX_VERSION="7.0"                          # Zabbix LTS version
-ZBX_REPO_URL="https://repo.zabbix.com/zabbix/${ZBX_VERSION}/alma/10/x86_64/zabbix-release-latest-${ZBX_VERSION}.el10.noarch.rpm"
-ZBX_WEB_USER="Admin"
-ZBX_WEB_PASS="zabbix"                      # Change after first login!
-SERVER_IP=$(hostname -I | awk '{print $1}')
+PORT=10051
+DB_NAME="zabbix"
+DB_USER="zabbix"
+DB_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
 LOG="/var/log/deploy-zabbix.log"
+CRED_FILE="/root/zabbix-credentials.txt"
 
-# -----------------------------
-# HELPERS
-# -----------------------------
+# Helper: log a section header to the log file
 log_section() {
     echo "" >> "$LOG"
     echo "============================================================" >> "$LOG"
@@ -150,159 +144,157 @@ echo "============================================================"
 log_section "${MSG_TITLE} — $(date)"
 
 # -----------------------------
-# STEP 1: System Update
+# USER PROMPTS
+# -----------------------------
+echo ""
+read -rp "  ${MSG_PROMPT_IP} ($(hostname -I | awk '{print $1}')): " SERVER_IP
+SERVER_IP=${SERVER_IP:-$(hostname -I | awk '{print $1}')}
+
+read -rp "  ${MSG_PROMPT_URL} ($(hostname -f)): " ACCESS_URL
+ACCESS_URL=${ACCESS_URL:-$(hostname -f)}
+
+echo "  ${MSG_SERVERIP}: ${SERVER_IP}" | tee -a "$LOG"
+echo "  ${MSG_ACCESSURL}: ${ACCESS_URL}" | tee -a "$LOG"
+echo ""
+
+# -----------------------------
+# STEP 1: Prerequisites
 # -----------------------------
 echo "${MSG_STEP1}"
-log_section "STEP 1: System Update"
-dnf update -y >> "$LOG" 2>&1
-dnf install -y tar curl >> "$LOG" 2>&1
+log_section "STEP 1: System Update & Prerequisites"
+{
+    dnf install -y epel-release
+    dnf install -y wget curl tar policycoreutils-python-utils nginx
+    dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-10-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+    dnf install -y glibc-all-langpacks
+    localectl set-locale LANG=en_US.UTF-8
+} >> "$LOG" 2>&1
 
 # -----------------------------
-# STEP 2: Install PostgreSQL
+# STEP 2: Install PostgreSQL 18
 # -----------------------------
 echo "${MSG_STEP2}"
-log_section "STEP 2: Install PostgreSQL"
-dnf install -y postgresql-server postgresql-contrib >> "$LOG" 2>&1
-postgresql-setup --initdb >> "$LOG" 2>&1
-systemctl enable --now postgresql >> "$LOG" 2>&1
-echo "  PostgreSQL initialised and started" >> "$LOG"
+log_section "STEP 2: Install PostgreSQL 18"
+{
+    dnf install -y postgresql18-server
+    /usr/pgsql-18/bin/postgresql-18-setup initdb
+    systemctl enable --now postgresql-18
+} >> "$LOG" 2>&1
 
 # -----------------------------
-# STEP 3: Configure Zabbix DB
+# STEP 3: Install Zabbix 7.4
 # -----------------------------
 echo "${MSG_STEP3}"
-log_section "STEP 3: Configure Zabbix Database"
-sudo -u postgres psql << SQL >> "$LOG" 2>&1
-CREATE USER ${ZBX_DB_USER} WITH PASSWORD '${ZBX_DB_PASS}';
-CREATE DATABASE ${ZBX_DB_NAME} OWNER ${ZBX_DB_USER} ENCODING 'UTF8' LC_COLLATE='en_US.UTF-8' LC_CTYPE='en_US.UTF-8' TEMPLATE template0;
-GRANT ALL PRIVILEGES ON DATABASE ${ZBX_DB_NAME} TO ${ZBX_DB_USER};
-SQL
-echo "  Database '${ZBX_DB_NAME}' and user '${ZBX_DB_USER}' created" >> "$LOG"
+log_section "STEP 3: Install Zabbix 7.4"
+{
+    # Exclude Zabbix packages from EPEL
+    sed -i '/^\[epel\]/,/^\[/ s/^excludepkgs=.*/excludepkgs=zabbix*/' /etc/yum.repos.d/epel.repo || \
+        echo -e "\n[epel]\nexcludepkgs=zabbix*" | tee -a /etc/yum.repos.d/epel.repo
 
-# Allow password auth for the zabbix user in pg_hba.conf
-PG_HBA=$(sudo -u postgres psql -t -c "SHOW hba_file;" 2>/dev/null | tr -d ' ')
-if ! grep -q "^host.*${ZBX_DB_NAME}.*${ZBX_DB_USER}" "$PG_HBA" 2>/dev/null; then
-    echo "host    ${ZBX_DB_NAME}    ${ZBX_DB_USER}    127.0.0.1/32    md5" >> "$PG_HBA"
-    echo "host    ${ZBX_DB_NAME}    ${ZBX_DB_USER}    ::1/128         md5" >> "$PG_HBA"
-    echo "  pg_hba.conf updated for zabbix user" >> "$LOG"
-fi
-systemctl reload postgresql >> "$LOG" 2>&1
+    # Add Zabbix repository
+    rpm -Uvh https://repo.zabbix.com/zabbix/7.4/release/alma/10/noarch/zabbix-release-latest-7.4.el10.noarch.rpm
+    dnf clean all
+
+    # Install Zabbix components
+    dnf install -y zabbix-server-pgsql zabbix-web-pgsql zabbix-nginx-conf \
+        zabbix-sql-scripts zabbix-selinux-policy zabbix-agent
+
+    # Create database and user
+    sudo -u postgres psql -c "CREATE USER ${DB_USER} WITH ENCRYPTED PASSWORD '${DB_PASS}';"
+    sudo -u postgres createdb -O "${DB_USER}" "${DB_NAME}"
+    zcat /usr/share/zabbix/sql-scripts/postgresql/server.sql.gz | sudo -u "${DB_USER}" psql "${DB_NAME}"
+
+    # Test DB connectivity
+    PGPASSWORD="${DB_PASS}" psql -U "${DB_USER}" -d "${DB_NAME}" -h localhost -c "\conninfo"
+
+    # Write DB password to Zabbix server config
+    sed -i "s|^# DBPassword=.*|DBPassword=${DB_PASS}|" /etc/zabbix/zabbix_server.conf
+
+    # Fix permissions
+    chown -R zabbix:zabbix /var/log/zabbix
+    chown -R zabbix:zabbix /run/zabbix
+
+    # SELinux contexts
+    semanage fcontext -a -t zabbix_log_t "/var/log/zabbix(/.*)?"
+    restorecon -Rv /var/log/zabbix
+    semanage fcontext -a -t zabbix_var_run_t "/run/zabbix(/.*)?"
+    restorecon -Rv /run/zabbix
+
+    # Configure Nginx virtual host
+    sed -i \
+        -e 's|^[[:space:]]*listen[[:space:]]\+8080;|    listen 80;|' \
+        -e "s|^[[:space:]]*server_name[[:space:]]\+[^;]\+;|    server_name ${SERVER_IP} ${ACCESS_URL};|" \
+        /etc/nginx/conf.d/zabbix.conf
+
+    setsebool -P httpd_can_network_connect 1
+    nginx -t
+
+    # Enable and start services
+    systemctl enable --now zabbix-server zabbix-agent nginx php-fpm
+    systemctl restart zabbix-server zabbix-agent nginx php-fpm
+
+} >> "$LOG" 2>&1
 
 # -----------------------------
-# STEP 4: Add Zabbix Repository
+# STEP 4: Configure Firewall
 # -----------------------------
 echo "${MSG_STEP4}"
-log_section "STEP 4: Add Zabbix Repository"
-rpm -Uvh "${ZBX_REPO_URL}" >> "$LOG" 2>&1 || true
-dnf clean all >> "$LOG" 2>&1
-echo "  Zabbix ${ZBX_VERSION} repository added" >> "$LOG"
-
-# -----------------------------
-# STEP 5: Install Zabbix Packages
-# -----------------------------
-echo "${MSG_STEP5}"
-log_section "STEP 5: Install Zabbix Server, Frontend, Agent"
-dnf install -y \
-    zabbix-server-pgsql \
-    zabbix-web-pgsql \
-    zabbix-apache-conf \
-    zabbix-sql-scripts \
-    zabbix-selinux-policy \
-    zabbix-agent >> "$LOG" 2>&1
-echo "  Zabbix packages installed" >> "$LOG"
-
-# -----------------------------
-# STEP 6: Import DB Schema
-# -----------------------------
-echo "${MSG_STEP6}"
-log_section "STEP 6: Import Database Schema"
-# The schema file is gzipped; pipe directly into psql
-zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | \
-    PGPASSWORD="${ZBX_DB_PASS}" psql -h 127.0.0.1 -U "${ZBX_DB_USER}" "${ZBX_DB_NAME}" >> "$LOG" 2>&1
-echo "  Schema imported successfully" >> "$LOG"
-
-# -----------------------------
-# STEP 7: Configure Zabbix Server
-# -----------------------------
-echo "${MSG_STEP7}"
-log_section "STEP 7: Configure Zabbix Server"
-ZBX_CONF="/etc/zabbix/zabbix_server.conf"
-
-# Set database connection parameters
-sed -i "s/^# DBPassword=/DBPassword=${ZBX_DB_PASS}/" "$ZBX_CONF"
-sed -i "s/^DBHost=localhost/DBHost=127.0.0.1/"        "$ZBX_CONF"
-sed -i "s/^DBName=zabbix/DBName=${ZBX_DB_NAME}/"      "$ZBX_CONF"
-sed -i "s/^DBUser=zabbix/DBUser=${ZBX_DB_USER}/"      "$ZBX_CONF"
-echo "  zabbix_server.conf updated" >> "$LOG"
-
-# -----------------------------
-# STEP 8: Configure Apache & Frontend
-# -----------------------------
-echo "${MSG_STEP8}"
-log_section "STEP 8: Configure Apache and Frontend"
-dnf install -y httpd >> "$LOG" 2>&1
-systemctl enable --now httpd >> "$LOG" 2>&1
-
-# Set timezone in Zabbix PHP config
-ZBX_PHP_CONF="/etc/zabbix/web/zabbix.conf.php"
-# If the PHP config doesn't exist yet (first run), the web installer will create it.
-# Pre-seed the Apache timezone config instead.
-ZBX_APACHE_CONF="/etc/httpd/conf.d/zabbix.conf"
-if [ -f "$ZBX_APACHE_CONF" ]; then
-    sed -i 's/.*php_value date.timezone.*/        php_value date.timezone Africa\/Luanda/' "$ZBX_APACHE_CONF" 2>/dev/null || true
-    echo "  Timezone set in Apache conf" >> "$LOG"
-fi
-
-# Firewall rules
-firewall-cmd --permanent --add-service=http  >> "$LOG" 2>&1
-firewall-cmd --permanent --add-service=https >> "$LOG" 2>&1
-firewall-cmd --permanent --add-port=10051/tcp >> "$LOG" 2>&1   # Zabbix trapper
-firewall-cmd --reload >> "$LOG" 2>&1
-echo "  Firewall rules applied (http, https, 10051/tcp)" >> "$LOG"
-
-# SELinux
-setsebool -P httpd_can_network_connect 1 >> "$LOG" 2>&1 || true
-setsebool -P zabbix_can_network 1        >> "$LOG" 2>&1 || true
-echo "  SELinux booleans set" >> "$LOG"
-
-systemctl restart httpd >> "$LOG" 2>&1
-
-# -----------------------------
-# STEP 9: Start Zabbix Services
-# -----------------------------
-echo "${MSG_STEP9}"
-log_section "STEP 9: Start Zabbix Services"
-systemctl enable --now zabbix-server zabbix-agent >> "$LOG" 2>&1
-systemctl restart zabbix-server zabbix-agent httpd >> "$LOG" 2>&1
-echo "  zabbix-server, zabbix-agent and httpd restarted" >> "$LOG"
+log_section "STEP 4: Configure Firewall"
+{
+    if systemctl is-active --quiet firewalld; then
+        firewall-cmd --permanent --add-service=http
+        firewall-cmd --permanent --add-service=https
+        firewall-cmd --permanent --add-port=${PORT}/tcp
+        firewall-cmd --reload
+    else
+        echo "  firewalld not running — skipping firewall rules."
+    fi
+} >> "$LOG" 2>&1
 
 # -----------------------------
 # SAVE CREDENTIALS TO FILE
 # -----------------------------
 log_section "Credentials Saved"
-CRED_FILE="/root/zabbix-credentials.txt"
+XVERSION=$(rpm -q zabbix-release --qf '%{VERSION}-%{RELEASE}\n' 2>/dev/null || echo "unknown")
+
 cat > "$CRED_FILE" << CREDS
 ============================================================
   ${MSG_CREDTITLE}
   ${MSG_GENERATED}: $(date)
 ============================================================
 
-  ${MSG_ZBXSECTION}
-  ${MSG_ZBXURL}            : http://${SERVER_IP}/zabbix
-  ${MSG_ZBXUSER}           : ${ZBX_WEB_USER}
-  ${MSG_ZBXPASS}           : ${ZBX_WEB_PASS}
+  ${MSG_URL}:
+  http://${ACCESS_URL}
+  http://${SERVER_IP}
+
+  ${MSG_DEFLOGIN}:
+  Admin
+  ${MSG_DEFPASS}:
+  zabbix
 
   ${MSG_DBSECTION}
-  ${MSG_DBNAME}            : ${ZBX_DB_NAME}
-  ${MSG_DBUSER}            : ${ZBX_DB_USER}
-  ${MSG_DBPASS}            : ${ZBX_DB_PASS}
+  ${MSG_DBNAME}:
+  ${DB_NAME}
+  ${MSG_DBUSER}:
+  ${DB_USER}
+  ${MSG_DBPASS}:
+  ${DB_PASS}
+  ${MSG_DBHOST}:
+  localhost
 
   ${MSG_SRVSECTION}
-  ${MSG_SERVERIP}          : ${SERVER_IP}
-  ${MSG_ZBXCONF}           : /etc/zabbix/zabbix_server.conf
-  ${MSG_APACHECONF}        : /etc/httpd/conf.d/zabbix.conf
-  ${MSG_LOG}               : ${LOG}
-  ${MSG_CREDS}             : ${CRED_FILE}
+  ${MSG_SERVERIP}:
+  ${SERVER_IP}
+  ${MSG_ACCESSURL}:
+  ${ACCESS_URL}
+  ${MSG_ZBXVER}:
+  ${XVERSION}
+  ${MSG_APACHECONF}:
+  /etc/nginx/conf.d/zabbix.conf
+  ${MSG_LOG}:
+  ${LOG}
+  ${MSG_CREDS}:
+  ${CRED_FILE}
 
 ============================================================
   ${MSG_KEEPFILE}
@@ -321,17 +313,26 @@ echo "============================================================"
 echo "  ${MSG_DONE}"
 echo "============================================================"
 echo ""
-echo "  ${MSG_ZBXURL}          : http://${SERVER_IP}/zabbix"
-echo "  ${MSG_ZBXUSER}         : ${ZBX_WEB_USER}"
-echo "  ${MSG_ZBXPASS}         : ${ZBX_WEB_PASS}"
+echo "  ${MSG_URL}:"
+echo "  http://${ACCESS_URL}"
+echo "  http://${SERVER_IP}"
 echo ""
-echo "  ${MSG_DBNAME}          : ${ZBX_DB_NAME}"
-echo "  ${MSG_DBUSER}          : ${ZBX_DB_USER}"
-echo "  ${MSG_DBPASS}          : ${ZBX_DB_PASS}"
+echo "  ${MSG_DEFLOGIN}: Admin"
+echo "  ${MSG_DEFPASS}: zabbix"
 echo ""
-echo "  ${MSG_SERVERIP}        : ${SERVER_IP}"
-echo "  ${MSG_LOG}             : ${LOG}"
-echo "  ${MSG_CREDS}           : ${CRED_FILE}"
+echo "  ${MSG_DBNAME}:"
+echo "  ${DB_NAME}"
+echo "  ${MSG_DBUSER}:"
+echo "  ${DB_USER}"
+echo "  ${MSG_DBPASS}:"
+echo "  ${DB_PASS}"
+echo ""
+echo "  ${MSG_ZBXVER}:"
+echo "  ${XVERSION}"
+echo "  ${MSG_LOG}:"
+echo "  ${LOG}"
+echo "  ${MSG_CREDS}:"
+echo "  ${CRED_FILE}"
 echo ""
 echo "  ${MSG_NEXTSTEP}"
 echo "============================================================"
