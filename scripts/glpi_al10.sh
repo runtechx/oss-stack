@@ -171,8 +171,11 @@ log_section "STEP 1: Prerequisites & PHP 8.5"
     dnf install -y epel-release
     dnf install -y wget tar unzip net-tools bzip2 policycoreutils-python-utils httpd mod_ssl
     dnf install -y https://rpms.remirepo.net/enterprise/remi-release-10.rpm
-    dnf module reset php -y
-    dnf module enable php:remi-8.5 -y
+
+    # Disable the modular repo — it returns 403 on EL10 and is deprecated in DNF5.
+    # PHP packages are available directly from the non-modular Remi repo.
+    dnf config-manager --set-disabled remi-modular || true
+
     dnf install -y php php-{mbstring,mysqli,xml,cli,ldap,openssl,xmlrpc,pecl-apcu,zip,curl,gd,json,session,imap,intl,zlib,redis,bcmath}
 } >> "$LOG" 2>&1
 
