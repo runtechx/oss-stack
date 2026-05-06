@@ -47,7 +47,7 @@ Todas as contribuições são bem-vindas, especialmente quando:
 |[Proxmox&nbsp;BS](https://www.proxmox.com/en/products/proxmox-backup-server/overview)| Solução de backup e recuperação integrada ao ecossistema Proxmox|
 | [OPNsense](https://opnsense.org/)| Firewall e roteador open source baseado em FreeBSD|
 | [Almalinux](https://almalinux.org/)| Distribuição Linux open source, focada em estabilidade, segurança e ambientes empresariais|
-| [Zabbix](https://www.zabbix.com/)| Sistema de monitoramento de redes, servidores e serviços|
+| **[Zabbix](https://www.zabbix.com/)**| Sistema de monitoramento de redes, servidores e serviços|
 | [Ansible](www.ansible.com)| Ferramenta de automação para configuração, deployment e gestão de infraestrutura|
 | [Gitea](https://about.gitea.com/)| Plataforma leve de hospedagem de repositórios Git|
 | [FreeIPA](https://www.freeipa.org/)| Gerenciamento centralizado de identidade e autenticação|
@@ -63,6 +63,6 @@ Todas as contribuições são bem-vindas, especialmente quando:
 | [Wazuh](https://wazuh.com/)| Plataforma de segurança e monitoramento (SIEM/XDR)|
 | [Issabel](https://www.issabel.com)| Plataforma de comunicações unificadas (VoIP, PBX, call center)|
 | [Odoo](https://www.odoo.com/)| ERP open source para gestão empresarial|
-| [Wordpress](https://wordpress.com/)| Sistema de gestão de conteúdos (CMS) para criação de sites e blogs|
+| **[Wordpress](https://wordpress.com/)**| Sistema de gestão de conteúdos (CMS) para criação de sites e blogs|
 | [Patchmon](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
 
