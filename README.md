@@ -49,7 +49,7 @@ Todas as contribuições são bem-vindas, especialmente quando:
 | [Almalinux](https://almalinux.org/)| Distribuição Linux open source, focada em estabilidade, segurança e ambientes empresariais|
 | **[Zabbix](https://www.zabbix.com/)**| Sistema de monitoramento de redes, servidores e serviços|
 | [Ansible](www.ansible.com)| Ferramenta de automação para configuração, deployment e gestão de infraestrutura|
-| [Gitea](https://about.gitea.com/)| Plataforma leve de hospedagem de repositórios Git|
+| [Gitlab](https://about.gitea.com/)| Plataforma leve de hospedagem de repositórios Git|
 | [FreeIPA](https://www.freeipa.org/)| Gerenciamento centralizado de identidade e autenticação|
 | [OpenCloud](https://opencloud.eu/en)| Plataforma de cloud privada para armazenamento e colaboração|
 | [GLPI](https://www.glpi-project.org/en/) | Sistema de gestão de ativos de TI e service desk|
