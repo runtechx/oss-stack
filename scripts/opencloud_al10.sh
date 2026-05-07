@@ -126,7 +126,7 @@ esac
 # -----------------------------
 # CONFIGURATION
 # -----------------------------
-OC_VERSION="6.0.0"
+OC_VERSION="6.1.0"
 OC_BIN_URL="https://github.com/opencloud-eu/opencloud/releases/download/v${OC_VERSION}/opencloud-${OC_VERSION}-linux-amd64"
 OC_BIN_DIR="/opt/opencloud"
 OC_DATA_DIR="/var/lib/opencloud/data"
