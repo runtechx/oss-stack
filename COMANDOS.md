@@ -12,7 +12,7 @@ Acompanhar o log da instalação (executar em outro terminal)
 tail -f /var/log/deploy-zabbix.log
 ```
 
-## OpenCLoud
+## OpenCloud
 one-liner
 
 ```bash
@@ -22,7 +22,10 @@ Acompanhar o log da instalação (executar em outro terminal)
 ```bash
 tail -f /var/log/deploy-opencloud.log
 ```
-
+> [!NOTE]
+> 1. Após abrir o OpenCloud no navegador, aguarde alguns minutos para que o carregamento inicial seja concluído por completo.
+> 2. Utilize o FQDN para aceder ao servidor via navegador. Caso o registo DNS ainda não esteja configurado, adicione a entrada manualmente no ficheiro `hosts` do seu computador.
+ 
 
 ## GLPI (NOK)
 one-liner
