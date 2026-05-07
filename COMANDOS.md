@@ -12,6 +12,18 @@ Log (abrir em outro terminar)
 tail -f /var/log/deploy-zabbix.log
 ```
 
+## OpenCLoud
+one-liner
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/opencloud_al10.sh -o opencloud.sh && bash opencloud.sh
+```
+Log (abrir em outro terminar)
+```bash
+tail -f /var/log/deploy-opencloud.log
+```
+
+
 ## GLPI (NOK)
 one-liner
 
