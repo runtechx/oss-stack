@@ -12,7 +12,7 @@ Log (abrir em outro terminar)
 tail -f /var/log/deploy-zabbix.log
 ```
 
-## GLPI
+## GLPI (NOK)
 one-liner
 
 ```bash
