@@ -65,4 +65,5 @@ Todas as contribuições são bem-vindas, especialmente quando:
 | [Odoo](https://www.odoo.com/)| ERP open source para gestão empresarial|
 | **[Wordpress](https://wordpress.com/)**| Sistema de gestão de conteúdos (CMS) para criação de sites e blogs|
 | [Patchmon](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
+| [Keaycloak](https://www.keycloak.org/)|Plataforma open source de gestão de identidades e acessos (IAM), com suporte para SSO, autenticação multifator e integração com LDAP/Active Directory|
 
