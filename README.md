@@ -51,7 +51,7 @@ Todas as contribuições são bem-vindas, especialmente quando:
 | [Ansible](www.ansible.com)| Ferramenta de automação para configuração, deployment e gestão de infraestrutura|
 | [Gitlab](https://about.gitea.com/)| Plataforma leve de hospedagem de repositórios Git|
 | [FreeIPA](https://www.freeipa.org/)| Gerenciamento centralizado de identidade e autenticação|
-| [OpenCloud](https://opencloud.eu/en)| Plataforma de cloud privada para armazenamento e colaboração|
+| **[OpenCloud](https://opencloud.eu/en)**| Plataforma de cloud privada para armazenamento e colaboração|
 | [GLPI](https://www.glpi-project.org/en/) | Sistema de gestão de ativos de TI e service desk|
 
 
