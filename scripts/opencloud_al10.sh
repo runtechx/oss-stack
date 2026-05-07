@@ -6,7 +6,9 @@ set -e
 #  Installs: OpenCloud (Go binary) + Nginx reverse proxy
 #  No PHP, no database — OpenCloud is fully self-contained
 #  Listens internally on port 9200, proxied via Nginx on 443
-#  REQUIRES: a valid domain name (HTTPS is mandatory for OIDC)
+#
+#  IMPORTANT: OpenCloud requires HTTPS and a valid FQDN.
+#  Access via IP address will NOT work — always use the domain.
 # ============================================================
 
 # -----------------------------
@@ -50,11 +52,12 @@ case "$LANG_CHOICE" in
         MSG_NGINXCONF="Config Nginx"
         MSG_KEEPFILE="GUARDE ESTE FICHEIRO — ELIMINE APÓS ANOTAR AS CREDENCIAIS"
         MSG_PROMPT_IP="Endereço IP do servidor"
-        MSG_PROMPT_DOMAIN="Domínio público (FQDN obrigatório para HTTPS)"
+        MSG_PROMPT_DOMAIN="Domínio / FQDN (ex: cloud.empresa.local)"
         MSG_PROMPT_ADMINPASS="Password admin do OpenCloud"
-        MSG_WARN_DOMAIN="ATENÇÃO: O OpenCloud requer HTTPS. Use um FQDN válido, não apenas um IP."
-        MSG_SELFSIGNED="A gerar certificado auto-assinado para testes..."
-        MSG_SELFSIGNED_WARN="AVISO: Certificado auto-assinado. Aceite a excepção de segurança no browser."
+        MSG_WARN_DOMAIN="ATENÇÃO: Use sempre o FQDN para aceder — o IP não funciona com OpenCloud."
+        MSG_SELFSIGNED="A gerar certificado auto-assinado (válido 10 anos)..."
+        MSG_SELFSIGNED_WARN="Certificado auto-assinado. Aceite a excepção no browser. Use Let's Encrypt para produção."
+        MSG_HOSTS_NOTE="Noutras máquinas da rede, adicione ao ficheiro hosts:"
         ;;
     3)
         MSG_TITLE="Installation OpenCloud — AlmaLinux 10"
@@ -80,14 +83,14 @@ case "$LANG_CHOICE" in
         MSG_NGINXCONF="Config Nginx"
         MSG_KEEPFILE="CONSERVEZ CE FICHIER — SUPPRIMEZ-LE APRÈS AVOIR NOTÉ LES IDENTIFIANTS"
         MSG_PROMPT_IP="Adresse IP du serveur"
-        MSG_PROMPT_DOMAIN="Domaine public (FQDN requis pour HTTPS)"
+        MSG_PROMPT_DOMAIN="Domaine / FQDN (ex: cloud.entreprise.local)"
         MSG_PROMPT_ADMINPASS="Mot de passe admin OpenCloud"
-        MSG_WARN_DOMAIN="ATTENTION : OpenCloud nécessite HTTPS. Utilisez un FQDN valide, pas seulement une IP."
-        MSG_SELFSIGNED="Génération d'un certificat auto-signé pour les tests..."
-        MSG_SELFSIGNED_WARN="AVERTISSEMENT : Certificat auto-signé. Acceptez l'exception de sécurité dans le navigateur."
+        MSG_WARN_DOMAIN="ATTENTION : Utilisez toujours le FQDN — l'accès par IP ne fonctionne pas avec OpenCloud."
+        MSG_SELFSIGNED="Génération d'un certificat auto-signé (valable 10 ans)..."
+        MSG_SELFSIGNED_WARN="Certificat auto-signé. Acceptez l'exception dans le navigateur. Utilisez Let's Encrypt en production."
+        MSG_HOSTS_NOTE="Sur les autres machines du réseau, ajoutez au fichier hosts :"
         ;;
     *)
-        # Default: English (option 2 or any invalid input)
         MSG_TITLE="OpenCloud Deployment — AlmaLinux 10"
         MSG_STEP1="[1/5] Updating system and installing prerequisites..."
         MSG_STEP2="[2/5] Downloading and installing OpenCloud binary..."
@@ -111,11 +114,12 @@ case "$LANG_CHOICE" in
         MSG_NGINXCONF="Nginx Config"
         MSG_KEEPFILE="KEEP THIS FILE SAFE — DELETE AFTER NOTING CREDENTIALS"
         MSG_PROMPT_IP="Server IP address"
-        MSG_PROMPT_DOMAIN="Public domain / FQDN (required for HTTPS)"
+        MSG_PROMPT_DOMAIN="Domain / FQDN (e.g. cloud.company.local)"
         MSG_PROMPT_ADMINPASS="OpenCloud admin password"
-        MSG_WARN_DOMAIN="WARNING: OpenCloud requires HTTPS. Use a valid FQDN, not just an IP."
-        MSG_SELFSIGNED="Generating self-signed certificate for testing..."
-        MSG_SELFSIGNED_WARN="WARNING: Self-signed certificate. Accept the security exception in your browser."
+        MSG_WARN_DOMAIN="WARNING: Always use the FQDN to access OpenCloud — IP access will NOT work."
+        MSG_SELFSIGNED="Generating self-signed certificate (valid 10 years)..."
+        MSG_SELFSIGNED_WARN="Self-signed certificate. Accept the browser exception. Use Let's Encrypt for production."
+        MSG_HOSTS_NOTE="On other machines on the network, add to their hosts file:"
         ;;
 esac
 
@@ -131,7 +135,6 @@ OC_USER="opencloud"
 LOG="/var/log/deploy-opencloud.log"
 CRED_FILE="/root/opencloud-credentials.txt"
 
-# Helper: log a section header
 log_section() {
     echo "" >> "$LOG"
     echo "============================================================" >> "$LOG"
@@ -149,7 +152,7 @@ log_section "${MSG_TITLE} — $(date)"
 # USER PROMPTS
 # -----------------------------
 echo ""
-echo "  ${MSG_WARN_DOMAIN}"
+echo "  !! ${MSG_WARN_DOMAIN} !!"
 echo ""
 
 read -rp "  ${MSG_PROMPT_IP} ($(hostname -I | awk '{print $1}')): " SERVER_IP
@@ -180,27 +183,26 @@ log_section "STEP 1: System Update & Prerequisites"
 } >> "$LOG" 2>&1
 
 # -----------------------------
-# STEP 2: Download OpenCloud binary
+# STEP 2: Download & initialise OpenCloud
 # -----------------------------
 echo "${MSG_STEP2}"
 log_section "STEP 2: Download OpenCloud ${OC_VERSION}"
 {
-    # Create system user (no home, no shell)
     useradd --system --no-create-home --shell /usr/sbin/nologin "${OC_USER}" 2>/dev/null || true
 
-    # Create directories
     mkdir -p "${OC_BIN_DIR}"
     mkdir -p "${OC_DATA_DIR}"
     mkdir -p "${OC_CONFIG_DIR}"
     chown -R "${OC_USER}:${OC_USER}" /var/lib/opencloud
     chmod 700 /var/lib/opencloud
 
-    # Download binary
     wget -q "${OC_BIN_URL}" -O "${OC_BIN_DIR}/opencloud"
     chmod +x "${OC_BIN_DIR}/opencloud"
     echo "  Binary downloaded to ${OC_BIN_DIR}/opencloud"
 
-    # Write environment config
+    # Runtime environment:
+    # PROXY_TLS=false   — TLS is terminated at Nginx, not inside OpenCloud
+    # OC_INSECURE=true  — allows internal OIDC calls through the self-signed cert
     cat > "${OC_CONFIG_DIR}/opencloud.env" << OCENV
 OC_CONFIG_DIR=${OC_CONFIG_DIR}
 OC_BASE_DATA_PATH=${OC_DATA_DIR}
@@ -211,7 +213,7 @@ OC_INSECURE=true
 PROXY_LOG_LEVEL=warn
 OCENV
 
-    # Initialize OpenCloud (generates config + admin credentials)
+    # Initialise OpenCloud — generates opencloud.yaml and all secrets
     sudo -u "${OC_USER}" env \
         OC_CONFIG_DIR="${OC_CONFIG_DIR}" \
         OC_BASE_DATA_PATH="${OC_DATA_DIR}" \
@@ -219,11 +221,18 @@ OCENV
         OC_INSECURE=true \
         "${OC_BIN_DIR}/opencloud" init --insecure true --admin-password "${OC_ADMIN_PASS}"
 
-    echo "  OpenCloud initialized."
+    # Patch generated yaml — it defaults insecure: false and overrides the env var
+    OCYAML="${OC_CONFIG_DIR}/opencloud.yaml"
+    if [[ -f "${OCYAML}" ]]; then
+        sed -i 's/insecure: false/insecure: true/g' "${OCYAML}"
+        echo "  Patched insecure: true in opencloud.yaml"
+    fi
+
+    echo "  OpenCloud initialised."
 } >> "$LOG" 2>&1
 
 # -----------------------------
-# STEP 3: Create systemd service
+# STEP 3: systemd service
 # -----------------------------
 echo "${MSG_STEP3}"
 log_section "STEP 3: Create systemd service"
@@ -244,7 +253,6 @@ Restart=on-failure
 RestartSec=5
 StandardOutput=journal
 StandardError=journal
-# Needed for large deployments (many open files)
 LimitNOFILE=65536
 
 [Install]
@@ -254,15 +262,15 @@ SVCEOF
     systemctl daemon-reload
     systemctl enable --now opencloud.service
 
-    echo "  Waiting 8 seconds for OpenCloud to start..."
-    sleep 8
+    echo "  Waiting 12 seconds for OpenCloud to fully start..."
+    sleep 12
     systemctl is-active --quiet opencloud.service && \
         echo "  opencloud.service is running." || \
         echo "  WARNING: opencloud.service may not have started. Check: journalctl -u opencloud"
 } >> "$LOG" 2>&1
 
 # -----------------------------
-# STEP 4: Configure Nginx as reverse proxy with self-signed cert
+# STEP 4: Nginx reverse proxy + self-signed TLS + OIDC loopback fix
 # -----------------------------
 echo "${MSG_STEP4}"
 log_section "STEP 4: Configure Nginx reverse proxy"
@@ -270,7 +278,6 @@ log_section "STEP 4: Configure Nginx reverse proxy"
     SSL_DIR="/etc/nginx/ssl/opencloud"
     mkdir -p "${SSL_DIR}"
 
-    # Generate self-signed TLS certificate
     echo "  ${MSG_SELFSIGNED}"
     openssl req -x509 -nodes -days 3650 -newkey rsa:4096 \
         -keyout "${SSL_DIR}/opencloud.key" \
@@ -281,12 +288,14 @@ log_section "STEP 4: Configure Nginx reverse proxy"
     chmod 600 "${SSL_DIR}/opencloud.key"
     chmod 644 "${SSL_DIR}/opencloud.crt"
 
-    # Write Nginx config
+    # Note: server_name is the FQDN only — IP access intentionally excluded
+    # because OpenCloud's OIDC issuer is bound to OC_URL (the FQDN) and
+    # will return a blank page if accessed via IP.
     cat > /etc/nginx/conf.d/opencloud.conf << NGINXEOF
 # Redirect HTTP -> HTTPS
 server {
     listen 80;
-    server_name ${OC_DOMAIN} ${SERVER_IP};
+    server_name ${OC_DOMAIN};
     return 301 https://\$host\$request_uri;
 }
 
@@ -294,7 +303,7 @@ server {
 server {
     listen 443 ssl;
     http2  on;
-    server_name ${OC_DOMAIN} ${SERVER_IP};
+    server_name ${OC_DOMAIN};
 
     ssl_certificate     ${SSL_DIR}/opencloud.crt;
     ssl_certificate_key ${SSL_DIR}/opencloud.key;
@@ -303,22 +312,25 @@ server {
     ssl_session_cache   shared:SSL:10m;
     ssl_session_timeout 1d;
 
-    # Security headers
     add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
     add_header X-Frame-Options            "SAMEORIGIN"    always;
     add_header X-Content-Type-Options     "nosniff"       always;
     add_header Referrer-Policy            "no-referrer"   always;
 
-    # Required for large file uploads and long-running syncs
+    # No upload size limit
     client_max_body_size 0;
-    proxy_buffering off;
+
+    # Disable buffering — required for SSE (server-sent events)
+    proxy_buffering         off;
     proxy_request_buffering off;
+
+    # Long timeouts for large file syncs
     proxy_read_timeout 3600s;
     proxy_send_timeout 3600s;
     keepalive_requests 100000;
     keepalive_timeout  5m;
 
-    # Prevent breaking SSE (server-sent events used by OpenCloud)
+    # Do not retry other upstreams — breaks SSE streams
     proxy_next_upstream off;
 
     location / {
@@ -328,22 +340,43 @@ server {
         proxy_set_header   X-Real-IP         \$remote_addr;
         proxy_set_header   X-Forwarded-For   \$proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto \$scheme;
+        # WebSocket support — required by the OpenCloud web UI
         proxy_set_header   Upgrade           \$http_upgrade;
         proxy_set_header   Connection        "upgrade";
     }
 }
 NGINXEOF
 
-    # SELinux: allow nginx to connect to upstream port 9200
+    # SELinux: allow nginx to reach upstream on port 9200
     setsebool -P httpd_can_network_connect 1
 
     nginx -t
     systemctl enable --now nginx
     systemctl reload nginx
+
+    # -----------------------------------------------------------------
+    # OIDC loopback fix
+    # OpenCloud's embedded identity provider must be able to call back
+    # to its own public URL (https://OC_DOMAIN) to validate OIDC tokens.
+    # Without this entry the login page loads but stays permanently blank
+    # after the authentication redirect, because the internal request
+    # cannot route back through Nginx using the public domain.
+    # -----------------------------------------------------------------
+    if ! grep -q "${OC_DOMAIN}" /etc/hosts; then
+        echo "127.0.0.1 ${OC_DOMAIN}" >> /etc/hosts
+        echo "  OIDC loopback fix applied: 127.0.0.1 ${OC_DOMAIN} added to /etc/hosts"
+    else
+        echo "  OIDC loopback entry already present in /etc/hosts — skipping."
+    fi
+
+    # Restart so OpenCloud picks up the now-reachable OIDC endpoint
+    systemctl restart opencloud.service
+    sleep 8
+    echo "  OpenCloud restarted with OIDC loopback active."
 } >> "$LOG" 2>&1
 
 # -----------------------------
-# STEP 5: Configure Firewall
+# STEP 5: Firewall
 # -----------------------------
 echo "${MSG_STEP5}"
 log_section "STEP 5: Configure Firewall"
@@ -370,7 +403,8 @@ cat > "$CRED_FILE" << CREDS
 
   ${MSG_URL}:
   https://${OC_DOMAIN}
-  https://${SERVER_IP}  (may show cert warning — use domain)
+
+  !! ${MSG_WARN_DOMAIN} !!
 
   ${MSG_ADMINUSER}:
   admin
@@ -384,7 +418,7 @@ cat > "$CRED_FILE" << CREDS
   https://${OC_DOMAIN}
   ${MSG_OCVER}:
   ${OC_VERSION}
-  ${MSG_OCPATH}:
+  Binary:
   ${OC_BIN_DIR}/opencloud
   Config Dir:
   ${OC_CONFIG_DIR}
@@ -405,9 +439,12 @@ cat > "$CRED_FILE" << CREDS
   journalctl -u opencloud -f
 
   ${MSG_SELFSIGNED_WARN}
-  To replace with a real cert (Let's Encrypt):
+  To replace with Let's Encrypt:
   dnf install -y certbot python3-certbot-nginx
   certbot --nginx -d ${OC_DOMAIN}
+
+  ${MSG_HOSTS_NOTE}
+  ${SERVER_IP}  ${OC_DOMAIN}
 
 ============================================================
   ${MSG_KEEPFILE}
@@ -428,13 +465,14 @@ echo "============================================================"
 echo ""
 echo "  ${MSG_URL}:"
 echo "  https://${OC_DOMAIN}"
-echo "  https://${SERVER_IP}  (cert warning expected — use domain)"
+echo ""
+echo "  !! ${MSG_WARN_DOMAIN} !!"
 echo ""
 echo "  ${MSG_ADMINUSER}: admin"
 echo "  ${MSG_ADMINPASS}: ${OC_ADMIN_PASS}"
 echo ""
 echo "  ${MSG_OCVER}: ${OC_VERSION}"
-echo "  ${MSG_OCPATH}: ${OC_BIN_DIR}/opencloud"
+echo "  Binary:      ${OC_BIN_DIR}/opencloud"
 echo "  Config Dir:  ${OC_CONFIG_DIR}"
 echo "  Data Dir:    ${OC_DATA_DIR}"
 echo ""
@@ -445,9 +483,12 @@ echo "  ${MSG_LOG}:   ${LOG}"
 echo "  ${MSG_CREDS}: ${CRED_FILE}"
 echo ""
 echo "  ${MSG_SELFSIGNED_WARN}"
-echo "  To use Let's Encrypt instead:"
+echo "  To use Let's Encrypt:"
 echo "  dnf install -y certbot python3-certbot-nginx"
 echo "  certbot --nginx -d ${OC_DOMAIN}"
+echo ""
+echo "  ${MSG_HOSTS_NOTE}"
+echo "  ${SERVER_IP}  ${OC_DOMAIN}"
 echo ""
 echo "  ${MSG_NEXTSTEP}"
 echo "============================================================"
