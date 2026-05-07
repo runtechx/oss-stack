@@ -7,7 +7,7 @@ one-liner
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/zabbix_al10.sh -o zabbix.sh && bash zabbix.sh
 ```
-Log (abrir em outro terminar)
+Acompanhar o log da instalação (executar em outro terminal)
 ```bash
 tail -f /var/log/deploy-zabbix.log
 ```
@@ -18,7 +18,7 @@ one-liner
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/opencloud_al10.sh -o opencloud.sh && bash opencloud.sh
 ```
-Log (abrir em outro terminar)
+Acompanhar o log da instalação (executar em outro terminal)
 ```bash
 tail -f /var/log/deploy-opencloud.log
 ```
@@ -30,7 +30,7 @@ one-liner
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/glpi_al10.sh -o glpi.sh && bash glpi.sh
 ```
-Log (abrir em outro terminar)
+Acompanhar o log da instalação (executar em outro terminal)
 ```bash
 tail -f /var/log/deploy-glpi.log
 ```
@@ -42,7 +42,7 @@ one-liner
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/wordpress_al10.sh -o wordpress.sh && bash wordpress.sh
 ```
-Log (abrir em outro terminar)
+Acompanhar o log da instalação (executar em outro terminal)
 ```bash
 tail -f /var/log/deploy-wordpress.log
 ```
