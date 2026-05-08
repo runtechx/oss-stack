@@ -31,7 +31,7 @@ tail -f /var/log/deploy-opencloud.log
 one-liner
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/freeipa_al10.sh -o glpi.sh && bash freeipa.sh
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/freeipa_al10.sh -o freeipa.sh && bash freeipa.sh
 ```
 Acompanhar o log da instalação (executar em outro terminal)
 ```bash
