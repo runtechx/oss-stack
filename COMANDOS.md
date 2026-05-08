@@ -1,6 +1,4 @@
 
-
-
 ## Zabbix
 one-liner
 
@@ -22,7 +20,7 @@ Acompanhar o log da instalação (executar em outro terminal)
 ```bash
 tail -f /var/log/deploy-opencloud.log
 ```
-> [!NOTE]
+>[!CAUTION]
 > 1. Após abrir o OpenCloud no navegador, aguarde alguns minutos para que o carregamento inicial seja concluído por completo.
 > 2. Utilize o FQDN para aceder ao servidor via navegador. Caso o registo DNS ainda não esteja configurado, adicione a entrada manualmente no ficheiro `hosts` do seu computador.
 
@@ -37,7 +35,9 @@ Acompanhar o log da instalação (executar em outro terminal)
 ```bash
 tail -f /var/log/deploy-freeipa.log
 ```
- 
+> [!CAUTION]
+> 1. A máquina onde será instalado o FreeIPA deve possuir no mínimo **4 GB de RAM**, de forma a garantir que a instalação decorra sem falhas.
+> 2. Utilize sempre o **FQDN (Fully Qualified Domain Name)** para aceder ao servidor através do navegador. Caso o registo DNS ainda não esteja configurado, adicione manualmente a entrada no ficheiro `hosts` do seu computador.
 
 ## GLPI (NOK)
 one-liner
