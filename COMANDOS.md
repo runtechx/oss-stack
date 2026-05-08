@@ -25,6 +25,18 @@ tail -f /var/log/deploy-opencloud.log
 > [!NOTE]
 > 1. Após abrir o OpenCloud no navegador, aguarde alguns minutos para que o carregamento inicial seja concluído por completo.
 > 2. Utilize o FQDN para aceder ao servidor via navegador. Caso o registo DNS ainda não esteja configurado, adicione a entrada manualmente no ficheiro `hosts` do seu computador.
+
+
+## FreeIPA
+one-liner
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/freeipa_al10.sh -o glpi.sh && bash freeipa.sh
+```
+Acompanhar o log da instalação (executar em outro terminal)
+```bash
+tail -f /var/log/deploy-freeipa.log
+```
  
 
 ## GLPI (NOK)
