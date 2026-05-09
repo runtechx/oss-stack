@@ -1,6 +1,6 @@
 
-# [Study points for the exam](https://www.redhat.com/en/services/training/ex200-red-hat-certified-system-administrator-rhcsa-exam) 
-RHCSA exam candidates should be able to accomplish the tasks below without assistance. These have been grouped into several categories.
+# Study points for the exam
+[RHCSA exam](https://www.redhat.com/en/services/training/ex200-red-hat-certified-system-administrator-rhcsa-exam) candidates should be able to accomplish the tasks below without assistance. These have been grouped into several categories.
 
 ## Understand and use essential tools
 
