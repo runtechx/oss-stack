@@ -18,29 +18,32 @@ RHCSA exam candidates should be able to accomplish the tasks below without assis
 
 ### Manage software
 
-Configure access to RPM repositories
-Install and remove RPM software packages
-Configure access to Flatpak repositories
-Install and remove Flatpak software packages
-Create simple shell scripts
+- Configure access to RPM repositories
+- Install and remove RPM software packages
+- Configure access to Flatpak repositories
+- Install and remove Flatpak software packages
 
-Conditionally execute code (use of: if, test, [], etc.)
-Use Looping constructs (for, etc.) to process file, command line input
-Process script inputs ($1, $2, etc.)
-Processing output of shell commands within a script
-Operate running systems
+### Create simple shell scripts
 
-Boot, reboot, and shut down a system normally
-Boot systems into different targets manually
-Interrupt the boot process in order to gain access to a system
-Identify CPU/memory intensive processes and kill processes
-Adjust process scheduling
-Manage tuning profiles
-Locate and interpret system log files and journals
-Preserve system journals
-Start, stop, and check the status of network services
-Securely transfer files between systems
-Configure local storage
+- Conditionally execute code (use of: if, test, [], etc.)
+- Use Looping constructs (for, etc.) to process file, command line input
+- Process script inputs ($1, $2, etc.)
+- Processing output of shell commands within a script
+
+### Operate running systems
+
+- Boot, reboot, and shut down a system normally
+- Boot systems into different targets manually
+- Interrupt the boot process in order to gain access to a system
+- Identify CPU/memory intensive processes and kill processes
+- Adjust process scheduling
+- Manage tuning profiles
+- Locate and interpret system log files and journals
+- Preserve system journals
+- Start, stop, and check the status of network services
+- Securely transfer files between systems
+
+### Configure local storage
 
 List, create, delete partitions on GPT disks
 Create and remove physical volumes
