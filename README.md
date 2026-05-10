@@ -33,6 +33,14 @@ Todas as contribuições são bem-vindas, especialmente quando:
 * Incluem justificação técnica e/ou comparação com soluções existentes
 * Contribuem para maior eficiência, segurança ou escalabilidade
 
+## Organização do repositório 
+
+| Pasta             |  Objectivo                                                            |
+|-------------------|------------------------------------------------------------------------------------------------------------|
+| blocklists        | Lista de bloqueios por IP ou Dominio, de maus actores ou publicidades excessivas
+| guias             | 
+
+
 ## Tecnologias adotadas
 
 >[!TIP]
