@@ -3,18 +3,19 @@
 one-liner
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/zabbix_al10.sh -o zabbix.sh && bash zabbix.sh
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/zabbix_al10.sh -o zabbix.sh && bash zabbix.sh
 ```
 Acompanhar o log da instalação (executar em outro terminal)
 ```bash
 tail -f /var/log/deploy-zabbix.log
 ```
 
+
 ## FreeIPA
 one-liner
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/freeipa_al10.sh -o freeipa.sh && bash freeipa.sh
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/freeipa_al10.sh -o freeipa.sh && bash freeipa.sh
 ```
 Acompanhar o log da instalação (executar em outro terminal)
 ```bash
@@ -22,13 +23,15 @@ tail -f /var/log/deploy-freeipa.log
 ```
 > [!WARNING]
 > 1. A máquina onde será instalado o FreeIPA deve possuir no mínimo **4 GB de RAM**, de forma a garantir que a instalação decorra sem falhas.
-> 2. Utilize sempre o **FQDN (Fully Qualified Domain Name)** para aceder ao servidor através do navegador. Caso o registo DNS ainda não esteja configurado, adicione manualmente a entrada no ficheiro `hosts` do seu computador.
+> 2. Instalar em VM e não em LXC por não suportar chrony (Linux Containers)
+> 3. Utilize sempre o **FQDN (Fully Qualified Domain Name)** para aceder ao servidor através do navegador. Caso o registo DNS ainda não esteja configurado, adicione manualmente a entrada no ficheiro `hosts` do seu computador.
+
 
 ## Keycloak
 one-liner
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/keycloak_al10.sh -o keycloak.sh && bash keycloak.sh
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/keycloak_al10.sh -o keycloak.sh && bash keycloak.sh
 ```
 Acompanhar o log da instalação (executar em outro terminal)
 ```bash
@@ -40,7 +43,7 @@ tail -f /var/log/deploy-keycloak.log
 one-liner
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/opencloud_al10.sh -o opencloud.sh && bash opencloud.sh
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/opencloud_al10.sh -o opencloud.sh && bash opencloud.sh
 ```
 Acompanhar o log da instalação (executar em outro terminal)
 ```bash
@@ -55,7 +58,7 @@ tail -f /var/log/deploy-opencloud.log
 one-liner
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/glpi_al10.sh -o glpi.sh && bash glpi.sh
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/glpi_al10.sh -o glpi.sh && bash glpi.sh
 ```
 Acompanhar o log da instalação (executar em outro terminal)
 ```bash
@@ -67,7 +70,7 @@ tail -f /var/log/deploy-glpi.log
 one-liner
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/scripts/wordpress_al10.sh -o wordpress.sh && bash wordpress.sh
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/wordpress_al10.sh -o wordpress.sh && bash wordpress.sh
 ```
 Acompanhar o log da instalação (executar em outro terminal)
 ```bash
