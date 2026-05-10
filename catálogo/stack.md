@@ -2,7 +2,7 @@
 
 >[!TIP]
 >Instale rapidamente as funcionalidades no AlmaLinux 10+ utilizando os comandos disponíveis:  
->[Aceder aos comandos](/COMANDOS.md)
+>[Aceder aos comandos](catálogo/COMANDOS.md)
 
 ### Base
 
@@ -33,4 +33,4 @@
 | [Issabel](https://www.issabel.com)| Plataforma de comunicações unificadas (VoIP, PBX, call center)|
 | *[Patchmon](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
 
-* Por implementar
+\* Por implementar
