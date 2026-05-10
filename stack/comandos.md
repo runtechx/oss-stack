@@ -23,7 +23,7 @@ tail -f /var/log/deploy-freeipa.log
 ```
 > [!WARNING]
 > 1. A máquina onde será instalado o FreeIPA deve possuir no mínimo **4 GB de RAM**, de forma a garantir que a instalação decorra sem falhas.
-> 2. Instalar em VM e não em LXC por não suportar chrony (Linux Containers)
+> 2. Instalar em VM e não em LXC (Linux Containers) por não suportar chrony
 > 3. Utilize sempre o **FQDN (Fully Qualified Domain Name)** para aceder ao servidor através do navegador. Caso o registo DNS ainda não esteja configurado, adicione manualmente a entrada no ficheiro `hosts` do seu computador.
 
 
