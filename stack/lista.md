@@ -2,7 +2,7 @@
 
 >[!TIP]
 >Instale rapidamente as funcionalidades no AlmaLinux 10+ utilizando os comandos disponíveis:  
->[Aceder aos comandos](/comandos.md)
+>[Aceder aos comandos](/scripts/comandos.md)
 
 ### N1 - Em uso
 
