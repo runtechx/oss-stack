@@ -1,4 +1,4 @@
-# Open First
+# Declaração
 
 A **RunTech** adota uma política **“Open First”**, priorizando o uso, promoção e contribuição para **software de código aberto (Open Source)** e **padrões abertos** em todas as suas decisões tecnológicas.
 
