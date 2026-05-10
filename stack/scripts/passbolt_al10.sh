@@ -28,9 +28,9 @@ read -rp "  > " LANG_CHOICE
 case "$LANG_CHOICE" in
     1)
         MSG_TITLE="Instalação Passbolt CE — AlmaLinux 10"
-        MSG_STEP1="[1/6] A instalar pré-requisitos e PHP 8.2..."
+        MSG_STEP1="[1/6] A instalar pré-requisitos e PHP 8.3..."
         MSG_STEP2="[2/6] A instalar e configurar o MariaDB..."
-        MSG_STEP3="[3/6] A configurar o repositório e instalar o Passbolt..."
+        MSG_STEP3="[3/6] A instalar o Passbolt CE (source/composer)..."
         MSG_STEP4="[4/6] A configurar o Nginx..."
         MSG_STEP5="[5/6] A aplicar políticas SELinux..."
         MSG_STEP6="[6/6] A configurar o firewall..."
@@ -61,9 +61,9 @@ case "$LANG_CHOICE" in
         ;;
     3)
         MSG_TITLE="Installation Passbolt CE — AlmaLinux 10"
-        MSG_STEP1="[1/6] Installation des prérequis et PHP 8.2..."
+        MSG_STEP1="[1/6] Installation des prérequis et PHP 8.3..."
         MSG_STEP2="[2/6] Installation et configuration de MariaDB..."
-        MSG_STEP3="[3/6] Configuration du dépôt et installation de Passbolt..."
+        MSG_STEP3="[3/6] Installation de Passbolt CE (source/composer)..."
         MSG_STEP4="[4/6] Configuration de Nginx..."
         MSG_STEP5="[5/6] Application des politiques SELinux..."
         MSG_STEP6="[6/6] Configuration du pare-feu..."
@@ -95,9 +95,9 @@ case "$LANG_CHOICE" in
     *)
         # Default: English (option 2 or any invalid input)
         MSG_TITLE="Passbolt CE Deployment — AlmaLinux 10"
-        MSG_STEP1="[1/6] Installing prerequisites and PHP 8.2..."
+        MSG_STEP1="[1/6] Installing prerequisites and PHP 8.3..."
         MSG_STEP2="[2/6] Installing and configuring MariaDB..."
-        MSG_STEP3="[3/6] Configuring repository and installing Passbolt..."
+        MSG_STEP3="[3/6] Installing Passbolt CE (source/composer)..."
         MSG_STEP4="[4/6] Configuring Nginx..."
         MSG_STEP5="[5/6] Applying SELinux policies..."
         MSG_STEP6="[6/6] Configuring firewall..."
@@ -191,7 +191,8 @@ log_section "STEP 1: Prerequisites & PHP 8.2"
     dnf install -y php83 php83-php-fpm php83-php-cli \
         php83-php-mysqlnd php83-php-intl php83-php-xml php83-php-mbstring \
         php83-php-curl php83-php-gd php83-php-zip php83-php-opcache \
-        php83-php-gnupg php83-php-ldap php83-php-pecl-apcu
+        php83-php-gnupg php83-php-ldap php83-php-pecl-apcu \
+        php83-process php83-php-sodium php83-php-pdo
 
     # Symlink so bare "php" command works system-wide
     ln -sf /usr/bin/php83 /usr/local/bin/php
@@ -243,30 +244,103 @@ EOF
 # STEP 3: Install Passbolt CE
 # -----------------------------
 echo "${MSG_STEP3}"
-log_section "STEP 3: Install Passbolt CE"
+log_section "STEP 3: Install Passbolt CE (source)"
 {
-    # Add Passbolt RPM repo.
-    # The official Passbolt repo-setup script uses el8 for all EL9+ systems
-    # (including AL9 and AL10). el9/el10 paths do not exist on their CDN.
-    # Source: https://github.com/passbolt/passbolt-dep-scripts/blob/main/passbolt-repo-setup.ce.sh
-    cat > /etc/yum.repos.d/passbolt.repo << EOF
-[passbolt-server]
-name=Passbolt Server
-baseurl=https://download.passbolt.com/ce/rpm/el8/stable
-enabled=1
-gpgcheck=1
-gpgkey=https://download.passbolt.com/pub.key
-EOF
+    source /etc/deploy-passbolt.env
 
-    dnf clean all
-    dnf install -y passbolt-ce-server
+    # Install additional system deps needed by Passbolt
+    dnf install -y gnupg2 git php83-php-pecl-gnupg
 
-    PB_VERSION=$(rpm -q passbolt-ce-server --qf '%{VERSION}-%{RELEASE}\n' 2>/dev/null || echo "unknown")
-    echo "  Passbolt CE installed. Version: ${PB_VERSION}"
+    # Install Composer
+    curl -fsSL https://getcomposer.org/installer | php83 -- --install-dir=/usr/local/bin --filename=composer
+    chmod +x /usr/local/bin/composer
+
+    # Detect latest Passbolt CE release tag from GitHub
+    PB_VERSION=$(curl -fsSL https://api.github.com/repos/passbolt/passbolt_api/releases/latest \
+        | grep '"tag_name"' | cut -d '"' -f4 | sed 's/^v//')
+    if [ -z "$PB_VERSION" ]; then
+        echo "  ERROR: Could not detect latest Passbolt version."
+        exit 1
+    fi
+    echo "  Version detected: ${PB_VERSION}"
+
+    # Download and extract
+    wget -q -P /tmp "https://github.com/passbolt/passbolt_api/archive/refs/tags/v${PB_VERSION}.tar.gz"
+    mkdir -p /var/www/passbolt
+    tar -xzf "/tmp/v${PB_VERSION}.tar.gz" -C /var/www/passbolt --strip-components=1
+    rm -f "/tmp/v${PB_VERSION}.tar.gz"
+
+    # Install PHP dependencies via Composer (no dev, optimised autoloader)
+    cd /var/www/passbolt
+    composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-req=ext-posix
+
+    # Create required directories
+    mkdir -p /var/www/passbolt/tmp/{cache,logs,sessions,tests}
+    mkdir -p /var/www/passbolt/logs
+    mkdir -p /var/www/passbolt/webroot/img/public
+
+    # Write app config (datasource)
+    cp /var/www/passbolt/config/app.default.php /var/www/passbolt/config/app.php
+
+    # Write passbolt.php datasource config
+    cat > /var/www/passbolt/config/passbolt.php << PBCONF
+<?php
+return [
+    'App' => [
+        'fullBaseUrl' => 'http://${ACCESS_URL}',
+    ],
+    'Datasources' => [
+        'default' => [
+            'host' => 'localhost',
+            'username' => '${DB_USER}',
+            'password' => '${DB_PASS}',
+            'database' => '${DB_NAME}',
+        ],
+    ],
+    'passbolt' => [
+        'registration' => ['public' => false],
+        'ssl' => ['force' => false],
+    ],
+];
+PBCONF
+
+    # Generate GPG server key for Passbolt
+    export GNUPGHOME=/var/www/passbolt/.gnupg
+    mkdir -p "${GNUPGHOME}"
+    chmod 700 "${GNUPGHOME}"
+
+    gpg --batch --gen-key << GPGEOF
+%no-protection
+Key-Type: RSA
+Key-Length: 3072
+Subkey-Type: RSA
+Subkey-Length: 3072
+Name-Real: Passbolt Server
+Name-Email: passbolt@${ACCESS_URL}
+Expire-Date: 0
+GPGEOF
+
+    GPG_FINGERPRINT=$(gpg --list-secret-keys --with-colons 2>/dev/null | grep '^fpr' | head -1 | cut -d: -f10)
+    gpg --armor --export "${GPG_FINGERPRINT}" > /var/www/passbolt/config/gpg/serverkey.asc
+    gpg --armor --export-secret-keys "${GPG_FINGERPRINT}" > /var/www/passbolt/config/gpg/serverkey_private.asc
+
+    # Add GPG key config to passbolt.php
+    sed -i "s|'passbolt' => \[|'passbolt' => [\n        'gpg' => [\n            'serverKey' => [\n                'fingerprint' => '${GPG_FINGERPRINT}',\n                'public' => CONFIG . 'gpg/serverkey.asc',\n                'private' => CONFIG . 'gpg/serverkey_private.asc',\n            ],\n        ],|" /var/www/passbolt/config/passbolt.php
+
+    # Ownership
+    chown -R nginx:nginx /var/www/passbolt
+    chmod -R 750 /var/www/passbolt
+    chmod -R 770 /var/www/passbolt/tmp
+    chmod -R 770 /var/www/passbolt/logs
+    chmod 640 /var/www/passbolt/config/passbolt.php
+    chmod 640 /var/www/passbolt/config/gpg/serverkey_private.asc
+
+    echo "  Passbolt CE ${PB_VERSION} installed at /var/www/passbolt"
 } >> "$LOG" 2>&1
 
 # Capture version for credentials
-PB_VERSION=$(rpm -q passbolt-ce-server --qf '%{VERSION}' 2>/dev/null || echo "unknown")
+PB_VERSION=$(curl -fsSL https://api.github.com/repos/passbolt/passbolt_api/releases/latest \
+    | grep '"tag_name"' | cut -d '"' -f4 | sed 's/^v//' 2>/dev/null || echo "unknown")
 
 # -----------------------------
 # STEP 4: Configure Nginx
@@ -287,7 +361,7 @@ server {
 
     server_name ${SERVER_IP} ${ACCESS_URL};
 
-    root /usr/share/php/passbolt/webroot;
+    root /var/www/passbolt/webroot;
     index index.php;
 
     client_max_body_size 5m;
@@ -335,23 +409,11 @@ NGINXEOF
     mkdir -p "${PHP_FPM_SOCK_DIR}"
     chown nginx:nginx "${PHP_FPM_SOCK_DIR}"
 
-    # Passbolt config — inject DB credentials
-    PB_CONFIG="/etc/passbolt/passbolt.php"
-    if [ -f "${PB_CONFIG}.default" ]; then
-        cp "${PB_CONFIG}.default" "${PB_CONFIG}"
-    fi
+    # Config already written by Step 3 — just reference it
+    PB_CONFIG="/var/www/passbolt/config/passbolt.php"
 
-    if [ -f "${PB_CONFIG}" ]; then
-        sed -i \
-            -e "s|'host' => '.*'|'host' => 'localhost'|" \
-            -e "s|'username' => '.*'|'username' => '${DB_USER}'|" \
-            -e "s|'password' => '.*'|'password' => '${DB_PASS}'|" \
-            -e "s|'database' => '.*'|'database' => '${DB_NAME}'|" \
-            "${PB_CONFIG}"
-    fi
-
-    chown -R nginx:nginx /usr/share/php/passbolt
-    chown -R nginx:nginx /etc/passbolt
+    chown -R nginx:nginx /var/www/passbolt
+    chmod 750 /var/www/passbolt
     chmod 640 "${PB_CONFIG}" 2>/dev/null || true
 
     nginx -t
@@ -369,15 +431,15 @@ log_section "STEP 5: SELinux"
         echo "  Applying SELinux contexts and booleans..."
 
         # Restore default contexts
-        restorecon -Rv /usr/share/php/passbolt
+        restorecon -Rv /var/www/passbolt
 
         # Passbolt needs to write to tmp/, logs/, webroot/
-        semanage fcontext -a -t httpd_sys_rw_content_t "/usr/share/php/passbolt/tmp(/.*)?"
-        semanage fcontext -a -t httpd_sys_rw_content_t "/usr/share/php/passbolt/logs(/.*)?"
-        semanage fcontext -a -t httpd_sys_rw_content_t "/etc/passbolt(/.*)?"
-        restorecon -Rv /usr/share/php/passbolt/tmp  2>/dev/null || true
-        restorecon -Rv /usr/share/php/passbolt/logs 2>/dev/null || true
-        restorecon -Rv /etc/passbolt
+        semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/passbolt/tmp(/.*)?"
+        semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/passbolt/logs(/.*)?"
+        semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/passbolt/config(/.*)?"
+        restorecon -Rv /var/www/passbolt/tmp  2>/dev/null || true
+        restorecon -Rv /var/www/passbolt/logs 2>/dev/null || true
+        restorecon -Rv /var/www/passbolt/config
 
         # Required booleans
         setsebool -P httpd_can_network_connect on        # Outbound HTTP (email, etc.)
@@ -434,9 +496,9 @@ cat > "$CRED_FILE" << CREDS
   ${MSG_SERVERIP}: ${SERVER_IP}
   ${MSG_ACCESSURL}: ${ACCESS_URL}
   ${MSG_PBVER}: ${PB_VERSION}
-  ${MSG_INSTALLDIR}: ${INSTALL_DIR}
+  ${MSG_INSTALLDIR}: /var/www/passbolt
   ${MSG_NGINXCONF}: /etc/nginx/conf.d/passbolt.conf
-  Passbolt Config: /etc/passbolt/passbolt.php
+  Passbolt Config: /var/www/passbolt/config/passbolt.php
   ${MSG_LOG}: ${LOG}
   ${MSG_CREDS}: ${CRED_FILE}
 
@@ -469,9 +531,9 @@ echo "  ${MSG_DBPASS}: ${DB_PASS}"
 echo "  ${MSG_DBROOTPASS}: ${MYSQL_ROOT_PASS}"
 echo ""
 echo "  ${MSG_PBVER}: ${PB_VERSION}"
-echo "  ${MSG_INSTALLDIR}: ${INSTALL_DIR}"
+echo "  ${MSG_INSTALLDIR}: /var/www/passbolt"
 echo "  ${MSG_NGINXCONF}: /etc/nginx/conf.d/passbolt.conf"
-echo "  Passbolt Config: /etc/passbolt/passbolt.php"
+echo "  Passbolt Config: /var/www/passbolt/config/passbolt.php"
 echo "  ${MSG_LOG}: ${LOG}"
 echo "  ${MSG_CREDS}: ${CRED_FILE}"
 echo ""
