@@ -1,3 +1,9 @@
+<div align="right">
+
+🇺🇸 [English](https://github.com/runtechx/OpenFirst/blob/main/README.en.md) | 🇵🇹 [Português](https://github.com/runtechx/OpenFirst/blob/main/README.md)
+
+</div>
+
 # Declaração
 
 A **RunTech** segue uma abordagem **“Open First”**, priorizando a adoção, promoção e contribuição para **software de código aberto (Open Source)** e **padrões abertos** em todas as decisões tecnológicas.
