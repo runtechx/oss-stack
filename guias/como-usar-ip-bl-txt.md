@@ -7,11 +7,10 @@
 > Ficheiro: `https://raw.githubusercontent.com/runtechx/Openfirst/master/blocklists/ip-bl.txt`
 
 >[!IMPORTANT]
-> Usa a conta root caso não for possível 
 >```bash
 >su - root
 >```
->adicione `sudo` antes de cada comando
+> Usa a conta root caso não for possível adicione `sudo` antes de cada comando
 
 ## 1. Instalar EPEL e Fail2ban
 
