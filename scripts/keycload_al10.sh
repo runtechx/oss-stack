@@ -136,6 +136,7 @@ esac
 KC_DB_NAME="keycloak"
 KC_DB_USER="keycloak"
 KC_DB_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
+KC_PG_ROOT_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
 KC_ADMIN_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
 KC_INSTALL_DIR="/opt/keycloak"
 KC_PORT=8080
@@ -187,8 +188,6 @@ log_section "STEP 1: Prerequisites & Java 21"
 # -----------------------------
 # STEP 2: Install PostgreSQL
 # -----------------------------
-KC_PG_ROOT_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
-
 echo "${MSG_STEP2}"
 log_section "STEP 2: Install PostgreSQL"
 {
@@ -196,14 +195,14 @@ log_section "STEP 2: Install PostgreSQL"
     postgresql-setup --initdb
     systemctl enable --now postgresql
 
-    # Set postgres superuser password while peer auth is still active
+    # Set postgres superuser password while peer auth is still active (socket)
     echo "  Setting postgres superuser password..."
     sudo -u postgres psql -c "ALTER USER postgres WITH ENCRYPTED PASSWORD '${KC_PG_ROOT_PASS}';"
 
-    # Now switch all local connections to md5
+    # Replace ALL auth methods (peer + ident) with md5 — covers both
+    # local socket lines and host/TCP lines (IPv4 + IPv6)
     echo "  Configuring PostgreSQL for password authentication..."
-    sed -i 's/^local\s\+all\s\+all\s\+peer/local   all             all                                     md5/' \
-        /var/lib/pgsql/data/pg_hba.conf
+    sed -i 's/\bpeer\b/md5/g; s/\bident\b/md5/g' /var/lib/pgsql/data/pg_hba.conf
     systemctl restart postgresql
 
     echo "  Creating Keycloak database and user..."
@@ -274,6 +273,7 @@ EOF
     chmod -R 750 "${KC_INSTALL_DIR}"
 
     echo "  Keycloak installed at: ${KC_INSTALL_DIR}"
+    echo "  Version: ${KC_VERSION}"
 } >> "$LOG" 2>&1
 
 # Capture version outside the log block for use in credentials
