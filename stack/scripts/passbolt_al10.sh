@@ -192,7 +192,7 @@ log_section "STEP 1: Prerequisites & PHP 8.2"
         php83-php-mysqlnd php83-php-intl php83-php-xml php83-php-mbstring \
         php83-php-curl php83-php-gd php83-php-zip php83-php-opcache \
         php83-php-gnupg php83-php-ldap php83-php-pecl-apcu \
-        php83-process php83-php-sodium php83-php-pdo
+        php83-php-process php83-php-sodium php83-php-pdo
 
     # Symlink so bare "php" command works system-wide
     ln -sf /usr/bin/php83 /usr/local/bin/php
