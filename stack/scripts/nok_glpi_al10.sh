@@ -25,13 +25,14 @@ read -rp "  > " LANG_CHOICE
 case "$LANG_CHOICE" in
     1)
         MSG_TITLE="Instalação GLPI — AlmaLinux 10"
-        MSG_STEP1="[1/5] A instalar pré-requisitos e PHP 8.5..."
-        MSG_STEP2="[2/5] A instalar o MariaDB..."
+        MSG_STEP1="[1/5] A actualizar o sistema e a instalar pré-requisitos..."
+        MSG_STEP2="[2/5] A instalar e configurar o MariaDB..."
         MSG_STEP3="[3/5] A instalar o GLPI..."
         MSG_STEP4="[4/5] A configurar o Apache..."
         MSG_STEP5="[5/5] A configurar o firewall..."
         MSG_DONE="INSTALAÇÃO DO GLPI CONCLUÍDA"
         MSG_URL="URL"
+        MSG_IP="IP do Servidor"
         MSG_LOG="Registo de instalação"
         MSG_CREDS="Ficheiro de credenciais"
         MSG_NEXTSTEP="Próximo passo: Abra o URL no seu browser e inicie sessão com glpi / glpi"
@@ -46,24 +47,26 @@ case "$LANG_CHOICE" in
         MSG_DBHOST="Servidor BD"
         MSG_SERVERIP="IP do Servidor"
         MSG_ACCESSURL="URL de Acesso"
-        MSG_INSTALLDIR="Directório de instalação"
-        MSG_APACHECONF="Config Apache"
+        MSG_GLPIVER="Versão GLPI"
         MSG_DEFLOGIN="Login padrão"
         MSG_DEFPASS="Password padrão"
-        MSG_ZBXVER="Versão GLPI"
+        MSG_APACHECONF="Config Apache"
+        MSG_INSTALLDIR="Directório de instalação"
         MSG_KEEPFILE="GUARDE ESTE FICHEIRO — ELIMINE APÓS ANOTAR AS CREDENCIAIS"
         MSG_PROMPT_IP="Endereço IP do servidor"
         MSG_PROMPT_URL="URL de acesso (FQDN ou IP)"
+        MSG_WARN_TIME="A instalação pode demorar vários minutos — por favor aguarde."
         ;;
     3)
         MSG_TITLE="Installation GLPI — AlmaLinux 10"
-        MSG_STEP1="[1/5] Installation des prérequis et PHP 8.5..."
-        MSG_STEP2="[2/5] Installation de MariaDB..."
+        MSG_STEP1="[1/5] Mise à jour du système et installation des prérequis..."
+        MSG_STEP2="[2/5] Installation et configuration de MariaDB..."
         MSG_STEP3="[3/5] Installation de GLPI..."
         MSG_STEP4="[4/5] Configuration d'Apache..."
         MSG_STEP5="[5/5] Configuration du pare-feu..."
         MSG_DONE="INSTALLATION DE GLPI TERMINÉE"
         MSG_URL="URL"
+        MSG_IP="IP Serveur"
         MSG_LOG="Journal d'installation"
         MSG_CREDS="Fichier d'identifiants"
         MSG_NEXTSTEP="Prochaine étape : Ouvrez l'URL dans votre navigateur et connectez-vous avec glpi / glpi"
@@ -78,25 +81,27 @@ case "$LANG_CHOICE" in
         MSG_DBHOST="Hôte BD"
         MSG_SERVERIP="IP Serveur"
         MSG_ACCESSURL="URL d'accès"
-        MSG_INSTALLDIR="Répertoire d'installation"
-        MSG_APACHECONF="Config Apache"
+        MSG_GLPIVER="Version GLPI"
         MSG_DEFLOGIN="Login par défaut"
         MSG_DEFPASS="Mot de passe par défaut"
-        MSG_ZBXVER="Version GLPI"
+        MSG_APACHECONF="Config Apache"
+        MSG_INSTALLDIR="Répertoire d'installation"
         MSG_KEEPFILE="CONSERVEZ CE FICHIER — SUPPRIMEZ-LE APRÈS AVOIR NOTÉ LES IDENTIFIANTS"
         MSG_PROMPT_IP="Adresse IP du serveur"
         MSG_PROMPT_URL="URL d'accès (FQDN ou IP)"
+        MSG_WARN_TIME="L'installation peut prendre plusieurs minutes — veuillez patienter."
         ;;
     *)
         # Default: English (option 2 or any invalid input)
         MSG_TITLE="GLPI Deployment — AlmaLinux 10"
-        MSG_STEP1="[1/5] Installing prerequisites and PHP 8.5..."
-        MSG_STEP2="[2/5] Installing MariaDB..."
+        MSG_STEP1="[1/5] Updating system and installing prerequisites..."
+        MSG_STEP2="[2/5] Installing and configuring MariaDB..."
         MSG_STEP3="[3/5] Installing GLPI..."
         MSG_STEP4="[4/5] Configuring Apache..."
         MSG_STEP5="[5/5] Configuring firewall..."
         MSG_DONE="GLPI DEPLOYMENT COMPLETE"
         MSG_URL="URL"
+        MSG_IP="Server IP"
         MSG_LOG="Deploy Log"
         MSG_CREDS="Credentials File"
         MSG_NEXTSTEP="Next step: Open the URL in your browser and log in with glpi / glpi"
@@ -111,26 +116,26 @@ case "$LANG_CHOICE" in
         MSG_DBHOST="DB Host"
         MSG_SERVERIP="Server IP"
         MSG_ACCESSURL="Access URL"
-        MSG_INSTALLDIR="Install Directory"
-        MSG_APACHECONF="Apache Config"
+        MSG_GLPIVER="GLPI Version"
         MSG_DEFLOGIN="Default Login"
         MSG_DEFPASS="Default Password"
-        MSG_ZBXVER="GLPI Version"
+        MSG_APACHECONF="Apache Config"
+        MSG_INSTALLDIR="Install Directory"
         MSG_KEEPFILE="KEEP THIS FILE SAFE — DELETE AFTER NOTING CREDENTIALS"
         MSG_PROMPT_IP="Server IP address"
         MSG_PROMPT_URL="Access URL (FQDN or IP)"
+        MSG_WARN_TIME="Installation may take several minutes — please wait."
         ;;
 esac
 
 # -----------------------------
 # CONFIGURATION — CHANGE ME
 # -----------------------------
-PORT=62300
+INSTALL_DIR="/var/www/html/glpi"
 DB_NAME="glpi"
 DB_USER="glpi"
 DB_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
-DB_ROOT_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
-INSTALL_DIR="/var/www/html"
+MYSQL_ROOT_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
 LOG="/var/log/deploy-glpi.log"
 CRED_FILE="/root/glpi-credentials.txt"
 
@@ -146,6 +151,8 @@ echo ""
 echo "============================================================"
 echo "  ${MSG_TITLE}"
 echo "============================================================"
+echo ""
+echo "  ${MSG_WARN_TIME}"
 log_section "${MSG_TITLE} — $(date)"
 
 # -----------------------------
@@ -163,21 +170,18 @@ echo "  ${MSG_ACCESSURL}: ${ACCESS_URL}" | tee -a "$LOG"
 echo ""
 
 # -----------------------------
-# STEP 1: Prerequisites & PHP 8.5
+# STEP 1: Prerequisites & PHP
 # -----------------------------
 echo "${MSG_STEP1}"
-log_section "STEP 1: Prerequisites & PHP 8.5"
+log_section "STEP 1: System Update & Prerequisites"
 {
     dnf install -y epel-release
     dnf install -y wget tar unzip net-tools bzip2 policycoreutils-python-utils httpd mod_ssl
     dnf install -y https://rpms.remirepo.net/enterprise/remi-release-10.rpm
-
-    # Disable the modular repo — it returns 403 on EL10 and is deprecated in DNF5.
-    # PHP packages are available directly from the non-modular Remi repo.
-    dnf config-manager --set-disabled remi-modular || true
-
-#xmlrpc,imap
-    dnf install -y php php-{mbstring,mysqli,xml,cli,ldap,openssl,pecl-apcu,zip,curl,gd,json,session,intl,zlib,redis,bcmath}
+    dnf module reset php -y
+    dnf module enable php:remi-8.5 -y
+    dnf install -y php php-{mbstring,mysqli,xml,cli,ldap,openssl,xmlrpc,pecl-apcu,zip,curl,gd,json,session,imap,intl,zlib,redis,bcmath}
+    php -v
 } >> "$LOG" 2>&1
 
 # -----------------------------
@@ -190,23 +194,27 @@ log_section "STEP 2: Install MariaDB"
     systemctl enable --now mariadb
     sleep 5
 
-    echo "  Securing MariaDB..."
-    mysql -u root << SQL
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}';
+    # Secure installation — set root password and harden defaults
+    mysql <<SQL
+ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASS}';
 DELETE FROM mysql.user WHERE User='';
-DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost');
 DROP DATABASE IF EXISTS test;
 DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 FLUSH PRIVILEGES;
 SQL
 
-    echo "  Creating GLPI database and user..."
-    mysql -u root -p"${DB_ROOT_PASS}" << SQL
+    # Create GLPI database and user
+    mysql -uroot -p"${MYSQL_ROOT_PASS}" <<EOF
 CREATE DATABASE ${DB_NAME} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE OR REPLACE USER '${DB_USER}'@'localhost' IDENTIFIED BY '${DB_PASS}';
 GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'localhost';
 FLUSH PRIVILEGES;
-SQL
+EOF
+
+    # Test connectivity
+    mysql -u"${DB_USER}" -p"${DB_PASS}" "${DB_NAME}" -e "SELECT 1;" > /dev/null
+    echo "  Database connectivity confirmed."
 } >> "$LOG" 2>&1
 
 # -----------------------------
@@ -215,6 +223,7 @@ SQL
 echo "${MSG_STEP3}"
 log_section "STEP 3: Install GLPI"
 {
+    # Detect latest release from GitHub API
     GLPI_VERSION=$(curl -fsSL https://api.github.com/repos/glpi-project/glpi/releases/latest \
         | grep '"tag_name"' \
         | cut -d '"' -f4 \
@@ -224,21 +233,29 @@ log_section "STEP 3: Install GLPI"
         echo "  ERROR: Could not detect latest GLPI version."
         exit 1
     fi
+    echo "  Version detected: ${GLPI_VERSION}"
 
-    echo "  Version detected: v${GLPI_VERSION}"
-
+    # Download and extract
     wget -q -P /tmp "https://github.com/glpi-project/glpi/releases/download/${GLPI_VERSION}/glpi-${GLPI_VERSION}.tgz"
-    tar -xzf "/tmp/glpi-${GLPI_VERSION}.tgz" -C "${INSTALL_DIR}"
+    tar -xzf "/tmp/glpi-${GLPI_VERSION}.tgz" -C /var/www/html/
     rm -f "/tmp/glpi-${GLPI_VERSION}.tgz"
 
-    php "${INSTALL_DIR}/glpi/bin/console" db:install \
+    # Run console installer (non-interactive)
+    php /var/www/html/glpi/bin/console db:install \
         --db-host=localhost \
         --db-name="${DB_NAME}" \
         --db-user="${DB_USER}" \
         --db-password="${DB_PASS}" \
         --no-interaction \
         --lang=en_GB
+
+    echo "  GLPI installed at: /var/www/html/glpi"
+    echo "  Version: ${GLPI_VERSION}"
 } >> "$LOG" 2>&1
+
+# Capture version outside the log block for use in credentials
+GLPI_VERSION=$(curl -fsSL https://api.github.com/repos/glpi-project/glpi/releases/latest \
+    | grep '"tag_name"' | cut -d '"' -f4 | sed 's/^v//' 2>/dev/null || echo "unknown")
 
 # -----------------------------
 # STEP 4: Configure Apache
@@ -246,13 +263,16 @@ log_section "STEP 3: Install GLPI"
 echo "${MSG_STEP4}"
 log_section "STEP 4: Configure Apache"
 {
-    cat > /etc/httpd/conf.d/glpi.conf << VHOST
+    systemctl enable --now httpd
+
+    # Write virtual host configuration
+    cat > /etc/httpd/conf.d/glpi.conf << EOF
 <VirtualHost *:80>
     ServerName ${SERVER_IP}
     ServerAlias ${ACCESS_URL}
-    DocumentRoot ${INSTALL_DIR}/glpi/public
+    DocumentRoot /var/www/html/glpi/public
 
-    <Directory ${INSTALL_DIR}/glpi/public>
+    <Directory /var/www/html/glpi/public>
         AllowOverride All
         RewriteEngine On
         RewriteCond %{REQUEST_FILENAME} !-f
@@ -262,29 +282,28 @@ log_section "STEP 4: Configure Apache"
     ErrorLog /var/log/httpd/glpi_error.log
     CustomLog /var/log/httpd/glpi_access.log combined
 </VirtualHost>
-VHOST
-    echo "  VHost config written to /etc/httpd/conf.d/glpi.conf"
+EOF
 
-    chown -R apache:apache "${INSTALL_DIR}/glpi"
-    chmod -R 755 "${INSTALL_DIR}/glpi"
-    rm -f "${INSTALL_DIR}/glpi/install/install.php"
-
-    echo "  Applying PHP settings..."
+    # Harden PHP session cookie
     cp /etc/php.ini /etc/php.ini.bak
     sed -i 's/^session.cookie_httponly =.*/session.cookie_httponly = 1/' /etc/php.ini
-    systemctl restart php-fpm
 
-    echo "  Applying SELinux permissions..."
+    # Fix file ownership
+    chown -R apache:apache /var/www/html/glpi
+    chmod -R 755 /var/www/html/glpi
+
+    # Remove the web installer once console install is done
+    rm -f /var/www/html/glpi/install/install.php
+
+    # SELinux
     if command -v getenforce >/dev/null 2>&1 && [ "$(getenforce)" != "Disabled" ]; then
-        restorecon -Rv "${INSTALL_DIR}/glpi"
+        restorecon -Rv /var/www/html/glpi
         setsebool -P httpd_can_sendmail on
         setsebool -P httpd_can_network_connect on
         setsebool -P httpd_can_network_connect_db on
     fi
 
-    systemctl enable --now httpd
-    systemctl restart httpd
-    echo "  Apache restarted successfully"
+    systemctl restart php-fpm httpd
 } >> "$LOG" 2>&1
 
 # -----------------------------
@@ -296,7 +315,6 @@ log_section "STEP 5: Configure Firewall"
     if systemctl is-active --quiet firewalld; then
         firewall-cmd --permanent --add-service=http
         firewall-cmd --permanent --add-service=https
-        firewall-cmd --permanent --add-port=${PORT}/tcp
         firewall-cmd --reload
     else
         echo "  firewalld not running — skipping firewall rules."
@@ -307,8 +325,6 @@ log_section "STEP 5: Configure Firewall"
 # SAVE CREDENTIALS TO FILE
 # -----------------------------
 log_section "Credentials Saved"
-GLPI_VERSION_INSTALLED=$(php "${INSTALL_DIR}/glpi/bin/console" glpi:system:status 2>/dev/null \
-    | grep -i version | head -1 | awk '{print $NF}' || echo "unknown")
 
 cat > "$CRED_FILE" << CREDS
 ============================================================
@@ -333,7 +349,7 @@ cat > "$CRED_FILE" << CREDS
   ${MSG_DBPASS}:
   ${DB_PASS}
   ${MSG_DBROOTPASS}:
-  ${DB_ROOT_PASS}
+  ${MYSQL_ROOT_PASS}
   ${MSG_DBHOST}:
   localhost
 
@@ -342,10 +358,10 @@ cat > "$CRED_FILE" << CREDS
   ${SERVER_IP}
   ${MSG_ACCESSURL}:
   ${ACCESS_URL}
-  ${MSG_ZBXVER}:
-  ${GLPI_VERSION_INSTALLED}
+  ${MSG_GLPIVER}:
+  ${GLPI_VERSION}
   ${MSG_INSTALLDIR}:
-  ${INSTALL_DIR}/glpi
+  ${INSTALL_DIR}
   ${MSG_APACHECONF}:
   /etc/httpd/conf.d/glpi.conf
   ${MSG_LOG}:
@@ -384,10 +400,14 @@ echo "  ${DB_USER}"
 echo "  ${MSG_DBPASS}:"
 echo "  ${DB_PASS}"
 echo "  ${MSG_DBROOTPASS}:"
-echo "  ${DB_ROOT_PASS}"
+echo "  ${MYSQL_ROOT_PASS}"
 echo ""
+echo "  ${MSG_GLPIVER}:"
+echo "  ${GLPI_VERSION}"
 echo "  ${MSG_INSTALLDIR}:"
-echo "  ${INSTALL_DIR}/glpi"
+echo "  ${INSTALL_DIR}"
+echo "  ${MSG_APACHECONF}:"
+echo "  /etc/httpd/conf.d/glpi.conf"
 echo "  ${MSG_LOG}:"
 echo "  ${LOG}"
 echo "  ${MSG_CREDS}:"
