@@ -33,8 +33,6 @@ Todas as contribuições são bem-vindas, especialmente quando:
 * Incluem justificação técnica e/ou comparação com soluções existentes
 * Contribuem para maior eficiência, segurança ou escalabilidade
 
-## Organização do repositório 
-
 ## Organização do Repositório
 
 | Pasta         | Objetivo                                                                                                                                                                                                |
