@@ -38,6 +38,10 @@ Todas as contribuições são bem-vindas, especialmente quando:
 
 ## Organização do Repositório
 
+> [!TIP]
+> Explore as diferentes pastas deste repositório para conhecer as tecnologias, guias, laboratórios e ferramentas utilizadas pela RunTech na construção e operação da sua infraestrutura TIC.
+
+
 | Pasta         | Objetivo                                                                                                                                                                                                              |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`blocklists`](/blocklists)  | Conjunto de listas de bloqueio de IPs e domínios associados a publicidade abusiva, malware, tracking e outras fontes potencialmente maliciosas, utilizadas para reforçar a segurança e privacidade da infraestrutura. |
