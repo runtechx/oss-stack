@@ -2,7 +2,7 @@
 
 >[!TIP]
 >Instale rapidamente as funcionalidades no AlmaLinux 10+ utilizando os comandos disponíveis:  
->[Aceder aos comandos](/scripts/comandos.md)
+>[Aceder aos comandos](https://github.com/runtechx/OpenFirst/blob/main/stack/comandos.md)
 
 ### N1 - BASE
 
