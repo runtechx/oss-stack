@@ -4,7 +4,7 @@
 >Instale rapidamente as funcionalidades no AlmaLinux 10+ utilizando os comandos disponíveis:  
 >[Aceder aos comandos](/scripts/comandos.md)
 
-### N1 - Em uso
+### N1 - BASE
 
 | Software | Descrição                                                                                                     |
 | ---------- | ------------------------------------------------------------------------------------------------------------- |
@@ -21,7 +21,7 @@
 
 
 
-### N2 - Adicional
+### N2 - ADICIONAL
 
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
@@ -33,7 +33,7 @@
 | [Issabel](https://www.issabel.com)| Plataforma de comunicações unificadas (VoIP, PBX, call center)|
 | *[Patchmon](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
 
-### N3 - Em estudo
+### N3 - ANÁLISE
 
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
