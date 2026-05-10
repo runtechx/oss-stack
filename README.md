@@ -35,9 +35,15 @@ Todas as contribuições são bem-vindas, especialmente quando:
 
 ## Organização do repositório 
 
-| Pasta             |  Objectivo                                                            |
-|-------------------|------------------------------------------------------------------------------------------------------------|
-| blocklists        | Lista de bloqueios por IP ou Dominio, de maus actores ou publicidades excessivas
-| guias             | 
+## Organização do Repositório
+
+| Pasta         | Objetivo                                                                                                                                                                                                |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `blocklists`  | Conjunto de listas de bloqueio de IPs e domínios associados a publicidade abusiva, malware, tracking ou outras fontes maliciosas, utilizadas para reforçar a segurança e privacidade da infraestrutura. |
+| `Ferramentas` | Catálogo de softwares, plataformas e tecnologias adotadas pela RunTech na construção, gestão e operação da sua infraestrutura TIC.                                                                      |
+| `guias`       | Coleção de guias técnicos, documentação e procedimentos destinados à instalação, configuração, administração e boas práticas operacionais.                                                              |
+| `labs`        | Laboratórios práticos e ambientes de teste criados para explorar funcionalidades, validar cenários e aprofundar o conhecimento sobre diferentes tecnologias e soluções.                                 |
+| `scripts`     | Conjunto de scripts automatizados para instalação, configuração e preparação de software open source em sistemas AlmaLinux 10+.                                                                         |
+
 
 
