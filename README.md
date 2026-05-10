@@ -36,6 +36,14 @@ Todas as contribuições são bem-vindas, especialmente quando:
 * Incluem fundamentação técnica e/ou comparação com soluções existentes.
 * Contribuem para melhorar a eficiência, segurança, automação ou escalabilidade da infraestrutura.
 
+Se este projeto lhe foi útil, considere também:
+
+* Deixar uma ⭐ no repositório
+* Seguir a organização para acompanhar novas funcionalidades, stacks e automações open source
+* Partilhar o projeto com outros profissionais e comunidades tecnológicas lusófonas
+
+A sua participação ajuda-nos a fortalecer um ecossistema tecnológico mais aberto, acessível e colaborativo.
+
 ## Organização do Repositório
 
 > [!TIP]
