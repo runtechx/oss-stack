@@ -7,11 +7,10 @@
 > Ficheiro: `https://raw.githubusercontent.com/runtechx/Openfirst/master/blocklists/ip-bl.txt`
 
 >[!IMPORTANT]
+> Se o seu sistema não tiver `sudo` instale com o comando abaixo ou use a conta root e remova o `sudo` em frente aos comandos
 >```bash
->su - root
+dnf install -y sudo
 >```
-> Use `sudo` antes de cada comando caso não poder usar a conta root
-> Se o seu sistema não tiver `sudo` instale com o comando `dnf install -y`
 
 ## 1. Instalar EPEL e Fail2ban
 
