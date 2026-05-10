@@ -394,12 +394,15 @@ server {
 }
 NGINXEOF
 
-    # Configure Remi PHP-FPM pool to use correct socket and run as nginx
+    # Configure Remi PHP-FPM pool to use correct socket and run as nginx.
+    # Important: listen.acl_users overrides listen.owner/group when set —
+    # nginx must be added to the ACL or it cannot access the socket.
     sed -i \
         -e "s|^listen = .*|listen = ${PHP_FPM_SOCK}|" \
         -e 's|^;listen.owner = .*|listen.owner = nginx|' \
         -e 's|^;listen.group = .*|listen.group = nginx|' \
         -e 's|^;listen.mode = .*|listen.mode = 0660|' \
+        -e 's|^listen.acl_users = apache$|listen.acl_users = apache,nginx|' \
         -e 's|^user = apache|user = nginx|' \
         -e 's|^group = apache|group = nginx|' \
         "${PHP_FPM_CONF}"
