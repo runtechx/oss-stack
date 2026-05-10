@@ -4,7 +4,7 @@
 >Instale rapidamente as funcionalidades no AlmaLinux 10+ utilizando os comandos disponíveis:  
 >[Aceder aos comandos](/comandos.md)
 
-### Base
+### N1 - Em uso
 
 | Software | Descrição                                                                                                     |
 | ---------- | ------------------------------------------------------------------------------------------------------------- |
@@ -16,12 +16,11 @@
 | *[Passbolt](https://www.passbolt.com/)| Gestão segura de passwords para equipas (vault colaborativo)|
 | [FreeIPA](https://www.freeipa.org/)| Gerenciamento centralizado de identidade e autenticação|
 | [Keycloak](https://www.keycloak.org/)|Plataforma open source de gestão de identidades e acessos (IAM), com suporte para SSO, autenticação multifator e integração com LDAP/Active Directory|
-| [OpenCloud](https://opencloud.eu/en)| Plataforma de cloud privada para armazenamento e colaboração|
 | *[GLPI](https://www.glpi-project.org/en/) | Sistema de gestão de ativos de TI e service desk|
 
 
 
-### Adicional
+### N2 - Adicional
 
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
@@ -32,5 +31,12 @@
 | *[Gitlab](https://about.gitea.com/)| Plataforma leve de hospedagem de repositórios Git|
 | [Issabel](https://www.issabel.com)| Plataforma de comunicações unificadas (VoIP, PBX, call center)|
 | *[Patchmon](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
+
+### N3 - Em estudo
+
+| Software | Descrição                                                                                                             |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| [OpenCloud](https://opencloud.eu/en)| Plataforma de cloud privada para armazenamento e colaboração|
+
 
 \* Por implementar
