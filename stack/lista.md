@@ -31,13 +31,13 @@
 | *[Ansible](www.ansible.com)| Ferramenta de automação para configuração, deployment e gestão de infraestrutura|
 | *[Gitlab](https://about.gitea.com/)| Plataforma leve de hospedagem de repositórios Git|
 | [Issabel](https://www.issabel.com)| Plataforma de comunicações unificadas (VoIP, PBX, call center)|
-| *[Patchmon](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
+
 
 ### N3 - ANÁLISE
 
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
-
+| *[Patchmon](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
 
 
 \* Por implementar
