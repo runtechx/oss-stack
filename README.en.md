@@ -1,6 +1,6 @@
 <div align="right">
 
- 🇵🇹 [Português](https://github.com/runtechx/OpenFirst/blob/main/README.md) | 🇺🇸 [English](https://github.com/runtechx/OpenFirst/blob/main/README.en.md)
+🇺🇸 [English](https://github.com/runtechx/OpenFirst/blob/main/README.en.md) | 🇵🇹 [Português](https://github.com/runtechx/OpenFirst/blob/main/README.md)
 
 </div>
 
