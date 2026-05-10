@@ -54,7 +54,7 @@ tail -f /var/log/deploy-opencloud.log
 > 2. Utilize o FQDN para aceder ao servidor via navegador. Caso o registo DNS ainda não esteja configurado, adicione a entrada manualmente no ficheiro `hosts` do seu computador.
 
 
-## GLPI (NOK)
+## GLPI
 one-liner
 
 ```bash
