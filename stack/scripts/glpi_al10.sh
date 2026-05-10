@@ -240,6 +240,20 @@ log_section "STEP 3: Install GLPI"
     tar -xzf "/tmp/glpi-${GLPI_VERSION}.tgz" -C /var/www/html/
     rm -f "/tmp/glpi-${GLPI_VERSION}.tgz"
 
+    # Fix ownership before db:install so PHP can write config/
+    chown -R apache:apache /var/www/html/glpi
+    chmod -R 755 /var/www/html/glpi
+
+    # Wait for MariaDB to be fully ready before running the installer
+    echo "  Waiting for MariaDB to be ready..."
+    for i in $(seq 1 12); do
+        if mysql -u"${DB_USER}" -p"${DB_PASS}" "${DB_NAME}" -e "SELECT 1;" > /dev/null 2>&1; then
+            echo "  MariaDB is ready."
+            break
+        fi
+        sleep 5
+    done
+
     # Run console installer (non-interactive)
     php /var/www/html/glpi/bin/console db:install \
         --db-host=localhost \
@@ -258,10 +272,10 @@ GLPI_VERSION=$(curl -fsSL https://api.github.com/repos/glpi-project/glpi/release
     | grep '"tag_name"' | cut -d '"' -f4 | sed 's/^v//' 2>/dev/null || echo "unknown")
 
 # -----------------------------
-# STEP 4: Configure Apache
+# STEP 4: Configure Apache & SELinux
 # -----------------------------
 echo "${MSG_STEP4}"
-log_section "STEP 4: Configure Apache"
+log_section "STEP 4: Configure Apache & SELinux"
 {
     systemctl enable --now httpd
 
@@ -288,22 +302,49 @@ EOF
     cp /etc/php.ini /etc/php.ini.bak
     sed -i 's/^session.cookie_httponly =.*/session.cookie_httponly = 1/' /etc/php.ini
 
-    # Fix file ownership
+    # Fix file ownership (re-apply after db:install may have written files as root)
     chown -R apache:apache /var/www/html/glpi
     chmod -R 755 /var/www/html/glpi
 
     # Remove the web installer once console install is done
     rm -f /var/www/html/glpi/install/install.php
 
-    # SELinux
+    # SELinux — full set of required policies for GLPI on AlmaLinux 10
     if command -v getenforce >/dev/null 2>&1 && [ "$(getenforce)" != "Disabled" ]; then
+        echo "  Applying SELinux contexts and booleans..."
+
+        # Restore default contexts on the web root
         restorecon -Rv /var/www/html/glpi
-        setsebool -P httpd_can_sendmail on
-        setsebool -P httpd_can_network_connect on
-        setsebool -P httpd_can_network_connect_db on
+
+        # GLPI writes to files/ — needs httpd_sys_rw_content_t
+        semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/html/glpi/files(/.*)?"
+        semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/html/glpi/config(/.*)?"
+        semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/html/glpi/marketplace(/.*)?"
+        semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/html/glpi/plugins(/.*)?"
+        restorecon -Rv /var/www/html/glpi/files
+        restorecon -Rv /var/www/html/glpi/config
+        restorecon -Rv /var/www/html/glpi/marketplace
+        restorecon -Rv /var/www/html/glpi/plugins
+
+        # Required booleans
+        setsebool -P httpd_can_network_connect on       # PHP-FPM socket / outbound HTTP
+        setsebool -P httpd_can_network_connect_db on    # MariaDB TCP connection
+        setsebool -P httpd_can_sendmail on              # GLPI email notifications
+        setsebool -P httpd_unified on                   # Needed on some AL10 builds
+
+        echo "  SELinux policies applied."
+    else
+        echo "  SELinux is disabled — skipping."
     fi
 
-    systemctl restart php-fpm httpd
+    # Load MariaDB timezone tables (fixes GLPI timezone warning)
+    echo "  Loading timezone data into MariaDB..."
+    mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -uroot -p"${MYSQL_ROOT_PASS}" mysql 2>/dev/null || true
+    mysql -uroot -p"${MYSQL_ROOT_PASS}" \
+        -e "GRANT SELECT ON mysql.time_zone_name TO '${DB_USER}'@'localhost'; FLUSH PRIVILEGES;" 2>/dev/null || true
+    echo "  Timezone data loaded."
+
+    systemctl restart mariadb php-fpm httpd
 } >> "$LOG" 2>&1
 
 # -----------------------------
@@ -332,42 +373,27 @@ cat > "$CRED_FILE" << CREDS
   ${MSG_GENERATED}: $(date)
 ============================================================
 
-  ${MSG_URL}:
-  http://${ACCESS_URL}
-  http://${SERVER_IP}
+  ${MSG_URL}: http://${ACCESS_URL}
+  ${MSG_URL}: http://${SERVER_IP}
 
-  ${MSG_DEFLOGIN}:
-  glpi
-  ${MSG_DEFPASS}:
-  glpi
+  ${MSG_DEFLOGIN}: glpi
+  ${MSG_DEFPASS}: glpi
 
   ${MSG_DBSECTION}
-  ${MSG_DBNAME}:
-  ${DB_NAME}
-  ${MSG_DBUSER}:
-  ${DB_USER}
-  ${MSG_DBPASS}:
-  ${DB_PASS}
-  ${MSG_DBROOTPASS}:
-  ${MYSQL_ROOT_PASS}
-  ${MSG_DBHOST}:
-  localhost
+  ${MSG_DBNAME}: ${DB_NAME}
+  ${MSG_DBUSER}: ${DB_USER}
+  ${MSG_DBPASS}: ${DB_PASS}
+  ${MSG_DBROOTPASS}: ${MYSQL_ROOT_PASS}
+  ${MSG_DBHOST}: localhost
 
   ${MSG_SRVSECTION}
-  ${MSG_SERVERIP}:
-  ${SERVER_IP}
-  ${MSG_ACCESSURL}:
-  ${ACCESS_URL}
-  ${MSG_GLPIVER}:
-  ${GLPI_VERSION}
-  ${MSG_INSTALLDIR}:
-  ${INSTALL_DIR}
-  ${MSG_APACHECONF}:
-  /etc/httpd/conf.d/glpi.conf
-  ${MSG_LOG}:
-  ${LOG}
-  ${MSG_CREDS}:
-  ${CRED_FILE}
+  ${MSG_SERVERIP}: ${SERVER_IP}
+  ${MSG_ACCESSURL}: ${ACCESS_URL}
+  ${MSG_GLPIVER}: ${GLPI_VERSION}
+  ${MSG_INSTALLDIR}: ${INSTALL_DIR}
+  ${MSG_APACHECONF}: /etc/httpd/conf.d/glpi.conf
+  ${MSG_LOG}: ${LOG}
+  ${MSG_CREDS}: ${CRED_FILE}
 
 ============================================================
   ${MSG_KEEPFILE}
@@ -393,25 +419,16 @@ echo ""
 echo "  ${MSG_DEFLOGIN}: glpi"
 echo "  ${MSG_DEFPASS}: glpi"
 echo ""
-echo "  ${MSG_DBNAME}:"
-echo "  ${DB_NAME}"
-echo "  ${MSG_DBUSER}:"
-echo "  ${DB_USER}"
-echo "  ${MSG_DBPASS}:"
-echo "  ${DB_PASS}"
-echo "  ${MSG_DBROOTPASS}:"
-echo "  ${MYSQL_ROOT_PASS}"
+echo "  ${MSG_DBNAME}: ${DB_NAME}"
+echo "  ${MSG_DBUSER}: ${DB_USER}"
+echo "  ${MSG_DBPASS}: ${DB_PASS}"
+echo "  ${MSG_DBROOTPASS}: ${MYSQL_ROOT_PASS}"
 echo ""
-echo "  ${MSG_GLPIVER}:"
-echo "  ${GLPI_VERSION}"
-echo "  ${MSG_INSTALLDIR}:"
-echo "  ${INSTALL_DIR}"
-echo "  ${MSG_APACHECONF}:"
-echo "  /etc/httpd/conf.d/glpi.conf"
-echo "  ${MSG_LOG}:"
-echo "  ${LOG}"
-echo "  ${MSG_CREDS}:"
-echo "  ${CRED_FILE}"
+echo "  ${MSG_GLPIVER}: ${GLPI_VERSION}"
+echo "  ${MSG_INSTALLDIR}: ${INSTALL_DIR}"
+echo "  ${MSG_APACHECONF}: /etc/httpd/conf.d/glpi.conf"
+echo "  ${MSG_LOG}: ${LOG}"
+echo "  ${MSG_CREDS}: ${CRED_FILE}"
 echo ""
 echo "  ${MSG_NEXTSTEP}"
 echo "============================================================"
