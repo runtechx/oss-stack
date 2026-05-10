@@ -1,3 +1,9 @@
+<div align="right">
+
+🇺🇸 [English](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.en.md) | 🇵🇹 [Português](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md)
+
+</div>
+
 ## Softwares adotados
 
 >[!TIP]
