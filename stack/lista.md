@@ -17,7 +17,7 @@
 | [FreeIPA](https://www.freeipa.org/)| Gerenciamento centralizado de identidade e autenticação|
 | [Keycloak](https://www.keycloak.org/)|Plataforma open source de gestão de identidades e acessos (IAM), com suporte para SSO, autenticação multifator e integração com LDAP/Active Directory|
 | [OpenCloud](https://opencloud.eu/en)| Plataforma de cloud privada para armazenamento e colaboração|
-| *[GLPI](https://www.glpi-project.org/en/) | Sistema de gestão de ativos de TI e service desk|
+| [GLPI](https://www.glpi-project.org/en/) | Sistema de gestão de ativos de TI e service desk|
 
 
 
