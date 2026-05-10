@@ -10,29 +10,30 @@
 >```bash
 >su - root
 >```
-> Usa a conta root caso não for possível adicione `sudo` antes de cada comando
+> Use `sudo` antes de cada comando caso não poder usar a conta root
+> Se o seu sistema não tiver `sudo` instale com o comando `dnf install -y`
 
 ## 1. Instalar EPEL e Fail2ban
 
 ```bash
 # Instalar EPEL
-dnf install -y epel-release
+sudo dnf install -y epel-release
 
 # Instalar Fail2ban
-dnf install -y fail2ban fail2ban-systemd
+sudo dnf install -y fail2ban fail2ban-systemd
 
 # Activar e iniciar o serviço
-systemctl enable --now fail2ban
+sudo systemctl enable --now fail2ban
 
 # Verificar estado
-systemctl status fail2ban
+sudo systemctl status fail2ban
 ```
 
 
 ## 2. Configurar o Fail2ban
 
 ```bash
-cat > /etc/fail2ban/jail.local << 'CONF'
+sudo cat > /etc/fail2ban/jail.local << 'CONF'
 [DEFAULT]
 bantime  = 24h
 findtime = 10m
@@ -51,18 +52,18 @@ CONF
 Recarregar após configurar:
 
 ```bash
-systemctl restart fail2ban
+sudo systemctl restart fail2ban
 ```
 
 ```bash
-fail2ban-client status
+sudo fail2ban-client status
 ```
 
 
 ## 3. Script de importação automática da ip-bl.txt
 
 ```bash
-cat > /usr/local/bin/import-ip-bl.sh << 'EOF'
+sudo cat > /usr/local/bin/import-ip-bl.sh << 'EOF'
 #!/bin/bash
 set -e
 
@@ -103,7 +104,7 @@ EOF
 Tornar executável 
 
 ```bash
-chmod +x /usr/local/bin/import-ip-bl.sh
+sudo chmod +x /usr/local/bin/import-ip-bl.sh
 ```
 
 ## 4. Crontab a cada 1 hora (Agendar a execução da tarefa)
@@ -111,14 +112,14 @@ chmod +x /usr/local/bin/import-ip-bl.sh
 Adiciona directamente a tarefa sem abrir o editor crontab -e
 
 ```bash
-(crontab -l 2>/dev/null | grep -v "import-ip-bl.sh"; \
-echo "0 * * * * /usr/local/bin/import-ip-bl.sh >> /var/log/import-ip-bl.log 2>&1") | crontab -
+sudo (crontab -l 2>/dev/null | grep -v "import-ip-bl.sh"; \
+sudo echo "0 * * * * /usr/local/bin/import-ip-bl.sh >> /var/log/import-ip-bl.log 2>&1") | crontab -
 ```
 
 Verificar se ficou guardado
 
 ```bash
-crontab -l
+sudo crontab -l
 ```
 
 ## 5. Outros comandos 
