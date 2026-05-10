@@ -35,6 +35,8 @@ Todas as contribuições são bem-vindas, especialmente quando:
 
 ## Organização do Repositório
 
+<p></p>
+
 | Pasta         | Objetivo                                                                                                                                                                                                |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `blocklists`  | Conjunto de listas de bloqueio de IPs e domínios associados a publicidade abusiva, malware, tracking ou outras fontes maliciosas, utilizadas para reforçar a segurança e privacidade da infraestrutura. |
