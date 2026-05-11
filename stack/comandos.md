@@ -22,7 +22,7 @@ tail -f /var/log/deploy-passbolt.log
 ```
 
 
-## FreeIPA
+## [FreeIPA](https://www.freeipa.org/)
 one-liner
 
 ```bash
