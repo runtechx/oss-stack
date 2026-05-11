@@ -45,6 +45,6 @@
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
 | *[Patchmon](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
-
+| [Zimbra](https://www.zimbra.com/) | |
 
 \* Por implementar
