@@ -10,7 +10,7 @@ Acompanhar o log da instalação (executar em outro terminal)
 tail -f /var/log/deploy-zabbix.log
 ```
 
-## Passbolt
+## [Passbolt](https://www.passbolt.com/)
 one-liner
 
 ```bash
