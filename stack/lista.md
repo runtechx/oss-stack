@@ -18,7 +18,7 @@
 |[Proxmox&nbsp;BS](https://www.proxmox.com/en/products/proxmox-backup-server/overview)| Solução de backup e recuperação integrada ao ecossistema Proxmox|
 | [OPNsense](https://opnsense.org/)| Firewall e roteador open source baseado em FreeBSD|
 | [Almalinux](https://almalinux.org/)| Distribuição Linux open source, focada em estabilidade, segurança e ambientes empresariais|
-| [Zabbix](https://www.zabbix.com/)| Sistema de monitoramento de redes, servidores e serviços|
+| [Zabbix](/stack/scripts/comandos.md#zabbix)| Sistema de monitoramento de redes, servidores e serviços|
 | *[Passbolt](https://www.passbolt.com/)| Gestão segura de passwords para equipas (vault colaborativo)|
 | [FreeIPA](https://www.freeipa.org/)| Gerenciamento centralizado de identidade e autenticação|
 | [Keycloak](https://www.keycloak.org/)|Plataforma open source de gestão de identidades e acessos (IAM), com suporte para SSO, autenticação multifator e integração com LDAP/Active Directory|
