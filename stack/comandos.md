@@ -10,6 +10,17 @@ Acompanhar o log da instalação (executar em outro terminal)
 tail -f /var/log/deploy-zabbix.log
 ```
 
+## Passbolt
+one-liner
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/passbolt_al10.sh -o passbolt.sh && bash passbolt.sh
+```
+Acompanhar o log da instalação (executar em outro terminal)
+```bash
+tail -f /var/log/deploy-passbolt.log
+```
+
 
 ## FreeIPA
 one-liner
