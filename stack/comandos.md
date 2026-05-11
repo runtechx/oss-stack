@@ -1,47 +1,45 @@
 
+# One-liner installers
+
 ## [Zabbix](https://www.zabbix.com/) 
-one-liner
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/zabbix_al10.sh -o zabbix.sh && bash zabbix.sh
 ```
-Acompanhar o log da instalação (executar em outro terminal)
+Log
 ```bash
 tail -f /var/log/deploy-zabbix.log
 ```
 
 
 ## [Wazuh](https://wazuh.com/)
-one-liner
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/wazuh_al10.sh -o wazuh.sh && bash wazuh.sh
 ```
-Acompanhar o log da instalação (executar em outro terminal)
+Log
 ```bash
 tail -f /var/log/deploy-wazuh.log
 ```
 
 
 ## [Passbolt](https://www.passbolt.com/)
-one-liner
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/passbolt_al10.sh -o passbolt.sh && bash passbolt.sh
 ```
-Acompanhar o log da instalação (executar em outro terminal)
+Log
 ```bash
 tail -f /var/log/deploy-passbolt.log
 ```
 
 
 ## [FreeIPA](https://www.freeipa.org/)
-one-liner
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/freeipa_al10.sh -o freeipa.sh && bash freeipa.sh
 ```
-Acompanhar o log da instalação (executar em outro terminal)
+Log
 ```bash
 tail -f /var/log/deploy-freeipa.log
 ```
@@ -52,24 +50,22 @@ tail -f /var/log/deploy-freeipa.log
 
 
 ## [Keycloak](https://www.keycloak.org/)
-one-liner
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/keycloak_al10.sh -o keycloak.sh && bash keycloak.sh
 ```
-Acompanhar o log da instalação (executar em outro terminal)
+Log
 ```bash
 tail -f /var/log/deploy-keycloak.log
 ```
 
 
 ## [OpenCloud](https://opencloud.eu/en)
-one-liner
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/opencloud_al10.sh -o opencloud.sh && bash opencloud.sh
 ```
-Acompanhar o log da instalação (executar em outro terminal)
+Log
 ```bash
 tail -f /var/log/deploy-opencloud.log
 ```
@@ -79,24 +75,22 @@ tail -f /var/log/deploy-opencloud.log
 
 
 ## [GLPI](https://www.glpi-project.org/en/)
-one-liner
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/glpi_al10.sh -o glpi.sh && bash glpi.sh
 ```
-Acompanhar o log da instalação (executar em outro terminal)
+Log
 ```bash
 tail -f /var/log/deploy-glpi.log
 ```
 
 
 ## [Wordpress](https://wordpress.com/)
-one-liner
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/wordpress_al10.sh -o wordpress.sh && bash wordpress.sh
 ```
-Acompanhar o log da instalação (executar em outro terminal)
+Log
 ```bash
 tail -f /var/log/deploy-wordpress.log
 ```
