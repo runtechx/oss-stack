@@ -7,8 +7,8 @@
 ## Softwares adotados
 
 >[!TIP]
->Instale rapidamente as funcionalidades no AlmaLinux 10+ utilizando os comandos disponíveis:  
->[Aceder aos comandos](https://github.com/runtechx/OpenFirst/blob/main/stack/comandos.md)
+>Clique no nome de cada solução para aceder aos comandos de instalação rapidamente.
+
 
 ### N1 - Base
 
