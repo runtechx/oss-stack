@@ -354,7 +354,7 @@ if [[ "$INSTALL_MODE" == "server" ]]; then
     if [[ -f /tmp/wazuh-install-files.tar ]]; then
         ADMIN_PASS=$(tar -O -xvf /tmp/wazuh-install-files.tar \
             wazuh-install-files/wazuh-passwords.txt 2>/dev/null \
-            | grep -A1 "admin" | grep "password:" | head -1 | awk '{print $2}' || true)
+            | grep -A1 "admin" | grep "password:" | head -1 | awk '{print $2}' | tr -d "'" || true)
     fi
     [[ -z "$ADMIN_PASS" ]] && ADMIN_PASS="(see /tmp/wazuh-install-files.tar)"
 
