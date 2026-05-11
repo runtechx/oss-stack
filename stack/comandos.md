@@ -77,7 +77,7 @@ tail -f /var/log/deploy-glpi.log
 ```
 
 
-## Wordpress
+## [Wordpress](https://wordpress.com/)
 one-liner
 
 ```bash
