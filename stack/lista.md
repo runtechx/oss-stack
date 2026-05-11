@@ -10,7 +10,7 @@
 >Instale rapidamente as funcionalidades no AlmaLinux 10+ utilizando os comandos disponíveis:  
 >[Aceder aos comandos](https://github.com/runtechx/OpenFirst/blob/main/stack/comandos.md)
 
-### N1 - BASE
+### N1 - Base
 
 | Software | Descrição                                                                                                     |
 | ---------- | ------------------------------------------------------------------------------------------------------------- |
@@ -27,7 +27,7 @@
 
 
 
-### N2 - ADICIONAL
+### N2 - Expansão
 
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
@@ -39,7 +39,7 @@
 | [Issabel](https://www.issabel.com)| Plataforma de comunicações unificadas (VoIP, PBX, call center)|
 
 
-### N3 - ANÁLISE
+### N3 - Candidatos
 
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
