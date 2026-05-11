@@ -32,7 +32,7 @@
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
 | *[Odoo](https://www.odoo.com/)| ERP open source para gestão empresarial|
-| [Wordpress](https://wordpress.com/)| Sistema de gestão de conteúdos (CMS) para criação de sites e blogs|
+| [Wordpress](/stack/comandos.md#wordpress)| Sistema de gestão de conteúdos (CMS) para criação de sites e blogs|
 | *[Wazuh](https://wazuh.com/)| Plataforma de segurança e monitoramento (SIEM/XDR)|
 | *[Ansible](www.ansible.com)| Ferramenta de automação para configuração, deployment e gestão de infraestrutura|
 | *[Gitlab](https://about.gitea.com/)| Plataforma leve de hospedagem de repositórios Git|
