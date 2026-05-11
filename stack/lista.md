@@ -33,10 +33,10 @@
 
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
-| *[Odoo](https://www.odoo.com/)| ERP open source para gestão empresarial|
+| [Odoo *](https://www.odoo.com/)| ERP open source para gestão empresarial|
 | [Wordpress](/stack/comandos.md#wordpress)| Sistema de gestão de conteúdos (CMS) para criação de sites e blogs|
-| *[Ansible](www.ansible.com)| Ferramenta de automação para configuração, deployment e gestão de infraestrutura|
-| *[Gitlab](https://about.gitea.com/)| Plataforma leve de hospedagem de repositórios Git|
+| [Ansible *](www.ansible.com)| Ferramenta de automação para configuração, deployment e gestão de infraestrutura|
+| [Gitlab *](https://about.gitea.com/)| Plataforma leve de hospedagem de repositórios Git|
 
 
 
@@ -44,7 +44,7 @@
 
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
-| *[Patchmon](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
-| [Zimbra](https://www.zimbra.com/) | |
+| [Patchmon *](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
+| [Zimbra *](https://www.zimbra.com/) | |
 
 \* Por implementar
