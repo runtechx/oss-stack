@@ -19,13 +19,13 @@
 |[OPNsense](https://opnsense.org/)| Firewall e roteador open source baseado em FreeBSD|
 |[Issabel](https://www.issabel.com)| Plataforma de comunicações unificadas (VoIP, PBX, call center)|
 |[Almalinux](https://almalinux.org/)| Distribuição Linux open source, focada em estabilidade, segurança e ambientes empresariais|
-| - [Zabbix](/stack/comandos.md#zabbix)| Sistema de monitoramento de redes, servidores e serviços|
-| - [Wazuh](/stack/comandos.md#wazuh)| Plataforma de segurança e monitoramento (SIEM/XDR)|
-| - [Passbolt](/stack/comandos.md#passbolt)| Gestão segura de passwords para equipas (vault colaborativo)|
-| - [FreeIPA](/stack/comandos.md#freeipa)| Gerenciamento centralizado de identidade e autenticação|
-| - [Keycloak](/stack/comandos.md#keycloak)|Plataforma open source de gestão de identidades e acessos (IAM), com suporte para SSO, autenticação multifator e integração com LDAP/Active Directory|
-| - [OpenCloud](/stack/comandos.md#opencloud)| Plataforma de cloud privada para armazenamento e colaboração|
-| - [GLPI](/stack/comandos.md#glpi) | Sistema de gestão de ativos de TI e service desk|
+| [Zabbix](/stack/comandos.md#zabbix)| Sistema de monitoramento de redes, servidores e serviços|
+| [Wazuh](/stack/comandos.md#wazuh)| Plataforma de segurança e monitoramento (SIEM/XDR)|
+| [Passbolt](/stack/comandos.md#passbolt)| Gestão segura de passwords para equipas (vault colaborativo)|
+| [FreeIPA](/stack/comandos.md#freeipa)| Gerenciamento centralizado de identidade e autenticação|
+| [Keycloak](/stack/comandos.md#keycloak)|Plataforma open source de gestão de identidades e acessos (IAM), com suporte para SSO, autenticação multifator e integração com LDAP/Active Directory|
+| [OpenCloud](/stack/comandos.md#opencloud)| Plataforma de cloud privada para armazenamento e colaboração|
+| [GLPI](/stack/comandos.md#glpi) | Sistema de gestão de ativos de TI e service desk|
 
 
 
