@@ -19,7 +19,7 @@
 | [OPNsense](https://opnsense.org/)| Firewall e roteador open source baseado em FreeBSD|
 | [Almalinux](https://almalinux.org/)| Distribuição Linux open source, focada em estabilidade, segurança e ambientes empresariais|
 | [Zabbix](/stack/comandos.md#zabbix)| Sistema de monitoramento de redes, servidores e serviços|
-| *[Passbolt](https://www.passbolt.com/)| Gestão segura de passwords para equipas (vault colaborativo)|
+| [Passbolt](/stack/comandos.md#passbolt)| Gestão segura de passwords para equipas (vault colaborativo)|
 | [FreeIPA](https://www.freeipa.org/)| Gerenciamento centralizado de identidade e autenticação|
 | [Keycloak](https://www.keycloak.org/)|Plataforma open source de gestão de identidades e acessos (IAM), com suporte para SSO, autenticação multifator e integração com LDAP/Active Directory|
 | [OpenCloud](https://opencloud.eu/en)| Plataforma de cloud privada para armazenamento e colaboração|
