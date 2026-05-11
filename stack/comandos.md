@@ -38,7 +38,7 @@ tail -f /var/log/deploy-freeipa.log
 > 3. Utilize sempre o **FQDN (Fully Qualified Domain Name)** para aceder ao servidor através do navegador. Caso o registo DNS ainda não esteja configurado, adicione manualmente a entrada no ficheiro `hosts` do seu computador.
 
 
-## Keycloak
+## [Keycloak](https://www.keycloak.org/)
 one-liner
 
 ```bash
@@ -50,7 +50,7 @@ tail -f /var/log/deploy-keycloak.log
 ```
 
 
-## OpenCloud
+## [OpenCloud]()
 one-liner
 
 ```bash
