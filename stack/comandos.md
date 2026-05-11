@@ -10,6 +10,19 @@ Acompanhar o log da instalação (executar em outro terminal)
 tail -f /var/log/deploy-zabbix.log
 ```
 
+
+## [Wazuh](https://wazuh.com/)
+one-liner
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/wazuh_al10.sh -o wazuh.sh && bash wazuh.sh
+```
+Acompanhar o log da instalação (executar em outro terminal)
+```bash
+tail -f /var/log/deploy-wazuh.log
+```
+
+
 ## [Passbolt](https://www.passbolt.com/)
 one-liner
 
