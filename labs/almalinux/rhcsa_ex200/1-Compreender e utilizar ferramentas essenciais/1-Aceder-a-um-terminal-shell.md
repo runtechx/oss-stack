@@ -8,7 +8,6 @@ Através do shell, os utilizadores podem interagir diretamente com o sistema ope
 
 O terminal é uma das ferramentas mais importantes para administradores de sistemas Linux, permitindo um controlo rápido, eficiente e avançado sobre o sistema.
 
----
 
 # Estrutura básica de um comando
 
@@ -32,7 +31,7 @@ ls -l /home
 | `-l` | Opção que apresenta a listagem detalhada |
 | `/home` | Argumento que indica o diretório alvo |
 
----
+
 
 # Abrir um terminal
 
@@ -47,7 +46,7 @@ Em servidores sem interface gráfica, o acesso é normalmente feito através de:
 - Consola local
 - SSH
 
----
+
 
 # Executar comandos básicos
 
@@ -93,7 +92,6 @@ cd ..
 cd ~
 ```
 
----
 
 # Obter ajuda sobre comandos
 
@@ -109,7 +107,6 @@ man ls
 ls --help
 ```
 
----
 
 # Executar comandos como administrador
 
@@ -123,7 +120,7 @@ sudo dnf update
 
 O sistema poderá solicitar a password do utilizador.
 
----
+
 
 # Sintaxe correta e boas práticas
 
@@ -141,7 +138,7 @@ mkdir testes
 mkdirtestes
 ```
 
----
+
 
 ## Atenção às maiúsculas e minúsculas
 
@@ -157,7 +154,7 @@ cd Documentos
 cd documentos
 ```
 
----
+
 
 ## Evitar apagar ficheiros sem verificar
 
@@ -173,7 +170,7 @@ verifique sempre o conteúdo com:
 ls
 ```
 
----
+
 
 # Histórico de comandos
 
@@ -190,7 +187,7 @@ history
 - Seta para cima (`↑`)
 - Seta para baixo (`↓`)
 
----
+
 
 # Encerrar sessão
 
@@ -206,7 +203,7 @@ ou
 logout
 ```
 
----
+
 
 # Conclusão
 
