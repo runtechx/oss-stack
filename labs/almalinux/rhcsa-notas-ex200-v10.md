@@ -94,6 +94,12 @@
 - Manage SELinux port labels
 - Use boolean settings to modify system SELinux settings
 
+>[!NOTE]
+> As with all Red Hat performance-based exams, configurations must persist after reboot without intervention.
+>
+>Red Hat reserves the right to add, modify, and remove objectives. Such changes will be made public in advance through revisions to this document.
+
+
 # Videos about the Exam 
 
 - [RHCSA 9/10 Exam Prep: Real EX200 Questions & Step-by-Step Solutions (2026) Ex200 Prep Full Exam](https://www.youtube.com/watch?v=Odr61cc6CpE)
@@ -101,11 +107,9 @@
 - [How I Scored 300/300 on the RHCSA Exam – 8 Tips You Need to Know!](https://www.youtube.com/watch?v=QlAwLcLz8CM)
 
 
+# Githubs
+- https://github.com/RHCSA
 
->[!NOTE]
-> As with all Red Hat performance-based exams, configurations must persist after reboot without intervention.
->
->Red Hat reserves the right to add, modify, and remove objectives. Such changes will be made public in advance through revisions to this document.
 
 # Especificações de Hardware
 
