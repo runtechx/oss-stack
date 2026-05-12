@@ -45,6 +45,9 @@
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
 | [Patchmon *](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
-| [Zimbra *](https://www.zimbra.com/) | |
+| [Zimbra *](https://www.zimbra.com/) | Plataforma colaborativa de e-mail e produtividade com suporte para calendário, contactos, chat e administração centralizada|
+| [TrueNAS *](https://www.truenas.com/) | Sistema operativo open source para armazenamento em rede (NAS), com suporte para ZFS, partilha de ficheiros e backups|
+
+
 
 \* Por implementar
