@@ -94,6 +94,14 @@
 - Manage SELinux port labels
 - Use boolean settings to modify system SELinux settings
 
+# Videos about the Exam 
+
+- [RHCSA 9/10 Exam Prep: Real EX200 Questions & Step-by-Step Solutions (2026) Ex200 Prep Full Exam](https://www.youtube.com/watch?v=Odr61cc6CpE)
+- [Pass the RHCSA Exam on Your First Try! 6 CAN'T MISS TIPS!](https://www.youtube.com/watch?v=xShNiJ0rwmQ)
+- [How I Scored 300/300 on the RHCSA Exam – 8 Tips You Need to Know!](https://www.youtube.com/watch?v=QlAwLcLz8CM)
+
+
+
 >[!NOTE]
 > As with all Red Hat performance-based exams, configurations must persist after reboot without intervention.
 >
