@@ -1,7 +1,5 @@
 # Aceder a um terminal shell e executar comandos com a sintaxe correta
 
-## Introdução
-
 O shell é a interface de linha de comandos do sistema operativo Linux. No RHEL, o shell padrão é o Bash (Bourne-Again SHell).
 
 Através do shell, os utilizadores podem interagir diretamente com o sistema operativo, executar comandos, administrar ficheiros, configurar serviços e automatizar tarefas.
