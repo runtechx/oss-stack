@@ -44,6 +44,34 @@ Em servidores sem interface gráfica, o acesso é normalmente feito através de:
 - Consola local
 - SSH
 
+## Método 1: Consola Virtual (Modo Texto)
+
+Num sistema RHEL, é possível aceder às consolas virtuais utilizando atalhos de teclado:
+
+| Combinação de Teclas | Descrição                                     |
+| -------------------- | --------------------------------------------- |
+| `Ctrl + Alt + F1`    | Ecrã gráfico de login (GNOME Display Manager) |
+| `Ctrl + Alt + F2`    | Primeira consola virtual (`tty2`)             |
+| `Ctrl + Alt + F3`    | Segunda consola virtual (`tty3`)              |
+| `Ctrl + Alt + F4`    | Terceira consola virtual (`tty4`)             |
+| `Ctrl + Alt + F5`    | Quarta consola virtual (`tty5`)               |
+| `Ctrl + Alt + F6`    | Quinta consola virtual (`tty6`)               |
+
+## Método 2: Emulador de Terminal (GUI)
+
+A partir do ambiente gráfico GNOME:
+
+1. Clique em **Activities** (canto superior esquerdo)
+2. Escreva **terminal** na barra de pesquisa
+3. Clique na aplicação **Terminal**
+4. Ou utilize o atalho de teclado (caso esteja configurado)
+
+
+## Método 3: Acesso Remoto via SSH
+>[!Note]
+>Para aceder à shell de um sistema remoto através de SSH, consulte o:
+
+
 
 
 # Executar comandos básicos
