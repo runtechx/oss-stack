@@ -69,8 +69,7 @@ A partir do ambiente gráfico GNOME:
 
 ## Método 3: Acesso Remoto via SSH
 >[!Note]
->Para aceder à shell de um sistema remoto através de SSH, consulte o:
-
+>O process para aceder à shell de um sistema remoto através de SSH será vista a posterior 
 
 
 
