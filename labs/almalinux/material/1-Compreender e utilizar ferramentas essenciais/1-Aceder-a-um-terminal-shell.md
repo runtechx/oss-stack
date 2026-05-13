@@ -165,7 +165,7 @@ rm ficheiro.txt
 verifique sempre o conteúdo com:
 
 ```bash
-ls
+cat ficheiro.txt
 ```
 
 
