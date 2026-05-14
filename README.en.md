@@ -30,6 +30,18 @@ Our infrastructure and technological processes are guided by the following princ
 * **Scalability** – Solutions designed for growth, evolution, and high availability.
 * **Observability** – Continuous monitoring, metrics, and visibility across systems and services.
 
+## Repository Organization
+
+> [!TIP]
+> Explore the different folders in this repository to discover the technologies, guides, labs, and tools used by RunTech in the development and operation of its IT infrastructure.
+
+| Folder                                                                    | Purpose                                                                                                                                                                                           |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`blocklists`](/blocklists)                                               | Collection of IP and domain blocklists associated with intrusive advertising, malware, tracking, and other potentially malicious sources, used to strengthen infrastructure security and privacy. |
+| [`guides`](/guides)                                                       | Collection of technical guides, documentation, and procedures focused on installation, configuration, administration, and operational best practices.                                             |
+| [`labs`](/labs)                                                           | Practical labs and testing environments created to explore features, validate scenarios, and deepen knowledge of different technologies and solutions.                                            |
+| [`stack`](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) | List of the technology stack used by RunTech, along with automated scripts for installing and preparing open source software on AlmaLinux 10+ systems.                                            |
+
 ## Contributions
 
 We believe the open source ecosystem evolves through collaboration and knowledge sharing.
@@ -49,15 +61,3 @@ If this project has been useful to you, consider:
 * Sharing the project with other technology professionals and open source communities
 
 Your participation helps strengthen a more open, accessible, and collaborative technology ecosystem.
-
-## Repository Organization
-
-> [!TIP]
-> Explore the different folders in this repository to discover the technologies, guides, labs, and tools used by RunTech in the development and operation of its IT infrastructure.
-
-| Folder                                                                    | Purpose                                                                                                                                                                                           |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`blocklists`](/blocklists)                                               | Collection of IP and domain blocklists associated with intrusive advertising, malware, tracking, and other potentially malicious sources, used to strengthen infrastructure security and privacy. |
-| [`guides`](/guides)                                                       | Collection of technical guides, documentation, and procedures focused on installation, configuration, administration, and operational best practices.                                             |
-| [`labs`](/labs)                                                           | Practical labs and testing environments created to explore features, validate scenarios, and deepen knowledge of different technologies and solutions.                                            |
-| [`stack`](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) | List of the technology stack used by RunTech, along with automated scripts for installing and preparing open source software on AlmaLinux 10+ systems.                                            |
