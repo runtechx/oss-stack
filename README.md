@@ -10,7 +10,7 @@ A **RunTech** segue uma abordagem **“Open First”**, priorizando a adoção, 
 
 Acreditamos que o open source proporciona maior transparência, auditabilidade e sustentabilidade, permitindo reduzir dependências de fornecedores e aumentar o controlo sobre sistemas e dados críticos. Esta filosofia possibilita a construção de infraestruturas mais flexíveis, seguras e alinhadas com as necessidades reais do negócio.
 
-## Open First Policy
+## Abordagem Open First
 
 Na **RunTech**, a adoção de tecnologia assenta num modelo simples, consciente e sustentável:
 
