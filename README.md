@@ -30,6 +30,19 @@ A nossa infraestrutura e processos tecnológicos são orientados pelos seguintes
 * **Escalabilidade** – Soluções preparadas para crescimento, evolução e alta disponibilidade.
 * **Observabilidade** – Monitorização, métricas e visibilidade contínua sobre sistemas e serviços.
 
+## Organização do Repositório
+
+> [!TIP]
+> Explore as diferentes pastas deste repositório para conhecer as tecnologias, guias, laboratórios e ferramentas utilizadas pela RunTech na construção e operação da sua infraestrutura TIC.
+
+
+| Pasta         | Objetivo                                                                                                                                                                                                              |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`blocklists`](/blocklists)  | Conjunto de listas de bloqueio de IPs e domínios associados a publicidade abusiva, malware, tracking e outras fontes potencialmente maliciosas, utilizadas para reforçar a segurança e privacidade da infraestrutura. |
+| [`guias`](/guias)       | Coleção de guias técnicos, documentação e procedimentos destinados à instalação, configuração, administração e adoção de boas práticas operacionais.                                                                  |
+| [`labs`](/labs)        | Laboratórios práticos e ambientes de teste criados para explorar funcionalidades, validar cenários e aprofundar conhecimentos sobre diferentes tecnologias e soluções.     |
+| [`stack`](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) | Lista da stack tecnológica utilizada pela RunTech e scripts automatizados para instalação e preparação de software open source em sistemas AlmaLinux 10+.  |                                                                                    |
+
 ## Contribuições
 
 Acreditamos que o ecossistema open source evolui através da colaboração e da partilha de conhecimento.
@@ -49,16 +62,3 @@ Se este projeto lhe foi útil, considere também:
 * Partilhar o projeto com outros profissionais e comunidades tecnológicas lusófonas
 
 A sua participação ajuda-nos a fortalecer um ecossistema tecnológico mais aberto, acessível e colaborativo.
-
-## Organização do Repositório
-
-> [!TIP]
-> Explore as diferentes pastas deste repositório para conhecer as tecnologias, guias, laboratórios e ferramentas utilizadas pela RunTech na construção e operação da sua infraestrutura TIC.
-
-
-| Pasta         | Objetivo                                                                                                                                                                                                              |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`blocklists`](/blocklists)  | Conjunto de listas de bloqueio de IPs e domínios associados a publicidade abusiva, malware, tracking e outras fontes potencialmente maliciosas, utilizadas para reforçar a segurança e privacidade da infraestrutura. |
-| [`guias`](/guias)       | Coleção de guias técnicos, documentação e procedimentos destinados à instalação, configuração, administração e adoção de boas práticas operacionais.                                                                  |
-| [`labs`](/labs)        | Laboratórios práticos e ambientes de teste criados para explorar funcionalidades, validar cenários e aprofundar conhecimentos sobre diferentes tecnologias e soluções.     |
-| [`stack`](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) | Lista da stack tecnológica utilizada pela RunTech e scripts automatizados para instalação e preparação de software open source em sistemas AlmaLinux 10+.  |                                                                                    |
