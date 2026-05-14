@@ -10,7 +10,7 @@
 
 We believe open source provides greater transparency, auditability, and sustainability, reducing vendor lock-in while increasing control over critical systems and data. This philosophy enables the development of more flexible, secure, and business-aligned infrastructures.
 
-## Open First Policy
+## Open First Approach
 
 At **RunTech**, technology adoption is based on a simple, conscious, and sustainable model:
 
