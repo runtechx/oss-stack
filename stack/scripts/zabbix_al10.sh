@@ -4,6 +4,7 @@ set -e
 # ============================================================
 #  Zabbix Deployment Script — AlmaLinux 10
 #  Installs: Nginx, PostgreSQL 18, PHP-FPM, Zabbix 7.4
+#  Source: https://github.com/runtechx/
 # ============================================================
 
 # -----------------------------
