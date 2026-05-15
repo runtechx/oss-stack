@@ -63,4 +63,8 @@ Se este projeto lhe foi útil, considere também:
 
 A sua participação ajuda-nos a fortalecer um ecossistema tecnológico mais aberto, acessível e colaborativo.
 
+## Perguntas & Respostas 
+
+[FAQ](https://github.com/runtechx/OpenFirst/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aclosed)
+
 Source: https://github.com/runtechx/
