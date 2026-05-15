@@ -4,6 +4,7 @@ set -e
 # ============================================================
 #  GLPI Deployment Script — AlmaLinux 10
 #  Installs: Apache, MariaDB, PHP 8.5 (Remi), GLPI (latest)
+#  Source: https://github.com/runtechx/
 # ============================================================
 
 # -----------------------------
