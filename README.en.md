@@ -62,4 +62,6 @@ If this project has been useful to you, consider:
 
 Your participation helps strengthen a more open, accessible, and collaborative technology ecosystem.
 
+<div align="right">
 Source: https://github.com/runtechx/
+</div>
