@@ -11,6 +11,7 @@ set -e
 #
 #  Server minimum requirements:
 #    4 CPU cores · 8 GB RAM · 50 GB free disk
+#  Source: https://github.com/runtechx/
 # ============================================================
 
 # -----------------------------
