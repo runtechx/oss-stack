@@ -12,6 +12,8 @@
 
 ### N1 - Base
 
+[Explicação](https://github.com/runtechx/OpenFirst/discussions/1002)
+
 | Software | Descrição                                                                                                     |
 | ---------- | ------------------------------------------------------------------------------------------------------------- |
 |[Proxmox&nbsp;VE](https://www.proxmox.com/en/products/proxmox-virtual-environment/overview) | Plataforma de virtualização open source baseada em KVM e containers LXC|
@@ -31,20 +33,24 @@
 
 ### N2 - Casuísticos
 
+[Explicação](https://github.com/runtechx/OpenFirst/discussions/1004)
+
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
 | [Odoo *](https://www.odoo.com/)| ERP open source para gestão empresarial|
 | [Wordpress](/stack/comandos.md#wordpress)| Sistema de gestão de conteúdos (CMS) para criação de sites e blogs|
 | [Ansible *](www.ansible.com)| Ferramenta de automação para configuração, deployment e gestão de infraestrutura|
-| [Gitlab *](https://about.gitea.com/)| Plataforma leve de hospedagem de repositórios Git|
+| [Gitlab *](https://about.gitlab.com/)| Plataforma leve de hospedagem de repositórios Git|
 
 
 
 ### N3 - Candidatos
 
+[Explicação](https://github.com/runtechx/OpenFirst/discussions/1005)
+
 | Software | Descrição                                                                                                             |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
-| [Patchmon *](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
+| [Patchmon&nbsp;*](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
 | [Zimbra *](https://www.zimbra.com/) | Plataforma colaborativa de e-mail e produtividade com suporte para calendário, contactos, chat e administração centralizada|
 | [TrueNAS *](https://www.truenas.com/) | Sistema operativo open source para armazenamento em rede (NAS), com suporte para ZFS, partilha de ficheiros e backups|
 
