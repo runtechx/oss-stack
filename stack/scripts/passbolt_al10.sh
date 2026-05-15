@@ -7,6 +7,7 @@ set -e
 #  Note: Bypasses the official repo-setup script which does
 #        not yet support AlmaLinux 10. Uses the EL9 RPM repo
 #        directly, which is fully compatible with AL10.
+#  Source: https://github.com/runtechx/
 # ============================================================
 
 # -----------------------------
