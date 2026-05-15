@@ -7,6 +7,7 @@ set -e
 #  Components: 389-DS, Kerberos KDC, Dogtag CA, BIND DNS,
 #              Apache httpd, Chrony NTP
 #  Requirements: FQDN hostname set, 2 GB RAM minimum
+#  Source: https://github.com/runtechx/
 # ============================================================
 
 # -----------------------------
