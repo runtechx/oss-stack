@@ -4,6 +4,7 @@ set -e
 # ============================================================
 #  WordPress Deployment Script — AlmaLinux 10
 #  Installs: Apache, MariaDB, PHP 8.3, WordPress
+#  Source: https://github.com/runtechx/
 # ============================================================
 
 # -----------------------------
