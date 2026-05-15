@@ -102,4 +102,6 @@ Log
 tail -f /var/log/deploy-wordpress.log
 ```
 
+<div align="right">
 Source: https://github.com/runtechx/
+</div>
