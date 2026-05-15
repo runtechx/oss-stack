@@ -188,9 +188,16 @@ log_section "STEP 2: Install PostgreSQL 18"
 echo "${MSG_STEP3}"
 log_section "STEP 3: Install Zabbix 7.4"
 {
-    # Exclude Zabbix packages from EPEL
-    sed -i '/^\[epel\]/,/^\[/ s/^excludepkgs=.*/excludepkgs=zabbix*/' /etc/yum.repos.d/epel.repo || \
-        echo -e "\n[epel]\nexcludepkgs=zabbix*" | tee -a /etc/yum.repos.d/epel.repo
+    # Exclude Zabbix packages from EPEL (skip if EPEL repo file not present)
+    if [ -f /etc/yum.repos.d/epel.repo ]; then
+        if grep -q '^\[epel\]' /etc/yum.repos.d/epel.repo; then
+            sed -i '/^\[epel\]/,/^\[/ s/^excludepkgs=.*/excludepkgs=zabbix*/' /etc/yum.repos.d/epel.repo
+            grep -q 'excludepkgs=zabbix' /etc/yum.repos.d/epel.repo || \
+                sed -i '/^\[epel\]/a excludepkgs=zabbix*' /etc/yum.repos.d/epel.repo
+        fi
+    else
+        echo "  EPEL repo file not found — skipping Zabbix exclusion."
+    fi
 
     # Add Zabbix repository
     rpm -Uvh https://repo.zabbix.com/zabbix/7.4/release/alma/10/noarch/zabbix-release-latest-7.4.el10.noarch.rpm
