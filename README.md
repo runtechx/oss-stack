@@ -69,4 +69,6 @@ Pode encontrar mais perguntas, respostas e discussões técnicas na secção de 
 
 Clique aqui: [FAQ](https://github.com/runtechx/OpenFirst/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aclosed)
 
+<div align="right">
 Source: https://github.com/runtechx/
+</div>
