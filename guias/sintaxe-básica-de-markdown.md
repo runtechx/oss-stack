@@ -187,4 +187,6 @@ Para mostrar caracteres especiais:
 * Ideal para documentação técnica
 
 
+<div align="right">
 Source: https://github.com/runtechx/
+</div>
