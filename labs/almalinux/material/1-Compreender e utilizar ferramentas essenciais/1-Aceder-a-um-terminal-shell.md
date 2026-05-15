@@ -1,3 +1,4 @@
+
 # Terminal e Shell no Linux
 
 No Linux, o trabalho com linha de comandos é uma das formas mais poderosas de interação com o sistema. Para isso, existem dois conceitos fundamentais que muitas vezes são confundidos: terminal e shell.
@@ -73,8 +74,6 @@ No Linux, a shell:
 
 # 3. Tipos de Shell no Linux
 
-Existem várias shells disponíveis no Linux.
-
 ## Tabela de shells
 
 | Shell                             | Descrição                                            | Utilização                                |
@@ -89,7 +88,7 @@ Existem várias shells disponíveis no Linux.
 
 A Bash é a shell mais utilizada no Linux, especialmente em sistemas como:
 
-* RHEL (Red Hat Enterprise Linux) / AlmaLinux
+* RHEL (Red Hat Enterprise Linux)
 * Ubuntu
 * Debian
 
@@ -160,13 +159,13 @@ cd ~
 
 Equivale a:
 
-```text
+```
 /home/utilizador
 ```
 
 Se for root:
 
-```text
+```
 /root
 ```
 
@@ -174,17 +173,11 @@ Se for root:
 
 # 5. Como aceder a um terminal
 
-Existem várias formas de aceder a um terminal no Linux.
-
-
-
 ## Método 1: Interface gráfica (GUI)
-
-Em sistemas com ambiente gráfico:
 
 * Menu de aplicações → Terminal
 * Pesquisa por “Terminal”
-* Atalho comum:
+* Atalho:
 
   * Ctrl + Alt + T
 
@@ -192,26 +185,18 @@ Em sistemas com ambiente gráfico:
 
 ## Método 2: Consolas virtuais (TTY)
 
-Em sistemas Linux é possível alternar entre consolas virtuais:
-
-| Atalho          | Descrição                              |
-| --------------- | -------------------------------------- |
-| Ctrl + Alt + F1 | Interface gráfica (em alguns sistemas) |
-| Ctrl + Alt + F2 | tty2                                   |
-| Ctrl + Alt + F3 | tty3                                   |
-| Ctrl + Alt + F4 | tty4                                   |
-| Ctrl + Alt + F5 | tty5                                   |
-| Ctrl + Alt + F6 | tty6                                   |
-
-Estas consolas são úteis quando o sistema gráfico não está disponível.
+| Atalho          | Descrição                                 |
+| --------------- | ----------------------------------------- |
+| Ctrl + Alt + F1 | Interface gráfica (dependendo do sistema) |
+| Ctrl + Alt + F2 | tty2                                      |
+| Ctrl + Alt + F3 | tty3                                      |
+| Ctrl + Alt + F4 | tty4                                      |
+| Ctrl + Alt + F5 | tty5                                      |
+| Ctrl + Alt + F6 | tty6                                      |
 
 
 
-## Método 3: Acesso remoto via SSH
-
-O acesso remoto ao terminal é feito através de SSH.
-
-Exemplo:
+## Método 3: SSH
 
 ```bash
 ssh utilizador@ip-do-servidor
@@ -221,31 +206,97 @@ ssh utilizador@ip-do-servidor
 
 # 6. Estrutura básica de um comando
 
-A maioria dos comandos Linux segue a estrutura:
-
 ```bash
 comando [opções] [argumentos]
 ```
 
-
-
-## Exemplo
+Exemplo:
 
 ```bash
 ls -l /home
 ```
 
-| Parte | Significado                   |
-| ----- | ----------------------------- |
-| ls    | comando para listar ficheiros |
-| -l    | opção de formato detalhado    |
-| /home | diretório alvo                |
+| Parte | Significado |
+| ----- | ----------- |
+| ls    | comando     |
+| -l    | opção       |
+| /home | argumento   |
 
 
 
-# 7. Comandos básicos no Linux
+# 7. Formatos de opções
 
-## Ver diretório atual
+No Linux, os comandos podem usar diferentes formatos de opções.
+
+
+
+## 7.1 Forma curta (short options)
+
+Usa um hífen (`-`) seguido de uma letra.
+
+Exemplo:
+
+```bash
+ls -l
+```
+
+Várias opções curtas podem ser combinadas:
+
+```bash
+ls -la
+```
+
+Isto equivale a:
+
+```bash
+ls -l -a
+```
+
+
+
+## 7.2 Forma longa (long options)
+
+Usa dois hífens (`--`) seguido de uma palavra completa.
+
+Exemplo:
+
+```bash
+ls --all
+```
+
+Outro exemplo:
+
+```bash
+ls --human-readable
+```
+
+
+
+## 7.3 Forma combinada de opções curtas
+
+Várias opções curtas podem ser agrupadas num único hífen:
+
+```bash
+tar -xvf arquivo.tar
+```
+
+Equivale a:
+
+```bash
+tar -x -v -f arquivo.tar
+```
+
+| Opção | Significado  |
+| ----- | ------------ |
+| -x    | extrair      |
+| -v    | modo verbose |
+| -f    | ficheiro     |
+
+
+
+# 8. Comandos básicos no Linux
+
+## Diretório atual
 
 ```bash
 pwd
@@ -257,31 +308,31 @@ pwd
 ls
 ```
 
-## Listar ficheiros com detalhes
+## Lista detalhada
 
 ```bash
 ls -l
 ```
 
-## Mostrar ficheiros ocultos
+## Ficheiros ocultos
 
 ```bash
 ls -la
 ```
 
-## Mudar de diretório
+## Mudar diretório
 
 ```bash
 cd /etc
 ```
 
-## Voltar ao diretório anterior
+## Voltar atrás
 
 ```bash
 cd ..
 ```
 
-## Ir para o diretório home
+## Home
 
 ```bash
 cd ~
@@ -289,9 +340,9 @@ cd ~
 
 
 
-# 8. Ajuda no sistema
+# 9. Ajuda no sistema
 
-## Manual completo
+## Manual
 
 ```bash
 man ls
@@ -305,103 +356,34 @@ ls --help
 
 
 
-# 9. Executar comandos como administrador
-
-No Linux, usa-se sudo para executar comandos com privilégios elevados.
-
-Exemplo:
+# 10. Executar como administrador
 
 ```bash
 sudo dnf update
 ```
 
-O sistema pode pedir a password do utilizador.
 
 
-
-# 10. Histórico de comandos
-
-A shell guarda um histórico dos comandos executados.
-
-## Ver histórico
+# 11. Histórico de comandos
 
 ```bash
 history
-```
-
-## Navegar no histórico
-
-* seta para cima
-* seta para baixo
-
-
-
-# 11. Boas práticas no terminal
-
-## Usar espaços corretamente
-
-Correto:
-
-```bash
-mkdir testes
-```
-
-Incorreto:
-
-```bash
-mkdirtestes
-```
-
-
-
-## Atenção a maiúsculas e minúsculas
-
-Linux diferencia letras:
-
-```bash
-cd Documentos
-```
-
-é diferente de:
-
-```bash
-cd documentos
-```
-
-
-
-## Ver antes de apagar ficheiros
-
-```bash
-cat ficheiro.txt
-```
-
-Depois:
-
-```bash
-rm ficheiro.txt
 ```
 
 
 
 # 12. Encerrar sessão
 
-## Sair do terminal
-
 ```bash
 exit
-```
-
-ou
-
-```bash
-logout
 ```
 
 
 
 # Conclusão
 
-O terminal é apenas a interface onde os comandos são escritos, enquanto a shell é o programa que interpreta e executa esses comandos.
+O terminal é apenas a interface onde os comandos são inseridos, enquanto a shell é o interpretador que os executa.
 
-Compreender a diferença entre terminal e shell, bem como os símbolos do prompt e a estrutura dos comandos, é essencial para trabalhar com eficiência em sistemas Linux como o Red Hat Enterprise Linux.
+Compreender terminal, shell e os formatos de opções é essencial para trabalhar eficientemente em sistemas Linux.
+
+
