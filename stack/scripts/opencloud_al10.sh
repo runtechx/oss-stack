@@ -9,6 +9,7 @@ set -e
 #
 #  IMPORTANT: OpenCloud requires HTTPS and a valid FQDN.
 #  Access via IP address will NOT work — always use the domain.
+#  Source: https://github.com/runtechx/
 # ============================================================
 
 # -----------------------------
