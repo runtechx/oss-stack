@@ -387,3 +387,6 @@ O terminal é apenas a interface onde os comandos são inseridos, enquanto a she
 Compreender terminal, shell e os formatos de opções é essencial para trabalhar eficientemente em sistemas Linux.
 
 
+<div align="right">
+Source: https://github.com/runtechx/
+</div>
