@@ -63,8 +63,10 @@ Se este projeto lhe foi útil, considere também:
 
 A sua participação ajuda-nos a fortalecer um ecossistema tecnológico mais aberto, acessível e colaborativo.
 
-## Perguntas & Respostas 
+## Perguntas Frequentes (FAQ)
 
-[FAQ](https://github.com/runtechx/OpenFirst/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aclosed)
+Pode encontrar mais perguntas, respostas e discussões técnicas na secção de FAQ do repositório, onde são abordados temas relacionados com a abordagem `Open First`, automação, infraestrutura, segurança, laboratórios e tecnologias utilizadas pela RunTech.
+
+Clique aqui: [FAQ](https://github.com/runtechx/OpenFirst/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aclosed)
 
 Source: https://github.com/runtechx/
