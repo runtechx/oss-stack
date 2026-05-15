@@ -6,6 +6,7 @@ set -e
 #  Installs: Java 21 (OpenJDK), PostgreSQL, Keycloak (latest)
 #  Keycloak runs as a systemd service under a dedicated user
 #  Requirements: 2 GB RAM minimum, 4 GB recommended
+#  Source: https://github.com/runtechx/
 # ============================================================
 
 # -----------------------------
