@@ -1,19 +1,233 @@
-# Aceder a um terminal shell e executar comandos com a sintaxe correta
+# Terminal e Shell no Linux
 
-O shell é a interface de linha de comandos do sistema operativo Linux. No RHEL, o shell padrão é o Bash (Bourne-Again SHell).
-
-Através do shell, os utilizadores podem interagir diretamente com o sistema operativo, executar comandos, administrar ficheiros, configurar serviços e automatizar tarefas.
-
-O terminal é uma das ferramentas mais importantes para administradores de sistemas Linux, permitindo um controlo rápido, eficiente e avançado sobre o sistema.
+No Linux, o trabalho com linha de comandos é uma das formas mais poderosas de interação com o sistema. Para isso, existem dois conceitos fundamentais que muitas vezes são confundidos: terminal e shell.
 
 
-# Estrutura básica de um comando
 
-A maioria dos comandos Linux segue a seguinte estrutura:
+# 1. O que é um Terminal
+
+O terminal é uma interface (gráfica ou de texto) que permite ao utilizador interagir com o sistema operativo através de comandos.
+
+Ele não interpreta comandos. Apenas:
+- recebe o que o utilizador escreve
+- envia para a shell
+- mostra o resultado na tela
+
+## Exemplos de terminais
+
+- GNOME Terminal
+- Konsole
+- xterm
+- Windows Terminal
+- PuTTY (acesso remoto via SSH)
+
+
+
+## Terminal vs Shell
+
+| Elemento | Função |
+|----------|--------|
+| Terminal | Interface de entrada e saída |
+| Shell | Interpretador de comandos |
+
+
+
+## Fluxo de funcionamento
+
+```text
+Utilizador
+   ↓
+Terminal (interface)
+   ↓
+Shell (interpreta comandos)
+   ↓
+Kernel Linux
+   ↓
+Hardware
+````
+
+
+
+# 2. O que é uma Shell
+
+Uma shell é um programa que funciona como interpretador de comandos e também como linguagem de scripting.
+
+No Linux, a shell:
+
+* interpreta comandos digitados no terminal
+* executa programas
+* permite automação através de scripts
+* controla o sistema através de comandos
+
+
+
+## Funções da Shell
+
+* Execução de comandos
+* Gestão de ficheiros e diretórios
+* Automação (scripts)
+* Gestão de processos
+* Administração do sistema
+
+
+
+# 3. Tipos de Shell no Linux
+
+Existem várias shells disponíveis no Linux.
+
+## Tabela de shells
+
+| Shell                             | Descrição                                            | Utilização                                |
+| --------------------------------- | ---------------------------------------------------- | ----------------------------------------- |
+| Bash (Bourne Again SHell)         | Shell padrão na maioria das distribuições Linux      | Mais usada em servidores e sistemas Linux |
+| Zsh (Z Shell)                     | Shell moderna com funcionalidades avançadas          | Popular entre developers                  |
+| Fish (Friendly Interactive Shell) | Shell com interface amigável e sugestões automáticas | Ideal para iniciantes                     |
+| sh (Bourne Shell)                 | Shell clássica e simples                             | Compatibilidade e scripts básicos         |
+| ksh (Korn Shell)                  | Shell tradicional Unix                               | Ambientes empresariais antigos            |
+
+## Nota importante
+
+A Bash é a shell mais utilizada no Linux, especialmente em sistemas como:
+
+* RHEL (Red Hat Enterprise Linux) / AlmaLinux
+* Ubuntu
+* Debian
+
+
+
+# 4. Símbolos no prompt da Shell
+
+Quando abres um terminal, vês algo como:
+
+```text
+user@linux:~$
+```
+
+ou
+
+```text
+root@linux:~#
+```
+
+
+
+## Símbolo $
+
+O símbolo `$` indica que estás logado como utilizador normal.
+
+Exemplo:
+
+```text
+mario@server:~$
+```
+
+Características:
+
+* utilizador sem privilégios administrativos
+* não pode modificar ficheiros críticos do sistema
+* uso seguro para tarefas comuns
+
+
+
+## Símbolo
+
+O símbolo `#` indica que estás como root (administrador).
+
+Exemplo:
+
+```text
+root@server:~#
+```
+
+Características:
+
+* acesso total ao sistema
+* pode instalar/remover software
+* pode alterar ficheiros críticos
+* uso deve ser cuidadoso
+
+
+
+## Símbolo ~
+
+O símbolo `~` representa o diretório home do utilizador atual.
+
+Exemplo:
+
+```bash
+cd ~
+```
+
+Equivale a:
+
+```text
+/home/utilizador
+```
+
+Se for root:
+
+```text
+/root
+```
+
+
+
+# 5. Como aceder a um terminal
+
+Existem várias formas de aceder a um terminal no Linux.
+
+
+
+## Método 1: Interface gráfica (GUI)
+
+Em sistemas com ambiente gráfico:
+
+* Menu de aplicações → Terminal
+* Pesquisa por “Terminal”
+* Atalho comum:
+
+  * Ctrl + Alt + T
+
+
+
+## Método 2: Consolas virtuais (TTY)
+
+Em sistemas Linux é possível alternar entre consolas virtuais:
+
+| Atalho          | Descrição                              |
+| --------------- | -------------------------------------- |
+| Ctrl + Alt + F1 | Interface gráfica (em alguns sistemas) |
+| Ctrl + Alt + F2 | tty2                                   |
+| Ctrl + Alt + F3 | tty3                                   |
+| Ctrl + Alt + F4 | tty4                                   |
+| Ctrl + Alt + F5 | tty5                                   |
+| Ctrl + Alt + F6 | tty6                                   |
+
+Estas consolas são úteis quando o sistema gráfico não está disponível.
+
+
+
+## Método 3: Acesso remoto via SSH
+
+O acesso remoto ao terminal é feito através de SSH.
+
+Exemplo:
+
+```bash
+ssh utilizador@ip-do-servidor
+```
+
+
+
+# 6. Estrutura básica de um comando
+
+A maioria dos comandos Linux segue a estrutura:
 
 ```bash
 comando [opções] [argumentos]
 ```
+
+
 
 ## Exemplo
 
@@ -21,61 +235,17 @@ comando [opções] [argumentos]
 ls -l /home
 ```
 
-### Explicação
-
-| Elemento | Descrição |
-|----------|------------|
-| `ls` | Comando utilizado para listar ficheiros e diretórios |
-| `-l` | Opção que apresenta a listagem detalhada |
-| `/home` | Argumento que indica o diretório alvo |
+| Parte | Significado                   |
+| ----- | ----------------------------- |
+| ls    | comando para listar ficheiros |
+| -l    | opção de formato detalhado    |
+| /home | diretório alvo                |
 
 
 
-# Abrir um terminal
+# 7. Comandos básicos no Linux
 
-Em ambientes gráficos, o terminal pode ser aberto através de:
-
-- Menu de aplicações → Terminal
-- Atalho:
-  - `Ctrl + Alt + T` (em muitos ambientes Linux)
-
-Em servidores sem interface gráfica, o acesso é normalmente feito através de:
-
-- Consola local
-- SSH
-
-## Método 1: Consola Virtual (Modo Texto)
-
-Num sistema RHEL, é possível aceder às consolas virtuais utilizando atalhos de teclado:
-
-| Combinação de Teclas | Descrição                                     |
-| -------------------- | --------------------------------------------- |
-| `Ctrl + Alt + F1`    | Ecrã gráfico de login (GNOME Display Manager) |
-| `Ctrl + Alt + F2`    | Primeira consola virtual (`tty2`)             |
-| `Ctrl + Alt + F3`    | Segunda consola virtual (`tty3`)              |
-| `Ctrl + Alt + F4`    | Terceira consola virtual (`tty4`)             |
-| `Ctrl + Alt + F5`    | Quarta consola virtual (`tty5`)               |
-| `Ctrl + Alt + F6`    | Quinta consola virtual (`tty6`)               |
-
-## Método 2: Emulador de Terminal (GUI)
-
-A partir do ambiente gráfico GNOME:
-
-1. Clique em **Activities** (canto superior esquerdo)
-2. Escreva **terminal** na barra de pesquisa
-3. Clique na aplicação **Terminal**
-4. Ou utilize o atalho de teclado (caso esteja configurado)
-
-
-## Método 3: Acesso Remoto via SSH
->[!Note]
->O process para aceder à shell de um sistema remoto através de SSH será vista a posterior 
-
-
-
-# Executar comandos básicos
-
-## Ver o diretório atual
+## Ver diretório atual
 
 ```bash
 pwd
@@ -111,16 +281,17 @@ cd /etc
 cd ..
 ```
 
-## Ir para a pasta pessoal do utilizador
+## Ir para o diretório home
 
 ```bash
 cd ~
 ```
 
 
-# Obter ajuda sobre comandos
 
-## Manual de um comando
+# 8. Ajuda no sistema
+
+## Manual completo
 
 ```bash
 man ls
@@ -133,31 +304,49 @@ ls --help
 ```
 
 
-# Executar comandos como administrador
 
-No RHEL e noutras distribuições Linux, utiliza-se o `sudo` para executar comandos com privilégios administrativos.
+# 9. Executar comandos como administrador
 
-## Exemplo
+No Linux, usa-se sudo para executar comandos com privilégios elevados.
+
+Exemplo:
 
 ```bash
 sudo dnf update
 ```
 
-O sistema poderá solicitar a password do utilizador.
+O sistema pode pedir a password do utilizador.
 
 
 
-# Sintaxe correta e boas práticas
+# 10. Histórico de comandos
 
-## Utilizar espaços corretamente
+A shell guarda um histórico dos comandos executados.
 
-✔ Correto:
+## Ver histórico
+
+```bash
+history
+```
+
+## Navegar no histórico
+
+* seta para cima
+* seta para baixo
+
+
+
+# 11. Boas práticas no terminal
+
+## Usar espaços corretamente
+
+Correto:
 
 ```bash
 mkdir testes
 ```
 
-✘ Incorreto:
+Incorreto:
 
 ```bash
 mkdirtestes
@@ -165,9 +354,9 @@ mkdirtestes
 
 
 
-## Atenção às maiúsculas e minúsculas
+## Atenção a maiúsculas e minúsculas
 
-Linux diferencia letras maiúsculas de minúsculas.
+Linux diferencia letras:
 
 ```bash
 cd Documentos
@@ -181,42 +370,23 @@ cd documentos
 
 
 
-## Evitar apagar ficheiros sem verificar
-
-Antes de remover ficheiros:
-
-```bash
-rm ficheiro.txt
-```
-
-verifique sempre o conteúdo com:
+## Ver antes de apagar ficheiros
 
 ```bash
 cat ficheiro.txt
 ```
 
-
-
-# Histórico de comandos
-
-O Bash guarda o histórico dos comandos executados.
-
-## Ver histórico
+Depois:
 
 ```bash
-history
+rm ficheiro.txt
 ```
 
-## Reutilizar comandos anteriores
-
-- Seta para cima (`↑`)
-- Seta para baixo (`↓`)
 
 
+# 12. Encerrar sessão
 
-# Encerrar sessão
-
-## Terminar o terminal
+## Sair do terminal
 
 ```bash
 exit
@@ -232,6 +402,6 @@ logout
 
 # Conclusão
 
-Dominar o terminal Linux e a sintaxe correta dos comandos é essencial para qualquer utilizador ou administrador de sistemas Linux.
+O terminal é apenas a interface onde os comandos são escritos, enquanto a shell é o programa que interpreta e executa esses comandos.
 
-O Bash fornece uma interface poderosa para gestão do sistema, automação de tarefas e administração avançada, sendo uma competência fundamental em ambientes RHEL e Linux em geral.
+Compreender a diferença entre terminal e shell, bem como os símbolos do prompt e a estrutura dos comandos, é essencial para trabalhar com eficiência em sistemas Linux como o Red Hat Enterprise Linux.
