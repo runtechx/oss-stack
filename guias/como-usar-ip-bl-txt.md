@@ -1,15 +1,17 @@
-# Guia — Como usar ip-bl.txt com Fail2ban
+
+# Conteúdo
+* [Como usar `ip-bl.txt` com Fail2ban](#como-usar-ip-bltxt-com-fail2ban)
+
+
+# Como usar ip-bl.txt com Fail2ban
 
 > Lista de bloqueio centralizada distribuída via GitHub  
->
-> Fonte: [Política OpenFirst da RunTech](https://github.com/runtechx) 
->
 > Ficheiro: `https://raw.githubusercontent.com/runtechx/Openfirst/master/blocklists/ip-bl.txt`
 
 >[!IMPORTANT]
 > Se o seu sistema não tiver `sudo` instale com o comando abaixo ou use a conta root e remova o `sudo` em frente aos comandos
 >```bash
-dnf install -y sudo
+> dnf install -y sudo
 >```
 
 ## 1. Instalar EPEL e Fail2ban
