@@ -48,11 +48,12 @@
 
 [Explicação](https://github.com/runtechx/OpenFirst/discussions/1005)
 
-| Software | Descrição                                                                                                             |
-| ---------- | --------------------------------------------------------------------------------------------------------------------- |
-| [Patchmon&nbsp;*](https://patchmon.net/open-source)|Plataforma open source de gestão e monitorização de patches para servidores (Linux, FreeBSD e Windows)|
-| [Zimbra *](https://www.zimbra.com/) | Plataforma colaborativa de e-mail e produtividade com suporte para calendário, contactos, chat e administração centralizada|
-| [TrueNAS *](https://www.truenas.com/) | Sistema operativo open source para armazenamento em rede (NAS), com suporte para ZFS, partilha de ficheiros e backups|
+| Software                                                              | Descrição                                                                                                                        |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| [Patchmon](https://patchmon.net/open-source?utm_source=chatgpt.com)&nbsp;* | Plataforma open source de gestão e monitorização de patches para servidores Linux, FreeBSD e Windows                             |
+| [Zimbra](https://www.zimbra.com/?utm_source=chatgpt.com) *            | Plataforma colaborativa de e-mail e produtividade com suporte para calendário, contactos, chat e administração centralizada      |
+| [TrueNAS](https://www.truenas.com/?utm_source=chatgpt.com) *          | Sistema operativo open source para armazenamento em rede (NAS), com suporte para ZFS, partilha de ficheiros e backups            |
+| [RustDesk](https://rustdesk.com/?utm_source=chatgpt.com) *            | Plataforma open source de acesso remoto e assistência remota, alternativa ao TeamViewer e AnyDesk, com suporte para self-hosting |
 
 
 
