@@ -1,3 +1,4 @@
 0.0.0.0 cdn.adsbetnet.com
 0.0.0.0 sootoarathus.net
 0.0.0.0 googleadservices.com
+0.0.0.0 googlesyndication.com
