@@ -55,6 +55,7 @@
 | [TrueNAS](https://www.truenas.com/?utm_source=chatgpt.com) *          | Sistema operativo open source para armazenamento em rede (NAS), com suporte para ZFS, partilha de ficheiros e backups            |
 | [RustDesk](https://rustdesk.com/?utm_source=chatgpt.com) *            | Plataforma open source de acesso remoto e assistência remota, alternativa ao TeamViewer e AnyDesk, com suporte para self-hosting |
 | [BigBlueButton](https://bigbluebutton.org/) | |
+| [Immich](https://immich.app/)||
 
 
 \* Por implementar
