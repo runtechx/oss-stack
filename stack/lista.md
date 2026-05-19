@@ -41,6 +41,7 @@
 | [Wordpress](/stack/comandos.md#wordpress)| Sistema de gestão de conteúdos (CMS) para criação de sites e blogs|
 | [Ansible *](www.ansible.com)| Ferramenta de automação para configuração, deployment e gestão de infraestrutura|
 | [Gitlab *](https://about.gitlab.com/)| Plataforma leve de hospedagem de repositórios Git|
+| [Netbox *]() |
 
 
 
@@ -56,6 +57,7 @@
 | [RustDesk](https://rustdesk.com/?utm_source=chatgpt.com) *            | Plataforma open source de acesso remoto e assistência remota, alternativa ao TeamViewer e AnyDesk, com suporte para self-hosting |
 | [BigBlueButton](https://bigbluebutton.org/) | |
 | [Immich](https://immich.app/)||
+
 
 
 \* Por implementar
