@@ -41,7 +41,8 @@
 | [Wordpress](/stack/comandos.md#wordpress)| Sistema de gestão de conteúdos (CMS) para criação de sites e blogs|
 | [Ansible *](www.ansible.com)| Ferramenta de automação para configuração, deployment e gestão de infraestrutura|
 | [Gitlab *](https://about.gitlab.com/)| Plataforma leve de hospedagem de repositórios Git|
-| [Netbox *]() |
+| [Netbox *]() ||
+| [Terraform *]() ||
 
 
 
