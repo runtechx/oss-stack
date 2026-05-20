@@ -52,6 +52,23 @@ Sem Vagrant, tens de criar cada VM manualmente no VirtualBox — escolher ISO, c
 
 ## Instalar VirtualBox + Vagrant
 
+
+Abra o PowerShell como Administrador e execute:
+```Powershell
+bcdedit /set hypervisorlaunchtype off
+```
+
+Depois desative funcionalidades do Windows:
+```Powershell
+Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -NoRestart
+
+Disable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -NoRestart
+
+Disable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
+
+Disable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM -NoRestart
+```
+
 **Metodo 1 - Usando o winget**
 
 Abra o terminal em modo admin
