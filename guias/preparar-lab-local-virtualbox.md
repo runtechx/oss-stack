@@ -36,3 +36,8 @@ Invoke-WebRequest -Uri $vagrantUrl -OutFile "$env:TEMP\Vagrant.msi"
 Start-Process msiexec.exe -ArgumentList "/i $env:TEMP\Vagrant.msi" -Wait
 ```
 
+## Prep do ambiente 
+
+```Powershell
+New-Item -Path "C:\RTLabs" -ItemType Directory -Force
+```
