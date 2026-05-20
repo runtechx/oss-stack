@@ -93,4 +93,24 @@ cd C:\RTLabs
 New-Item -Path "C:\RTLabs\almalinux" -ItemType Directory -Force
 cd C:\RTLabs\almalinux
 ```
+Baixar o Ficheiro vagrantfile 
+```Powershell
+baixar ficheiro
+```
+
+Iniciar o lab:
+```Powershell
+cd C:\RTLabs\almalinux
+vagrant up
+```
+Aceder à VM:
+```Powershell
+vagrant ssh
+```
+Parar / Destruir o lab:
+```Powershell
+vagrant halt      # parar
+vagrant destroy   # destruir
+```
+
 ver [AlmaLinux-lab-l01]() na pasta `\labs\almalinux\`
