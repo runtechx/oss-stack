@@ -51,7 +51,11 @@ O Vagrant não substitui o VirtualBox — ele **fala com o VirtualBox** por baix
 Sem Vagrant, tens de criar cada VM manualmente no VirtualBox — escolher ISO, configurar disco, rede, memória, instalar o SO, etc. Com Vagrant, defines tudo num `Vagrantfile` e corres `vagrant up`. Em segundos tens uma VM pronta, e qualquer pessoa com o mesmo ficheiro obtém exactamente o mesmo ambiente.
 
 ## Instalar VirtualBox + Vagrant
+
 **Metodo 1 - Usando o winget**
+
+Abra o terminal em modo admin
+
 Virtualbox
 ```Powershell
 winget install Oracle.VirtualBox
