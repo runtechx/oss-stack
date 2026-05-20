@@ -84,7 +84,12 @@ Start-Process msiexec.exe -ArgumentList "/i $env:TEMP\Vagrant.msi" -Wait
 
 ## Prep do ambiente 
 
+Feche o PowerShell e abra novamente, depois teste
+```Powershell
+vagrant --version
+```
 Vagrant-vbguest
+
 ```Powershell
 vagrant plugin install vagrant-vbguest
 ```
