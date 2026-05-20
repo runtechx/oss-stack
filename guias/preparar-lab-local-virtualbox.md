@@ -36,8 +36,13 @@ Invoke-WebRequest -Uri $vagrantUrl -OutFile "$env:TEMP\Vagrant.msi"
 Start-Process msiexec.exe -ArgumentList "/i $env:TEMP\Vagrant.msi" -Wait
 ```
 
+```bash
+vagrant plugin install vagrant-vbguest
+```
+
 ## Prep do ambiente 
 
+Criar a pasta `RTLabs`
 ```Powershell
 New-Item -Path "C:\RTLabs" -ItemType Directory -Force
 ```
