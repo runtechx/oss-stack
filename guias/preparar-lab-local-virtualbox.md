@@ -81,11 +81,14 @@ $vagrantUrl = "https://releases.hashicorp.com/vagrant/$vagrantVersion/vagrant_${
 Invoke-WebRequest -Uri $vagrantUrl -OutFile "$env:TEMP\Vagrant.msi"
 Start-Process msiexec.exe -ArgumentList "/i $env:TEMP\Vagrant.msi" -Wait
 ```
+
+## Prep do ambiente 
+
 Vagrant-vbguest
 ```Powershell
 vagrant plugin install vagrant-vbguest
 ```
-## Prep do ambiente 
+
 Criar a pasta `RTLabs`
 ```Powershell
 New-Item -Path "C:\RTLabs" -ItemType Directory -Force
