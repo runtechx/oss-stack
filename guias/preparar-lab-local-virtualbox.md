@@ -36,6 +36,8 @@ Invoke-WebRequest -Uri $vagrantUrl -OutFile "$env:TEMP\Vagrant.msi"
 Start-Process msiexec.exe -ArgumentList "/i $env:TEMP\Vagrant.msi" -Wait
 ```
 
+Vagrant-vbguest
+
 ```bash
 vagrant plugin install vagrant-vbguest
 ```
