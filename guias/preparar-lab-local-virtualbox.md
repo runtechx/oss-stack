@@ -89,6 +89,9 @@ New-Item -Path "C:\RTLabs\shared" -ItemType Directory -Force
 cd C:\RTLabs
 ```
 ## Criar o primeiro LAB 
+
+Abra um cmd em modo normal 
+
 ```Powershell
 New-Item -Path "C:\RTLabs\almalinux" -ItemType Directory -Force
 cd C:\RTLabs\almalinux
