@@ -116,16 +116,34 @@ baixar ficheiro
 Iniciar o lab:
 ```Powershell
 cd C:\RTLabs\almalinux
-vagrant up
-```
-Aceder à VM:
-```Powershell
-vagrant ssh
-```
-Parar / Destruir o lab:
-```Powershell
-vagrant halt      # parar
-vagrant destroy   # destruir
 ```
 
-ver [AlmaLinux-lab-l01]() na pasta `\labs\almalinux\`
+Depois execute:
+
+```powershell
+vagrant up
+```
+
+Para entrar na VM:
+
+```powershell
+vagrant ssh
+```
+
+Para verificar o estado:
+
+```powershell
+vagrant status
+```
+
+Para desligar:
+
+```powershell
+vagrant halt
+```
+
+Para destruir a VM:
+
+```powershell
+vagrant destroy -f
+```
