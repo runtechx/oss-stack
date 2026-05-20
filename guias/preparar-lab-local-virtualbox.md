@@ -97,7 +97,6 @@ vagrant plugin install vagrant-vbguest
 Criar a pasta `RTLabs`
 ```Powershell
 New-Item -Path "C:\RTLabs" -ItemType Directory -Force
-New-Item -Path "C:\RTLabs\shared" -ItemType Directory -Force
 cd C:\RTLabs
 ```
 ## Criar o primeiro LAB 
@@ -146,4 +145,21 @@ Para destruir a VM:
 
 ```powershell
 vagrant destroy -f
+```
+>[!NOTE]
+>Apenas a VM clonada é removida — a box original/base continua armazenada localmente pelo Vagrant.
+
+Ver boxes instaladas:
+```powershell
+vagrant box list
+```
+
+Remover a box:
+```powershell
+vagrant box remove almalinux/10
+```
+
+Se houver várias versões:
+```powershell
+vagrant box remove almalinux/9 --all```
 ```
