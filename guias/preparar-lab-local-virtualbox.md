@@ -68,6 +68,13 @@ Disable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestar
 
 Disable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM -NoRestart
 ```
+```Powershell
+dism.exe /Online /Disable-Feature:Microsoft-Hyper-V-All
+dism.exe /Online /Disable-Feature:VirtualMachinePlatform
+dism.exe /Online /Disable-Feature:HypervisorPlatform
+dism.exe /Online /Disable-Feature:Microsoft-Windows-Subsystem-Linux
+dism.exe /Online /Disable-Feature:Containers
+```
 
 **Metodo 1 - Usando o winget**
 
