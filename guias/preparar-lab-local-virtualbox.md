@@ -219,4 +219,7 @@ Hyper-v+Vagrant
 
 
 https://www.youtube.com/watch?v=HNsdfTRfnig
+https://medium.com/credera-engineering/vagrant-usinghyper-v-4e86f72acc3b
+https://developer.hashicorp.com/vagrant/docs/providers/hyperv
 
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
