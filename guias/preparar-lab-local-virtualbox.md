@@ -98,6 +98,8 @@ O correto é NÃO aparecer:
 A hypervisor has been detected
 ```
 
+"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" list hostinfo
+
 
 **Metodo 1 - Usando o winget**
 
@@ -210,3 +212,11 @@ Se houver várias versões:
 ```powershell
 vagrant box remove almalinux/9 --all```
 ```
+
+---
+
+Hyper-v+Vagrant
+
+
+https://www.youtube.com/watch?v=HNsdfTRfnig
+
