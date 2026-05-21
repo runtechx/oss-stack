@@ -69,12 +69,35 @@ Disable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestar
 Disable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM -NoRestart
 ```
 ```Powershell
-dism.exe /Online /Disable-Feature:Microsoft-Hyper-V-All
-dism.exe /Online /Disable-Feature:VirtualMachinePlatform
-dism.exe /Online /Disable-Feature:HypervisorPlatform
-dism.exe /Online /Disable-Feature:Microsoft-Windows-Subsystem-Linux
+# Desativar o hypervisor do boot
+bcdedit /set hypervisorlaunchtype off
+# Desativar Virtual Machine Platform
+dism /online /disable-feature /featurename:VirtualMachinePlatform /norestart
+# Desativar Windows Hypervisor Platform
+dism /online /disable-feature /featurename:HypervisorPlatform /norestart
+# Desativar WSL2
+dism /online /disable-feature /featurename:Microsoft-Windows-Subsystem-Linux /norestart
+# Desativar Sandbox
+dism /online /disable-feature /featurename:Containers-DisposableClientVM /norestart
 dism.exe /Online /Disable-Feature:Containers
 ```
+
+Muito importante.
+
+Reiniciar
+
+Depois do reboot, confirma:
+
+```powershell
+systeminfo | findstr /i "Hyper-V"
+```
+
+O correto é NÃO aparecer:
+
+```text
+A hypervisor has been detected
+```
+
 
 **Metodo 1 - Usando o winget**
 
