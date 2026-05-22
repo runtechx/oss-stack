@@ -97,6 +97,8 @@ A hypervisor has been detected
 
 ## 4. Criar diretório de trabalho
 
+Criar pasta da VM controladora
+
 ```powershell
 New-Item -Path "C:\RTLabs" -ItemType Directory -Force
 cd C:\RTLabs
