@@ -177,12 +177,18 @@ Executar PowerShell como Administrador:
 Cria um ficheiro chamado `Vagrantfile`:
 
 ```powershell
-cd controlador
+cd C:\RTLabs\controlador
 Invoke-WebRequest `
   -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/hyperv-Vagrantfile" `
-  -OutFile "Vagrantfile"
+  -OutFile "Vagrantfile" 
+ls
 ```
 
+Correr a criação da VM
 
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+vagrant up
+```
 
 
