@@ -50,9 +50,31 @@ Executar PowerShell como Administrador:
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 ```
 
+## 2. Instalar Vagrant
+
+**Método rápido (winget)**
+
+```powershell
+winget install HashiCorp.Vagrant
+```
+
+**Método manual**
+```Powershell
+$vagrantVersion = (Invoke-RestMethod "https://checkpoint-api.hashicorp.com/v1/check/vagrant").current_version
+$vagrantUrl = "https://releases.hashicorp.com/vagrant/$vagrantVersion/vagrant_${vagrantVersion}_windows_amd64.msi"
+Invoke-WebRequest -Uri $vagrantUrl -OutFile "$env:TEMP\Vagrant.msi"
+Start-Process msiexec.exe -ArgumentList "/i $env:TEMP\Vagrant.msi" -Wait
+```
+
+**Verificar instalação**
+
+```powershell
+vagrant --version
+```
+
 Reiniciar o computador.
 
-## 2. Confirmar Hyper-V ativo
+## 3. Confirmar Hyper-V ativo
 
 ```powershell
 systeminfo | findstr /i "hyper-v"
@@ -64,16 +86,7 @@ Se estiver ativo, vais ver algo como:
 A hypervisor has been detected
 ```
 
-## Método rápido (winget)
 
-```powershell
-winget install HashiCorp.Vagrant
-```
 
-## Verificar instalação
-
-```powershell
-vagrant --version
-```
 
 
