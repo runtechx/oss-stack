@@ -1,4 +1,4 @@
-#  Preparara o Controlador de Laboratorios com Hyper-V + Vagrant (Windows)
+#  Preparar o controlador de laboratórios com Hyper-V e Vagrant (Windows).
 
 ## O que é o Hyper-V?
 
@@ -86,7 +86,16 @@ Se estiver ativo, vais ver algo como:
 A hypervisor has been detected
 ```
 
+## 4. Criar diretório de trabalho
 
+```powershell
+New-Item -Path "C:\RTLabs" -ItemType Directory -Force
+cd C:\RTLabs
+New-Item -Path "controlador-rtlabs" -ItemType Directory -Force
+cd controlador-rtlabs
+```
 
+## 5. Criar Vagrantfile (Hyper-V)
 
+Cria um ficheiro chamado `Vagrantfile`:
 
