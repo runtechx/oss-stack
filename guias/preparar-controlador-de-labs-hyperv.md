@@ -187,8 +187,10 @@ ls
 Correr a criação da VM
 
 ```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 vagrant up
 ```
-
+>[!TIP]
+> Caso der error de Nivel de Execução corra antes o comando `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+> No caso de ter dois utilizador sendo um normal e outro adminstrativo abra uma nova tab no mesmo Terminal (Admin) e corra `virtmgmt.msc`
+> para abrir o gestor de VM Hyper-V
 
