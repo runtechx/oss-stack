@@ -47,7 +47,7 @@ Vagrantfile → vagrant up → Hyper-V → VM pronta
 Executar PowerShell como Administrador:
 
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
 ```
 
 ## 2. Instalar Vagrant
