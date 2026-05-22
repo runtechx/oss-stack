@@ -15,10 +15,28 @@ Vagrant.configure("2") do |config|
 
   config.vm.network "private_network", type: "dhcp"
 
-  # Provisioning step
   config.vm.provision "shell", inline: <<-SHELL
-    sudo dnf -y install epel-release
-    sudo dnf -y install htop wget
+    set -e
+
+    echo "Fixing repo configuration..."
+
+    sudo sed -i \
+      -e 's/^[[:space:]]*mirrorlist=/#mirrorlist=/' \
+      -e 's/^[[:space:]]*#[[:space:]]*baseurl=/baseurl=/' \
+      /etc/yum.repos.d/*.repo
+
+    echo "Cleaning DNF cache..."
+    sudo dnf clean all
+    sudo rm -rf /var/cache/dnf
+
+    echo "Rebuilding cache..."
+    sudo dnf makecache
+
+    echo "Updating system..."
+    sudo dnf update -y
+
+    echo "Installing packages..."
+    sudo dnf -y install epel-release htop wget
   SHELL
 
 end
