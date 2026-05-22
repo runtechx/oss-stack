@@ -245,6 +245,12 @@ Testar https
 curl  -v https://google.com
 ```
 
+## ToDo 
+Instalar a Terraform 
+Gerar API Token 
+Configurar o Terraform para ligar-se ao Proxmox
+
+
 > [!NOTE]
 >
 >1. Caso ocorra erro de Execution Policy, executar:
