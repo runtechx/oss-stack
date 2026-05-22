@@ -227,9 +227,16 @@ Validar se têm internet
 ```powershell
 cd C:\RTLabs\controladora
 vagrant ssh
-# testar dns
+```
+
+Testar dns
+
+```bash
 ping google.com -4 -c 4
-# testar https
+```
+
+Testar https
+```bash
 curl  -v https://google.com
 ```
 
