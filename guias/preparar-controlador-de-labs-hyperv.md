@@ -103,7 +103,21 @@ cd C:\RTLabs
 New-Item -Path "controlador" -ItemType Directory -Force
 cd controlador
 ```
+Alterar o caminho dos ficheiros Hyper-V
 
+```powershell
+Import-Module Hyper-V
+```
+```powershell
+New-Item -ItemType Directory -Force -Path "C:\RTLabs\VMs"
+New-Item -ItemType Directory -Force -Path "C:\RTLabs\Disks"
+Set-VMHost `
+  -VirtualMachinePath "C:\RTLabs\VMs" `
+  -VirtualHardDiskPath "C:\RTLabs\Disks"
+```
+```powershell
+Get-VMHost | Select-Object VirtualMachinePath, VirtualHardDiskPath
+```
 
 ## VM Controladora de Laboratórios (Arquitetura de Infraestrutura)
 
@@ -190,7 +204,7 @@ Correr a criação da VM
 vagrant up
 ```
 >[!TIP]
-> Caso der error de Nivel de Execução corra antes o comando `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
-> No caso de ter dois utilizador sendo um normal e outro adminstrativo abra uma nova tab no mesmo Terminal (Admin) e corra `virtmgmt.msc`
+> 1. Caso der error de Nivel de Execução corra antes o comando `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+> 2. No caso de ter dois utilizador sendo um normal e outro adminstrativo abra uma nova tab no mesmo Terminal (Admin) e corra `virtmgmt.msc`
 > para abrir o gestor de VM Hyper-V
 
