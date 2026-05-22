@@ -98,7 +98,7 @@ Criar pasta da VM controladora:
 New-Item -Path "C:\RTLabs" -ItemType Directory -Force
 cd C:\RTLabs
 New-Item -Path "controladora" -ItemType Directory -Force
-cd controlador
+cd controladora
 ```
 
 Alterar o caminho dos ficheiros do Hyper-V:
@@ -197,17 +197,17 @@ Criar a VM:
 vagrant up
 ```
 
-> Nota
-
-1. Caso ocorra erro de Execution Policy, executar:
-
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-e a seguir voltar a correr o `vagrant up` dentro da pasta `C:\RTLabs\controladora`
-
-2. Se existir utilizador normal e administrativo, abrir uma nova sessão no terminal como Administrador e executar:
-
-```powershell
-virtmgmt.msc
-```
+> [!NOTE]
+>
+>1. Caso ocorra erro de Execution Policy, executar:
+>
+>```powershell
+>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+>```
+>e a seguir voltar a correr o `vagrant up` dentro da pasta `C:\RTLabs\controladora`
+>
+>2. Se existir utilizador normal e administrativo, abrir uma nova sessão no terminal como Administrador e executar:
+>
+>```powershell
+>virtmgmt.msc
+>```
