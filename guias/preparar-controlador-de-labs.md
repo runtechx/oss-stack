@@ -161,7 +161,7 @@ Exemplos de templates:
 
 
 
-## 1. Criar Vagrantfile no Hyper-V, para a criar C
+## 1. Criar o VM Controlador usando (Vagrantfile no Hyper-V)
 
 Cria um ficheiro chamado `Vagrantfile`:
 
