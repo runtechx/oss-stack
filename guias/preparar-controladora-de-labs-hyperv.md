@@ -220,6 +220,19 @@ Para destruir a VM:
 vagrant destroy -f
 ```
 
+## Tshoot
+
+Validar se têm internet
+
+```powershell
+cd C:\RTLabs\controladora
+vagrant ssh
+# testar dns
+ping google.com -4 -c 4
+# testar https
+curl  -v https://google.com
+```
+
 > [!NOTE]
 >
 >1. Caso ocorra erro de Execution Policy, executar:
