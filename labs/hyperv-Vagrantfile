@@ -36,7 +36,12 @@ Vagrant.configure("2") do |config|
     sudo dnf update -y
 
     echo "Installing packages..."
-    sudo dnf -y install epel-release htop wget
+    sudo dnf -y install epel-release
+    sudo /usr/bin/crb enable
+    sudo dnf -y install htop wget unzip
+    sudo dnf install -y dnf-plugins-core
+    sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+    sudo dnf install -y terraform
   SHELL
 
 end
