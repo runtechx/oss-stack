@@ -1,4 +1,4 @@
-# Preparar o controlador de laboratórios com Hyper-V e Vagrant (Windows)
+# Preparar a controladora de laboratórios com Hyper-V e Vagrant (Windows)
 
 ## O que é o Hyper-V?
 
