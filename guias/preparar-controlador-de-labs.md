@@ -91,8 +91,8 @@ A hypervisor has been detected
 ```powershell
 New-Item -Path "C:\RTLabs" -ItemType Directory -Force
 cd C:\RTLabs
-New-Item -Path "controlador-rtlabs" -ItemType Directory -Force
-cd controlador-rtlabs
+New-Item -Path "controlador" -ItemType Directory -Force
+cd controlador
 ```
 
 
