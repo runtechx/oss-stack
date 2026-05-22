@@ -196,6 +196,29 @@ Criar a VM:
 ```powershell
 vagrant up
 ```
+Para entrar na VM:
+
+```powershell
+vagrant ssh
+```
+
+Para verificar o estado:
+
+```powershell
+vagrant status
+```
+
+Para desligar:
+
+```powershell
+vagrant halt
+```
+
+Para destruir a VM:
+
+```powershell
+vagrant destroy -f
+```
 
 > [!NOTE]
 >
