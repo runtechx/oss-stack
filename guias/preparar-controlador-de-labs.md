@@ -165,8 +165,12 @@ Exemplos de templates:
 
 Cria um ficheiro chamado `Vagrantfile`:
 
-
-
+```powershell
+cd controlador
+Invoke-WebRequest `
+  -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/hyperv-Vagrantfile" `
+  -OutFile "Vagrantfile"
+```
 
 
 
