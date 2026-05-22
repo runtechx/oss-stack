@@ -1,10 +1,10 @@
-#  Preparar o controlador de laboratórios com Hyper-V e Vagrant (Windows).
+# Preparar o controlador de laboratórios com Hyper-V e Vagrant (Windows)
 
 ## O que é o Hyper-V?
 
 O **Hyper-V** é o hipervisor nativo da Microsoft — permite criar e gerir máquinas virtuais diretamente no Windows.
 
-Ao contrário do VirtualBox, o Hyper-V é integrado ao sistema operativo e usado em ambientes mais corporativos.
+Ao contrário do VirtualBox, o Hyper-V é integrado no sistema operativo e é utilizado em ambientes mais corporativos.
 
 ```
 ┌──────────────────────────────────────┐
@@ -18,20 +18,17 @@ Ao contrário do VirtualBox, o Hyper-V é integrado ao sistema operativo e usado
 └──────────────────────────────────────┘
 ```
 
-
-
 ## O que é o Vagrant (com Hyper-V)?
 
-O **Vagrant** continua a ser o orquestrador de VMs.
+O **Vagrant** continua a ser o orquestrador de máquinas virtuais.
 
-A diferença é que agora ele fala com o **Hyper-V em vez do VirtualBox**.
+A diferença é que agora comunica com o **Hyper-V em vez do VirtualBox**.
 
 ```
 Vagrantfile → vagrant up → Hyper-V → VM pronta
 ```
 
-
-# Diferença importante (VirtualBox vs Hyper-V)
+## Diferença importante (VirtualBox vs Hyper-V)
 
 |                         | VirtualBox | Hyper-V                |
 | ----------------------- | ---------- | ---------------------- |
@@ -40,15 +37,13 @@ Vagrantfile → vagrant up → Hyper-V → VM pronta
 | Integração              | Média      | Excelente              |
 | Compatibilidade Vagrant | Sim        | Sim (provider oficial) |
 
->[!NOTE]
-> Os comandos para Hyper-V precisam ser executados em PowerShell como Administrador
-> já para o virtualbox apenas as instalações do virtualbox e vagrant, a criação da VM não precisa
-> de ser executado em PowerShell como Administrador 
+> Nota
+> Os comandos para Hyper-V devem ser executados no PowerShell como Administrador.
+> No VirtualBox, apenas a instalação é administrativa; a criação de VMs não requer execução como Administrador.
 
+## Pré-requisitos
 
-# Pré-requisitos
-
-## 1. Ativar Hyper-V
+### 1. Ativar Hyper-V
 
 Executar PowerShell como Administrador:
 
@@ -56,10 +51,9 @@ Executar PowerShell como Administrador:
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
 ```
 
-## 2. Instalar Vagrant
+### 2. Instalar Vagrant
 
 Executar PowerShell como Administrador:
-
 
 **Método rápido (winget)**
 
@@ -68,7 +62,8 @@ winget install HashiCorp.Vagrant
 ```
 
 **Método manual**
-```Powershell
+
+```powershell
 $vagrantVersion = (Invoke-RestMethod "https://checkpoint-api.hashicorp.com/v1/check/vagrant").current_version
 $vagrantUrl = "https://releases.hashicorp.com/vagrant/$vagrantVersion/vagrant_${vagrantVersion}_windows_amd64.msi"
 Invoke-WebRequest -Uri $vagrantUrl -OutFile "$env:TEMP\Vagrant.msi"
@@ -83,21 +78,21 @@ vagrant --version
 
 Reiniciar o computador.
 
-## 3. Confirmar Hyper-V ativo
+### 3. Confirmar Hyper-V ativo
 
 ```powershell
 systeminfo | findstr /i "hyper-v"
 ```
 
-Se estiver ativo, vais ver algo como:
+Se estiver ativo, aparece:
 
 ```
 A hypervisor has been detected
 ```
 
-## 4. Criar diretório de trabalho
+### 4. Criar diretório de trabalho
 
-Criar pasta da VM controladora
+Criar pasta da VM controladora:
 
 ```powershell
 New-Item -Path "C:\RTLabs" -ItemType Directory -Force
@@ -105,18 +100,22 @@ cd C:\RTLabs
 New-Item -Path "controlador" -ItemType Directory -Force
 cd controlador
 ```
-Alterar o caminho dos ficheiros Hyper-V
+
+Alterar o caminho dos ficheiros do Hyper-V:
 
 ```powershell
 Import-Module Hyper-V
 ```
+
 ```powershell
 New-Item -ItemType Directory -Force -Path "C:\RTLabs\VMs"
 New-Item -ItemType Directory -Force -Path "C:\RTLabs\Disks"
+
 Set-VMHost `
   -VirtualMachinePath "C:\RTLabs\VMs" `
   -VirtualHardDiskPath "C:\RTLabs\Disks"
 ```
+
 ```powershell
 Get-VMHost | Select-Object VirtualMachinePath, VirtualHardDiskPath
 ```
@@ -125,21 +124,19 @@ Get-VMHost | Select-Object VirtualMachinePath, VirtualHardDiskPath
 
 Depois de compreender as diferenças entre VirtualBox e Hyper-V, evoluímos o conceito para uma abordagem de **Infrastructure as Code (IaC)**, permitindo a criação e gestão automatizada de laboratórios em ambiente centralizado.
 
-Neste modelo, os laboratórios **não são criados no PC local**. Em vez disso, toda a infraestrutura é provisionada diretamente num **host Proxmox**, através da API, utilizando uma **VM Controladora de Laboratórios (VM-Ctrl)**.
+Neste modelo, os laboratórios não são criados no PC local. Em vez disso, toda a infraestrutura é provisionada diretamente num host Proxmox, através da API, utilizando uma VM controladora de laboratórios (VM-Ctrl).
 
 O PC local apenas atua como ponto de apoio para gestão inicial e acesso, enquanto a VM-Ctrl centraliza toda a automação.
-
 
 ## O papel da VM-Ctrl
 
 A VM-Ctrl não é uma máquina de laboratório.
 
-Ela é o **cérebro da infraestrutura**.
+Ela é o cérebro da infraestrutura.
 
 É responsável por toda a orquestração, automação e padronização do ambiente.
 
-
-##  Responsabilidades principais
+## Responsabilidades principais
 
 ### 1. Orquestração de laboratórios
 
@@ -151,20 +148,17 @@ Exemplos:
 * Lab 02 → Cluster Linux
 * Lab 03 → Ambiente de testes e integração
 
-
-
 ### Fluxo de comunicação com o Proxmox
 
 A interação segue um modelo automatizado baseado em IaC:
 
-**VM-Ctrl → Terraform → Proxmox API → Provisionamento das VMs**
+VM-Ctrl → Terraform → Proxmox API → Provisionamento das VMs
 
 Isto garante:
 
 * Criação consistente de ambientes
 * Redução de erros manuais
-* Total automação do ciclo de vida dos laboratórios
-
+* Automação do ciclo de vida dos laboratórios
 
 ## Padronização dos laboratórios
 
@@ -172,41 +166,48 @@ Cada laboratório deixa de ser configurado manualmente e passa a ser definido co
 
 Exemplos de templates:
 
-* `lab-web-stack.tf` → stack web (frontend + backend + DB)
-* `lab-linux-basic.tf` → máquinas Linux para treino básico
-* `lab-monitoring.tf` → ambiente com métricas e observabilidade
-
+* lab-web-stack.tf → stack web (frontend + backend + DB)
+* lab-linux-basic.tf → máquinas Linux para treino básico
+* lab-monitoring.tf → ambiente com métricas e observabilidade
 
 ## Benefícios da arquitetura
 
-* Escalabilidade: criar dezenas de laboratórios rapidamente
+* Escalabilidade: criação de dezenas de laboratórios rapidamente
 * Consistência: ambientes sempre iguais
 * Automação total: sem intervenção manual no Proxmox
 * Reprodutibilidade: laboratórios versionados em Git
 
-
-
-## 1. Criar o VM Controlador usando (Vagrantfile no Hyper-V)
+## 1. Criar a VM controladora usando Vagrantfile no Hyper-V
 
 Executar PowerShell como Administrador:
 
-Cria um ficheiro chamado `Vagrantfile`:
+Criar o ficheiro Vagrantfile:
 
 ```powershell
 cd C:\RTLabs\controlador
 Invoke-WebRequest `
   -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/hyperv-Vagrantfile" `
-  -OutFile "Vagrantfile" 
+  -OutFile "Vagrantfile"
 ls
 ```
 
-Correr a criação da VM
+Criar a VM:
 
 ```powershell
 vagrant up
 ```
->[!TIP]
-> 1. Caso der error de Nivel de Execução corra antes o comando `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
-> 2. No caso de ter dois utilizador sendo um normal e outro adminstrativo abra uma nova tab no mesmo Terminal (Admin) e corra `virtmgmt.msc`
-> para abrir o gestor de VM Hyper-V
 
+> Nota
+
+1. Caso ocorra erro de Execution Policy, executar:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+e a seguir voltar a correr o `vagrant up` dentro da pasta `C:\RTLabs\controlador`
+
+2. Se existir utilizador normal e administrativo, abrir uma nova sessão no terminal como Administrador e executar:
+
+```powershell
+virtmgmt.msc
+```
