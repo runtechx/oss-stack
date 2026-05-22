@@ -35,14 +35,16 @@
 
 [Explicação](https://github.com/runtechx/OpenFirst/discussions/1004)
 
-| Software | Descrição                                                                                                             |
-| ---------- | --------------------------------------------------------------------------------------------------------------------- |
-| [Odoo *](https://www.odoo.com/)| ERP open source para gestão empresarial|
-| [Wordpress](/stack/comandos.md#wordpress)| Sistema de gestão de conteúdos (CMS) para criação de sites e blogs|
-| [Ansible *](www.ansible.com)| Ferramenta de automação para configuração, deployment e gestão de infraestrutura|
-| [Gitlab *](https://about.gitlab.com/)| Plataforma leve de hospedagem de repositórios Git|
-| [Netbox *]() ||
-| [Terraform *]() ||
+| Software  | Descrição                                                                                                                                                                                      |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Odoo](https://www.odoo.com)       | ERP open source para gestão empresarial, cobrindo áreas como vendas, contabilidade, inventário e CRM.                                      |
+| [WordPress](https://wordpress.org) | Sistema de gestão de conteúdos (CMS) amplamente usado para criação de sites, blogs e portais.                                         |
+| [Ansible](https://www.ansible.com)     | Ferramenta de automação para configuração, deployment e gestão de infraestrutura sem agentes.                                       |
+| [GitLab](https://about.gitlab.com)     | Plataforma de DevOps para gestão de código-fonte Git, CI/CD e colaboração em desenvolvimento.                                        |
+| [NetBox](https://netbox.dev)    | Plataforma de IP Address Management (IPAM) e Data Center Infrastructure Management (DCIM) para documentação e automação de redes.           |
+| [Terraform](https://www.hashicorp.com/products/terraform? | Ferramenta de Infrastructure as Code (IaC) usada para provisionamento e gestão de infraestrutura multi-cloud. utm_source=chatgpt.com) |
+| [BookStack](https://www.bookstackapp.com) | Sistema simples e auto-hospedado para criação de documentação técnica estruturada em formato de livros e capítulos.            |
+
 
 
 
