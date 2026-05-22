@@ -1,0 +1,21 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "almalinux/10"
+  config.vm.hostname = "controlador"
+
+  config.vm.provider "hyperv" do |h|
+    h.vmname = "controlador"
+    h.memory = 2048
+    h.cpus = 2
+    h.enable_virtualization_extensions = true
+  end
+
+  config.vm.network "private_network", type: "dhcp"
+
+  # Provisioning step
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo dnf -y install epel-release
+    sudo dnf -y install htop wget
+  SHELL
+
+end
