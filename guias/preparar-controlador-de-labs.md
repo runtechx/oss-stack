@@ -96,45 +96,76 @@ cd controlador
 ```
 
 
-# VM Controladora de Laboratórios (Arquitetura de Infraestrutura)
+## VM Controladora de Laboratórios (Arquitetura de Infraestrutura)
 
-Depois de compreender a diferença entre VirtualBox e Hyper-V, vamos evoluir o conceito para infraestrutura como codigo para criar os varios laboratorios 
-Neste modelo, não crias os laboratorios no teu PC local mas sim no proxmox host via API usando a VM controlador de laboratorios.
-Em vez disso, ele apenas executa uma VM Controladora (VM-Ctrl), que centraliza toda a automação e comunicação com o cluster Proxmox.
+Depois de compreender as diferenças entre VirtualBox e Hyper-V, evoluímos o conceito para uma abordagem de **Infrastructure as Code (IaC)**, permitindo a criação e gestão automatizada de laboratórios em ambiente centralizado.
 
-O papel da VM-Ctrl
+Neste modelo, os laboratórios **não são criados no PC local**. Em vez disso, toda a infraestrutura é provisionada diretamente num **host Proxmox**, através da API, utilizando uma **VM Controladora de Laboratórios (VM-Ctrl)**.
 
-A VM-Ctrl não é uma VM de laboratório.
+O PC local apenas atua como ponto de apoio para gestão inicial e acesso, enquanto a VM-Ctrl centraliza toda a automação.
 
-Ela é o cérebro da infraestrutura.
 
-🧠 Responsabilidades principais:
-⚙️ 1. Orquestração de laboratórios
+## O papel da VM-Ctrl
 
-Cria, destrói e gere VMs no Proxmox:
+A VM-Ctrl não é uma máquina de laboratório.
 
-Lab 01 → 3 VMs (web + db + client)
-Lab 02 → cluster Linux
-Lab 03 → ambiente de testes
+Ela é o **cérebro da infraestrutura**.
 
-Comunicação com Proxmox (Exemplo lógico:)
- VM-Ctrl → Terraform → Proxmox API → VM do laboratorio criada
+É responsável por toda a orquestração, automação e padronização do ambiente.
 
-Padronização dos laboratórios
 
-Cada laboratório deixa de ser “manual”.
+##  Responsabilidades principais
 
-Passa a ser:
+### 1. Orquestração de laboratórios
 
-lab-web-stack.tf
-lab-linux-basic.tf
-lab-monitoring.tf
+A VM-Ctrl cria, gere e elimina ambientes completos no Proxmox de forma automatizada.
+
+Exemplos:
+
+* Lab 01 → 3 VMs (Web + DB + Client)
+* Lab 02 → Cluster Linux
+* Lab 03 → Ambiente de testes e integração
+
+
+
+### Fluxo de comunicação com o Proxmox
+
+A interação segue um modelo automatizado baseado em IaC:
+
+**VM-Ctrl → Terraform → Proxmox API → Provisionamento das VMs**
+
+Isto garante:
+
+* Criação consistente de ambientes
+* Redução de erros manuais
+* Total automação do ciclo de vida dos laboratórios
+
+
+## Padronização dos laboratórios
+
+Cada laboratório deixa de ser configurado manualmente e passa a ser definido como código.
+
+Exemplos de templates:
+
+* `lab-web-stack.tf` → stack web (frontend + backend + DB)
+* `lab-linux-basic.tf` → máquinas Linux para treino básico
+* `lab-monitoring.tf` → ambiente com métricas e observabilidade
+
+
+## Benefícios da arquitetura
+
+* Escalabilidade: criar dezenas de laboratórios rapidamente
+* Consistência: ambientes sempre iguais
+* Automação total: sem intervenção manual no Proxmox
+* Reprodutibilidade: laboratórios versionados em Git
 
 
 
 ## 1. Criar Vagrantfile no Hyper-V, para a criar C
 
 Cria um ficheiro chamado `Vagrantfile`:
+
+
 
 
 
