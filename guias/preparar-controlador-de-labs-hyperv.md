@@ -97,7 +97,7 @@ Criar pasta da VM controladora:
 ```powershell
 New-Item -Path "C:\RTLabs" -ItemType Directory -Force
 cd C:\RTLabs
-New-Item -Path "controlador" -ItemType Directory -Force
+New-Item -Path "controladora" -ItemType Directory -Force
 cd controlador
 ```
 
@@ -128,9 +128,9 @@ Neste modelo, os laboratórios não são criados no PC local. Em vez disso, toda
 
 O PC local apenas atua como ponto de apoio para gestão inicial e acesso, enquanto a VM-Ctrl centraliza toda a automação.
 
-## O papel da VM-Ctrl
+## O papel da VM Controladora de Laboratórios
 
-A VM-Ctrl não é uma máquina de laboratório.
+A VM Controladora de Laboratórios não é uma máquina de laboratório.
 
 Ela é o cérebro da infraestrutura.
 
@@ -140,7 +140,7 @@ Ela é o cérebro da infraestrutura.
 
 ### 1. Orquestração de laboratórios
 
-A VM-Ctrl cria, gere e elimina ambientes completos no Proxmox de forma automatizada.
+A VM Controladora de Laboratórios cria, gere e elimina ambientes completos no Proxmox de forma automatizada.
 
 Exemplos:
 
@@ -152,7 +152,7 @@ Exemplos:
 
 A interação segue um modelo automatizado baseado em IaC:
 
-VM-Ctrl → Terraform → Proxmox API → Provisionamento das VMs
+Controladora → Terraform → Proxmox API → Provisionamento das VMs
 
 Isto garante:
 
@@ -184,7 +184,7 @@ Executar PowerShell como Administrador:
 Criar o ficheiro Vagrantfile:
 
 ```powershell
-cd C:\RTLabs\controlador
+cd C:\RTLabs\controladora
 Invoke-WebRequest `
   -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/hyperv-Vagrantfile" `
   -OutFile "Vagrantfile"
@@ -204,7 +204,7 @@ vagrant up
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
-e a seguir voltar a correr o `vagrant up` dentro da pasta `C:\RTLabs\controlador`
+e a seguir voltar a correr o `vagrant up` dentro da pasta `C:\RTLabs\controladora`
 
 2. Se existir utilizador normal e administrativo, abrir uma nova sessão no terminal como Administrador e executar:
 
