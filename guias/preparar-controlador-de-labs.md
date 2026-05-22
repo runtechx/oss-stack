@@ -95,7 +95,37 @@ New-Item -Path "controlador-rtlabs" -ItemType Directory -Force
 cd controlador-rtlabs
 ```
 
-## 5. Criar Vagrantfile (Hyper-V)
+
+# VM Controladora de Laboratórios (Arquitetura de Infraestrutura)
+
+Depois de compreender a diferença entre VirtualBox e Hyper-V, vamos evoluir o conceito para infraestrutura como codigo para criar os varios laboratorios 
+Neste modelo, não crias os laboratorios no teu PC local mas sim no proxmox host via API usando a VM controlador de laboratorios.
+Em vez disso, ele apenas executa uma VM Controladora (VM-Ctrl), que centraliza toda a automação e comunicação com o cluster Proxmox.
+
+O papel da VM-Ctrl
+
+A VM-Ctrl não é uma VM de laboratório.
+
+Ela é o cérebro da infraestrutura.
+
+🧠 Responsabilidades principais:
+⚙️ 1. Orquestração de laboratórios
+
+Cria, destrói e gere VMs no Proxmox:
+
+Lab 01 → 3 VMs (web + db + client)
+Lab 02 → cluster Linux
+Lab 03 → ambiente de testes
+
+Comunicação com Proxmox (Exemplo lógico:)
+ VM-Ctrl → Terraform → Proxmox API → VM do laboratorio criada
+
+
+## 1. Criar Vagrantfile (Hyper-V)
 
 Cria um ficheiro chamado `Vagrantfile`:
+
+
+
+
 
