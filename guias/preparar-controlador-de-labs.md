@@ -120,8 +120,19 @@ Lab 03 → ambiente de testes
 Comunicação com Proxmox (Exemplo lógico:)
  VM-Ctrl → Terraform → Proxmox API → VM do laboratorio criada
 
+Padronização dos laboratórios
 
-## 1. Criar Vagrantfile (Hyper-V)
+Cada laboratório deixa de ser “manual”.
+
+Passa a ser:
+
+lab-web-stack.tf
+lab-linux-basic.tf
+lab-monitoring.tf
+
+
+
+## 1. Criar Vagrantfile no Hyper-V, para a criar C
 
 Cria um ficheiro chamado `Vagrantfile`:
 
