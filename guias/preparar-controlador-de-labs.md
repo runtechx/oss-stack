@@ -40,6 +40,12 @@ Vagrantfile → vagrant up → Hyper-V → VM pronta
 | Integração              | Média      | Excelente              |
 | Compatibilidade Vagrant | Sim        | Sim (provider oficial) |
 
+>[!NOTE]
+> Os comandos para Hyper-V precisam ser executados em PowerShell como Administrador
+> já para o virtualbox apenas as instalações do virtualbox e vagrant, a criação da VM não precisa
+> de ser executado em PowerShell como Administrador 
+
+
 # Pré-requisitos
 
 ## 1. Ativar Hyper-V
@@ -51,6 +57,9 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRes
 ```
 
 ## 2. Instalar Vagrant
+
+Executar PowerShell como Administrador:
+
 
 **Método rápido (winget)**
 
@@ -162,6 +171,8 @@ Exemplos de templates:
 
 
 ## 1. Criar o VM Controlador usando (Vagrantfile no Hyper-V)
+
+Executar PowerShell como Administrador:
 
 Cria um ficheiro chamado `Vagrantfile`:
 
