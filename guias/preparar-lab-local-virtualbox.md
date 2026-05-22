@@ -52,22 +52,14 @@ Sem Vagrant, tens de criar cada VM manualmente no VirtualBox — escolher ISO, c
 
 ## Instalar VirtualBox + Vagrant
 
-
 Abra o PowerShell como Administrador e execute:
+
 ```Powershell
 bcdedit /set hypervisorlaunchtype off
 ```
 
 Depois desative funcionalidades do Windows:
-```Powershell
-Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -NoRestart
 
-Disable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -NoRestart
-
-Disable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
-
-Disable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM -NoRestart
-```
 ```Powershell
 # Desativar o hypervisor do boot
 bcdedit /set hypervisorlaunchtype off
@@ -106,14 +98,19 @@ A hypervisor has been detected
 Abra o terminal em modo admin
 
 Virtualbox
+
 ```Powershell
 winget install Oracle.VirtualBox
 ```
 Vagrant
+
 ```Powershell
 winget install HashiCorp.Vagrant
 ```
+
+
 **Metodo 2 - Baixar e Instalar manualmente**
+
 Virtualbox
 ```Powershell 
 $vboxVersion = (Invoke-RestMethod "https://download.virtualbox.org/virtualbox/LATEST-STABLE.TXT").Trim()
@@ -123,6 +120,7 @@ $vboxUrl = "https://download.virtualbox.org/virtualbox/$vboxVersion/$exeFile"
 Invoke-WebRequest -Uri $vboxUrl -OutFile "$env:TEMP\VirtualBox.exe"
 Start-Process "$env:TEMP\VirtualBox.exe" -Wait
 ```
+
 Vagrant
 ```Powershell
 $vagrantVersion = (Invoke-RestMethod "https://checkpoint-api.hashicorp.com/v1/check/vagrant").current_version
