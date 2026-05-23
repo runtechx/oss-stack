@@ -97,8 +97,6 @@ Criar pasta da VM controladora:
 ```powershell
 New-Item -Path "C:\RTLabs" -ItemType Directory -Force
 cd C:\RTLabs
-New-Item -Path "controladora" -ItemType Directory -Force
-cd controladora
 ```
 
 Alterar o caminho dos ficheiros do Hyper-V:
@@ -119,3 +117,7 @@ Set-VMHost `
 ```powershell
 Get-VMHost | Select-Object VirtualMachinePath, VirtualHardDiskPath
 ```
+
+>[!TIP]
+>Pronto agora você está pronto para começar a baixar os labs.
+>LINK:
