@@ -6,3 +6,5 @@
 >
 > Apenas depois de concluir essa preparação deverá continuar com a criação dos laboratórios.
 
+
+## LAB-LNX1
