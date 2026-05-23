@@ -9,9 +9,11 @@
 
 ## LAB-LNX1
 
-### Pre
+### Requisitos
 1. Windows 11 com Hyper-V ativo e Vagrant instalado
 2. Pelo menos:
   - 16 GB RAM
   - 4 CPUs
   - 100 GB livres em disco   
+
+### 
