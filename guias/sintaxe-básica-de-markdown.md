@@ -61,8 +61,6 @@ Os ficheiros têm a extensão **`.md` (Markdown)**
 [Runtech](https://www.runtech.ao)
 
 
----
-
 ## Imagens
 
 ```md
@@ -106,6 +104,20 @@ echo "Olá Mundo"
 |----------|-------|
 | João     | 25    |
 | Maria    | 30    |
+
+**Centralizar os valores**
+
+```md
+| Nome     | Idade |
+|----------|:-----:|
+| João     | 25    |
+| Maria    | 30    |
+````
+| Nome     | Idade |
+|----------|:-----:|
+| João     | 25    |
+| Maria    | 30    |
+
 
 ## Citações (Blockquote)
 
