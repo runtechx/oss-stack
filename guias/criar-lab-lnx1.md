@@ -20,5 +20,5 @@
 ### Objectivo 
 Conectar-se aos servidores e familiarizar-se com a linha de comando 
 
-...
+....
 
