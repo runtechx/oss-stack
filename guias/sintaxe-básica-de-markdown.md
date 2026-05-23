@@ -118,6 +118,18 @@ echo "Olá Mundo"
 | João     | 25    |
 | Maria    | 30    |
 
+**Mover para esquerda**
+```md
+| Nome     | Idade |
+|----------|------:|
+| João     | 25    |
+| Maria    | 30    |
+````
+
+| Nome     | Idade |
+|----------|------:|
+| João     | 25    |
+| Maria    | 30    |
 
 ## Citações (Blockquote)
 
