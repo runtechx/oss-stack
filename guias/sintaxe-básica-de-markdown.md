@@ -167,7 +167,8 @@ Para mostrar caracteres especiais:
 
 ## Icones
 
-Em alguns 
+Em alguns casos como no Github 
+
 ```md
 :x: Cross
 
