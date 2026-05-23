@@ -146,8 +146,6 @@ echo "Olá Mundo"
 ---
 ```
 
----
-
 ## Checklist
 
 ```md
@@ -167,6 +165,21 @@ Para mostrar caracteres especiais:
 
 \* não itálico \*
 
+## Icones
+
+Em alguns 
+```md
+:x: Cross
+
+:white_check_mark: White Check Mark
+
+:warning: Warning
+```
+:x: Cross
+
+:white_check_mark: White Check Mark
+
+:warning: Warning
 
 ## Admonition / Callout
 
