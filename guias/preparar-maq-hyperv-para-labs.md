@@ -119,5 +119,5 @@ Get-VMHost | Select-Object VirtualMachinePath, VirtualHardDiskPath
 ```
 
 >[!TIP]
->Pronto agora você está pronto para começar a baixar os labs.
+>Agora você está pronto para começar a baixar os labs.
 >LINK:
