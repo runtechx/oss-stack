@@ -6,7 +6,7 @@ Back to List                                                                   |
 
 </div>
 
-# One-liner installers
+# Comandos de Instalação rápida
 
 ## [Zabbix](https://www.zabbix.com/) 
 
