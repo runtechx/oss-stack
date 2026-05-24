@@ -8,6 +8,12 @@
 
 
 ## Como usar os labs
+Os labs sao encontrados no github [runtech/OpenFirst/labs](https://github.com/runtechx/OpenFirst/tree/main/labs), e em geral possuem dois ficheiros 
+1. o ficheiro vagrantfile - para laboratorios locais ou .tf para laboratorios hospedados
+2. o ficheiro de Exercicios em markdown 
+Neste caso para exemplificar vamos usar os ficheiros:
+1. lab-lnx1-vagrantfile
+2. lab-lnx1-exercicios.md
 
 ### Requisitos
 - Windows 11 com Hyper-V ativo e Vagrant instalado 
@@ -56,8 +62,6 @@ cd C:\RTLabs\
 vagrant ssh srv1
 ```
 
-
-
 Para desligar a VM:
 
 ```powershell
@@ -65,16 +69,12 @@ cd C:\RTLabs\
 vagrant halt srv1
 ```
 
-Se tiver apenas uma VM
-```powershell
-cd C:\RTLabs\
-vagrant halt
-```
+
+### 3. Exercícios do Laboratório
+Va a pasta labs no github
 
 
-
-
-### 2. Outras Operações do Laboratório
+### 4. Outras Operações do Laboratório
 
 
 Para destruir o laboratório :
@@ -95,4 +95,10 @@ Se o Lab tiver apenas uma VM não é preciso especificar o nome da VM
 ```powershell
 cd C:\RTLabs\
 vagrant ssh
+```
+
+
+```powershell
+cd C:\RTLabs\
+vagrant halt
 ```
