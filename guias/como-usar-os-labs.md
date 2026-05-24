@@ -1,4 +1,3 @@
-
 > [!IMPORTANT]
 > Antes de prosseguir, é necessário preparar a máquina que será utilizada para os laboratórios.
 >
@@ -6,99 +5,124 @@
 >
 > Apenas depois de concluir essa preparação deverá continuar com a criação dos laboratórios.
 
+---
 
-## Como usar os labs
-Os labs sao encontrados no github [runtech/OpenFirst/labs](https://github.com/runtechx/OpenFirst/tree/main/labs), e em geral possuem dois ficheiros 
-1. o ficheiro vagrantfile - para laboratorios locais ou .tf para laboratorios hospedados
-2. o ficheiro de Exercicios em markdown
-   
-Neste caso para exemplificar vamos usar os ficheiros:
-1. lab-lnx1-vagrantfile
-2. lab-lnx1-exercicios.md
+# Como usar os laboratórios
 
-### Requisitos
-- Windows 11 com Hyper-V ativo e Vagrant instalado 
-- Pelo menos:
-  - 16 GB RAM
-  - 4 CPUs
-  - 100 GB livres em disco   
+Os laboratórios encontram-se no GitHub em [runtechx/OpenFirst/labs](https://github.com/runtechx/OpenFirst/tree/main/labs) e, normalmente, possuem dois ficheiros:
 
+1. O ficheiro `Vagrantfile` para laboratórios locais ou `.tf` para laboratórios hospedados
+2. O ficheiro de exercícios em Markdown
 
-### 1. Baixar o Laboratório 
-Executar PowerShell como Administrador:
+Neste exemplo serão utilizados os seguintes ficheiros:
 
-```bash
+1. `lab-lnx1-vagrantfile`
+2. `lab-lnx1-exercicios.md`
+
+---
+
+# Requisitos
+
+- Windows 11 com Hyper-V ativo
+- Vagrant instalado
+
+Recursos mínimos recomendados:
+
+- 16 GB de RAM
+- 4 CPUs
+- 100 GB livres em disco
+
+---
+
+# 1. Baixar o laboratório
+
+Executar o PowerShell como Administrador:
+
+```powershell
 cd C:\RTLabs
+
 Invoke-WebRequest `
   -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/lab-lnx1-vagrantfile" `
   -OutFile "Vagrantfile"
 ```
 
-### 2. Levantar o Laboratório
+---
 
-Criar as VMs:
+# 2. Levantar o laboratório
+
+Criar as máquinas virtuais:
 
 ```powershell
 cd C:\RTLabs\
 vagrant up
 ```
 
-Para verificar o estado:
+Verificar o estado das VMs:
 
 ```powershell
 cd C:\RTLabs\
 vagrant status
 ```
-resultado:
-```bash
+
+Resultado esperado:
+
+```text
 Current machine states:
 
 srv1                      running (hyperv)
 srv2                      running (hyperv)
 ```
-Para entrar na VM:
+
+Entrar numa VM:
 
 ```powershell
 cd C:\RTLabs\
 vagrant ssh srv1
 ```
 
-Para desligar a VM:
+Desligar uma VM:
 
 ```powershell
 cd C:\RTLabs\
 vagrant halt srv1
 ```
 
+---
 
-### 3. Exercícios do Laboratório
-Va a pasta labs no github e abra o ficheiro markdown lab-lnx1-exercicios.md 
-link direito - https://github.com/runtechx/OpenFirst/tree/main/labs
+# 3. Exercícios do laboratório
 
+Aceda à pasta `labs` no GitHub e abra o ficheiro Markdown `lab-lnx1-exercicios.md`.
 
-### 4. Outras Operações do Laboratório
+Link:
+https://github.com/runtechx/OpenFirst/tree/main/labs
 
+---
 
-Para destruir o laboratório :
+# 4. Outras operações do laboratório
+
+Destruir o laboratório:
 
 ```powershell
 cd C:\RTLabs\
 vagrant destroy -f
 ```
 
-Abrir o gestor de Hyper-V
+Abrir o Gestor do Hyper-V:
 
-```bash
+```powershell
 virtmgmt.msc
 ```
 
-Se o Lab tiver apenas uma VM não é preciso especificar o nome da VM
+Se o laboratório tiver apenas uma VM, não é necessário especificar o nome da máquina virtual.
+
+Entrar na VM:
 
 ```powershell
 cd C:\RTLabs\
 vagrant ssh
 ```
 
+Desligar a VM:
 
 ```powershell
 cd C:\RTLabs\
