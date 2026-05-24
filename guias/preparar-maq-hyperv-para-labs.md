@@ -120,6 +120,7 @@ Get-VMHost | Select-Object VirtualMachinePath, VirtualHardDiskPath
 
 >[!TIP]
 >Agora você está pronto para começar a baixar os labs.
+>
 >Abra em /guias o ficheiro como-usar-os-labs.md
 
 
