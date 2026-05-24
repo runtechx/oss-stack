@@ -34,27 +34,47 @@ Invoke-WebRequest `
 Criar a VM:
 
 ```powershell
-cd C:\RTLabs\controladora
+cd C:\RTLabs\
 vagrant up
-```
-Para entrar na VM:
-
-```powershell
-cd C:\RTLabs\controladora
-vagrant ssh
 ```
 
 Para verificar o estado:
 
 ```powershell
-cd C:\RTLabs\controladora
+cd C:\RTLabs\
 vagrant status
 ```
+resultado:
+```bash
+Current machine states:
 
-Para desligar:
+srv1                      running (hyperv)
+srv2                      running (hyperv)
+```
+Para entrar na VM:
 
 ```powershell
-cd C:\RTLabs\controladora
+cd C:\RTLabs\
+vagrant ssh srv1
+```
+
+Se tiver apenas uma VM
+
+```powershell
+cd C:\RTLabs\
+vagrant ssh
+```
+
+Para desligar a VM:
+
+```powershell
+cd C:\RTLabs\
+vagrant halt srv1
+```
+
+Se tiver apenas uma VM
+```powershell
+cd C:\RTLabs\
 vagrant halt
 ```
 
