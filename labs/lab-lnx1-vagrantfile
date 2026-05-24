@@ -6,6 +6,10 @@ Vagrant.configure("2") do |config|
   # Disable shared folder
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
+  # Default user
+  LAB_USER = "labuser"
+  LAB_PASS = "Lab123!"
+
   # =========================================================
   # SRV1 - No GUI
   # =========================================================
@@ -46,13 +50,15 @@ Vagrant.configure("2") do |config|
       echo "Installing packages..."
       sudo dnf -y install epel-release
       sudo /usr/bin/crb enable
+
       sudo dnf -y install \
         htop \
         wget \
         unzip \
         vim \
         bash-completion \
-        net-tools
+        net-tools \
+        sudo
 
       sudo dnf install -y dnf-plugins-core
 
@@ -62,8 +68,29 @@ Vagrant.configure("2") do |config|
 
       sudo dnf install -y terraform
 
+      echo "Creating lab user..."
+      sudo useradd -m #{LAB_USER}
+
+      echo "#{LAB_USER}:#{LAB_PASS}" | sudo chpasswd
+
+      echo "Adding sudo permissions..."
+      sudo usermod -aG wheel #{LAB_USER}
+
+      echo "%wheel ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/wheel
+
       echo "Enabling SSH..."
       sudo systemctl enable --now sshd
+
+      echo ""
+      echo "========================================="
+      echo " SRV1 READY"
+      echo "========================================="
+      echo " Hostname : srv1"
+      echo " User     : #{LAB_USER}"
+      echo " Password : #{LAB_PASS}"
+      echo " IPs:"
+      ip -4 addr show | grep inet
+      echo "========================================="
     SHELL
 
   end
@@ -114,13 +141,15 @@ Vagrant.configure("2") do |config|
       echo "Installing packages..."
       sudo dnf -y install epel-release
       sudo /usr/bin/crb enable
+
       sudo dnf -y install \
         htop \
         wget \
         unzip \
         vim \
         bash-completion \
-        net-tools
+        net-tools \
+        sudo
 
       sudo dnf install -y dnf-plugins-core
 
@@ -130,8 +159,29 @@ Vagrant.configure("2") do |config|
 
       sudo dnf install -y terraform
 
+      echo "Creating lab user..."
+      sudo useradd -m #{LAB_USER}
+
+      echo "#{LAB_USER}:#{LAB_PASS}" | sudo chpasswd
+
+      echo "Adding sudo permissions..."
+      sudo usermod -aG wheel #{LAB_USER}
+
+      echo "%wheel ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/wheel
+
       echo "Enabling SSH..."
       sudo systemctl enable --now sshd
+
+      echo ""
+      echo "========================================="
+      echo " SRV2 READY"
+      echo "========================================="
+      echo " Hostname : srv2"
+      echo " User     : #{LAB_USER}"
+      echo " Password : #{LAB_PASS}"
+      echo " IPs:"
+      ip -4 addr show | grep inet
+      echo "========================================="
 
       echo "Rebooting into GUI mode..."
       sudo reboot
