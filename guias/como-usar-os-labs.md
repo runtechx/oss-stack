@@ -72,7 +72,8 @@ vagrant halt srv1
 
 
 ### 3. Exercícios do Laboratório
-Va a pasta labs no github
+Va a pasta labs no github e abra o ficheiro markdown lab-lnx1-exercicios.md 
+link direito - https://github.com/runtechx/OpenFirst/tree/main/labs
 
 
 ### 4. Outras Operações do Laboratório
