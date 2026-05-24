@@ -24,6 +24,7 @@ Conectar-se aos servidores e familiarizar-se com a linha de comando
 Executar PowerShell como Administrador:
 
 ```bash
+cd C:\RTLabs
 Invoke-WebRequest `
   -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/lab-lnx1-vagrantfile" `
   -OutFile "Vagrantfile"
