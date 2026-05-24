@@ -5,7 +5,6 @@
 >
 > Apenas depois de concluir essa preparação deverá continuar com a criação dos laboratórios.
 
----
 
 # Como usar os laboratórios
 
@@ -19,7 +18,7 @@ Neste exemplo serão utilizados os seguintes ficheiros:
 1. `lab-lnx1-vagrantfile`
 2. `lab-lnx1-exercicios.md`
 
----
+
 
 # Requisitos
 
@@ -32,7 +31,6 @@ Recursos mínimos recomendados:
 - 4 CPUs
 - 100 GB livres em disco
 
----
 
 # 1. Baixar o laboratório
 
@@ -46,7 +44,7 @@ Invoke-WebRequest `
   -OutFile "Vagrantfile"
 ```
 
----
+
 
 # 2. Levantar o laboratório
 
@@ -87,7 +85,7 @@ cd C:\RTLabs\
 vagrant halt srv1
 ```
 
----
+
 
 # 3. Exercícios do laboratório
 
@@ -96,7 +94,7 @@ Aceda à pasta `labs` no GitHub e abra o ficheiro Markdown `lab-lnx1-exercicios.
 Link:
 https://github.com/runtechx/OpenFirst/tree/main/labs
 
----
+
 
 # 4. Outras operações do laboratório
 
