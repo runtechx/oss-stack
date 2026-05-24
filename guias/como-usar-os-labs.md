@@ -10,7 +10,8 @@
 ## Como usar os labs
 Os labs sao encontrados no github [runtech/OpenFirst/labs](https://github.com/runtechx/OpenFirst/tree/main/labs), e em geral possuem dois ficheiros 
 1. o ficheiro vagrantfile - para laboratorios locais ou .tf para laboratorios hospedados
-2. o ficheiro de Exercicios em markdown 
+2. o ficheiro de Exercicios em markdown
+   
 Neste caso para exemplificar vamos usar os ficheiros:
 1. lab-lnx1-vagrantfile
 2. lab-lnx1-exercicios.md
