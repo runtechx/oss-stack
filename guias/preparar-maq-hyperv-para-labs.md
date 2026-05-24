@@ -120,4 +120,10 @@ Get-VMHost | Select-Object VirtualMachinePath, VirtualHardDiskPath
 
 >[!TIP]
 >Agora você está pronto para começar a baixar os labs.
->LINK:
+>Abra em /guias o ficheiro como-usar-os-labs.md
+
+
+
+<div align="right">
+Source: https://github.com/runtechx/
+</div>
