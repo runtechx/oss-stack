@@ -24,7 +24,9 @@ Neste exemplo serão utilizados os seguintes ficheiros:
 
 - Windows 11 com Hyper-V ativo
 - Vagrant instalado
+- Ligação à Internet para a fase inicial
 
+  
 Recursos mínimos recomendados:
 
 - 16 GB de RAM
