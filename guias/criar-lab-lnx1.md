@@ -30,4 +30,37 @@ Invoke-WebRequest `
   -OutFile "Vagrantfile"
 ```
 
-### 
+### Operações do Laboratório
+Criar a VM:
+
+```powershell
+cd C:\RTLabs\controladora
+vagrant up
+```
+Para entrar na VM:
+
+```powershell
+cd C:\RTLabs\controladora
+vagrant ssh
+```
+
+Para verificar o estado:
+
+```powershell
+cd C:\RTLabs\controladora
+vagrant status
+```
+
+Para desligar:
+
+```powershell
+cd C:\RTLabs\controladora
+vagrant halt
+```
+
+Para destruir a VM:
+
+```powershell
+cd C:\RTLabs\controladora
+vagrant destroy -f
+```
