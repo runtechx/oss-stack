@@ -20,5 +20,11 @@
 ### Objectivo 
 Conectar-se aos servidores e familiarizar-se com a linha de comando 
 
-.....
+### Baixar o Laboratório 
+Executar PowerShell como Administrador:
 
+Invoke-WebRequest `
+  -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/lab-lnx1-vagrantfile" `
+  -OutFile "Vagrantfile"
+
+### 
