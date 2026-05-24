@@ -12,6 +12,7 @@ Os laboratórios encontram-se no GitHub em [runtechx/OpenFirst/labs](https://git
 
 1. O ficheiro `Vagrantfile` para laboratórios locais ou `.tf` para laboratórios hospedados
 2. O ficheiro de exercícios em Markdown
+3. Alguns laboratórios poderão incluir um diagrama para auxiliar na compreensão do ambiente e da estrutura do laboratório.
 
 Neste exemplo serão utilizados os seguintes ficheiros:
 
