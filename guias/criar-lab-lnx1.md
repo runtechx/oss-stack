@@ -84,3 +84,9 @@ Para destruir a VM:
 cd C:\RTLabs\controladora
 vagrant destroy -f
 ```
+
+Abrir o gestor de Hyper-V
+
+```bash
+virtmgmt.msc
+```
