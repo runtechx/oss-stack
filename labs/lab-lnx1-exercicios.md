@@ -22,12 +22,29 @@ Procura pela placa 2 e parte onde diz ***inet*** e a seguir o IP, neste caso 172
        valid_lft forever preferred_lft forever
 ```
 
+Com IP abra o terminal normal ou outra aba no terminal windows 
+```bash
+ssh labuser@172.28.78.13
+```
+>[!NOTE]
+> substituir o IP pelo o IP que apareceu em sua maquina e depois pressione enter
+
+ Resultado esperado 
+ ```bash
+The authenticity of host '172.28.78.13 (172.28.78.13)' can't be established.
+ED25519 key fingerprint is SHA256:QqX4yqI/dJIAU+M2D3uWItJY/YQ0LAiBvtAwAqKvWxs.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+```
+yes
+
+
 **Exercício 2**
 - Loga-te no servidor 2 para usar o terminal a partir da parte grafica
 apartir de um terminal (Admin) cole o comando a baixo para abrir o Gestor Hyper-v 
 ```bash
 virtmgmt.msc
 ```
-Deia dois cliques no servidor 2, maximize a janela e faça o login com a conta `labuser` e senha `student123!`
+A seguir selecione o srv2, clique a direita connect ou conectar, maximize a janela e faça o login com a conta `labuser` e senha `student123!`
 
 
