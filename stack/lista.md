@@ -37,13 +37,13 @@
 
 | Software  | Descrição                                                                                                                                                                                      |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Odoo](https://www.odoo.com)       | ERP open source para gestão empresarial, cobrindo áreas como vendas, contabilidade, inventário e CRM.                                      |
-| [WordPress](https://wordpress.org) | Sistema de gestão de conteúdos (CMS) amplamente usado para criação de sites, blogs e portais.                                         |
-| [Ansible](https://www.ansible.com)     | Ferramenta de automação para configuração, deployment e gestão de infraestrutura sem agentes.                                       |
-| [GitLab](https://about.gitlab.com)     | Plataforma de DevOps para gestão de código-fonte Git, CI/CD e colaboração em desenvolvimento.                                        |
-| [NetBox](https://netbox.dev)    | Plataforma de IP Address Management (IPAM) e Data Center Infrastructure Management (DCIM) para documentação e automação de redes.           |
-| [Terraform](https://www.hashicorp.com/products/terraform) | Ferramenta de Infrastructure as Code (IaC) usada para provisionamento e gestão de infraestrutura multi-cloud. utm_source=chatgpt.com) |
-| [BookStack](https://www.bookstackapp.com) | Sistema simples e auto-hospedado para criação de documentação técnica estruturada em formato de livros e capítulos.            |
+| [Odoo]()       | ERP open source para gestão empresarial, cobrindo áreas como vendas, contabilidade, inventário e CRM.                                      |
+| [WordPress]() | Sistema de gestão de conteúdos (CMS) amplamente usado para criação de sites, blogs e portais.                                         |
+| [Ansible]()     | Ferramenta de automação para configuração, deployment e gestão de infraestrutura sem agentes.                                       |
+| [GitLab]()     | Plataforma de DevOps para gestão de código-fonte Git, CI/CD e colaboração em desenvolvimento.                                        |
+| [NetBox](/stack/comandos.md#netbox)    | Plataforma de IP Address Management (IPAM) e Data Center Infrastructure Management (DCIM) para documentação e automação de redes.           |
+| [Terraform]() | Ferramenta de Infrastructure as Code (IaC) usada para provisionamento e gestão de infraestrutura multi-cloud. utm_source=chatgpt.com) |
+| [BookStack]() | Sistema simples e auto-hospedado para criação de documentação técnica estruturada em formato de livros e capítulos.            |
 
 
 
@@ -54,16 +54,15 @@
 
 | Software                                                              | Descrição                                                                                                                        |
 | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| [Patchmon](https://patchmon.net/open-source?utm_source=chatgpt.com)&nbsp;* | Plataforma open source de gestão e monitorização de patches para servidores Linux, FreeBSD e Windows                             |
-| [Zimbra](https://www.zimbra.com/?utm_source=chatgpt.com) *            | Plataforma colaborativa de e-mail e produtividade com suporte para calendário, contactos, chat e administração centralizada      |
-| [TrueNAS](https://www.truenas.com/?utm_source=chatgpt.com) *          | Sistema operativo open source para armazenamento em rede (NAS), com suporte para ZFS, partilha de ficheiros e backups            |
-| [RustDesk](https://rustdesk.com/?utm_source=chatgpt.com) *            | Plataforma open source de acesso remoto e assistência remota, alternativa ao TeamViewer e AnyDesk, com suporte para self-hosting |
-| [BigBlueButton](https://bigbluebutton.org/) | |
-| [Immich](https://immich.app/)||
+| [Patchmon]() | Plataforma open source de gestão e monitorização de patches para servidores Linux, FreeBSD e Windows                             |
+| [Zimbra]()            | Plataforma colaborativa de e-mail e produtividade com suporte para calendário, contactos, chat e administração centralizada      |
+| [TrueNAS]()           | Sistema operativo open source para armazenamento em rede (NAS), com suporte para ZFS, partilha de ficheiros e backups            |
+| [RustDesk]()             | Plataforma open source de acesso remoto e assistência remota, alternativa ao TeamViewer e AnyDesk, com suporte para self-hosting |
+| [BigBlueButton]() | |
+| [Immich]()||
 
 
 
-\* Por implementar
 
 <div align="right">
 Source: https://github.com/runtechx/
