@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
 
   # Default user
   LAB_USER = "labuser"
-  LAB_PASS = "Lab123!"
+  LAB_PASS = "Qwerty456#"
 
   # =========================================================
   # SRV1 - No GUI
