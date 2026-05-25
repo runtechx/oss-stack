@@ -48,15 +48,32 @@ Invoke-WebRequest `
 ```
 
 
-
 # 2. Levantar o laboratório
 
-Criar as máquinas virtuais:
+2.1 - Verificar o estado das VMs:
+```powershell
+cd C:\RTLabs\
+vagrant status
+```
 
+Resultado esperado:
+```text
+Current machine states:
+
+test-srv                  not_created (hyperv)
+```
+>[!TIP]
+> Quer dizer que a maquina ainda nao foi criada
+
+2.2 - Criar as máquinas virtuais:
 ```powershell
 cd C:\RTLabs\
 vagrant up
 ```
+
+Agora tente ver o estado da maquina, recordaste do comando ? 
+
+Resultado esperado:
 
 
 # 3. Operar os servidor do laboratório
@@ -73,7 +90,7 @@ Resultado esperado:
 ```text
 Current machine states:
 
-test-srv                      running (hyperv)
+test-srv                  not_created (hyperv)
 ```
 
 3.2 - Entrar na VM:
