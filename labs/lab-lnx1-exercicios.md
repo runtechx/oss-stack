@@ -10,7 +10,7 @@ Quando estiveres dentro vais ver `[vagrant@srvs ~]$` e corre o comando a baixo
 ```bash
 sudo ip a
 ```
-Procura pela placa 2 e parte onde diz **inet** e a seguir o IP, neste caso 172.28.78.13/20
+Procura pela placa 2 e parte onde diz ***inet*** e a seguir o IP, neste caso 172.28.78.13/20
 
 ```bash
  2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
@@ -24,7 +24,7 @@ Procura pela placa 2 e parte onde diz **inet** e a seguir o IP, neste caso 172.2
 
 **Exercício 2**
 - Loga-te no servidor 2 para usar o terminal a partir da parte grafica
-Abra o Gestor Hyper-v 
+apartir de um terminal (Admin) cole o comando a baixo para abrir o Gestor Hyper-v 
 ```bash
 
 ```
