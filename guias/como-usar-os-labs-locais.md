@@ -6,33 +6,32 @@
 > Apenas depois de concluir essa preparação deverá continuar com a criação dos laboratórios.
 
 
-# Como usar os laboratórios Locais
+# Como usar os laboratórios locais
 
-Os laboratórios encontram-se no GitHub em [runtechx/OpenFirst/labs](https://github.com/runtechx/OpenFirst/tree/main/labs) e, normalmente, possuem dois ficheiros:
+Os laboratórios encontram-se no GitHub em [runtechx/OpenFirst/labs](https://github.com/runtechx/OpenFirst/tree/main/labs) e, normalmente, incluem:
 
-1. O ficheiro `Vagrantfile` para laboratórios locais ou `.tf` para laboratórios hospedados
-2. O ficheiro de exercícios em Markdown
-3. Alguns laboratórios poderão incluir um diagrama para auxiliar na compreensão do ambiente e da estrutura do laboratório.
+1. Um ficheiro `Vagrantfile` para laboratórios locais ou `.tf` para laboratórios hospedados
+2. Um ficheiro de exercícios em Markdown
+3. Em alguns casos, um diagrama para auxiliar na compreensão do ambiente e da estrutura do laboratório
 
-Exemplo serão utilizados os seguintes ficheiros:
+Neste exemplo serão utilizados os seguintes ficheiros:
 
 1. `lab-lnx0-vagrantfile`
 2. `lab-lnx0-exercicios.md`
-
 
 
 # Requisitos
 
 - Windows 11 com Hyper-V ativo
 - Vagrant instalado
-- Ligação à Internet para a fase inicial
+- Ligação à Internet durante a fase inicial
 
-  
 Recursos mínimos recomendados:
 
 - 16 GB de RAM
 - 4 CPUs
 - 100 GB livres em disco
+
 
 
 # 1. Baixar o laboratório
@@ -47,110 +46,130 @@ Invoke-WebRequest `
   -OutFile "Vagrantfile"
 ```
 
+---
 
 # 2. Levantar o laboratório
 
-2.1 - Verificar o estado das VMs:
+## 2.1 — Verificar o estado das VMs
+
 ```powershell
 cd C:\RTLabs\
 vagrant status
 ```
 
 Resultado esperado:
+
 ```text
 Current machine states:
 
 test-srv                  not_created (hyperv)
 ```
->[!TIP]
-> Quer dizer que a maquina ainda nao foi criada
 
-2.2 - Criar as máquinas virtuais:
+> [!TIP]
+> Isto significa que a máquina virtual ainda não foi criada.
+
+---
+
+## 2.2 — Criar as máquinas virtuais
+
 ```powershell
 cd C:\RTLabs\
 vagrant up
 ```
 
-2.3 - Agora tente ver o estado da maquina, recordaste do comando ? 
+
+## 2.3 — Verificar novamente o estado da VM
+
+Tente novamente executar o comando `vagrant status`.
 
 Resultado esperado:
+
 ```text
 Current machine states:
 
 test-srv                  running (hyperv)
 ```
 
-# 3. Operar os servidor do laboratório
 
+# 3. Operar o servidor do laboratório
 
-3.1 - Entrar na VM:
+## 3.1 — Entrar na VM
+
 ```powershell
 cd C:\RTLabs\
-vagrant ssh test-srv 
+vagrant ssh test-srv
 ```
 
-3.3 - Correr comandos na VM:
-```powershell
+
+
+## 3.2 — Executar comandos na VM
+
+```bash
 top
 ```
-```powershell
+
+Pressione `Q` para sair.
+
+```bash
 ls -l /
 ```
 
-Sair da VM:
-```powershell
+
+
+## 3.3 — Sair da VM
+
+```bash
 exit
 ```
 
-Desligar uma VM:
+
+
+## 3.4 — Desligar a VM
 
 ```powershell
 cd C:\RTLabs\
-vagrant halt test-srv 
+vagrant halt test-srv
 ```
-
-
-
-# 4. Exercícios do laboratório
-
-Aceda à pasta `labs` no GitHub e abra o ficheiro Markdown `lab-lnx1-exercicios.md`.
-
-Link:
-https://github.com/runtechx/OpenFirst/tree/main/labs
 
 
 
 # 4. Outras operações do laboratório
 
-Destruir o laboratório:
+## Abrir o Gestor do Hyper-V
+
+No mesmo terminal (Administrador), execute:
+
+```powershell
+virtmgmt.msc
+```
+
+Explore a máquina virtual e analise os recursos disponíveis.
+
+
+
+## Destruir o laboratório
 
 ```powershell
 cd C:\RTLabs\
 vagrant destroy -f
 ```
 
-Abrir o Gestor do Hyper-V:
+> [!NOTE]
+> Se o laboratório tiver apenas uma VM, não é necessário especificar o nome da máquina virtual nos comandos do Vagrant.
 
-```powershell
-virtmgmt.msc
-```
 
-Se o laboratório tiver apenas uma VM, não é necessário especificar o nome da máquina virtual.
 
-Entrar na VM:
+## Ver ajuda do Vagrant
 
 ```powershell
 cd C:\RTLabs\
-vagrant ssh
+vagrant -h
 ```
 
-Desligar a VM:
 
-```powershell
-cd C:\RTLabs\
-vagrant halt
-```
 
 <div align="right">
-Source: https://github.com/runtechx/
+
+Fonte: https://github.com/runtechx/
+
 </div>
