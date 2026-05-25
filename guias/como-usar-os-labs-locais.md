@@ -100,6 +100,9 @@ cd C:\RTLabs\
 vagrant ssh test-srv
 ```
 
+> [!NOTE]
+> Se o laboratório tiver apenas uma VM, não é necessário especificar o nome da máquina virtual nos comandos do Vagrant.
+
 
 
 ## 3.2 — Executar comandos na VM
@@ -154,8 +157,6 @@ cd C:\RTLabs\
 vagrant destroy -f
 ```
 
-> [!NOTE]
-> Se o laboratório tiver apenas uma VM, não é necessário especificar o nome da máquina virtual nos comandos do Vagrant.
 
 
 
