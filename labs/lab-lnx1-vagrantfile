@@ -45,11 +45,11 @@ Vagrant.configure("2") do |config|
       sudo dnf makecache
 
       echo "Updating system..."
-      sudo dnf update -y
+      sudo dnf update -y || true
 
       echo "Installing packages..."
-      sudo dnf -y install epel-release
-      sudo /usr/bin/crb enable
+      sudo dnf -y install epel-release || true
+      sudo /usr/bin/crb enable || true
 
       sudo dnf -y install \
         htop \
@@ -58,15 +58,15 @@ Vagrant.configure("2") do |config|
         vim \
         bash-completion \
         net-tools \
-        sudo
+        sudo || true
 
-      sudo dnf install -y dnf-plugins-core
+      sudo dnf install -y dnf-plugins-core || true
 
       echo "Installing Terraform..."
       sudo dnf config-manager --add-repo \
-        https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+        https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo || true
 
-      sudo dnf install -y terraform
+      sudo dnf install -y terraform || true
 
       echo "Creating lab user..."
       sudo useradd -m #{LAB_USER}
@@ -130,17 +130,17 @@ Vagrant.configure("2") do |config|
       sudo dnf makecache
 
       echo "Updating system..."
-      sudo dnf update -y
+      sudo dnf update -y || true
 
       echo "Installing GUI..."
-      sudo dnf groupinstall -y "Server with GUI"
+      sudo dnf groupinstall -y "Server with GUI" || true
 
       echo "Setting graphical target..."
-      sudo systemctl set-default graphical.target
+      sudo systemctl set-default graphical.target || true
 
       echo "Installing packages..."
-      sudo dnf -y install epel-release
-      sudo /usr/bin/crb enable
+      sudo dnf -y install epel-release || true
+      sudo /usr/bin/crb enable || true
 
       sudo dnf -y install \
         htop \
@@ -149,15 +149,15 @@ Vagrant.configure("2") do |config|
         vim \
         bash-completion \
         net-tools \
-        sudo
+        sudo || true
 
-      sudo dnf install -y dnf-plugins-core
+      sudo dnf install -y dnf-plugins-core || true
 
       echo "Installing Terraform..."
       sudo dnf config-manager --add-repo \
-        https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+        https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo || true
 
-      sudo dnf install -y terraform
+      sudo dnf install -y terraform || true
 
       echo "Creating lab user..."
       sudo useradd -m #{LAB_USER}
