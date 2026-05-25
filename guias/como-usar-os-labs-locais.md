@@ -157,7 +157,12 @@ cd C:\RTLabs\
 vagrant destroy -f
 ```
 
-
+Agora remover a box 
+```powershell
+cd C:\RTLabs\
+vagrant box list
+vagrant box remove almalinux/10
+```
 
 
 ## Ver ajuda do Vagrant
