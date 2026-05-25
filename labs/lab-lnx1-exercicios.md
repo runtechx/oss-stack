@@ -1,8 +1,10 @@
 
 ## Formas de ter acesso ao shell
 
-**Exercício 1**
-- Loga-te no servidor 2 usando ssh
+**Exercício 1** - Encontrar o IP do servidor 2
+
+Abra o terminal(Admin) do windows, clicando por cima do botao do windows com o botao esquerdo do rato para abrir o menu de contexto e escolher terminal(Admin)
+
 ```bash
 vagrant ssh srv2
 ```
@@ -22,7 +24,9 @@ Procura pela placa 2 e parte onde diz ***inet*** e a seguir o IP, neste caso 172
        valid_lft forever preferred_lft forever
 ```
 
-Com IP abra o terminal normal ou outra aba no terminal windows 
+**Exercício 2** - Logar-se no servidor 2 usando ssh
+Agora que temos o IP abra uma outra aba no terminal(Admin) windows e corra
+
 ```bash
 ssh labuser@172.28.78.13
 ```
@@ -53,12 +57,17 @@ There was 1 failed login attempt since the last successful login.
 labuser@srv2:~$
 ```
 
-**Exercício 2**
-- Loga-te no servidor 2 para usar o terminal a partir da parte grafica
-apartir de um terminal (Admin) cole o comando a baixo para abrir o Gestor Hyper-v 
+Corra 
+ ```bash
+htop 
+```
+Deia uma vista de olhos no programa aberto, a seguir pressione Q para fechar o programa htop e escreva exit para sair da ligacao ssh 
+
+**Exercício 2** - Logar-se no servidor 2 para usar o terminal a partir da parte grafica
+No terminal(Admin) do windows cole o comando a baixo para abrir o Gestor Hyper-v 
 ```bash
 virtmgmt.msc
 ```
-A seguir selecione o srv2, clique a direita connect ou conectar, maximize a janela e faça o login com a conta `labuser` e senha `student123!`
+A seguir selecione o srv2, clique a direita connect ou conectar, maximize a janela e faça o login com a conta `labuser` e senha `Qwerty456#`
 
 
