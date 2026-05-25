@@ -26,7 +26,7 @@ Procura pela placa 2 e parte onde diz ***inet*** e a seguir o IP, neste caso 172
 - Loga-te no servidor 2 para usar o terminal a partir da parte grafica
 apartir de um terminal (Admin) cole o comando a baixo para abrir o Gestor Hyper-v 
 ```bash
-
+virtmgmt.msc
 ```
 Deia dois cliques no servidor 2, maximize a janela e faça o login com a conta `labuser` e senha `student123!`
 
