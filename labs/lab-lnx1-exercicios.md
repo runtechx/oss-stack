@@ -29,15 +29,29 @@ ssh labuser@172.28.78.13
 >[!NOTE]
 > substituir o IP pelo o IP que apareceu em sua maquina e depois pressione enter
 
- Resultado esperado 
+ Resultado esperado:
+ 
  ```bash
 The authenticity of host '172.28.78.13 (172.28.78.13)' can't be established.
 ED25519 key fingerprint is SHA256:QqX4yqI/dJIAU+M2D3uWItJY/YQ0LAiBvtAwAqKvWxs.
 This key is not known by any other names.
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```
-yes
+escreva yes
 
+ ```bash
+labuser@172.28.78.13's password:
+```
+insira Qwerty456#
+
+ ```bash
+labuser@172.28.78.13's password:
+Web console: https://srv2:9090/ or https://172.28.78.13:9090/
+
+Last failed login: Mon May 25 21:36:54 UTC 2026 from 172.28.64.1 on ssh:notty
+There was 1 failed login attempt since the last successful login.
+labuser@srv2:~$
+```
 
 **Exercício 2**
 - Loga-te no servidor 2 para usar o terminal a partir da parte grafica
