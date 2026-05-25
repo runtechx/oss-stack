@@ -102,6 +102,16 @@ Log
 tail -f /var/log/deploy-wordpress.log
 ```
 
+## [Netbox][(https://netboxlabs.com/products/free-netbox-cloud/)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/netbox_al10.sh -o netbox.sh && bash netbox.sh
+```
+Log
+```bash
+tail -f /var/log/deploy-netbox.log
+```
+
 <div align="right">
 Source: https://github.com/runtechx/
 </div>
