@@ -14,10 +14,10 @@ Os laboratórios encontram-se no GitHub em [runtechx/OpenFirst/labs](https://git
 2. O ficheiro de exercícios em Markdown
 3. Alguns laboratórios poderão incluir um diagrama para auxiliar na compreensão do ambiente e da estrutura do laboratório.
 
-Neste exemplo serão utilizados os seguintes ficheiros:
+Exemplo serão utilizados os seguintes ficheiros:
 
-1. `lab-lnx1-vagrantfile`
-2. `lab-lnx1-exercicios.md`
+1. `lab-lnx0-vagrantfile`
+2. `lab-lnx0-exercicios.md`
 
 
 
@@ -43,7 +43,7 @@ Executar o PowerShell como Administrador:
 cd C:\RTLabs
 
 Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/lab-lnx1-vagrantfile" `
+  -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/lab-lnx0-vagrantfile" `
   -OutFile "Vagrantfile"
 ```
 
@@ -55,8 +55,11 @@ Criar as máquinas virtuais:
 
 ```powershell
 cd C:\RTLabs\
-vagrant up --parallel
+vagrant up
 ```
+
+
+# 3. Operar os servidor do laboratório
 
 Verificar o estado das VMs:
 
@@ -70,27 +73,38 @@ Resultado esperado:
 ```text
 Current machine states:
 
-srv1                      running (hyperv)
-srv2                      running (hyperv)
+test-srv                      running (hyperv)
 ```
 
-Entrar numa VM:
-
+Entrar na VM:
 ```powershell
 cd C:\RTLabs\
-vagrant ssh srv1
+vagrant ssh test-srv 
+```
+
+Correr comandos na VM:
+```powershell
+top
+```
+```powershell
+ls -l /
+```
+
+Sair da VM:
+```powershell
+exit
 ```
 
 Desligar uma VM:
 
 ```powershell
 cd C:\RTLabs\
-vagrant halt srv1
+vagrant halt test-srv 
 ```
 
 
 
-# 3. Exercícios do laboratório
+# 4. Exercícios do laboratório
 
 Aceda à pasta `labs` no GitHub e abra o ficheiro Markdown `lab-lnx1-exercicios.md`.
 
