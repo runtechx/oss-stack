@@ -55,7 +55,7 @@ Criar as máquinas virtuais:
 
 ```powershell
 cd C:\RTLabs\
-vagrant up
+vagrant up --parallel
 ```
 
 Verificar o estado das VMs:
