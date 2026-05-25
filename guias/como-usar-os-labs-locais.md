@@ -6,7 +6,7 @@
 > Apenas depois de concluir essa preparação deverá continuar com a criação dos laboratórios.
 
 
-# Como usar os laboratórios
+# Como usar os laboratórios Locais
 
 Os laboratórios encontram-se no GitHub em [runtechx/OpenFirst/labs](https://github.com/runtechx/OpenFirst/tree/main/labs) e, normalmente, possuem dois ficheiros:
 
@@ -71,29 +71,19 @@ cd C:\RTLabs\
 vagrant up
 ```
 
-Agora tente ver o estado da maquina, recordaste do comando ? 
+2.3 - Agora tente ver o estado da maquina, recordaste do comando ? 
 
 Resultado esperado:
-
-
-# 3. Operar os servidor do laboratório
-
-3.1 - Verificar o estado das VMs:
-
-```powershell
-cd C:\RTLabs\
-vagrant status
-```
-
-Resultado esperado:
-
 ```text
 Current machine states:
 
-test-srv                  not_created (hyperv)
+test-srv                  running (hyperv)
 ```
 
-3.2 - Entrar na VM:
+# 3. Operar os servidor do laboratório
+
+
+3.1 - Entrar na VM:
 ```powershell
 cd C:\RTLabs\
 vagrant ssh test-srv 
