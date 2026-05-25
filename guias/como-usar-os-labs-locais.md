@@ -61,7 +61,7 @@ vagrant up
 
 # 3. Operar os servidor do laboratório
 
-Verificar o estado das VMs:
+3.1 - Verificar o estado das VMs:
 
 ```powershell
 cd C:\RTLabs\
@@ -76,13 +76,13 @@ Current machine states:
 test-srv                      running (hyperv)
 ```
 
-Entrar na VM:
+3.2 - Entrar na VM:
 ```powershell
 cd C:\RTLabs\
 vagrant ssh test-srv 
 ```
 
-Correr comandos na VM:
+3.3 - Correr comandos na VM:
 ```powershell
 top
 ```
