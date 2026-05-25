@@ -46,7 +46,7 @@ Invoke-WebRequest `
   -OutFile "Vagrantfile"
 ```
 
----
+
 
 # 2. Levantar o laboratório
 
@@ -68,7 +68,7 @@ test-srv                  not_created (hyperv)
 > [!TIP]
 > Isto significa que a máquina virtual ainda não foi criada.
 
----
+
 
 ## 2.2 — Criar as máquinas virtuais
 
