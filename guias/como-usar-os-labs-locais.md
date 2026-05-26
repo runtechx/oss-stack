@@ -70,7 +70,7 @@ test-srv                  not_created (hyperv)
 
 
 
-## 2.2 — Criar as máquinas virtuais
+## 2.2 — Criar/Arrancar as máquinas virtuais
 
 ```powershell
 cd C:\RTLabs\
