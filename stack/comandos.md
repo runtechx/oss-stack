@@ -6,7 +6,7 @@ Back to List                                                                   |
 
 </div>
 
-# Comandos de Instalação rápida diretamente no AlmaLinux (sem Docker)
+# Instalação rápida diretamente no AlmaLinux (sem Docker)
 
 ## [Zabbix](https://www.zabbix.com/) 
 
