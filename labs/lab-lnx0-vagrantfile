@@ -14,6 +14,7 @@ Vagrant.configure("2") do |config|
 
     srv.vm.hostname = "test-srv"
 
+    # STATIC IP + FORCE SWITCH
     srv.vm.network "private_network",
       ip: "192.168.51.10",
       virtual_switch: "SwitchNAT"
@@ -23,6 +24,9 @@ Vagrant.configure("2") do |config|
       h.memory = 2048
       h.cpus = 2
       h.enable_virtualization_extensions = true
+
+      # This prevents the switch prompt
+      h.switch_name = "SwitchNAT"
     end
 
   end
