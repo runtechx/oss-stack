@@ -147,7 +147,7 @@ cd C:\RTLabs\
 vagrant snapshot restore test-srv base
 ```
 
-# 4. Outras operações do laboratório
+# 4. Resumo de operações do laboratório
 
 >[!IMPORTANT]
 > Comandos vagrant devem ser corridos dentro da pasta  `C:\RTLabs\ `
