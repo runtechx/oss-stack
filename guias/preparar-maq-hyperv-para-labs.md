@@ -117,6 +117,10 @@ Set-VMHost `
 Criar Rede NAT 
 
 ```powershell
+Import-Module Hyper-V
+```
+
+```powershell
 $SwitchName = "SwitchNAT"
 $NatName    = "NetNAT"
 
