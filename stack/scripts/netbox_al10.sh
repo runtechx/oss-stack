@@ -3,7 +3,7 @@ set -e
 
 # ============================================================
 #  NetBox Deployment Script — AlmaLinux 10
-#  Installs: NetBox + PostgreSQL + Redis + Nginx reverse proxy
+#  Installs: NetBox + PostgreSQL + Valkey (Redis-compatible) + Nginx reverse proxy
 #  Access via HTTPS (self-signed cert) on port 443
 #
 #  Source: https://github.com/runtechx/
@@ -30,7 +30,7 @@ case "$LANG_CHOICE" in
         MSG_TITLE="Instalação NetBox — AlmaLinux 10"
         MSG_STEP1="[1/9] A actualizar o sistema e instalar pré-requisitos..."
         MSG_STEP2="[2/9] A instalar e configurar o PostgreSQL..."
-        MSG_STEP3="[3/9] A instalar e configurar o Redis..."
+        MSG_STEP3="[3/9] A instalar e configurar o Valkey (Redis-compatible)..."
         MSG_STEP4="[4/9] A criar utilizador de sistema e directórios..."
         MSG_STEP5="[5/9] A descarregar o NetBox do GitHub..."
         MSG_STEP6="[6/9] A criar ambiente virtual Python e instalar dependências..."
@@ -67,7 +67,7 @@ case "$LANG_CHOICE" in
         MSG_TITLE="Installation NetBox — AlmaLinux 10"
         MSG_STEP1="[1/9] Mise à jour du système et installation des prérequis..."
         MSG_STEP2="[2/9] Installation et configuration de PostgreSQL..."
-        MSG_STEP3="[3/9] Installation et configuration de Redis..."
+        MSG_STEP3="[3/9] Installation et configuration de Valkey (Redis-compatible)..."
         MSG_STEP4="[4/9] Création de l'utilisateur système et des répertoires..."
         MSG_STEP5="[5/9] Téléchargement de NetBox depuis GitHub..."
         MSG_STEP6="[6/9] Création de l'environnement Python et installation des dépendances..."
@@ -104,7 +104,7 @@ case "$LANG_CHOICE" in
         MSG_TITLE="NetBox Deployment — AlmaLinux 10"
         MSG_STEP1="[1/9] Updating system and installing prerequisites..."
         MSG_STEP2="[2/9] Installing and configuring PostgreSQL..."
-        MSG_STEP3="[3/9] Installing and configuring Redis..."
+        MSG_STEP3="[3/9] Installing and configuring Valkey (Redis-compatible)..."
         MSG_STEP4="[4/9] Creating system user and directories..."
         MSG_STEP5="[5/9] Downloading NetBox from GitHub..."
         MSG_STEP6="[6/9] Creating Python virtual environment and installing dependencies..."
@@ -271,23 +271,18 @@ PSQL
 } >> "$LOG" 2>&1
 
 # -----------------------------
-# STEP 3: Redis
+# STEP 3: Valkey (Redis-compatible, replaces Redis on AlmaLinux 10)
 # -----------------------------
 echo "${MSG_STEP3}"
-log_section "STEP 3: Redis"
+log_section "STEP 3: Valkey (Redis-compatible)"
 {
-    dnf install -y redis
+    dnf install -y valkey
 
-    # Bind to localhost only
-    REDIS_CONF=""
-    [[ -f /etc/redis/redis.conf ]] && REDIS_CONF="/etc/redis/redis.conf"
-    [[ -f /etc/redis.conf       ]] && REDIS_CONF="/etc/redis.conf"
-    [[ -n "$REDIS_CONF" ]] && sed -i 's/^bind .*/bind 127.0.0.1/' "${REDIS_CONF}"
+    # Valkey listens on 127.0.0.1 by default on AlmaLinux 10 — no extra config needed
+    systemctl enable valkey --now
+    echo "  Valkey configured (listening on 127.0.0.1:6379)."
 
-    systemctl enable redis --now
-    echo "  Redis configured."
 } >> "$LOG" 2>&1
-
 # -----------------------------
 # STEP 4: NetBox system user + directories
 # -----------------------------
