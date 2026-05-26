@@ -289,12 +289,14 @@ log_section "STEP 3: Valkey (Redis-compatible)"
 echo "${MSG_STEP4}"
 log_section "STEP 4: System User & Directories"
 {
+    # Create system user without --create-home so git clone can create the dir cleanly
     id netbox &>/dev/null || \
         useradd --system --shell /bin/bash \
                 --home-dir "${NETBOX_INSTALL_DIR}" \
-                --create-home netbox
+                --no-create-home netbox
 
     mkdir -p "${NETBOX_INSTALL_DIR}"/{media,reports,scripts}
+    mkdir -p "${NETBOX_DATA_DIR}"
     chown -R netbox:netbox "${NETBOX_INSTALL_DIR}"
     chmod 750 "${NETBOX_INSTALL_DIR}"
     echo "  User and directories ready."
@@ -307,12 +309,19 @@ echo "${MSG_STEP5}"
 log_section "STEP 5: Clone NetBox"
 {
     if [[ -d "${NETBOX_INSTALL_DIR}/.git" ]]; then
+        # Already cloned — just pull latest
         sudo -u netbox git -C "${NETBOX_INSTALL_DIR}" pull
         echo "  Repository updated."
     else
+        # Directory may exist but be empty (created by useradd or a previous failed run)
+        # Remove it so git clone can create it cleanly
+        rm -rf "${NETBOX_INSTALL_DIR}"
         sudo -u netbox git clone -b "${NETBOX_VERSION}" \
             https://github.com/netbox-community/netbox.git \
             "${NETBOX_INSTALL_DIR}"
+        # Re-create subdirs that were removed with the directory
+        mkdir -p "${NETBOX_INSTALL_DIR}"/{media,reports,scripts}
+        chown -R netbox:netbox "${NETBOX_INSTALL_DIR}"
         echo "  Repository cloned."
     fi
 } >> "$LOG" 2>&1
