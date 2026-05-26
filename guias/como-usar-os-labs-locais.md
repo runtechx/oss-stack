@@ -149,50 +149,33 @@ vagrant snapshot restore test-srv base
 
 # 4. Outras operações do laboratório
 
-## 4.1 — Sair da VM
+>[!IMPORTANT]
+> Comandos vagrant devem ser corridos dentro da pasta  `C:\RTLabs\ `
 
-```bash
-exit
-```
-
-## 4.2 — Desligar a VM
-
-```powershell
-cd C:\RTLabs\
-vagrant halt test-srv
-```
-
-## Abrir o Gestor do Hyper-V
-
-No mesmo terminal (Administrador), execute:
-
-```powershell
-virtmgmt.msc
-```
-
-Explore a máquina virtual e analise os recursos disponíveis.
-
-## Apagar o snaphot
-
-```powershell
-cd C:\RTLabs\
-vagrant snapshot delete test-srv
-```
-
-
-## Destruir o laboratório
-
-```powershell
-cd C:\RTLabs\
-vagrant destroy -f
-```
-
-Agora remover a box 
-```powershell
-cd C:\RTLabs\
-vagrant box list
-vagrant box remove almalinux/10
-```
+| Operação                  | Comando                                  | Descrição                                        |
+| ------------------------- | ---------------------------------------- | ------------------------------------------------ |
+| Verificar estado das VMs  | `vagrant status`                         | Mostra o estado atual das máquinas virtuais      |
+| Criar/Iniciar laboratório | `vagrant up`                             | Cria e arranca as VMs definidas no `Vagrantfile` |
+| Iniciar VMs em paralelo   | `vagrant up --parallel`                  | Arranca múltiplas VMs ao mesmo tempo             |
+| Entrar na VM              | `vagrant ssh test-srv`                   | Abre sessão SSH na VM                            |
+| Sair da VM                | `exit`                                   | Fecha a sessão SSH                               |
+| Desligar VM               | `vagrant halt test-srv`                  | Desliga a VM de forma segura                     |
+| Reiniciar VM              | `vagrant reload test-srv`                | Reinicia a VM                                    |
+| Recarregar configuração   | `vagrant reload --provision`             | Reinicia e reaplica provisionamento              |
+| Suspender VM              | `vagrant suspend test-srv`               | Coloca a VM em estado suspenso                   |
+| Retomar VM suspensa       | `vagrant resume test-srv`                | Retoma VM suspensa                               |
+| Criar snapshot            | `vagrant snapshot save test-srv base`    | Cria snapshot chamado `base`                     |
+| Listar snapshots          | `vagrant snapshot list test-srv`         | Lista snapshots existentes                       |
+| Restaurar snapshot        | `vagrant snapshot restore test-srv base` | Restaura snapshot `base`                         |
+| Apagar snapshot           | `vagrant snapshot delete test-srv base`  | Remove snapshot                                  |
+| Ver logs SSH              | `vagrant ssh-config`                     | Mostra configuração SSH da VM                    |
+| Ver boxes instaladas      | `vagrant box list`                       | Lista boxes instaladas localmente                |
+| Remover box               | `vagrant box remove almalinux/10`        | Remove box do sistema                            |
+| Destruir laboratório      | `vagrant destroy -f`                     | Remove todas as VMs do laboratório               |
+| Validar Vagrantfile       | `vagrant validate`                       | Verifica sintaxe do `Vagrantfile`                |
+| Ver ajuda                 | `vagrant -h`                             | Mostra ajuda geral do Vagrant                    |
+| Ver plugins               | `vagrant plugin list`                    | Lista plugins instalados                         |
+| Abrir Hyper-V Manager     | `virtmgmt.msc`                           | Abre gestor gráfico do Hyper-V                   |
 
 
 ## Ver ajuda do Vagrant
