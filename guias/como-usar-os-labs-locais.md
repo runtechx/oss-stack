@@ -145,6 +145,12 @@ cd C:\RTLabs\
 vagrant snapshot list test-srv
 ```
 
+## 3.7 - Restauro de Snapshot 
+```powershell
+cd C:\RTLabs\
+vagrant snapshot restore test-srv
+```
+
 # 4. Outras operações do laboratório
 
 ## Abrir o Gestor do Hyper-V
