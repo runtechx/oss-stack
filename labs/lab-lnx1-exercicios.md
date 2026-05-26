@@ -25,6 +25,7 @@ Procura pela placa 2 e parte onde diz ***inet*** e a seguir o IP, neste caso 172
 ```
 
 **Exercício 2** - Logar-se no servidor 2 usando ssh
+
 Agora que temos o IP abra uma outra aba no terminal(Admin) windows e corra
 
 ```bash
