@@ -114,29 +114,25 @@ top
 Pressione `Q` para sair.
 
 ```bash
-sudo dnf -y update
+sudo passwd root
 ```
-
-
-
-## 3.3 — Sair da VM
+> aproveite alterar a senha do root
 
 ```bash
-exit
+sudo dnf -y update
+```
+> um update ajuda a VM a estar fresca
+
+
+```bash
+sudo shutdown now
 ```
 
 
-
-## 3.4 — Desligar a VM
-
-```powershell
-cd C:\RTLabs\
-vagrant halt test-srv
-```
 ## 3.5 — Criar Snapshot da VM
 ```powershell
 cd C:\RTLabs\
-vagrant snapshot save test-srv
+vagrant snapshot save test-srv base
 ```
 
 ## 3.6 — Listar Snapshot
@@ -148,10 +144,23 @@ vagrant snapshot list test-srv
 ## 3.7 - Restauro de Snapshot 
 ```powershell
 cd C:\RTLabs\
-vagrant snapshot restore test-srv
+vagrant snapshot restore test-srv base
 ```
 
 # 4. Outras operações do laboratório
+
+## 4.1 — Sair da VM
+
+```bash
+exit
+```
+
+## 4.2 — Desligar a VM
+
+```powershell
+cd C:\RTLabs\
+vagrant halt test-srv
+```
 
 ## Abrir o Gestor do Hyper-V
 
