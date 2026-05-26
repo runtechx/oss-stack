@@ -296,7 +296,6 @@ log_section "STEP 4: System User & Directories"
                 --no-create-home netbox
 
     mkdir -p "${NETBOX_INSTALL_DIR}"/{media,reports,scripts}
-    mkdir -p "${NETBOX_DATA_DIR}"
     chown -R netbox:netbox "${NETBOX_INSTALL_DIR}"
     chmod 750 "${NETBOX_INSTALL_DIR}"
     echo "  User and directories ready."
@@ -313,15 +312,16 @@ log_section "STEP 5: Clone NetBox"
         sudo -u netbox git -C "${NETBOX_INSTALL_DIR}" pull
         echo "  Repository updated."
     else
-        # Directory may exist but be empty (created by useradd or a previous failed run)
-        # Remove it so git clone can create it cleanly
+        # Remove any leftover empty dir (from useradd or a failed run)
         rm -rf "${NETBOX_INSTALL_DIR}"
-        sudo -u netbox git clone -b "${NETBOX_VERSION}" \
+        # Clone as root into /opt — netbox user has no write access to /opt itself
+        git clone -b "${NETBOX_VERSION}" \
             https://github.com/netbox-community/netbox.git \
             "${NETBOX_INSTALL_DIR}"
-        # Re-create subdirs that were removed with the directory
+        # Create extra subdirs and hand ownership to netbox
         mkdir -p "${NETBOX_INSTALL_DIR}"/{media,reports,scripts}
         chown -R netbox:netbox "${NETBOX_INSTALL_DIR}"
+        chmod 750 "${NETBOX_INSTALL_DIR}"
         echo "  Repository cloned."
     fi
 } >> "$LOG" 2>&1
