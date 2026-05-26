@@ -54,9 +54,6 @@ case "$LANG_CHOICE" in
         MSG_KEEPFILE="GUARDE ESTE FICHEIRO — ELIMINE APÓS ANOTAR AS CREDENCIAIS"
         MSG_PROMPT_IP="Endereço IP do servidor"
         MSG_PROMPT_DOMAIN="Domínio / FQDN (ex: netbox.empresa.local)"
-        MSG_PROMPT_ADMINPASS="Password do utilizador admin do NetBox"
-        MSG_PROMPT_ADMINUSER="Utilizador admin (deixe em branco para 'admin')"
-        MSG_PROMPT_ADMINEMAIL="Email do admin (deixe em branco para admin@localhost)"
         MSG_SELFSIGNED="A gerar certificado SSL auto-assinado (válido 10 anos)..."
         MSG_SELFSIGNED_WARN="Certificado auto-assinado. Aceite a excepção no browser. Use Let's Encrypt para produção."
         MSG_HOSTS_NOTE="Noutras máquinas da rede, adicione ao ficheiro hosts:"
@@ -94,9 +91,6 @@ case "$LANG_CHOICE" in
         MSG_KEEPFILE="CONSERVEZ CE FICHIER — SUPPRIMEZ-LE APRÈS AVOIR NOTÉ LES IDENTIFIANTS"
         MSG_PROMPT_IP="Adresse IP du serveur"
         MSG_PROMPT_DOMAIN="Domaine / FQDN (ex: netbox.entreprise.local)"
-        MSG_PROMPT_ADMINPASS="Mot de passe admin NetBox"
-        MSG_PROMPT_ADMINUSER="Utilisateur admin (laisser vide pour 'admin')"
-        MSG_PROMPT_ADMINEMAIL="Email admin (laisser vide pour admin@localhost)"
         MSG_SELFSIGNED="Génération d'un certificat SSL auto-signé (valable 10 ans)..."
         MSG_SELFSIGNED_WARN="Certificat auto-signé. Acceptez l'exception dans le navigateur. Utilisez Let's Encrypt en production."
         MSG_HOSTS_NOTE="Sur les autres machines du réseau, ajoutez au fichier hosts :"
@@ -134,9 +128,6 @@ case "$LANG_CHOICE" in
         MSG_KEEPFILE="KEEP THIS FILE SAFE — DELETE AFTER NOTING CREDENTIALS"
         MSG_PROMPT_IP="Server IP address"
         MSG_PROMPT_DOMAIN="Domain / FQDN (e.g. netbox.company.local)"
-        MSG_PROMPT_ADMINPASS="NetBox admin password"
-        MSG_PROMPT_ADMINUSER="Admin username (leave blank for 'admin')"
-        MSG_PROMPT_ADMINEMAIL="Admin email (leave blank for admin@localhost)"
         MSG_SELFSIGNED="Generating self-signed SSL certificate (valid 10 years)..."
         MSG_SELFSIGNED_WARN="Self-signed certificate. Accept the browser exception. Use Let's Encrypt for production."
         MSG_HOSTS_NOTE="On other machines on the network, add to their hosts file:"
@@ -179,8 +170,13 @@ NETBOX_DB_PASS="$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)"
 NETBOX_SECRET_KEY="$(tr -dc 'A-Za-z0-9!@#^&*_+-' </dev/urandom | head -c 50)"
 
 # -----------------------------
-# USER PROMPTS
 # -----------------------------
+# AUTO-GENERATED CREDENTIALS
+# -----------------------------
+ADMIN_USER="admin"
+ADMIN_EMAIL="admin@localhost"
+ADMIN_PASS="$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 16)"
+
 echo ""
 echo "============================================================"
 echo "  ${MSG_TITLE}"
@@ -195,25 +191,11 @@ SERVER_IP=${SERVER_IP:-$(hostname -I | awk '{print $1}')}
 read -rp "  ${MSG_PROMPT_DOMAIN} ($(hostname -f 2>/dev/null || echo netbox.local)): " NB_DOMAIN
 NB_DOMAIN=${NB_DOMAIN:-$(hostname -f 2>/dev/null || echo netbox.local)}
 
-read -rp "  ${MSG_PROMPT_ADMINUSER} [admin]: " ADMIN_USER
-ADMIN_USER=${ADMIN_USER:-admin}
-
-read -rp "  ${MSG_PROMPT_ADMINEMAIL} [admin@localhost]: " ADMIN_EMAIL
-ADMIN_EMAIL=${ADMIN_EMAIL:-admin@localhost}
-
-read -rsp "  ${MSG_PROMPT_ADMINPASS}: " ADMIN_PASS
-echo ""
-if [[ -z "$ADMIN_PASS" ]]; then
-    ADMIN_PASS="$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 16)"
-    echo "  (admin password auto-generated)"
-fi
-
 echo ""
 echo "  ${MSG_SERVERIP}: ${SERVER_IP}"   | tee -a "$LOG"
 echo "  ${MSG_ACCESSURL}: https://${NB_DOMAIN}" | tee -a "$LOG"
 echo ""
 
-log_section "${MSG_TITLE} — $(date)"
 
 # -----------------------------
 # STEP 1: System update + prerequisites
