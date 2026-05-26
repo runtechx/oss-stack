@@ -163,6 +163,12 @@ virtmgmt.msc
 
 Explore a máquina virtual e analise os recursos disponíveis.
 
+## Apagar o snaphot
+
+```powershell
+cd C:\RTLabs\
+vagrant snapshot delete test-srv
+```
 
 
 ## Destruir o laboratório
@@ -179,12 +185,6 @@ vagrant box list
 vagrant box remove almalinux/10
 ```
 
-## Apagar o snaphot
-
-```powershell
-cd C:\RTLabs\
-vagrant snapshot delete test-srv
-```
 
 ## Ver ajuda do Vagrant
 
