@@ -114,7 +114,7 @@ top
 Pressione `Q` para sair.
 
 ```bash
-ls -l /
+sudo dnf -y update
 ```
 
 
