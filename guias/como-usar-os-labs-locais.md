@@ -133,8 +133,17 @@ exit
 cd C:\RTLabs\
 vagrant halt test-srv
 ```
+## 3.5 — Criar Snapshot da VM
+```powershell
+cd C:\RTLabs\
+vagrant snapshot save test-srv
+```
 
-
+## 3.6 — Listar Snapshot
+```powershell
+cd C:\RTLabs\
+vagrant snapshot list test-srv
+```
 
 # 4. Outras operações do laboratório
 
@@ -164,6 +173,12 @@ vagrant box list
 vagrant box remove almalinux/10
 ```
 
+## Apagar o snaphot
+
+```powershell
+cd C:\RTLabs\
+vagrant snapshot delete test-srv
+```
 
 ## Ver ajuda do Vagrant
 
