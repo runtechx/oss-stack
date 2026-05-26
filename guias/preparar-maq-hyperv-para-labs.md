@@ -114,6 +114,10 @@ Set-VMHost `
   -VirtualHardDiskPath "C:\RTLabs\Disks"
 ```
 
+```powershell
+Get-VMHost | Select-Object VirtualMachinePath, VirtualHardDiskPath
+```
+
 Criar Rede NAT 
 
 ```powershell
@@ -151,12 +155,12 @@ if (-not (Get-NetNat -Name $NatName -ErrorAction SilentlyContinue)) {
       -InternalIPInterfaceAddressPrefix "192.168.51.0/24"
 }
 
-Write-Host "Hyper-V lab networking configured successfully."
+
 ```
 
-
 ```powershell
-Get-VMHost | Select-Object VirtualMachinePath, VirtualHardDiskPath
+Get-NetIPAddress | Where-Object IPAddress -eq "192.168.51.1"
+Get-NetNat
 ```
 
 >[!TIP]
