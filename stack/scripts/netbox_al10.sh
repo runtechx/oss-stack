@@ -142,7 +142,7 @@ esac
 # -----------------------------
 # CONFIGURATION
 # -----------------------------
-NETBOX_VERSION="master"          # or e.g. "v4.2.0" for a specific release
+NETBOX_VERSION="main"            # or e.g. "v4.2.0" for a specific release
 NETBOX_INSTALL_DIR="/opt/netbox"
 NETBOX_VENV_DIR="${NETBOX_INSTALL_DIR}/venv"
 NETBOX_DB_NAME="netbox"
