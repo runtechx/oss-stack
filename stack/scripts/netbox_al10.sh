@@ -222,7 +222,7 @@ log_section "STEP 1: System Update & Prerequisites"
 echo "${MSG_STEP2}"
 log_section "STEP 2: PostgreSQL"
 {
-    dnf install -y postgresql postgresql-server postgresql-devel
+    dnf install -y postgresql postgresql-server libpq-devel
 
     if [[ ! -f /var/lib/pgsql/data/PG_VERSION ]]; then
         postgresql-setup --initdb
@@ -336,8 +336,7 @@ log_section "STEP 6: Python venv & dependencies"
     sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install --upgrade pip wheel
     sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install \
         -r "${NETBOX_INSTALL_DIR}/requirements.txt"
-    sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install \
-        gunicorn psycopg2-binary
+    sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install gunicorn
     echo "  Python dependencies installed."
 } >> "$LOG" 2>&1
 
