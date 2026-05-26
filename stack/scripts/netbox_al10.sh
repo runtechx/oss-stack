@@ -246,16 +246,22 @@ log_section "STEP 2: PostgreSQL"
         postgresql-setup --initdb
     fi
 
-    # Switch local auth to md5
+    # AlmaLinux 10 / PostgreSQL 16 uses scram-sha-256 by default.
+    # Temporarily set all local connections to trust so we can run psql
+    # as the postgres OS user without a password, create the netbox role,
+    # then restore scram-sha-256 for all connections.
     PG_HBA="/var/lib/pgsql/data/pg_hba.conf"
-    sed -i 's/^\(local\s\+all\s\+all\s\+\)peer/\1md5/'             "${PG_HBA}"
-    sed -i 's/^\(host\s\+all\s\+all\s\+127\.0\.0\.1\/32\s\+\)ident/\1md5/' "${PG_HBA}"
-    sed -i 's/^\(host\s\+all\s\+all\s\+::1\/128\s\+\)ident/\1md5/' "${PG_HBA}"
+    cp "${PG_HBA}" "${PG_HBA}.bak"
+
+    # Set ALL local/loopback entries to trust (handles peer, ident, scram-sha-256)
+    sed -i -E 's/^(local[[:space:]]+all[[:space:]]+all[[:space:]]+)[^[:space:]]+$/\1trust/' "${PG_HBA}" 
+    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+127\.0\.0\.1\/32[[:space:]]+)[^[:space:]]+$/\1trust/' "${PG_HBA}" 
+    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+::1\/128[[:space:]]+)[^[:space:]]+$/\1trust/' "${PG_HBA}" 
 
     systemctl enable postgresql --now
     systemctl restart postgresql
 
-    # Create DB user and database
+    # Create DB user and database (trust auth active — no password needed)
     sudo -u postgres psql <<PSQL
 DO \$\$
 BEGIN
@@ -273,6 +279,12 @@ PSQL
     sudo -u postgres psql -d "${NETBOX_DB_NAME}" \
         -c "GRANT ALL ON SCHEMA public TO ${NETBOX_DB_USER};" 2>/dev/null || true
 
+    # Restore secure auth — scram-sha-256 for all local connections
+    sed -i -E 's/^(local[[:space:]]+all[[:space:]]+all[[:space:]]+)trust$/\1scram-sha-256/' "${PG_HBA}" 
+    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+127\.0\.0\.1\/32[[:space:]]+)trust$/\1scram-sha-256/' "${PG_HBA}" 
+    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+::1\/128[[:space:]]+)trust$/\1scram-sha-256/' "${PG_HBA}" 
+
+    systemctl restart postgresql
     echo "  PostgreSQL configured."
 } >> "$LOG" 2>&1
 
