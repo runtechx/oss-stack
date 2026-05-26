@@ -1,90 +1,262 @@
-#!/usr/bin/env bash
-# =============================================================================
-#  install_netbox_almalinux10.sh
-#  Instalação automatizada do NetBox no AlmaLinux 10
-#  Compatível com: AlmaLinux 10.x (RHEL 10 compatible)
-#  Autor: gerado via Claude (Anthropic)
-# =============================================================================
-set -euo pipefail
+#!/bin/bash
+set -e
 
-# -----------------------------------------------------------------------------
-# VARIÁVEIS DE CONFIGURAÇÃO — ajuste antes de executar
-# -----------------------------------------------------------------------------
-NETBOX_DB_NAME="netbox"
-NETBOX_DB_USER="netbox"
-NETBOX_DB_PASS="$(openssl rand -hex 20)"   # gerada automaticamente; guarde-a
-NETBOX_SECRET_KEY="$(openssl rand -hex 50)"
-NETBOX_ALLOWED_HOST="*"          # altere para o IP/domínio real do servidor
+# ============================================================
+#  NetBox Deployment Script — AlmaLinux 10
+#  Installs: NetBox + PostgreSQL + Redis + Nginx reverse proxy
+#  Access via HTTPS (self-signed cert) on port 443
+#
+#  Source: https://github.com/runtechx/
+# ============================================================
+
+# -----------------------------
+# LANGUAGE SELECTION
+# -----------------------------
+clear
+echo "============================================================"
+echo "  NetBox Deployment — AlmaLinux 10"
+echo "============================================================"
+echo ""
+echo "  Select language / Selecione o idioma / Choisissez la langue:"
+echo ""
+echo "  1) Português (PT)"
+echo "  2) English   (EN)"
+echo "  3) Français  (FR)"
+echo ""
+read -rp "  > " LANG_CHOICE
+
+case "$LANG_CHOICE" in
+    1)
+        MSG_TITLE="Instalação NetBox — AlmaLinux 10"
+        MSG_STEP1="[1/9] A actualizar o sistema e instalar pré-requisitos..."
+        MSG_STEP2="[2/9] A instalar e configurar o PostgreSQL..."
+        MSG_STEP3="[3/9] A instalar e configurar o Redis..."
+        MSG_STEP4="[4/9] A criar utilizador de sistema e directórios..."
+        MSG_STEP5="[5/9] A descarregar o NetBox do GitHub..."
+        MSG_STEP6="[6/9] A criar ambiente virtual Python e instalar dependências..."
+        MSG_STEP7="[7/9] A criar configuração do NetBox..."
+        MSG_STEP8="[8/9] A inicializar base de dados e criar super-utilizador..."
+        MSG_STEP9="[9/9] A configurar Gunicorn, Nginx e serviços systemd..."
+        MSG_DONE="INSTALAÇÃO DO NETBOX CONCLUÍDA"
+        MSG_URL="URL de Acesso"
+        MSG_LOG="Registo de instalação"
+        MSG_CREDS="Ficheiro de credenciais"
+        MSG_NEXTSTEP="Próximo passo: Abra o URL no seu browser e inicie sessão"
+        MSG_CREDTITLE="Instalação NetBox — Credenciais"
+        MSG_GENERATED="Gerado em"
+        MSG_SRVSECTION="-- Servidor --"
+        MSG_SERVERIP="IP do Servidor"
+        MSG_ACCESSURL="URL de Acesso"
+        MSG_ADMINUSER="Utilizador Admin"
+        MSG_ADMINPASS="Password Admin"
+        MSG_DBPASS="Password Base de Dados"
+        MSG_NGINXCONF="Config Nginx"
+        MSG_KEEPFILE="GUARDE ESTE FICHEIRO — ELIMINE APÓS ANOTAR AS CREDENCIAIS"
+        MSG_PROMPT_IP="Endereço IP do servidor"
+        MSG_PROMPT_DOMAIN="Domínio / FQDN (ex: netbox.empresa.local)"
+        MSG_PROMPT_ADMINPASS="Password do utilizador admin do NetBox"
+        MSG_PROMPT_ADMINUSER="Utilizador admin (deixe em branco para 'admin')"
+        MSG_PROMPT_ADMINEMAIL="Email do admin (deixe em branco para admin@localhost)"
+        MSG_SELFSIGNED="A gerar certificado SSL auto-assinado (válido 10 anos)..."
+        MSG_SELFSIGNED_WARN="Certificado auto-assinado. Aceite a excepção no browser. Use Let's Encrypt para produção."
+        MSG_HOSTS_NOTE="Noutras máquinas da rede, adicione ao ficheiro hosts:"
+        MSG_CHECKSTATUS="A verificar estado dos serviços..."
+        MSG_RUNNING="activo"
+        MSG_NOTRUNNING="NÃO está activo"
+        MSG_USEFUL_CMDS="Comandos úteis"
+        MSG_WARN_TIME="A instalação pode demorar vários minutos — por favor aguarde."
+        ;;
+    3)
+        MSG_TITLE="Installation NetBox — AlmaLinux 10"
+        MSG_STEP1="[1/9] Mise à jour du système et installation des prérequis..."
+        MSG_STEP2="[2/9] Installation et configuration de PostgreSQL..."
+        MSG_STEP3="[3/9] Installation et configuration de Redis..."
+        MSG_STEP4="[4/9] Création de l'utilisateur système et des répertoires..."
+        MSG_STEP5="[5/9] Téléchargement de NetBox depuis GitHub..."
+        MSG_STEP6="[6/9] Création de l'environnement Python et installation des dépendances..."
+        MSG_STEP7="[7/9] Création de la configuration NetBox..."
+        MSG_STEP8="[8/9] Initialisation de la base de données et création du super-utilisateur..."
+        MSG_STEP9="[9/9] Configuration de Gunicorn, Nginx et services systemd..."
+        MSG_DONE="INSTALLATION DE NETBOX TERMINÉE"
+        MSG_URL="URL d'accès"
+        MSG_LOG="Journal d'installation"
+        MSG_CREDS="Fichier d'identifiants"
+        MSG_NEXTSTEP="Prochaine étape : Ouvrez l'URL dans votre navigateur et connectez-vous"
+        MSG_CREDTITLE="Installation NetBox — Identifiants"
+        MSG_GENERATED="Généré le"
+        MSG_SRVSECTION="-- Serveur --"
+        MSG_SERVERIP="IP Serveur"
+        MSG_ACCESSURL="URL d'accès"
+        MSG_ADMINUSER="Utilisateur Admin"
+        MSG_ADMINPASS="Mot de passe Admin"
+        MSG_DBPASS="Mot de passe Base de données"
+        MSG_NGINXCONF="Config Nginx"
+        MSG_KEEPFILE="CONSERVEZ CE FICHIER — SUPPRIMEZ-LE APRÈS AVOIR NOTÉ LES IDENTIFIANTS"
+        MSG_PROMPT_IP="Adresse IP du serveur"
+        MSG_PROMPT_DOMAIN="Domaine / FQDN (ex: netbox.entreprise.local)"
+        MSG_PROMPT_ADMINPASS="Mot de passe admin NetBox"
+        MSG_PROMPT_ADMINUSER="Utilisateur admin (laisser vide pour 'admin')"
+        MSG_PROMPT_ADMINEMAIL="Email admin (laisser vide pour admin@localhost)"
+        MSG_SELFSIGNED="Génération d'un certificat SSL auto-signé (valable 10 ans)..."
+        MSG_SELFSIGNED_WARN="Certificat auto-signé. Acceptez l'exception dans le navigateur. Utilisez Let's Encrypt en production."
+        MSG_HOSTS_NOTE="Sur les autres machines du réseau, ajoutez au fichier hosts :"
+        MSG_CHECKSTATUS="Vérification de l'état des services..."
+        MSG_RUNNING="actif"
+        MSG_NOTRUNNING="N'est PAS actif"
+        MSG_USEFUL_CMDS="Commandes utiles"
+        MSG_WARN_TIME="L'installation peut prendre plusieurs minutes — veuillez patienter."
+        ;;
+    *)
+        MSG_TITLE="NetBox Deployment — AlmaLinux 10"
+        MSG_STEP1="[1/9] Updating system and installing prerequisites..."
+        MSG_STEP2="[2/9] Installing and configuring PostgreSQL..."
+        MSG_STEP3="[3/9] Installing and configuring Redis..."
+        MSG_STEP4="[4/9] Creating system user and directories..."
+        MSG_STEP5="[5/9] Downloading NetBox from GitHub..."
+        MSG_STEP6="[6/9] Creating Python virtual environment and installing dependencies..."
+        MSG_STEP7="[7/9] Creating NetBox configuration..."
+        MSG_STEP8="[8/9] Initialising database and creating superuser..."
+        MSG_STEP9="[9/9] Configuring Gunicorn, Nginx and systemd services..."
+        MSG_DONE="NETBOX DEPLOYMENT COMPLETE"
+        MSG_URL="Access URL"
+        MSG_LOG="Deploy Log"
+        MSG_CREDS="Credentials File"
+        MSG_NEXTSTEP="Next step: Open the URL in your browser and log in"
+        MSG_CREDTITLE="NetBox Installation — Credentials"
+        MSG_GENERATED="Generated"
+        MSG_SRVSECTION="-- Server --"
+        MSG_SERVERIP="Server IP"
+        MSG_ACCESSURL="Access URL"
+        MSG_ADMINUSER="Admin User"
+        MSG_ADMINPASS="Admin Password"
+        MSG_DBPASS="Database Password"
+        MSG_NGINXCONF="Nginx Config"
+        MSG_KEEPFILE="KEEP THIS FILE SAFE — DELETE AFTER NOTING CREDENTIALS"
+        MSG_PROMPT_IP="Server IP address"
+        MSG_PROMPT_DOMAIN="Domain / FQDN (e.g. netbox.company.local)"
+        MSG_PROMPT_ADMINPASS="NetBox admin password"
+        MSG_PROMPT_ADMINUSER="Admin username (leave blank for 'admin')"
+        MSG_PROMPT_ADMINEMAIL="Admin email (leave blank for admin@localhost)"
+        MSG_SELFSIGNED="Generating self-signed SSL certificate (valid 10 years)..."
+        MSG_SELFSIGNED_WARN="Self-signed certificate. Accept the browser exception. Use Let's Encrypt for production."
+        MSG_HOSTS_NOTE="On other machines on the network, add to their hosts file:"
+        MSG_CHECKSTATUS="Checking service status..."
+        MSG_RUNNING="running"
+        MSG_NOTRUNNING="NOT running"
+        MSG_USEFUL_CMDS="Useful commands"
+        MSG_WARN_TIME="Installation may take several minutes — please wait."
+        ;;
+esac
+
+# -----------------------------
+# CONFIGURATION
+# -----------------------------
+NETBOX_VERSION="master"          # or e.g. "v4.2.0" for a specific release
 NETBOX_INSTALL_DIR="/opt/netbox"
 NETBOX_VENV_DIR="${NETBOX_INSTALL_DIR}/venv"
-NETBOX_BRANCH="master"           # ou "v4.x.x" para uma versão específica
-NGINX_SERVER_NAME="_"            # altere para FQDN em produção
-ADMIN_USER="admin"
-ADMIN_EMAIL="admin@exemplo.local"
-ADMIN_PASS="Admin@12345"         # mude esta palavra-passe depois do primeiro login
+NETBOX_DB_NAME="netbox"
+NETBOX_DB_USER="netbox"
+LOG="/var/log/deploy-netbox.log"
+CRED_FILE="/root/netbox-credentials.txt"
 
-# Cores para output
-RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
-info()    { echo -e "${GREEN}[INFO]${NC}  $*"; }
-warn()    { echo -e "${YELLOW}[WARN]${NC}  $*"; }
-error()   { echo -e "${RED}[ERRO]${NC}  $*"; exit 1; }
+log_section() {
+    echo ""                                                    >> "$LOG"
+    echo "============================================================" >> "$LOG"
+    echo "  $1"                                               >> "$LOG"
+    echo "============================================================" >> "$LOG"
+}
 
-# -----------------------------------------------------------------------------
-# 0. VERIFICAÇÕES INICIAIS
-# -----------------------------------------------------------------------------
-[[ $EUID -ne 0 ]] && error "Este script deve ser executado como root (sudo)."
-
-info "=== Instalação do NetBox no AlmaLinux 10 ==="
-info "Palavra-passe BD gerada: ${NETBOX_DB_PASS}"
-info "Chave secreta gerada   : ${NETBOX_SECRET_KEY}"
-warn "Guarde as credenciais acima antes de continuar!"
-echo ""
-read -rp "Pressione ENTER para continuar ou Ctrl+C para abortar..."
-
-# -----------------------------------------------------------------------------
-# 1. ACTUALIZAR O SISTEMA
-# -----------------------------------------------------------------------------
-info "1/10 — A actualizar o sistema..."
-dnf update -y
-
-# -----------------------------------------------------------------------------
-# 2. DEPENDÊNCIAS DO SISTEMA
-# -----------------------------------------------------------------------------
-info "2/10 — A instalar dependências do sistema..."
-dnf groupinstall -y "Development Tools"
-dnf install -y \
-    python3 python3-pip python3-devel python3-setuptools python3-virtualenv \
-    git gcc gcc-c++ \
-    libxml2-devel libxslt-devel \
-    libffi-devel openssl-devel \
-    redhat-rpm-config \
-    nginx \
-    policycoreutils-python-utils
-
-# -----------------------------------------------------------------------------
-# 3. POSTGRESQL
-# -----------------------------------------------------------------------------
-info "3/10 — A instalar e configurar o PostgreSQL..."
-dnf install -y postgresql postgresql-server postgresql-devel
-
-# Inicializar cluster se ainda não existir
-if [[ ! -f /var/lib/pgsql/data/PG_VERSION ]]; then
-    postgresql-setup --initdb
+# -----------------------------
+# ROOT CHECK
+# -----------------------------
+if [[ $EUID -ne 0 ]]; then
+    echo "  ERROR: This script must be run as root (sudo)."
+    exit 1
 fi
 
-# Configurar autenticação md5
-PG_HBA="/var/lib/pgsql/data/pg_hba.conf"
-# Substituir ident/peer por md5 para ligações locais
-sed -i 's/^\(local\s\+all\s\+all\s\+\)peer/\1md5/' "${PG_HBA}"
-sed -i 's/^\(host\s\+all\s\+all\s\+127\.0\.0\.1\/32\s\+\)ident/\1md5/' "${PG_HBA}"
-sed -i 's/^\(host\s\+all\s\+all\s\+::1\/128\s\+\)ident/\1md5/' "${PG_HBA}"
+# Generate random credentials using /dev/urandom — no dependencies needed
+NETBOX_DB_PASS="$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)"
+NETBOX_SECRET_KEY="$(tr -dc 'A-Za-z0-9!@#^&*_+-' </dev/urandom | head -c 50)"
 
-systemctl enable postgresql --now
-systemctl restart postgresql
+# -----------------------------
+# USER PROMPTS
+# -----------------------------
+echo ""
+echo "============================================================"
+echo "  ${MSG_TITLE}"
+echo "============================================================"
+echo ""
+echo "  ${MSG_WARN_TIME}"
+echo ""
 
-# Criar base de dados e utilizador
-info "   A criar base de dados e utilizador PostgreSQL..."
-sudo -u postgres psql <<EOF
+read -rp "  ${MSG_PROMPT_IP} ($(hostname -I | awk '{print $1}')): " SERVER_IP
+SERVER_IP=${SERVER_IP:-$(hostname -I | awk '{print $1}')}
+
+read -rp "  ${MSG_PROMPT_DOMAIN} ($(hostname -f 2>/dev/null || echo netbox.local)): " NB_DOMAIN
+NB_DOMAIN=${NB_DOMAIN:-$(hostname -f 2>/dev/null || echo netbox.local)}
+
+read -rp "  ${MSG_PROMPT_ADMINUSER} [admin]: " ADMIN_USER
+ADMIN_USER=${ADMIN_USER:-admin}
+
+read -rp "  ${MSG_PROMPT_ADMINEMAIL} [admin@localhost]: " ADMIN_EMAIL
+ADMIN_EMAIL=${ADMIN_EMAIL:-admin@localhost}
+
+read -rsp "  ${MSG_PROMPT_ADMINPASS}: " ADMIN_PASS
+echo ""
+if [[ -z "$ADMIN_PASS" ]]; then
+    ADMIN_PASS="$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 16)"
+    echo "  (admin password auto-generated)"
+fi
+
+echo ""
+echo "  ${MSG_SERVERIP}: ${SERVER_IP}"   | tee -a "$LOG"
+echo "  ${MSG_ACCESSURL}: https://${NB_DOMAIN}" | tee -a "$LOG"
+echo ""
+
+log_section "${MSG_TITLE} — $(date)"
+
+# -----------------------------
+# STEP 1: System update + prerequisites
+# -----------------------------
+echo "${MSG_STEP1}"
+log_section "STEP 1: System Update & Prerequisites"
+{
+    dnf update -y
+    dnf groupinstall -y "Development Tools"
+    dnf install -y \
+        curl wget git \
+        openssl openssl-devel \
+        python3 python3-pip python3-devel python3-setuptools \
+        libxml2-devel libxslt-devel \
+        libffi-devel \
+        redhat-rpm-config \
+        nginx \
+        policycoreutils-python-utils
+} >> "$LOG" 2>&1
+
+# -----------------------------
+# STEP 2: PostgreSQL
+# -----------------------------
+echo "${MSG_STEP2}"
+log_section "STEP 2: PostgreSQL"
+{
+    dnf install -y postgresql postgresql-server postgresql-devel
+
+    if [[ ! -f /var/lib/pgsql/data/PG_VERSION ]]; then
+        postgresql-setup --initdb
+    fi
+
+    # Switch local auth to md5
+    PG_HBA="/var/lib/pgsql/data/pg_hba.conf"
+    sed -i 's/^\(local\s\+all\s\+all\s\+\)peer/\1md5/'             "${PG_HBA}"
+    sed -i 's/^\(host\s\+all\s\+all\s\+127\.0\.0\.1\/32\s\+\)ident/\1md5/' "${PG_HBA}"
+    sed -i 's/^\(host\s\+all\s\+all\s\+::1\/128\s\+\)ident/\1md5/' "${PG_HBA}"
+
+    systemctl enable postgresql --now
+    systemctl restart postgresql
+
+    # Create DB user and database
+    sudo -u postgres psql <<PSQL
 DO \$\$
 BEGIN
   IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = '${NETBOX_DB_USER}') THEN
@@ -92,91 +264,106 @@ BEGIN
   END IF;
 END
 \$\$;
-
 SELECT 'CREATE DATABASE ${NETBOX_DB_NAME} OWNER ${NETBOX_DB_USER}'
 WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = '${NETBOX_DB_NAME}')\gexec
-
 GRANT ALL PRIVILEGES ON DATABASE ${NETBOX_DB_NAME} TO ${NETBOX_DB_USER};
-EOF
+PSQL
 
-# PostgreSQL 15+ exige GRANT no schema public
-sudo -u postgres psql -d "${NETBOX_DB_NAME}" -c \
-    "GRANT ALL ON SCHEMA public TO ${NETBOX_DB_USER};" 2>/dev/null || true
+    # PostgreSQL 15+ requires explicit schema grant
+    sudo -u postgres psql -d "${NETBOX_DB_NAME}" \
+        -c "GRANT ALL ON SCHEMA public TO ${NETBOX_DB_USER};" 2>/dev/null || true
 
-# -----------------------------------------------------------------------------
-# 4. REDIS
-# -----------------------------------------------------------------------------
-info "4/10 — A instalar e configurar o Redis..."
-dnf install -y redis
+    echo "  PostgreSQL configured."
+} >> "$LOG" 2>&1
 
-# Ligação apenas local
-sed -i 's/^bind .*/bind 127.0.0.1/' /etc/redis/redis.conf 2>/dev/null || \
-sed -i 's/^bind .*/bind 127.0.0.1/' /etc/redis.conf 2>/dev/null || true
+# -----------------------------
+# STEP 3: Redis
+# -----------------------------
+echo "${MSG_STEP3}"
+log_section "STEP 3: Redis"
+{
+    dnf install -y redis
 
-systemctl enable redis --now
+    # Bind to localhost only
+    REDIS_CONF=""
+    [[ -f /etc/redis/redis.conf ]] && REDIS_CONF="/etc/redis/redis.conf"
+    [[ -f /etc/redis.conf       ]] && REDIS_CONF="/etc/redis.conf"
+    [[ -n "$REDIS_CONF" ]] && sed -i 's/^bind .*/bind 127.0.0.1/' "${REDIS_CONF}"
 
-# -----------------------------------------------------------------------------
-# 5. UTILIZADOR E DIRECTÓRIO DO NETBOX
-# -----------------------------------------------------------------------------
-info "5/10 — A criar utilizador de sistema e directórios..."
-id netbox &>/dev/null || \
-    useradd --system --shell /bin/bash \
-            --home-dir "${NETBOX_INSTALL_DIR}" \
-            --create-home netbox
+    systemctl enable redis --now
+    echo "  Redis configured."
+} >> "$LOG" 2>&1
 
-mkdir -p "${NETBOX_INSTALL_DIR}"/{media,reports,scripts}
-chown -R netbox:netbox "${NETBOX_INSTALL_DIR}"
-chmod 750 "${NETBOX_INSTALL_DIR}"
+# -----------------------------
+# STEP 4: NetBox system user + directories
+# -----------------------------
+echo "${MSG_STEP4}"
+log_section "STEP 4: System User & Directories"
+{
+    id netbox &>/dev/null || \
+        useradd --system --shell /bin/bash \
+                --home-dir "${NETBOX_INSTALL_DIR}" \
+                --create-home netbox
 
-# -----------------------------------------------------------------------------
-# 6. CLONAR O NETBOX
-# -----------------------------------------------------------------------------
-info "6/10 — A descarregar o NetBox do GitHub..."
-if [[ -d "${NETBOX_INSTALL_DIR}/.git" ]]; then
-    warn "   Repositório já existe — a actualizar..."
-    sudo -u netbox git -C "${NETBOX_INSTALL_DIR}" pull
-else
-    sudo -u netbox git clone -b "${NETBOX_BRANCH}" \
-        https://github.com/netbox-community/netbox.git \
-        "${NETBOX_INSTALL_DIR}"
-fi
+    mkdir -p "${NETBOX_INSTALL_DIR}"/{media,reports,scripts}
+    chown -R netbox:netbox "${NETBOX_INSTALL_DIR}"
+    chmod 750 "${NETBOX_INSTALL_DIR}"
+    echo "  User and directories ready."
+} >> "$LOG" 2>&1
 
-# -----------------------------------------------------------------------------
-# 7. AMBIENTE VIRTUAL PYTHON E DEPENDÊNCIAS
-# -----------------------------------------------------------------------------
-info "7/10 — A criar ambiente virtual Python e instalar dependências..."
-sudo -u netbox python3 -m venv "${NETBOX_VENV_DIR}"
-sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install --upgrade pip wheel
-sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install \
-    -r "${NETBOX_INSTALL_DIR}/requirements.txt"
+# -----------------------------
+# STEP 5: Clone NetBox
+# -----------------------------
+echo "${MSG_STEP5}"
+log_section "STEP 5: Clone NetBox"
+{
+    if [[ -d "${NETBOX_INSTALL_DIR}/.git" ]]; then
+        sudo -u netbox git -C "${NETBOX_INSTALL_DIR}" pull
+        echo "  Repository updated."
+    else
+        sudo -u netbox git clone -b "${NETBOX_VERSION}" \
+            https://github.com/netbox-community/netbox.git \
+            "${NETBOX_INSTALL_DIR}"
+        echo "  Repository cloned."
+    fi
+} >> "$LOG" 2>&1
 
-# Pacotes de produção adicionais
-sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install \
-    gunicorn psycopg2-binary
+# -----------------------------
+# STEP 6: Python venv + dependencies
+# -----------------------------
+echo "${MSG_STEP6}"
+log_section "STEP 6: Python venv & dependencies"
+{
+    sudo -u netbox python3 -m venv "${NETBOX_VENV_DIR}"
+    sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install --upgrade pip wheel
+    sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install \
+        -r "${NETBOX_INSTALL_DIR}/requirements.txt"
+    sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install \
+        gunicorn psycopg2-binary
+    echo "  Python dependencies installed."
+} >> "$LOG" 2>&1
 
-# -----------------------------------------------------------------------------
-# 8. FICHEIRO DE CONFIGURAÇÃO DO NETBOX
-# -----------------------------------------------------------------------------
-info "8/10 — A criar configuração do NetBox..."
-NETBOX_CONF="${NETBOX_INSTALL_DIR}/netbox/netbox/configuration.py"
+# -----------------------------
+# STEP 7: NetBox configuration
+# -----------------------------
+echo "${MSG_STEP7}"
+log_section "STEP 7: NetBox Configuration"
+{
+    NETBOX_CONF="${NETBOX_INSTALL_DIR}/netbox/netbox/configuration.py"
+    cp "${NETBOX_INSTALL_DIR}/netbox/netbox/configuration_example.py" \
+       "${NETBOX_CONF}"
 
-cp "${NETBOX_INSTALL_DIR}/netbox/netbox/configuration_example.py" \
-   "${NETBOX_CONF}"
-
-# Substituições no ficheiro de configuração
-python3 - <<PYEOF
+    python3 - <<PYEOF
 import re, pathlib
 
 conf = pathlib.Path("${NETBOX_CONF}").read_text()
 
-# ALLOWED_HOSTS
 conf = re.sub(
     r"ALLOWED_HOSTS\s*=\s*\[.*?\]",
-    "ALLOWED_HOSTS = ['${NETBOX_ALLOWED_HOST}']",
+    "ALLOWED_HOSTS = ['${NB_DOMAIN}', '${SERVER_IP}', 'localhost', '127.0.0.1']",
     conf, flags=re.DOTALL
 )
 
-# DATABASE
 conf = re.sub(
     r"DATABASE\s*=\s*\{.*?\}",
     """DATABASE = {
@@ -191,7 +378,6 @@ conf = re.sub(
     conf, flags=re.DOTALL
 )
 
-# REDIS
 conf = re.sub(
     r"REDIS\s*=\s*\{.*?\}\s*\}",
     """REDIS = {
@@ -213,7 +399,6 @@ conf = re.sub(
     conf, flags=re.DOTALL
 )
 
-# SECRET_KEY
 conf = re.sub(
     r"SECRET_KEY\s*=\s*['\"].*?['\"]",
     "SECRET_KEY = '${NETBOX_SECRET_KEY}'",
@@ -221,62 +406,58 @@ conf = re.sub(
 )
 
 pathlib.Path("${NETBOX_CONF}").write_text(conf)
-print("Configuração escrita com sucesso.")
+print("  Configuration written.")
 PYEOF
 
-chown netbox:netbox "${NETBOX_CONF}"
-chmod 640 "${NETBOX_CONF}"
+    chown netbox:netbox "${NETBOX_CONF}"
+    chmod 640 "${NETBOX_CONF}"
+} >> "$LOG" 2>&1
 
-# -----------------------------------------------------------------------------
-# 9. MIGRAÇÕES, FICHEIROS ESTÁTICOS E SUPER-UTILIZADOR
-# -----------------------------------------------------------------------------
-info "9/10 — A inicializar base de dados e criar super-utilizador..."
-cd "${NETBOX_INSTALL_DIR}/netbox"
+# -----------------------------
+# STEP 8: DB migration + static files + superuser
+# -----------------------------
+echo "${MSG_STEP8}"
+log_section "STEP 8: Database Migration & Superuser"
+{
+    cd "${NETBOX_INSTALL_DIR}/netbox"
+    MANAGE="${NETBOX_VENV_DIR}/bin/python3 manage.py"
 
-MANAGE="${NETBOX_VENV_DIR}/bin/python3 manage.py"
+    sudo -u netbox ${MANAGE} migrate
+    sudo -u netbox ${MANAGE} collectstatic --no-input
+    sudo -u netbox ${MANAGE} remove_stale_contenttypes --no-input 2>/dev/null || true
 
-sudo -u netbox ${MANAGE} migrate
-sudo -u netbox ${MANAGE} collectstatic --no-input
-sudo -u netbox ${MANAGE} remove_stale_contenttypes --no-input 2>/dev/null || true
-
-# Criar super-utilizador de forma não interactiva
-sudo -u netbox ${MANAGE} shell <<PYEOF
+    sudo -u netbox ${MANAGE} shell <<PYEOF
 from django.contrib.auth import get_user_model
 User = get_user_model()
 if not User.objects.filter(username='${ADMIN_USER}').exists():
     User.objects.create_superuser('${ADMIN_USER}', '${ADMIN_EMAIL}', '${ADMIN_PASS}')
-    print("Super-utilizador criado: ${ADMIN_USER}")
+    print("  Superuser created: ${ADMIN_USER}")
 else:
-    print("Super-utilizador já existe.")
+    print("  Superuser already exists.")
 PYEOF
 
-# -----------------------------------------------------------------------------
-# 10. GUNICORN + NGINX + SYSTEMD
-# -----------------------------------------------------------------------------
-info "10/10 — A configurar Gunicorn, Nginx e serviços systemd..."
+    echo "  Database ready."
+} >> "$LOG" 2>&1
 
-# --- Gunicorn config ---
-cat > /etc/netbox/gunicorn.py <<'EOF'
-bind = "127.0.0.1:8001"
-workers = 5
-threads = 3
-timeout = 120
-max_requests = 5000
+# -----------------------------
+# STEP 9: Gunicorn + Nginx + systemd + SSL
+# -----------------------------
+echo "${MSG_STEP9}"
+log_section "STEP 9: Gunicorn / Nginx / systemd / SSL"
+{
+    # --- Gunicorn config ---
+    mkdir -p /etc/netbox
+    cat > /etc/netbox/gunicorn.py << 'GCFG'
+bind          = "127.0.0.1:8001"
+workers       = 5
+threads       = 3
+timeout       = 120
+max_requests  = 5000
 max_requests_jitter = 500
-EOF
+GCFG
 
-mkdir -p /etc/netbox
-cat > /etc/netbox/gunicorn.py <<'EOF'
-bind = "127.0.0.1:8001"
-workers = 5
-threads = 3
-timeout = 120
-max_requests = 5000
-max_requests_jitter = 500
-EOF
-
-# --- Serviço netbox (Gunicorn) ---
-cat > /etc/systemd/system/netbox.service <<EOF
+    # --- netbox.service ---
+    cat > /etc/systemd/system/netbox.service << SVCEOF
 [Unit]
 Description=NetBox WSGI Service
 Documentation=https://docs.netbox.dev/
@@ -298,10 +479,10 @@ PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
-EOF
+SVCEOF
 
-# --- Serviço netbox-rq (worker de filas) ---
-cat > /etc/systemd/system/netbox-rq.service <<EOF
+    # --- netbox-rq.service ---
+    cat > /etc/systemd/system/netbox-rq.service << RQEOF
 [Unit]
 Description=NetBox Request Queue Worker
 Documentation=https://docs.netbox.dev/
@@ -319,13 +500,46 @@ PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
-EOF
+RQEOF
 
-# --- Nginx ---
-cat > /etc/nginx/conf.d/netbox.conf <<EOF
+    # --- Self-signed SSL certificate ---
+    echo "  ${MSG_SELFSIGNED}"
+    SSL_DIR="/etc/nginx/ssl/netbox"
+    mkdir -p "${SSL_DIR}"
+    openssl req -x509 -nodes -days 3650 -newkey rsa:4096 \
+        -keyout "${SSL_DIR}/netbox.key" \
+        -out    "${SSL_DIR}/netbox.crt" \
+        -subj "/C=PT/ST=Local/L=Local/O=NetBox/CN=${NB_DOMAIN}" \
+        -addext "subjectAltName=DNS:${NB_DOMAIN},IP:${SERVER_IP}" 2>/dev/null
+    chmod 600 "${SSL_DIR}/netbox.key"
+    chmod 644 "${SSL_DIR}/netbox.crt"
+
+    # --- Nginx config ---
+    rm -f /etc/nginx/conf.d/default.conf
+    cat > /etc/nginx/conf.d/netbox.conf << NGINXEOF
+# Redirect HTTP -> HTTPS
 server {
     listen 80;
-    server_name ${NGINX_SERVER_NAME};
+    server_name ${NB_DOMAIN} ${SERVER_IP};
+    return 301 https://\$host\$request_uri;
+}
+
+# NetBox HTTPS reverse proxy
+server {
+    listen 443 ssl;
+    http2  on;
+    server_name ${NB_DOMAIN} ${SERVER_IP};
+
+    ssl_certificate     ${SSL_DIR}/netbox.crt;
+    ssl_certificate_key ${SSL_DIR}/netbox.key;
+    ssl_protocols       TLSv1.2 TLSv1.3;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+    ssl_session_cache   shared:SSL:10m;
+    ssl_session_timeout 1d;
+
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    add_header X-Frame-Options            "SAMEORIGIN"      always;
+    add_header X-Content-Type-Options     "nosniff"         always;
 
     client_max_body_size 25m;
 
@@ -334,68 +548,144 @@ server {
     }
 
     location / {
-        proxy_pass http://127.0.0.1:8001;
-        proxy_set_header X-Forwarded-Host \$http_host;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-        proxy_redirect http://127.0.0.1:8001 http://\$http_host/;
+        proxy_pass         http://127.0.0.1:8001;
+        proxy_http_version 1.1;
+        proxy_set_header   Host              \$host;
+        proxy_set_header   X-Real-IP         \$remote_addr;
+        proxy_set_header   X-Forwarded-For   \$proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto \$scheme;
         proxy_read_timeout 120;
         proxy_connect_timeout 120;
         proxy_send_timeout 120;
     }
 }
-EOF
+NGINXEOF
 
-# Remover default do nginx se existir
-rm -f /etc/nginx/conf.d/default.conf
+    # --- SELinux ---
+    setsebool -P httpd_can_network_connect 1 2>/dev/null || true
+    setsebool -P httpd_execmem 1             2>/dev/null || true
+    semanage fcontext -a -t httpd_exec_t \
+        "${NETBOX_VENV_DIR}/bin/python3" 2>/dev/null || true
+    restorecon -Rv "${NETBOX_INSTALL_DIR}" 2>/dev/null || true
 
-# --- SELinux ---
-setsebool -P httpd_can_network_connect 1 2>/dev/null || true
-setsebool -P httpd_execmem 1             2>/dev/null || true
-semanage fcontext -a -t httpd_exec_t \
-    "${NETBOX_VENV_DIR}/bin/python3" 2>/dev/null || true
-restorecon -Rv "${NETBOX_INSTALL_DIR}" 2>/dev/null || true
+    # --- Firewall ---
+    if systemctl is-active --quiet firewalld; then
+        firewall-cmd --permanent --add-service=http
+        firewall-cmd --permanent --add-service=https
+        firewall-cmd --reload
+    fi
 
-# --- Firewall ---
-if systemctl is-active --quiet firewalld; then
-    firewall-cmd --permanent --add-service=http
-    firewall-cmd --permanent --add-service=https
-    firewall-cmd --reload
-fi
+    # --- Enable & start services ---
+    systemctl daemon-reload
+    systemctl enable --now netbox netbox-rq nginx
 
-# --- Activar e iniciar serviços ---
-systemctl daemon-reload
-systemctl enable --now netbox netbox-rq nginx
-
-# --- Housekeeping cron ---
-cat > /etc/cron.d/netbox <<EOF
+    # --- Housekeeping cron ---
+    cat > /etc/cron.d/netbox << CRONEOF
 # NetBox daily housekeeping
-0 0 * * * netbox ${NETBOX_VENV_DIR}/bin/python3 \\
+0 0 * * * netbox ${NETBOX_VENV_DIR}/bin/python3 \
     ${NETBOX_INSTALL_DIR}/netbox/manage.py housekeeping
-EOF
+CRONEOF
 
-# =============================================================================
-# RESUMO FINAL
-# =============================================================================
+    echo "  Services started."
+} >> "$LOG" 2>&1
+
+# -----------------------------
+# SAVE CREDENTIALS TO FILE
+# -----------------------------
+log_section "Credentials Saved"
+
+cat > "$CRED_FILE" << CREDS
+============================================================
+  ${MSG_CREDTITLE}
+  ${MSG_GENERATED}: $(date)
+============================================================
+
+  ${MSG_URL}:
+  https://${NB_DOMAIN}
+  https://${SERVER_IP}
+
+  ${MSG_ADMINUSER}:  ${ADMIN_USER}
+  ${MSG_ADMINPASS}: ${ADMIN_PASS}
+  ${MSG_DBPASS}:  ${NETBOX_DB_PASS}
+
+  ${MSG_SRVSECTION}
+  ${MSG_SERVERIP}:  ${SERVER_IP}
+  ${MSG_ACCESSURL}: https://${NB_DOMAIN}
+
+  Install Dir:  ${NETBOX_INSTALL_DIR}
+  Config File:  ${NETBOX_INSTALL_DIR}/netbox/netbox/configuration.py
+  Data Dir:     ${NETBOX_INSTALL_DIR}/netbox
+  ${MSG_NGINXCONF}: /etc/nginx/conf.d/netbox.conf
+  SSL Cert:     /etc/nginx/ssl/netbox/netbox.crt
+  Gunicorn Cfg: /etc/netbox/gunicorn.py
+
+  Systemd Services:
+  netbox       — Gunicorn WSGI server
+  netbox-rq    — Background task worker
+  nginx        — Reverse proxy / SSL termination
+
+  ${MSG_LOG}:   ${LOG}
+  ${MSG_CREDS}: ${CRED_FILE}
+
+  ${MSG_USEFUL_CMDS}:
+  systemctl status  netbox
+  systemctl restart netbox
+  systemctl status  netbox-rq
+  journalctl -u netbox -f
+  journalctl -u netbox-rq -f
+
+  ${MSG_SELFSIGNED_WARN}
+  To replace with Let's Encrypt:
+  dnf install -y certbot python3-certbot-nginx
+  certbot --nginx -d ${NB_DOMAIN}
+
+  ${MSG_HOSTS_NOTE}
+  ${SERVER_IP}  ${NB_DOMAIN}
+
+============================================================
+  ${MSG_KEEPFILE}
+============================================================
+CREDS
+
+chmod 600 "$CRED_FILE"
+echo "  Credentials saved to: $CRED_FILE" >> "$LOG"
+log_section "Deployment Finished — $(date)"
+
+# -----------------------------
+# SUMMARY OUTPUT
+# -----------------------------
 echo ""
-echo -e "${GREEN}============================================================${NC}"
-echo -e "${GREEN}   NetBox instalado com sucesso no AlmaLinux 10!${NC}"
-echo -e "${GREEN}============================================================${NC}"
+echo "============================================================"
+echo "  ${MSG_DONE}"
+echo "============================================================"
 echo ""
-echo -e "  URL de acesso : ${YELLOW}http://$(hostname -I | awk '{print $1}')/${NC}"
-echo -e "  Utilizador    : ${YELLOW}${ADMIN_USER}${NC}"
-echo -e "  Palavra-passe : ${YELLOW}${ADMIN_PASS}${NC}  ← altere após o login!"
-echo -e "  BD palavra-passe : ${YELLOW}${NETBOX_DB_PASS}${NC}"
+echo "  ${MSG_URL}:"
+echo "  https://${NB_DOMAIN}"
+echo "  https://${SERVER_IP}"
 echo ""
-echo -e "  Estado dos serviços:"
-systemctl is-active netbox    && echo -e "    netbox     : ${GREEN}activo${NC}" \
-                               || echo -e "    netbox     : ${RED}inactivo${NC}"
-systemctl is-active netbox-rq && echo -e "    netbox-rq  : ${GREEN}activo${NC}" \
-                               || echo -e "    netbox-rq  : ${RED}inactivo${NC}"
-systemctl is-active nginx     && echo -e "    nginx      : ${GREEN}activo${NC}" \
-                               || echo -e "    nginx      : ${RED}inactivo${NC}"
+echo "  ${MSG_ADMINUSER}:  ${ADMIN_USER}"
+echo "  ${MSG_ADMINPASS}: ${ADMIN_PASS}"
 echo ""
-echo -e "${YELLOW}NOTA: Guarde as credenciais acima em local seguro.${NC}"
-echo -e "${YELLOW}Para SSL/TLS, adicione o seu certificado no ficheiro:${NC}"
-echo -e "${YELLOW}  /etc/nginx/conf.d/netbox.conf${NC}"
+echo "  ${MSG_CHECKSTATUS}"
+for svc in netbox netbox-rq nginx; do
+    if systemctl is-active --quiet "${svc}"; then
+        echo "  ✔ ${svc}: ${MSG_RUNNING}"
+    else
+        echo "  ✘ ${svc}: ${MSG_NOTRUNNING}"
+    fi
+done
 echo ""
+echo "  Install Dir:  ${NETBOX_INSTALL_DIR}"
+echo "  ${MSG_LOG}:   ${LOG}"
+echo "  ${MSG_CREDS}: ${CRED_FILE}"
+echo ""
+echo "  ${MSG_SELFSIGNED_WARN}"
+echo "  To use Let's Encrypt:"
+echo "  dnf install -y certbot python3-certbot-nginx"
+echo "  certbot --nginx -d ${NB_DOMAIN}"
+echo ""
+echo "  ${MSG_HOSTS_NOTE}"
+echo "  ${SERVER_IP}  ${NB_DOMAIN}"
+echo ""
+echo "  ${MSG_NEXTSTEP}"
+echo "============================================================"
