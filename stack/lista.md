@@ -1,8 +1,3 @@
-<div align="right">
-
-🇺🇸 [English](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.en.md) | 🇵🇹 [Português](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md)
-
-</div>
 
 ## Softwares adotados
 
@@ -12,7 +7,7 @@
 
 ### N1 - Base
 
-[Explicação](https://github.com/runtechx/OpenFirst/discussions/1002)
+
 
 | Software | Descrição                                                                                                     |
 | ---------- | ------------------------------------------------------------------------------------------------------------- |
@@ -31,9 +26,9 @@
 
 
 
-### N2 - Casuísticos
+### N2 - Expansão
 
-[Explicação](https://github.com/runtechx/OpenFirst/discussions/1004)
+
 
 | Software  | Descrição                                                                                                                                                                                      |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -44,19 +39,9 @@
 | [NetBox](/stack/comandos.md#netbox)    | Plataforma de IP Address Management (IPAM) e Data Center Infrastructure Management (DCIM) para documentação e automação de redes.           |
 | [Terraform]() | Ferramenta de Infrastructure as Code (IaC) usada para provisionamento e gestão de infraestrutura multi-cloud. utm_source=chatgpt.com) |
 | [BookStack]() | Sistema simples e auto-hospedado para criação de documentação técnica estruturada em formato de livros e capítulos.            |
-
-
-
-
-### N3 - Candidatos
-
-[Explicação](https://github.com/runtechx/OpenFirst/discussions/1005)
-
-| Software                                                              | Descrição                                                                                                                        |
-| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| [Patchmon]() | Plataforma open source de gestão e monitorização de patches para servidores Linux, FreeBSD e Windows                             |
+| [Patchmon]() | Plataforma open source de gestão e monitorização de patches para servidores Linux, FreeBSD e Windows                            |
 | [Zimbra]()            | Plataforma colaborativa de e-mail e produtividade com suporte para calendário, contactos, chat e administração centralizada      |
-| [TrueNAS]()           | Sistema operativo open source para armazenamento em rede (NAS), com suporte para ZFS, partilha de ficheiros e backups            |
+| [TrueNAS]()           | Sistema operativo open source para armazenamento em rede (NAS), com suporte para ZFS, partilha de ficheiros e backups  |
 | [RustDesk]()             | Plataforma open source de acesso remoto e assistência remota, alternativa ao TeamViewer e AnyDesk, com suporte para self-hosting |
 | [BigBlueButton]() | |
 | [Immich]()||
