@@ -26,7 +26,7 @@ Ele funciona com ambos:
 * VirtualBox
 
 ```
-Vagrantfile → vagrant up → Hyper-V / VirtualBox → VM pronta
+Vagrantfile → vagrant up → VirtualBox → VM pronta
 ```
 
 ## Diferença importante (VirtualBox vs Hyper-V)
