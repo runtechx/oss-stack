@@ -14,7 +14,7 @@ Os laboratórios encontram-se no GitHub em [runtechx/OpenFirst/labs](https://git
 2. Um ficheiro de exercícios em Markdown
 3. Em alguns casos, um diagrama para auxiliar na compreensão do ambiente e da estrutura do laboratório
 
-Exemplo são os seguintes ficheiros:
+Exemplo ver os seguintes ficheiros em `/labs`:
 
 1. `lab-lnx0-vagrantfile`
 2. `lab-lnx0-exercicios.md`
