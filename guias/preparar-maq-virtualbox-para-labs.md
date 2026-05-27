@@ -74,20 +74,7 @@ Sem Vagrant, tens de criar cada VM manualmente no VirtualBox — escolher ISO, c
 >```powershell
 >Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -NoRestart
 >```
-> E
->```powershell
-># Desativar o hypervisor do boot
->bcdedit /set hypervisorlaunchtype off
-># Desativar Virtual Machine Platform
->dism /online /disable-feature /featurename:VirtualMachinePlatform /norestart
-># Desativar Windows Hypervisor Platform
->dism /online /disable-feature /featurename:HypervisorPlatform /norestart
-># Desativar WSL2
->dism /online /disable-feature /featurename:Microsoft-Windows-Subsystem-Linux /norestart
-># Desativar Sandbox
->dism /online /disable-feature /featurename:Containers-DisposableClientVM /norestart
->dism.exe /Online /Disable-Feature:Containers
->```
+>
 > (Reboot necessário)
 
 ### 1. Instalar VirtualBox
