@@ -14,7 +14,7 @@ Os laboratórios encontram-se no GitHub em [runtechx/OpenFirst/labs](https://git
 2. Um ficheiro de exercícios em Markdown
 3. Em alguns casos, um diagrama para auxiliar na compreensão do ambiente e da estrutura do laboratório
 
-Neste exemplo serão utilizados os seguintes ficheiros:
+Exemplo são os seguintes ficheiros:
 
 1. `lab-lnx0-vagrantfile`
 2. `lab-lnx0-exercicios.md`
@@ -22,7 +22,7 @@ Neste exemplo serão utilizados os seguintes ficheiros:
 
 # Requisitos
 
-- Windows 11 com Hyper-V ativo
+- Hyper-V ativo ou Virtualbox instalado
 - Vagrant instalado
 - Ligação à Internet durante a fase inicial
 
@@ -38,15 +38,25 @@ Recursos mínimos recomendados:
 
 Executar o PowerShell como Administrador:
 
+** Para Hyper-V**
+
 ```powershell
 cd C:\RTLabs
 
 Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/lab-lnx0-vagrantfile" `
+  -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/lab-hyperv-vagrantfile" `
   -OutFile "Vagrantfile"
 ```
 
+** Para Virtualbox**
 
+```powershell
+cd C:\RTLabs
+
+Invoke-WebRequest `
+  -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/lab-virtualbox-vagrantfile" `
+  -OutFile "Vagrantfile"
+```
 
 # 2. Levantar o laboratório
 
