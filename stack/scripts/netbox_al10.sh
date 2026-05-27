@@ -447,21 +447,24 @@ GCFG
 [Unit]
 Description=NetBox WSGI Service
 Documentation=https://docs.netbox.dev/
-After=network-online.target
+After=network-online.target postgresql.service valkey.service
 Wants=network-online.target
 
 [Service]
 User=netbox
 Group=netbox
 WorkingDirectory=${NETBOX_INSTALL_DIR}/netbox
+Environment=PYTHONPATH=${NETBOX_INSTALL_DIR}/netbox
 ExecStart=${NETBOX_VENV_DIR}/bin/gunicorn \\
     --pid /var/tmp/netbox.pid \\
     --pythonpath ${NETBOX_INSTALL_DIR}/netbox \\
     -c /etc/netbox/gunicorn.py \\
     netbox.wsgi
 Restart=on-failure
-RestartSec=30
+RestartSec=10
 PrivateTmp=true
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
@@ -472,17 +475,20 @@ SVCEOF
 [Unit]
 Description=NetBox Request Queue Worker
 Documentation=https://docs.netbox.dev/
-After=network-online.target
+After=network-online.target netbox.service
 Wants=network-online.target
 
 [Service]
 User=netbox
 Group=netbox
 WorkingDirectory=${NETBOX_INSTALL_DIR}/netbox
-ExecStart=${NETBOX_VENV_DIR}/bin/python3 manage.py rqworker
+Environment=PYTHONPATH=${NETBOX_INSTALL_DIR}/netbox
+ExecStart=${NETBOX_VENV_DIR}/bin/python3 ${NETBOX_INSTALL_DIR}/netbox/manage.py rqworker
 Restart=on-failure
-RestartSec=30
+RestartSec=10
 PrivateTmp=true
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
@@ -560,11 +566,6 @@ NGINXEOF
         firewall-cmd --permanent --add-service=https
         firewall-cmd --reload
     fi
-
-    # --- Enable & start services ---
-    systemctl daemon-reload
-    systemctl enable --now netbox netbox-rq nginx
-
     # --- Housekeeping cron ---
     cat > /etc/cron.d/netbox << CRONEOF
 # NetBox daily housekeeping
@@ -572,8 +573,34 @@ NGINXEOF
     ${NETBOX_INSTALL_DIR}/netbox/manage.py housekeeping
 CRONEOF
 
-    echo "  Services started."
+    echo "  Setup complete."
 } >> "$LOG" 2>&1
+
+# --- Enable & start services (outside log redirect so failures are visible) ---
+systemctl daemon-reload
+systemctl enable netbox netbox-rq nginx >> "$LOG" 2>&1
+
+echo "  A iniciar netbox..."
+systemctl start netbox
+sleep 5
+if ! systemctl is-active --quiet netbox; then
+    echo ""
+    echo "  !! netbox failed to start — last 30 lines of journal:"
+    journalctl -u netbox -n 30 --no-pager
+    echo ""
+fi
+
+echo "  A iniciar netbox-rq..."
+systemctl start netbox-rq
+sleep 3
+if ! systemctl is-active --quiet netbox-rq; then
+    echo ""
+    echo "  !! netbox-rq failed to start — last 20 lines of journal:"
+    journalctl -u netbox-rq -n 20 --no-pager
+    echo ""
+fi
+
+systemctl reload nginx >> "$LOG" 2>&1 || systemctl restart nginx >> "$LOG" 2>&1
 
 # -----------------------------
 # SAVE CREDENTIALS TO FILE
