@@ -18,15 +18,42 @@ Ao contrário do VirtualBox, o Hyper-V é integrado no sistema operativo e é ut
 └──────────────────────────────────────┘
 ```
 
-## O que é o Vagrant (com Hyper-V)?
+## O que é o Vagrant?
 
-O **Vagrant** continua a ser o orquestrador de máquinas virtuais.
+O **Vagrant** é o orquestrador de máquinas virtuais.
 
-A diferença é que agora comunica com o **Hyper-V em vez do VirtualBox**.
+Ele funciona com ambos:
 
+* Hyper-V
+* VirtualBox
+  
 ```
 Vagrantfile → vagrant up → Hyper-V → VM pronta
 ```
+O Vagrant não substitui o Hyper-V — ele **fala com o Hyper-V** por baixo para criar e gerir as VMs.
+
+
+## Como funcionam juntos?
+
+```
+┌──────────────┐        cria/gere         ┌───────────────┐
+│   Vagrant    │  ──────────────────────▶ │  Hyper-V     │
+│ (automação)  │                          │ (virtualização│
+│  Vagrantfile │                          │    da VM)     │
+└──────────────┘                          └───────────────┘
+```
+
+| | Hyper-V | Vagrant |
+|---|---|---|
+| O que é | Hipervisor (cria VMs) | Gestor de VMs (automação) |
+| Interface | GUI + linha de comandos | Linha de comandos |
+| Configuração | Manual (cliques) | Ficheiro de texto (`Vagrantfile`) |
+| Uso típico | Usar VMs individualmente | Labs, ambientes reproduzíveis |
+
+
+## Porquê usar os dois juntos?
+
+Sem Vagrant, tens de criar cada VM manualmente no Hyper-V — escolher ISO, configurar disco, rede, memória, instalar o SO, etc. Com Vagrant, defines tudo num `Vagrantfile` e corres `vagrant up`. Em segundos tens uma VM pronta, e qualquer pessoa com o mesmo ficheiro obtém exactamente o mesmo ambiente.
 
 ## Diferença importante (VirtualBox vs Hyper-V)
 
