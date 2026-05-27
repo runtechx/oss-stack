@@ -38,7 +38,7 @@ Recursos mínimos recomendados:
 
 Executar o PowerShell como Administrador:
 
-** Para Hyper-V**
+**Para Hyper-V**
 
 ```powershell
 cd C:\RTLabs
@@ -48,7 +48,7 @@ Invoke-WebRequest `
   -OutFile "Vagrantfile"
 ```
 
-** Para Virtualbox**
+**Para Virtualbox**
 
 ```powershell
 cd C:\RTLabs
