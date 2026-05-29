@@ -1,74 +1,117 @@
 <div align="right">
 
-🇺🇸 [English](https://github.com/runtechx/OpenFirst/blob/main/README.en.md) | 🇵🇹 [Português](https://github.com/runtechx/OpenFirst/blob/main/README.md)
+🇺🇸 [English](https://github.com/runtechx/OpenFirst/blob/main/README.en.md) | 🇵🇹 Português
 
 </div>
 
-# Declaração
+# OpenFirst — Framework de Decisão Tecnológica
 
-A **RunTech** adota o princípio estratégico **“Open First”**, baseado na priorização de **software open source** e **padrões abertos** como fundamentos da sua arquitetura tecnológica e das suas decisões de engenharia.
+## Declaração
 
-Esta abordagem promove transparência, auditabilidade, interoperabilidade e independência tecnológica, reduzindo a dependência de fornecedores (vendor lock-in) e reforçando o controlo sobre sistemas, dados e infraestruturas críticas. O objetivo é garantir soluções mais seguras, sustentáveis e alinhadas com as necessidades operacionais e estratégicas do negócio.
+O **OpenFirst** é um framework de decisão tecnológica que estabelece um modelo estruturado para adoção de tecnologias open source e padrões abertos em ambientes empresariais.
 
-## Princípio Open First
+Este framework prioriza a transparência, auditabilidade, interoperabilidade e independência tecnológica de longo prazo, reduzindo a dependência de fornecedores (vendor lock-in) e aumentando o controlo sobre sistemas, dados e infraestruturas críticas.
 
-A estratégia tecnológica da RunTech segue um modelo de decisão estruturado:
+O OpenFirst foi concebido para apoiar organizações na construção de ecossistemas tecnológicos seguros, escaláveis e sustentáveis, alinhados com objetivos operacionais e estratégicos de negócio.
 
-### 1. Open Source como padrão preferencial
-O software open source é considerado a opção por defeito sempre que exista maturidade técnica, suporte adequado e viabilidade operacional. É dada preferência a soluções self-hosted, bem como a tecnologias com ecossistemas ativos e alinhamento com standards abertos.
 
-### 2. Adoção criteriosa de soluções proprietárias
-Soluções proprietárias ou SaaS são consideradas apenas quando não existem alternativas open source adequadas aos requisitos funcionais, técnicos ou de conformidade. Nestes casos, a seleção de fornecedores é baseada em critérios de segurança, privacidade, interoperabilidade e alinhamento com standards abertos, assegurando sempre uma estratégia de mitigação de dependência e possibilidade de migração futura.
+
+## Princípio OpenFirst
+
+O framework OpenFirst segue um modelo estruturado de decisão tecnológica:
+
+### 1. Open Source como padrão por defeito
+
+O software open source é a opção padrão sempre que cumpre requisitos de maturidade, viabilidade operacional e suporte adequado.
+
+É dada preferência a:
+
+* soluções self-hosted
+* tecnologias com ecossistemas ativos e maduros
+* arquiteturas baseadas em padrões abertos e interoperáveis
+
+
+
+### 2. Adoção controlada de soluções proprietárias
+
+Soluções proprietárias ou SaaS são utilizadas apenas quando não existem alternativas open source viáveis que satisfaçam requisitos funcionais, técnicos ou de conformidade.
+
+Quando adotadas, a sua seleção baseia-se em:
+
+* requisitos de segurança e privacidade
+* capacidade de interoperabilidade
+* adesão a standards abertos
+* existência de estratégia de saída (exit strategy) e possibilidade de migração futura
+
+
 
 ## Princípios Operacionais
 
-A execução do princípio Open First é suportada pelos seguintes princípios operacionais:
+A implementação do OpenFirst é suportada pelos seguintes princípios de engenharia:
 
-- **Open First by Design** – O open source é o ponto de partida no ciclo de decisão tecnológica.
-- **Automação e Infrastructure as Code** – A gestão de infraestrutura e serviços é automatizada sempre que aplicável.
-- **Security by Design** – A segurança é integrada desde a conceção das soluções.
-- **Escalabilidade e Resiliência** – As arquiteturas são desenhadas para suportar crescimento e elevada disponibilidade.
-- **Observabilidade e Controlo Operacional** – Monitorização contínua, métricas e visibilidade end-to-end dos sistemas.
+* **Open First by Design** — o open source é o ponto de partida por defeito nas decisões tecnológicas
+* **Infrastructure as Code e Automação** — infraestrutura e serviços são automatizados sempre que possível
+* **Security by Design** — segurança incorporada desde a fase de conceção dos sistemas
+* **Escalabilidade e Resiliência** — arquiteturas desenhadas para crescimento e alta disponibilidade
+* **Observabilidade e Controlo Operacional** — visibilidade total através de métricas, logs e tracing
+
+
+
+## Valor para o Negócio
+
+O OpenFirst não é uma ideologia — é um framework de engenharia e de decisão tecnológica.
+
+A sua adoção permite às organizações:
+
+* reduzir dependência de fornecedores específicos
+* diminuir custos operacionais e de longo prazo
+* acelerar integração entre sistemas e equipas
+* aumentar segurança através de transparência e auditabilidade
+* construir stacks tecnológicos portáveis e sustentáveis
+
+
 
 ## Organização do Repositório
 
 > [!TIP]
-> Explore as diferentes pastas deste repositório para conhecer as tecnologias, guias, laboratórios e ferramentas utilizadas pela RunTech na construção e operação da sua infraestrutura TIC.
+> Explore as diferentes pastas deste repositório para conhecer tecnologias, guias, laboratórios e ferramentas que suportam a implementação prática do framework OpenFirst.
+
+| Pasta                                                                     | Objetivo                                                                                   |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| [`blocklists`](/blocklists)                                               | Listas de bloqueio de IPs e domínios associados a publicidade abusiva, malware e tracking. |
+| [`guias`](/guias)                                                         | Documentação técnica e procedimentos operacionais.                                         |
+| [`labs`](/labs)                                                           | Laboratórios e ambientes de teste para validação de tecnologias.                           |
+| [`stack`](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) | Stack tecnológica e automações para ambientes open source em AlmaLinux 10+.                |
 
 
-| Pasta         | Objetivo                                                                                                                                                                                                              |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`blocklists`](/blocklists)  | Conjunto de listas de bloqueio de IPs e domínios associados a publicidade abusiva, malware, tracking e outras fontes potencialmente maliciosas, utilizadas para reforçar a segurança e privacidade da infraestrutura. |
-| [`guias`](/guias)       | Coleção de guias técnicos, documentação e procedimentos destinados à instalação, configuração, administração e adoção de boas práticas operacionais.                                                                  |
-| [`labs`](/labs)        | Laboratórios práticos e ambientes de teste criados para explorar funcionalidades, validar cenários e aprofundar conhecimentos sobre diferentes tecnologias e soluções.     |
-| [`stack`](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) | Lista da stack tecnológica utilizada pela RunTech e scripts automatizados para instalação e preparação de software open source em sistemas AlmaLinux 10+.  |                                                                                    |
 
 ## Contribuições
 
-Acreditamos que o ecossistema open source evolui através da colaboração e da partilha de conhecimento.
+O ecossistema OpenFirst evolui através da colaboração e da partilha de conhecimento técnico.
 
-Caso pretenda sugerir novas tecnologias, melhorias ou alternativas às soluções atualmente adotadas, convidamos à abertura de um *issue* neste repositório.
+São valorizadas contribuições que:
 
-Todas as contribuições são bem-vindas, especialmente quando:
+* proponham alternativas open source viáveis e maduras
+* incluam fundamentação técnica ou comparação de soluções
+* contribuam para melhorar segurança, automação, eficiência ou escalabilidade
 
-* Apresentam alternativas open source alinhadas com os nossos princípios.
-* Incluem fundamentação técnica e/ou comparação com soluções existentes.
-* Contribuem para melhorar a eficiência, segurança, automação ou escalabilidade da infraestrutura.
+Se este framework for útil:
 
-Se este projeto lhe foi útil, considere também:
+* ⭐ estrela o repositório
+* segue a organização para acompanhar novas stacks e automações
+* partilha com equipas e comunidades técnicas
 
-* Deixar uma ⭐ no repositório
-* Seguir a organização para acompanhar novas funcionalidades, stacks e automações open source
-* Partilhar o projeto com outros profissionais e comunidades tecnológicas lusófonas
-
-A sua participação ajuda-nos a fortalecer um ecossistema tecnológico mais aberto, acessível e colaborativo.
 
 ## Perguntas Frequentes (FAQ)
 
-Pode encontrar mais perguntas, respostas e discussões técnicas na secção de FAQ do repositório, onde são abordados temas relacionados com a abordagem `Open First`, automação, infraestrutura, segurança, laboratórios e tecnologias utilizadas pela RunTech.
+Mais informações, discussões e respostas técnicas podem ser encontradas na secção de FAQ do repositório.
 
-Clique aqui: [FAQ](https://github.com/runtechx/OpenFirst/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aclosed)
+👉 [https://github.com/runtechx/OpenFirst/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aclosed](https://github.com/runtechx/OpenFirst/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aclosed)
+
+
 
 <div align="right">
 Source: https://github.com/runtechx/
 </div>
+
+
