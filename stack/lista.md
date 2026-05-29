@@ -1,3 +1,8 @@
+<div align="right">
+  
+[OpenFirst](https://github.com/runtechx/OpenFirst/blob/main/README.md) | [Comandos](https://github.com/runtechx/OpenFirst/blob/main/stack/comandos.md)
+
+</div>
 
 ## Softwares adotados
 
@@ -39,7 +44,7 @@
 | Email / Colaboração        | Zimbra                   | Microsoft Exchange Online       |
 | NAS / Storage              | TrueNAS                  | NetApp ONTAP                    |
 | Acesso Remoto              | RustDesk                 | TeamViewer                      |
-| Videoconferência           | BigBlueButton            | Zoom                            |
+| Videoconferência           | BigBlueButton            | Zoom / Microsoft Teams          |
 | Fotos / Backup             | Immich                   | Google Photos                   |
 
 
