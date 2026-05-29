@@ -1,8 +1,4 @@
-<div align="right">
 
-🇺🇸 [English](https://github.com/runtechx/OpenFirst/blob/main/README.en.md) | 🇵🇹 Português
-
-</div>
 
 # OpenFirst — Framework de Decisão Tecnológica
 
