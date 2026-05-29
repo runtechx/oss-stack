@@ -7,42 +7,40 @@
 
 ### N1 - Base
 
+| Categoria                 | Ferramenta (Open Source) | Ferramenta (Comercial)          |
+| ------------------------- | ------------------------ | ------------------------------- |
+| Virtualização             | Proxmox VE               | VMware vSphere                  |
+| Backup                    | Proxmox Backup Server    | Veeam Backup & Replication      |
+| Firewall / Rede           | OPNsense                 | Fortinet FortiGate              |
+| VoIP / Comunicação        | Issabel                  | 3CX                             |
+| Sistema Operativo         | AlmaLinux                | Red Hat Enterprise Linux (RHEL) |
+| Monitorização             | Zabbix                   | Datadog                         |
+| SIEM / Segurança          | Wazuh                    | FortiSIEM                       |
+| Gestão de Passwords       | Passbolt                 | 1Password Business              |
+| IAM / Identidade          | FreeIPA                  | Microsoft Entra ID (Azure AD)   |
+| IAM Avançado / SSO        | Keycloak                 | Okta                            |
+| Cloud Privada / Ficheiros | OpenCloud                | Microsoft OneDrive for Business |
+| ITSM / Service Desk       | GLPI                     | ServiceNow                      |
 
-| Software                                                                               | Descrição                                                                                                                          |
-| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| [Proxmox VE](https://www.proxmox.com/en/products/proxmox-virtual-environment/overview) | Plataforma de virtualização open source baseada em KVM e containers LXC.                                                           |
-| [Proxmox BS](https://www.proxmox.com/en/products/proxmox-backup-server/overview)       | Solução de backup e recuperação integrada ao ecossistema Proxmox.                                                                  |
-| [OPNsense](https://opnsense.org/)                                                      | Firewall e roteador open source baseado em FreeBSD.                                                                                |
-| [Issabel](https://www.issabel.com)                                                     | Plataforma de comunicações unificadas (VoIP, PBX e call center).                                                                   |
-| [AlmaLinux](https://almalinux.org/)                                                    | Distribuição Linux open source focada em estabilidade, segurança e ambientes empresariais.                                         |
-| [Zabbix](/stack/comandos.md#zabbix)                                                    | Sistema de monitorização de redes, servidores, aplicações e serviços.                                                              |
-| [Wazuh](/stack/comandos.md#wazuh)                                                      | Plataforma de segurança e monitorização com capacidades SIEM e XDR.                                                                |
-| [Passbolt](/stack/comandos.md#passbolt)                                                | Plataforma de gestão segura de passwords para equipas e ambientes empresariais.                                                    |
-| [FreeIPA](/stack/comandos.md#freeipa)                                                  | Plataforma de gestão centralizada de identidade, autenticação e políticas de acesso.                                               |
-| [Keycloak](/stack/comandos.md#keycloak)                                                | Plataforma open source de gestão de identidades e acessos (IAM), com suporte para SSO, MFA e integração com LDAP/Active Directory. |
-| [OpenCloud](/stack/comandos.md#opencloud)                                              | Plataforma de cloud privada para armazenamento, sincronização e colaboração de ficheiros.                                          |
-| [GLPI](/stack/comandos.md#glpi)                                                        | Sistema de gestão de ativos de TI, inventário e service desk.                                                                      |
 
 
 ### N2 - Expansão
 
-
-
-| Software                            | Descrição                                                                                                                              |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| [Odoo]()                            | ERP open source para gestão empresarial, cobrindo áreas como vendas, contabilidade, inventário e CRM.                                  |
-| [WordPress]()                       | Sistema de gestão de conteúdos (CMS) amplamente usado para criação de sites, blogs e portais.                                          |
-| [Ansible]()                         | Ferramenta de automação para configuração, deployment e gestão de infraestrutura sem agentes.                                          |
-| [GitLab]()                          | Plataforma de DevOps para gestão de código-fonte Git, CI/CD e colaboração em desenvolvimento.                                          |
-| [NetBox](/stack/comandos.md#netbox) | Plataforma de IP Address Management (IPAM) e Data Center Infrastructure Management (DCIM) para documentação e automação de redes.      |
-| [Terraform]()                       | Ferramenta de Infrastructure as Code (IaC) usada para provisionamento e gestão de infraestrutura multi-cloud.                          |
-| [BookStack]()                       | Sistema simples e auto-hospedado para criação de documentação técnica estruturada em formato de livros e capítulos.                    |
-| [Patchmon]()                        | Plataforma open source de gestão e monitorização de patches para servidores Linux, FreeBSD e Windows.                                  |
-| [Zimbra]()                          | Plataforma colaborativa de e-mail e produtividade com suporte para calendário, contactos, chat e administração centralizada.           |
-| [TrueNAS]()                         | Sistema operativo open source para armazenamento em rede (NAS), com suporte para ZFS, partilha de ficheiros e backups.                 |
-| [RustDesk]()                        | Plataforma open source de acesso remoto e assistência remota, alternativa ao TeamViewer e AnyDesk, com suporte para self-hosting.      |
-| [BigBlueButton]()                   | Plataforma open source de videoconferência e ensino à distância, desenvolvida para aulas online, reuniões e colaboração em tempo real. |
-| [Immich]()                          | Plataforma open source de gestão e backup de fotografias e vídeos, alternativa self-hosted ao Google Photos.                           |
+| Categoria                  | Ferramenta (Open Source) | Ferramenta (Comercial)          |
+| -------------------------- | ------------------------ | ------------------------------- |
+| ERP                        | Odoo                     | SAP S/4HANA                     |
+| CMS                        | WordPress                | Adobe Experience Manager        |
+| Automação / IaC            | Ansible                  | Puppet Enterprise               |
+| DevOps / Repositório       | GitLab                   | GitHub Enterprise               |
+| IPAM / DCIM                | NetBox                   | SolarWinds IP Address Manager   |
+| Infraestrutura como Código | Terraform                | AWS CloudFormation              |
+| Documentação               | BookStack                | Confluence                      |
+| Patch Management           | Patchmon                 | ManageEngine Patch Manager Plus |
+| Email / Colaboração        | Zimbra                   | Microsoft Exchange Online       |
+| NAS / Storage              | TrueNAS                  | NetApp ONTAP                    |
+| Acesso Remoto              | RustDesk                 | TeamViewer                      |
+| Videoconferência           | BigBlueButton            | Zoom                            |
+| Fotos / Backup             | Immich                   | Google Photos                   |
 
 
 
