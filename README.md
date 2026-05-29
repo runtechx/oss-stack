@@ -1,11 +1,14 @@
 <div align="right">
-
+  
 [OpenFirst](https://github.com/runtechx/OpenFirst/blob/main/README.md) |
 [Stack](/stack/lista.md) |
 [Guias](/guias/pg1.md) |
 [Comandos](/stack/comandos.md)
 
+&nbsp;
+&nbsp;
 </div>
+
 
 # OpenFirst — Framework de Decisão Tecnológica
 
@@ -110,6 +113,7 @@ Mais informações, discussões e respostas técnicas podem ser encontradas na s
 
 
 
+&nbsp;
 <div align="right">
 Source: https://github.com/runtechx/
 </div>
