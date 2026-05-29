@@ -6,29 +6,29 @@
 
 # Declaração
 
-A **RunTech** segue uma abordagem **“Open First”**, priorizando a adoção, promoção e contribuição para **software de código aberto (Open Source)** e **padrões abertos** em todas as decisões tecnológicas.
+A **RunTech** adota o princípio estratégico **“Open First”**, baseado na priorização de **software open source** e **padrões abertos** como fundamentos da sua arquitetura tecnológica e das suas decisões de engenharia.
 
-Acreditamos que o open source proporciona maior transparência, auditabilidade e sustentabilidade, permitindo reduzir dependências de fornecedores e aumentar o controlo sobre sistemas e dados críticos. Esta filosofia possibilita a construção de infraestruturas mais flexíveis, seguras e alinhadas com as necessidades reais do negócio.
+Esta abordagem promove transparência, auditabilidade, interoperabilidade e independência tecnológica, reduzindo a dependência de fornecedores (vendor lock-in) e reforçando o controlo sobre sistemas, dados e infraestruturas críticas. O objetivo é garantir soluções mais seguras, sustentáveis e alinhadas com as necessidades operacionais e estratégicas do negócio.
 
-## Abordagem Open First
+## Princípio Open First
 
-Na **RunTech**, a adoção de tecnologia assenta num modelo simples, consciente e sustentável:
+A estratégia tecnológica da RunTech segue um modelo de decisão estruturado:
 
-1. **Priorizar software de código aberto**
-   O open source é a escolha padrão sempre que exista uma solução tecnicamente viável. Privilegiamos plataformas self-hosted e incentivamos a sua utilização, evolução e contribuição ativa para a comunidade. Esta abordagem reforça a independência tecnológica, a transparência operacional e a capacidade de adaptação a longo prazo.
+### 1. Open Source como padrão preferencial
+O software open source é considerado a opção por defeito sempre que exista maturidade técnica, suporte adequado e viabilidade operacional. É dada preferência a soluções self-hosted, bem como a tecnologias com ecossistemas ativos e alinhamento com standards abertos.
 
-2. **Adotar soluções proprietárias apenas quando necessário**
-   Quando não existir uma alternativa open source adequada aos requisitos técnicos ou operacionais, recorremos a soluções proprietárias ou SaaS de forma criteriosa. Nestes casos, damos preferência a fornecedores alinhados com standards abertos, boas práticas de segurança, privacidade e interoperabilidade. Todas as decisões são revistas periodicamente, com o objetivo de avaliar futuras migrações para alternativas open source.
+### 2. Adoção criteriosa de soluções proprietárias
+Soluções proprietárias ou SaaS são consideradas apenas quando não existem alternativas open source adequadas aos requisitos funcionais, técnicos ou de conformidade. Nestes casos, a seleção de fornecedores é baseada em critérios de segurança, privacidade, interoperabilidade e alinhamento com standards abertos, assegurando sempre uma estratégia de mitigação de dependência e possibilidade de migração futura.
 
 ## Princípios Operacionais
 
-A nossa infraestrutura e processos tecnológicos são orientados pelos seguintes princípios:
+A execução do princípio Open First é suportada pelos seguintes princípios operacionais:
 
-* **Open First by Design** – O open source é o ponto de partida para qualquer decisão tecnológica.
-* **Automação** – Infraestrutura e serviços geridos como código sempre que possível.
-* **Segurança** – Implementação de controlos e boas práticas desde a base (*security by design*).
-* **Escalabilidade** – Soluções preparadas para crescimento, evolução e alta disponibilidade.
-* **Observabilidade** – Monitorização, métricas e visibilidade contínua sobre sistemas e serviços.
+- **Open First by Design** – O open source é o ponto de partida no ciclo de decisão tecnológica.
+- **Automação e Infrastructure as Code** – A gestão de infraestrutura e serviços é automatizada sempre que aplicável.
+- **Security by Design** – A segurança é integrada desde a conceção das soluções.
+- **Escalabilidade e Resiliência** – As arquiteturas são desenhadas para suportar crescimento e elevada disponibilidade.
+- **Observabilidade e Controlo Operacional** – Monitorização contínua, métricas e visibilidade end-to-end dos sistemas.
 
 ## Organização do Repositório
 
