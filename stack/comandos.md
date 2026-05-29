@@ -1,6 +1,6 @@
 <div align="right">
-  
-[Stack](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) | [Guias](https://github.com/runtechx/OpenFirst/blob/main/stack/comandos.md)
+ 
+&larr; [Stack](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) | [Guias](https://github.com/runtechx/OpenFirst/blob/main/stack/comandos.md) &rarr;
 
 </div>
 
