@@ -2,7 +2,7 @@
 
 [OpenFirst](https://github.com/runtechx/OpenFirst/blob/main/README.md) |
 [Stack](./stack/lista.md) |
-[Guias](./stack/pg1.md) |
+[Guias](./guias/pg1.md) |
 [Comandos](./stack/comandos.md)
 
 </div>
