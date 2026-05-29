@@ -11,8 +11,6 @@
 
 # Softwares adotados
 
->[!TIP]
->Clique no nome de cada solução para aceder aos comandos de instalação rápida
 
 
 ### N1 - Base
