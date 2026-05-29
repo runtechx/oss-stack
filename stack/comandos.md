@@ -1,10 +1,10 @@
-
 <div align="right">
-
-Back to List                                                                   | Voltar a lista
-🇺🇸 [English](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.en.md) | 🇵🇹 [Português](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md)
+  
+[Stack](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md)) | [Guias](https://github.com/runtechx/OpenFirst/blob/main/stack/comandos.md)
 
 </div>
+
+
 
 # Instalação rápida diretamente no AlmaLinux (sem Docker)
 
