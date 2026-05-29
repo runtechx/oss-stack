@@ -1,4 +1,8 @@
+<div align="right">
+  
+[Stack](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) &rarr;
 
+</div>
 
 # OpenFirst — Framework de Decisão Tecnológica
 
@@ -72,13 +76,12 @@ A sua adoção permite às organizações:
 > [!TIP]
 > Explore as diferentes pastas deste repositório para conhecer tecnologias, guias, laboratórios e ferramentas que suportam a implementação prática do framework OpenFirst.
 
-| Pasta                                                                     | Objetivo                                                                                   |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [`blocklists`](/blocklists)                                               | Listas de bloqueio de IPs e domínios associados a publicidade abusiva, malware e tracking. |
-| [`guias`](/guias)                                                         | Documentação técnica e procedimentos operacionais.                                         |
-| [`labs`](/labs)                                                           | Laboratórios e ambientes de teste para validação de tecnologias.                           |
-| [`stack`](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) | Stack tecnológica e automações para ambientes open source em AlmaLinux 10+.                |
-
+| Pasta        | Objetivo                                                                                   |
+|--------------|--------------------------------------------------------------------------------------------|
+| `blocklists` | Listas de bloqueio de IPs e domínios associados a publicidade abusiva, malware e tracking. |
+| `guias`      | Documentação técnica e procedimentos operacionais.                                         |
+| `labs`       | Laboratórios e ambientes de teste para validação de tecnologias.                           |
+| `stack`      | Stack tecnológica e automações para ambientes open source em AlmaLinux 10+.                |
 
 
 ## Contribuições
