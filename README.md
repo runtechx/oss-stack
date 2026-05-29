@@ -1,5 +1,7 @@
 <div align="right">
-  
+
+[Stack](/stack/lista.md) |
+[Guias](/stack/indece.md) |
 [Comandos](/stack/comandos.md)
 
 </div>
