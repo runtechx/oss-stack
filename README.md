@@ -104,9 +104,7 @@ Se este framework for útil:
 
 ## Perguntas Frequentes (FAQ)
 
-Mais informações, discussões e respostas técnicas podem ser encontradas na secção de FAQ do repositório.
-
-👉 [https://github.com/runtechx/OpenFirst/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aclosed](https://github.com/runtechx/OpenFirst/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aclosed)
+Mais informações, discussões e respostas técnicas podem ser encontradas na secção de [FAQ do repositório.]()
 
 
 
