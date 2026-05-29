@@ -1,9 +1,11 @@
 <div align="right">
- 
-&larr; [Stack](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) | [Guias](https://github.com/runtechx/OpenFirst/blob/main/stack/comandos.md) &rarr;
+
+[OpenFirst](https://github.com/runtechx/OpenFirst/blob/main/README.md) |
+[Stack](/stack/lista.md) |
+[Guias](/guias/pg1.md) |
+[Comandos](/stack/comandos.md)
 
 </div>
-
 
 
 # Instalação rápida diretamente no AlmaLinux (sem Docker)
