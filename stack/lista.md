@@ -1,8 +1,9 @@
 <div align="right">
-  
-[OpenFirst](/main/README.md) |
-[Guias](/stack/indece.md) |
-[Comandos](/stack/comandos.md)
+
+[OpenFirst](https://github.com/runtechx/OpenFirst/blob/main/README.md) |
+[Stack](./stack/lista.md) |
+[Guias](./stack/pg1.md) |
+[Comandos](./stack/comandos.md)
 
 </div>
 
