@@ -1,6 +1,6 @@
 <div align="right">
 
-[OpenFirst](./OpenFirst/main/README.md) |
+[OpenFirst](./OpenFirst/) |
 [Stack](./stack/lista.md) |
 [Guias](./stack/indece.md) |
 [Comandos](./stack/comandos.md)
