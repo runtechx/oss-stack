@@ -11,7 +11,8 @@
 
 # Softwares adotados
 
-
+>[!TIP]
+> Para ver os comandos de instalação rápida, vá em `comandos`.
 
 ### N1 - Base
 
