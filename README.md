@@ -1,6 +1,6 @@
 <div align="right">
   
-[Stack](https://github.com/runtechx/OpenFirst/blob/main/stack/lista.md) &rarr;
+[Comandos]/stack/comandos.md
 
 </div>
 
