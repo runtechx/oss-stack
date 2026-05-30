@@ -50,7 +50,8 @@ Resultado esperado:
 ```text
 Current machine states:
 
-test-srv                  not_created (hyperv)
+srv1                      running (hyperv)
+srv2                      running (hyperv)
 ```
 
 ## Formas de ter acesso ao shell
