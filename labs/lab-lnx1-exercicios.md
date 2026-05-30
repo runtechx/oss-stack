@@ -1,3 +1,50 @@
+## 1. Baixar o laboratório
+
+Executar o PowerShell como Administrador:
+
+**Para Hyper-V**
+
+```powershell
+cd C:\RTLabs
+
+Invoke-WebRequest `
+  -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/lab-lnx1-hyperv-vagrantfile" `
+  -OutFile "Vagrantfile"
+```
+
+**Para Virtualbox**
+
+```powershell
+cd C:\RTLabs
+
+Invoke-WebRequest `
+  -Uri "https://raw.githubusercontent.com/runtechx/OpenFirst/main/labs/lab-lnx1-virtualbox-vagrantfile" `
+  -OutFile "Vagrantfile"
+```
+
+## 2. Levantar o laboratório
+
+Levantar as VMs
+
+```powershell
+cd C:\RTLabs\
+vagrant up
+```
+
+Verificar o estado das VMs
+
+```powershell
+cd C:\RTLabs\
+vagrant status
+```
+
+Resultado esperado:
+
+```text
+Current machine states:
+
+test-srv                  not_created (hyperv)
+```
 
 ## Formas de ter acesso ao shell
 
