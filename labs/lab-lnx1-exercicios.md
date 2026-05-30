@@ -55,7 +55,7 @@ test-srv                  not_created (hyperv)
 
 ## Formas de ter acesso ao shell
 
-**Exercício 1** - Encontrar o IP do servidor 2
+**Exercício 1** - Encontrar o IP do servidor 2 (Disponível apenas em ambiente de laboratório)
 
 Abra o terminal(Admin) do windows, clicando por cima do botao do windows com o botao esquerdo do rato para abrir o menu de contexto e escolher terminal(Admin)
 
