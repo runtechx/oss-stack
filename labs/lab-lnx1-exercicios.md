@@ -2,6 +2,13 @@
 
 Executar o PowerShell como Administrador:
 
+**Remover Labs antigos**
+
+```powershell
+cd C:\RTLabs
+vagrant destroy -f
+```
+
 **Para Hyper-V**
 
 ```powershell
