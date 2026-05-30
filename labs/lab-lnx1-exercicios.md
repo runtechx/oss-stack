@@ -117,7 +117,13 @@ Corra
  ```bash
 htop 
 ```
-Deia uma vista de olhos no programa aberto, a seguir pressione Q para fechar o programa htop e escreva exit para sair da ligacao ssh 
+Deia uma vista de olhos no programa aberto, tente responder estás perguntas;
+* Quantos vcpu vês ? ____
+* Quanto memória está a ser consumida ? ____
+* A quanto tempo a VM está ligada ? ____
+
+A seguir pressione Q para fechar o programa htop e escreva exit para sair da ligacao ssh.
+
 
 **Exercício 2** - Logar-se no servidor 2 para usar o terminal a partir da parte grafica
 No terminal(Admin) do windows cole o comando a baixo para abrir o Gestor Hyper-v 
