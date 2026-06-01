@@ -16,3 +16,12 @@
 ✓ = Sim  
 ✗ = Não  
 △ = Parcialmente / Limitado
+
+**Observações:**
+* BlueOnyx possui uma interface funcional, mas visualmente mais tradicional.
+* aaPanel destaca-se pela interface moderna e facilidade de utilização.
+* CyberPanel oferece uma interface moderna baseada em OpenLiteSpeed, mas o suporte ao AlmaLinux 10 ainda não é oficialmente consolidado.
+* Kloxo é um projeto antigo e praticamente descontinuado.
+* Froxlor é open source, moderno e suporta distribuições Linux recentes.
+* ApisCP é comercial (não open source), focado em ambientes profissionais.
+* CWP (Control Web Panel) possui versão gratuita e versão Pro com suporte pago. O visual é razoavelmente moderno, mas menos intuitivo que aaPanel ou CyberPanel.
