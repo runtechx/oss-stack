@@ -161,7 +161,19 @@ No terminal(Admin) do windows cole o comando a baixo para abrir o Gestor Hyper-v
 A seguir selecione o srv2, clique duas vezes por cima da janela do srv2, maximize a janela e faça o login com a conta `labuser` e senha `Qwerty456#`
 
 
-**Exercício 3** - Alternar entre as 
+**Exercício 3** - Alternar entre consolas virtuais ()
+No modo gráfico use as seguintes combinações para alternar entre consolas virtuais 
+
+| Combinação de Teclas | Descrição                                                |
+| -------------------- | -------------------------------------------------------- |
+| Ctrl + Alt + F1      | Ecrã de início de sessão gráfico (GNOME Display Manager) |
+| Ctrl + Alt + F2      | Primeira consola virtual (tty2)                          |
+| Ctrl + Alt + F3      | Segunda consola virtual (tty3)                           |
+| Ctrl + Alt + F4      | Terceira consola virtual (tty4)                          |
+| Ctrl + Alt + F5      | Quarta consola virtual (tty5)                            |
+| Ctrl + Alt + F6      | Quinta consola virtual (tty6)                            |
+
+**Exercício 4** - 
 
 
 
