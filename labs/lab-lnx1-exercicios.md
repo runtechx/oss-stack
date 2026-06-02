@@ -1,3 +1,9 @@
+>[!IMPORTANT]
+>Caso não tenha feito a configuração inicial para execução dos laboratórios
+>deve iniciar em guias/
+>
+>[preparar-maq-virtualbox-para-labs](https://github.com/runtechx/OpenFirst/blob/main/guias/preparar-maq-virtualbox-para-labs.md) ou [preparar-maq-hyperv-para-labs](https://github.com/runtechx/OpenFirst/blob/main/guias/preparar-maq-hyperv-para-labs.md)
+
 ## 1. Baixar o laboratório
 
 Executar o PowerShell como Administrador:
