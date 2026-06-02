@@ -131,7 +131,9 @@ Deia uma vista de olhos no programa aberto, tente responder estás perguntas;
 A seguir pressione Q para fechar o programa htop e escreva exit para sair da ligacao ssh.
 
 
-**Exercício 2** - Logar-se no servidor 2 para usar o terminal a partir da parte grafica
+**Exercício 2** - Logar-se no servidor 2 apartir da consola
+
+**Hyper-v**
 
 No terminal(Admin) do windows cole o comando a baixo para abrir o Gestor Hyper-v 
 ```bash
@@ -139,4 +141,12 @@ virtmgmt.msc
 ```
 A seguir selecione o srv2, clique a direita connect ou conectar, maximize a janela e faça o login com a conta `labuser` e senha `Qwerty456#`
 
+**Virtualbox**
+No terminal(Admin) do windows cole o comando a baixo para abrir o Gestor Hyper-v 
+```bash
+"C:\Program Files\Oracle\VirtualBox\VirtualBox.exe"
+```
+A seguir selecione o srv2, clique duas vezes por cima da janela do srv2, maximize a janela e faça o login com a conta `labuser` e senha `Qwerty456#`
 
+
+**Exercício 3** - Alternar entre as 
