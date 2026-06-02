@@ -1,3 +1,15 @@
+<div align="right">
+  
+[OpenFirst](https://github.com/runtechx/OpenFirst/blob/main/README.md) |
+[Stack](/stack/stack.md) |
+[Guias](/guias/guias.md) |
+[Labs](/labs/labs.md) |
+[Comandos](/stack/comandos.md)
+
+&nbsp;
+&nbsp;
+</div>
+
 >[!IMPORTANT]
 >Caso não tenha feito a configuração inicial para execução dos laboratórios
 >deve iniciar em guias/
@@ -150,3 +162,11 @@ A seguir selecione o srv2, clique duas vezes por cima da janela do srv2, maximiz
 
 
 **Exercício 3** - Alternar entre as 
+
+
+
+
+&nbsp;
+<div align="right">
+Source: https://github.com/runtechx/
+</div>
