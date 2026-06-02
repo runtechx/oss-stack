@@ -1,3 +1,13 @@
+
+|Projecto                                                       | SO Suportado                         | Correio | Suporte Pago |
+|---------------------------------------------------------------|--------------------------------------|---------|--------------|
+|[CWP](https://control-webpanel.com/)                           | AlmaLinux 8 & 9                      |         |              |
+|
+
+
+
+
+
 | Projeto        | Código aberto? | Suporta AlmaLinux 10? | Interface moderna? | Suporte pago disponível? | Suporta Mailserver? | Suporta Multitenancy? | Observações                                                                 |
 |----------------|----------------|------------------------|---------------------|---------------------------|----------------------|------------------------|-----------------------------------------------------------------------------|
 | BlueOnyx       | ✓              | ✗                      | △                   | ✓                         | ✓                    | ✗                      | Interface funcional, mas visualmente mais tradicional. E-mail integrado.    |
