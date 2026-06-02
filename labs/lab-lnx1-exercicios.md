@@ -161,7 +161,8 @@ No terminal(Admin) do windows cole o comando a baixo para abrir o Gestor Hyper-v
 A seguir selecione o srv2, clique duas vezes por cima da janela do srv2, maximize a janela e faça o login com a conta `labuser` e senha `Qwerty456#`
 
 
-**Exercício 3** - Alternar entre consolas virtuais ()
+**Exercício 3** - Alternar entre consolas virtuais
+
 No modo gráfico use as seguintes combinações para alternar entre consolas virtuais 
 
 | Combinação de Teclas | Descrição                                                |
