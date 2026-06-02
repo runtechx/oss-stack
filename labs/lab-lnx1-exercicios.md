@@ -16,6 +16,15 @@
 >
 >[preparar-maq-virtualbox-para-labs](https://github.com/runtechx/OpenFirst/blob/main/guias/preparar-maq-virtualbox-para-labs.md) ou [preparar-maq-hyperv-para-labs](https://github.com/runtechx/OpenFirst/blob/main/guias/preparar-maq-hyperv-para-labs.md)
 
+
+> [!TIP]
+> Tenha um bloco de notas para registar os exercícios que já concluiu, de forma a poder retomar a qualquer momento e saber exatamente de onde continuar.
+>
+> Outro aspeto importante é que recomendamos realizar cada exercício pelo menos duas ou mais vezes, para desenvolver memória muscular.
+>
+> *"Os amadores treinam até acertarem. Os profissionais treinam até não conseguirem errar." José N. Harris* 
+
+
 ## 1. Baixar o laboratório
 
 Executar o PowerShell como Administrador:
@@ -174,7 +183,9 @@ No modo gráfico use as seguintes combinações para alternar entre consolas vir
 | Ctrl + Alt + F5      | Quarta consola virtual (tty5)                            |
 | Ctrl + Alt + F6      | Quinta consola virtual (tty6)                            |
 
-**Exercício 4** - 
+**Exercício 4** - Aceder o Emulador do Terminal no modo gráfico 
+
+No GNOME desktop > vá `Activities`> escreva "terminal" na barra de pesquisa > Clique em `Terminal`
 
 
 
