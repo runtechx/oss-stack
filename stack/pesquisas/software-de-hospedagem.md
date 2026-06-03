@@ -2,20 +2,22 @@
 
 | Software                |  Código  | Multi-tenant | Multi-servidor | Mail | DNS | AlmaLinux 10 |
 | ----------------------- | :------: | :----------: | :------------: | :--: | :-: | :----------: |
-| InterWorx               |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       AL 9.x      |
+
 | ISPConfig               |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | ispmanager              |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
-| VestaCP - refazer       |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
-| Control Web Panel (CWP) | Fechado* |       ✔      |        ✖       |   ✔  |  ✔  |       AL 9.X      |
-| KeyHelp                 |  Fechado |       ✔      |        ✖       |   ✔  |  ✔  |       ✖       |
-| CyberPanel              |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       AL 9.X      |
 | DirectAdmin             |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
-| HestiaCP                |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
-| ApisCP                  |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |    AL 8.x     |
-| Froxlor                 |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       ✖      |
-| Plesk                   |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
-| Sentora                 |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
+| InterWorx               |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       AL 9.x      |
+| Control Web Panel (CWP) | Fechado* |       ✔      |        ✖       |   ✔  |  ✔  |       AL 9.X      |
+| CyberPanel              |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       AL 9.X      |
 | aaPanel                 | Fechado* |       ✖      |        ✖       |   ✔  |  ✔  |       AL 9.X      |
+| ApisCP                  |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |    AL 8.x     |
+| VestaCP - refazer       |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
+| KeyHelp                 |  Fechado |       ✔      |        ✖       |   ✔  |  ✔  |       ✖       |
+| HestiaCP                |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
+| Froxlor                 |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       ✖      |
+| Plesk                   |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✖      |
+| Sentora                 |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
+
 
 Os campos referem-se a:
 
