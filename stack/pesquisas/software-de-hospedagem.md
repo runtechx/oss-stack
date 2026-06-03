@@ -38,11 +38,6 @@ Os campos referem-se a:
 * integra-se com 
 
 
-| Software          |         Código         | Multi-tenant | Multi-servidor | Mail | DNS |
-| ----------------- | :--------------------: | :----------: | :------------: | :--: | :-: |
-
-
-
 ---
 
 
