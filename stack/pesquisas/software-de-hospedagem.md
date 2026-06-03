@@ -2,7 +2,6 @@
 
 | Software                |  Código  | Multi-tenant | Multi-servidor | Mail | DNS | AlmaLinux 10 |
 | ----------------------- | :------: | :----------: | :------------: | :--: | :-: | :----------: |
-
 | ISPConfig               |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | ispmanager              |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | DirectAdmin             |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
