@@ -5,7 +5,7 @@
 | InterWorx               |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       AL 9.x      |
 | ISPConfig               |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | ispmanager              |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
-| VestaCP                 |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
+| VestaCP - refazer       |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
 | Control Web Panel (CWP) | Fechado* |       ✔      |        ✖       |   ✔  |  ✔  |       ⚠      |
 | KeyHelp                 |  Fechado |       ✔      |        ✖       |   ✔  |  ✔  |       ✔      |
 | CyberPanel              |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       ✔      |
