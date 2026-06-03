@@ -7,15 +7,15 @@
 | ispmanager              |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | VestaCP - refazer       |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
 | Control Web Panel (CWP) | Fechado* |       ✔      |        ✖       |   ✔  |  ✔  |       AL 9.X      |
-| KeyHelp                 |  Fechado |       ✔      |        ✖       |   ✔  |  ✔  |       ✔      |
+| KeyHelp                 |  Fechado |       ✔      |        ✖       |   ✔  |  ✔  |       ✖       |
 | CyberPanel              |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       AL 9.X      |
 | DirectAdmin             |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
-| HestiaCP                |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✔      |
+| HestiaCP                |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
 | ApisCP                  |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |    AL 8.x     |
-| Froxlor                 |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       ✔      |
+| Froxlor                 |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       ✖      |
 | Plesk                   |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | Sentora                 |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
-| aaPanel                 | Fechado* |       ✖      |        ✖       |   ✔  |  ✔  |       ✔      |
+| aaPanel                 | Fechado* |       ✖      |        ✖       |   ✔  |  ✔  |       AL 9.X      |
 
 Os campos referem-se a:
 
