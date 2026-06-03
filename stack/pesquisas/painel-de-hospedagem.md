@@ -2,7 +2,7 @@
 
 | Software                |  Código  | Multi-tenant | Multi-servidor | Mail | DNS | AlmaLinux 10 |
 | ----------------------- | :------: | :----------: | :------------: | :--: | :-: | :----------: |
-| InterWorx               |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
+| InterWorx               |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       AL 9.x      |
 | ISPConfig               |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | ispmanager              |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | VestaCP                 |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
@@ -11,7 +11,7 @@
 | CyberPanel              |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       ✔      |
 | DirectAdmin             |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | HestiaCP                |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✔      |
-| ApisCP                  |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |    AL 8.*     |
+| ApisCP                  |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |    AL 8.x     |
 | Froxlor                 |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       ✔      |
 | Plesk                   |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | Sentora                 |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
