@@ -34,7 +34,7 @@ Os campos referem-se a:
 | Software   | Open Source | ISPConfig | ispmanager | DirectAdmin | Proxmox |
 | ---------- | :---------: | :-------: | :--------: | :---------: | :-----: |
 | WHMCS      |      ✖      |     ✔     |      ✔     |      ✔      |    ✔    |
-| Blesta     |      ✖      |     ✔     |      ✔     |      ✔      |    ✔    |
+| **Blesta** |      ✖      |     ✔     |      ✔     |      ✔      |    ✔    |
 | WISECP     |      ✖      |     ✖     |      ✔     |      ✔      |    ✖    |
 | HostBill   |      ✖      |     ✔     |      ✔     |      ✔      |    ✔    |
 | BoxBilling |      ✔      |     ✖     |      ✖     |     ✖       |    ✖    |
