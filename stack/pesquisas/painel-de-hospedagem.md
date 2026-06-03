@@ -6,7 +6,7 @@
 | ISPConfig               |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | ispmanager              |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | VestaCP - refazer       |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
-| Control Web Panel (CWP) | Fechado* |       ✔      |        ✖       |   ✔  |  ✔  |       ⚠      |
+| Control Web Panel (CWP) | Fechado* |       ✔      |        ✖       |   ✔  |  ✔  |       AL 9.X      |
 | KeyHelp                 |  Fechado |       ✔      |        ✖       |   ✔  |  ✔  |       ✔      |
 | CyberPanel              |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       ✔      |
 | DirectAdmin             |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
