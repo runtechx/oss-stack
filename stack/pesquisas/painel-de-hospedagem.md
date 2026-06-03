@@ -8,7 +8,7 @@
 | VestaCP - refazer       |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✖      |
 | Control Web Panel (CWP) | Fechado* |       ✔      |        ✖       |   ✔  |  ✔  |       AL 9.X      |
 | KeyHelp                 |  Fechado |       ✔      |        ✖       |   ✔  |  ✔  |       ✔      |
-| CyberPanel              |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       ✔      |
+| CyberPanel              |  Aberto  |       ✔      |        ✖       |   ✔  |  ✔  |       AL 9.X      |
 | DirectAdmin             |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | HestiaCP                |  Aberto  |       ✖      |        ✖       |   ✔  |  ✔  |       ✔      |
 | ApisCP                  |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |    AL 8.x     |
