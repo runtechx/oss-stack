@@ -2,7 +2,7 @@
 
 | Software                |  Código  | Multi-tenant | Multi-servidor | Mail | DNS | AlmaLinux 10 |
 | ----------------------- | :------: | :----------: | :------------: | :--: | :-: | :----------: |
-| ISPConfig               |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
+| **ISPConfig**           |  Aberto  |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | ispmanager              |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | DirectAdmin             |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       ✔      |
 | InterWorx               |  Fechado |       ✔      |        ✔       |   ✔  |  ✔  |       AL 9.x      |
@@ -30,22 +30,21 @@ Os campos referem-se a:
 
 
 ## Cobrança de Clientes
-* WHMCS
-* Blesta
-* WISECP
+
+| Software   | Open Source | ISPConfig | ispmanager | DirectAdmin | Proxmox |
+| ---------- | :---------: | :-------: | :--------: | :---------: | :-----: |
+| WHMCS      |      ✖      |     ✔     |      ✔     |      ✔      |    ✔    |
+| Blesta     |      ✖      |     ✔     |      ✔     |      ✔      |    ✔    |
+| WISECP     |      ✖      |     ✖     |      ✔     |      ✔      |    ✖    |
+| HostBill   |      ✖      |     ✔     |      ✔     |      ✔      |    ✔    |
+| BoxBilling |      ✔      |     ✖     |      ✖     |     ✖       |    ✖    |
+
+## Proxmox (VPS)
+* [WHMCS](https://www.proxmox.com/en/partners/find-partner/all/partner/modulesgarden)
+* [Blesta](https://docs.blesta.com/integrations/modules/proxmox/)
 * [BoxBilling](https://hostbillapp.com/feature/proxmox-overview/)
-
-* Opensource
-* integra-se com 
-
-
----
+* [HostBill](https://hostbillapp.com/feature/proxmox-overview/)
 
 
 
 
-| Blesta            |         Fechado        |       ✖      |        ✖       |   ✖  |  ✖  |           ✔          |
-| WHMCS             |         Fechado        |       ✖      |        ✖       |   ✖  |  ✖  |           ✔          |
-| HostBill          |         Fechado        |       ✖      |        ✖       |   ✖  |  ✖  |           ✔          |
-| WISECP            |         Fechado        |       ✖      |        ✖       |   ✖  |  ✖  |           ✔          |
-| BoxBilling        |         Aberto         |       ✖      |        ✖       |   ✖  |  ✖  |           ✔          |
