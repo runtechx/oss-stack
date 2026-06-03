@@ -28,7 +28,6 @@ Os campos referem-se a:
 * AlmaLinux 10 = Suporte oficial ou funcional à data atual
 
 
-
 ## Cobrança de Clientes
 
 | Software   | Open Source | ISPConfig | ispmanager | DirectAdmin | Proxmox |
@@ -38,6 +37,17 @@ Os campos referem-se a:
 | WISECP     |      ✖      |     ✖     |      ✔     |      ✔      |    ✖    |
 | HostBill   |      ✖      |     ✔     |      ✔     |      ✔      |    ✔    |
 | BoxBilling |      ✔      |     ✖     |      ✖     |     ✖       |    ✖    |
+
+**Código-fonte**
+
+* **Blesta:** Não é 100% open source, mas a maior parte do código não é encriptada e a plataforma é bastante amigável para desenvolvedores.
+* **HostBill:** Proprietário (os ficheiros de código são frequentemente protegidos com ionCube), mas oferece um elevado nível de personalização interna.
+
+**Foco Principal**
+
+* **Blesta:** Simplicidade, segurança e custo acessível.
+* **HostBill:** Escalabilidade rápida e suporte para serviços complexos ou de nicho.
+
 
 ## Proxmox (VPS)
 * [WHMCS](https://www.proxmox.com/en/partners/find-partner/all/partner/modulesgarden)
