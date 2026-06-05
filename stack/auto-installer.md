@@ -11,7 +11,11 @@
 </div>
 
 
-# Auto-Instaladores - Instalação rápida diretamente no AlmaLinux (sem Docker)
+# Auto-Instaladores
+
+>[!TIP]
+>Fresh
+>Instalação rápida diretamente no AlmaLinux (sem Docker)
 
 ## [Zabbix](https://www.zabbix.com/) 
 
