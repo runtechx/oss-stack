@@ -26,7 +26,7 @@
 | Sistema Operativo         | AlmaLinux                | Red Hat Enterprise Linux (RHEL) |
 | Monitorização             | [Zabbix](/stack/auto-installer.md#zabbix)                   | Datadog                         |
 | SIEM / Segurança          | [Wazuh](/stack/auto-installer.md#wazuh)                    | FortiSIEM                       |
-| Gestão de Passwords       | Passbolt                 | 1Password Business              |
+| Gestão de Passwords       | [Passbolt](/stack/auto-installer.md#passbolt)                 | 1Password Business              |
 | IAM / Identidade          | FreeIPA                  | Microsoft Entra ID (Azure AD)   |
 | IAM Avançado / SSO        | Keycloak                 | Okta                            |
 | Cloud Privada / Ficheiros | OpenCloud                | Microsoft OneDrive for Business |
