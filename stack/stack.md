@@ -38,13 +38,13 @@
 
 | Categoria                  | Solução (Open Source)    | Solução (Comercial)             |
 | -------------------------- | ------------------------ | ------------------------------- |
-| ERP                        | Odoo                     | SAP S/4HANA                     |
 | CMS                        | [WordPress](/stack/auto-installer.md#wordpress)                | Adobe Experience Manager        |
+| Documentação               | BookStack                | Confluence                      |
+| ERP                        | Odoo                     | SAP S/4HANA                     |
 | Automação / IaC            | Ansible                  | Puppet Enterprise               |
 | DevOps / Repositório       | GitLab                   | GitHub Enterprise               |
 | IPAM / DCIM                | NetBox                   | SolarWinds IP Address Manager   |
 | Infraestrutura como Código | Terraform                | AWS CloudFormation              |
-| Documentação               | BookStack                | Confluence                      |
 | Patch Management           | Patchmon                 | ManageEngine Patch Manager Plus |
 | Email / Colaboração        | Zimbra                   | Microsoft Exchange Online       |
 | NAS / Storage              | TrueNAS                  | NetApp ONTAP                    |
