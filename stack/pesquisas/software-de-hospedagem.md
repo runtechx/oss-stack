@@ -37,6 +37,7 @@ Os campos referem-se a:
 | WISECP     |      ✖      |     ✖     |      ✔     |      ✔      |    ✖    |
 | HostBill   |      ✖      |     ✔     |      ✔     |      ✔      |    ✔    |
 | BoxBilling |      ✔      |     ✖     |      ✖     |     ✖       |    ✖    |
+| ClientExec |      ✖      |     ✖     |      ✔     |     ✔       |     ✔   |
 
 **Código-fonte**
 
