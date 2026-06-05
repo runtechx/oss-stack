@@ -14,8 +14,9 @@
 # Auto-Instaladores
 
 >[!TIP]
->Fresh
->Instalação rápida diretamente no AlmaLinux (sem Docker)
+>**Instalação rápida (sem docker)**
+>
+>Instale diretamente numa instalação nova do AlmaLinux 10
 
 ## [Zabbix](https://www.zabbix.com/) 
 
