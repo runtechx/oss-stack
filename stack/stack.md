@@ -39,7 +39,7 @@
 | Categoria                  | Solução (Open Source)    | Solução (Comercial)             |
 | -------------------------- | ------------------------ | ------------------------------- |
 | ERP                        | Odoo                     | SAP S/4HANA                     |
-| CMS                        | WordPress                | Adobe Experience Manager        |
+| CMS                        | [WordPress](/stack/auto-installer.md#wordpress)                | Adobe Experience Manager        |
 | Automação / IaC            | Ansible                  | Puppet Enterprise               |
 | DevOps / Repositório       | GitLab                   | GitHub Enterprise               |
 | IPAM / DCIM                | NetBox                   | SolarWinds IP Address Manager   |
