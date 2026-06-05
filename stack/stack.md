@@ -30,7 +30,7 @@
 | IAM / Identidade          | [FreeIPA](/stack/auto-installer.md#freeipa)                  | Microsoft Entra ID (Azure AD)   |
 | IAM Avançado / SSO        | [Keycloak](/stack/auto-installer.md#keycloak)                 | Okta                            |
 | Cloud Privada / Ficheiros | [OpenCloud](/stack/auto-installer.md#opencloud)                | Microsoft OneDrive for Business |
-| ITSM / Service Desk       | GLPI                     | ServiceNow                      |
+| ITSM / Service Desk       | [GLPI](/stack/auto-installer.md#glpi)                     | ServiceNow                      |
 
 
 
