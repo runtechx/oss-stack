@@ -24,7 +24,7 @@
 | Firewall / Rede           | OPNsense                 | Fortinet FortiGate              |
 | VoIP / Comunicação        | Issabel                  | 3CX                             |
 | Sistema Operativo         | AlmaLinux                | Red Hat Enterprise Linux (RHEL) |
-| Monitorização             | Zabbix                   | Datadog                         |
+| Monitorização             | [Zabbix](/stack/auto-installer.md#zabbix)                   | Datadog                         |
 | SIEM / Segurança          | Wazuh                    | FortiSIEM                       |
 | Gestão de Passwords       | Passbolt                 | 1Password Business              |
 | IAM / Identidade          | FreeIPA                  | Microsoft Entra ID (Azure AD)   |
