@@ -236,12 +236,12 @@ log_section "STEP 3: Install BookStack"
     fi
     echo "  Version detected: ${BS_VERSION}"
 
-    # Download and extract tarball
-    wget -q -P /tmp "https://github.com/BookStackApp/BookStack/archive/refs/tags/v${BS_VERSION}.tar.gz"
+    # Download and extract tarball directly into INSTALL_DIR
+    wget -q -O /tmp/bookstack.tar.gz \
+        "https://github.com/BookStackApp/BookStack/archive/refs/tags/v${BS_VERSION}.tar.gz"
     mkdir -p "${INSTALL_DIR}"
-    tar -xzf "/tmp/v${BS_VERSION}.tar.gz" -C /tmp/
-    mv /tmp/BookStack-${BS_VERSION}/* "${INSTALL_DIR}/"
-    rm -f "/tmp/v${BS_VERSION}.tar.gz"
+    tar -xzf /tmp/bookstack.tar.gz -C "${INSTALL_DIR}" --strip-components=1
+    rm -f /tmp/bookstack.tar.gz
 
     # Install Composer dependencies via bundled CLI tool
     cd "${INSTALL_DIR}"
