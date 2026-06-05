@@ -177,7 +177,7 @@ echo "${MSG_STEP1}"
 log_section "STEP 1: System Update & Prerequisites"
 {
     dnf install -y epel-release
-    dnf install -y wget curl tar unzip git policycoreutils-python-utils
+    dnf install -y wget curl tar unzip policycoreutils-python-utils
     dnf install -y https://rpms.remirepo.net/enterprise/remi-release-10.rpm
     dnf module reset php -y
     dnf module enable php:remi-8.5 -y
@@ -224,9 +224,24 @@ EOF
 echo "${MSG_STEP3}"
 log_section "STEP 3: Install BookStack"
 {
-    # Clone latest release branch
-    git clone https://github.com/BookStackApp/BookStack.git \
-        --branch release --single-branch "${INSTALL_DIR}"
+    # Detect latest release from GitHub API
+    BS_VERSION=$(curl -fsSL https://api.github.com/repos/BookStackApp/BookStack/releases/latest \
+        | grep '"tag_name"' \
+        | cut -d '"' -f4 \
+        | sed 's/^v//')
+
+    if [ -z "$BS_VERSION" ]; then
+        echo "  ERROR: Could not detect latest BookStack version."
+        exit 1
+    fi
+    echo "  Version detected: ${BS_VERSION}"
+
+    # Download and extract tarball
+    wget -q -P /tmp "https://github.com/BookStackApp/BookStack/archive/refs/tags/v${BS_VERSION}.tar.gz"
+    mkdir -p "${INSTALL_DIR}"
+    tar -xzf "/tmp/v${BS_VERSION}.tar.gz" -C /tmp/
+    mv /tmp/BookStack-${BS_VERSION}/* "${INSTALL_DIR}/"
+    rm -f "/tmp/v${BS_VERSION}.tar.gz"
 
     # Install Composer dependencies via bundled CLI tool
     cd "${INSTALL_DIR}"
@@ -253,14 +268,13 @@ log_section "STEP 3: Install BookStack"
                  "${INSTALL_DIR}/storage"
     chmod 740 "${INSTALL_DIR}/.env"
 
-    # Tell git to ignore permission changes
-    git -C "${INSTALL_DIR}" config core.fileMode false
-
     echo "  BookStack installed at: ${INSTALL_DIR}"
 } >> "$LOG" 2>&1
 
 # Capture version outside the log block for use in credentials
-BS_VERSION=$(cat "${INSTALL_DIR}/version" 2>/dev/null || echo "unknown")
+BS_VERSION=$(cat "${INSTALL_DIR}/version" 2>/dev/null || \
+    curl -fsSL https://api.github.com/repos/BookStackApp/BookStack/releases/latest \
+    | grep '"tag_name"' | cut -d '"' -f4 | sed 's/^v//' 2>/dev/null || echo "unknown")
 
 # -----------------------------
 # STEP 4: Configure Nginx, PHP-FPM & SELinux
