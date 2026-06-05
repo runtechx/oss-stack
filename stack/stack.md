@@ -13,11 +13,11 @@
 # Softwares adotados
 
 >[!TIP]
-> Para ver os comandos de instalação rápida, vá em `comandos`.
+> Clique no nome Para ver os comandos de instalação rápida, vá em `comandos`.
 
 ### N1 - Base
 
-| Categoria                 | Ferramenta (Open Source) | Ferramenta (Comercial)          |
+| Categoria                 | Solução (Open Source)    | Solução (Comercial)             |
 | ------------------------- | ------------------------ | ------------------------------- |
 | Virtualização             | Proxmox VE               | VMware vSphere                  |
 | Backup                    | Proxmox Backup Server    | Veeam Backup & Replication      |
@@ -25,7 +25,7 @@
 | VoIP / Comunicação        | Issabel                  | 3CX                             |
 | Sistema Operativo         | AlmaLinux                | Red Hat Enterprise Linux (RHEL) |
 | Monitorização             | [Zabbix](/stack/auto-installer.md#zabbix)                   | Datadog                         |
-| SIEM / Segurança          | Wazuh                    | FortiSIEM                       |
+| SIEM / Segurança          | [Wazuh](/stack/auto-installer.md#wazuh)                    | FortiSIEM                       |
 | Gestão de Passwords       | Passbolt                 | 1Password Business              |
 | IAM / Identidade          | FreeIPA                  | Microsoft Entra ID (Azure AD)   |
 | IAM Avançado / SSO        | Keycloak                 | Okta                            |
@@ -36,7 +36,7 @@
 
 ### N2 - Expansão
 
-| Categoria                  | Ferramenta (Open Source) | Ferramenta (Comercial)          |
+| Categoria                  | Solução (Open Source)    | Solução (Comercial)             |
 | -------------------------- | ------------------------ | ------------------------------- |
 | ERP                        | Odoo                     | SAP S/4HANA                     |
 | CMS                        | WordPress                | Adobe Experience Manager        |
