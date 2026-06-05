@@ -13,7 +13,7 @@
 # Softwares adotados
 
 >[!TIP]
-> Clique no nome Para ver os comandos de instalação rápida, vá em `comandos`.
+> Clique no nome para ver os comandos de instalação rápida ou vá em `comandos`.
 
 ### N1 - Base
 
