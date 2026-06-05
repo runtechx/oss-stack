@@ -2,16 +2,16 @@
   
 [OpenFirst](https://github.com/runtechx/OpenFirst/blob/main/README.md) |
 [Stack](/stack/stack.md) |
-[Guias](/guias/guias.md) |
+[Guias](/guias/guides.md) |
 [Labs](/labs/labs.md) |
-[Comandos](/stack/comandos.md)
+[Comandos](/stack/auto-installer.md)
 
 &nbsp;
 &nbsp;
 </div>
 
 
-# Instalação rápida diretamente no AlmaLinux (sem Docker)
+# Auto-Instaladores - Instalação rápida diretamente no AlmaLinux (sem Docker)
 
 ## [Zabbix](https://www.zabbix.com/) 
 
