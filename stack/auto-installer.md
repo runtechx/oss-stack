@@ -17,6 +17,15 @@
 >**Instalação rápida (sem docker)**
 >
 >Instale diretamente numa instalação nova do AlmaLinux 10
+>Para rede lentas corra antes:
+>```bash
+># Increase DNF timeout and retries for slow networks
+>cat >> /etc/dnf/dnf.conf << 'EOF'
+>timeout=120
+>retries=10
+>minrate=100
+>EOF
+>```
 
 ## [Zabbix](https://www.zabbix.com/) 
 
