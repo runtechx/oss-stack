@@ -69,7 +69,7 @@ Vagrant.configure("2") do |config|
       sudo dnf install -y terraform || true
 
       echo "Creating lab user..."
-      sudo useradd -m #{LAB_USER}
+      id -u #{LAB_USER} >/dev/null 2>&1 || sudo useradd -m #{LAB_USER}
 
       echo "#{LAB_USER}:#{LAB_PASS}" | sudo chpasswd
 
@@ -160,7 +160,7 @@ Vagrant.configure("2") do |config|
       sudo dnf install -y terraform || true
 
       echo "Creating lab user..."
-      sudo useradd -m #{LAB_USER}
+      id -u #{LAB_USER} >/dev/null 2>&1 || sudo useradd -m #{LAB_USER}
 
       echo "#{LAB_USER}:#{LAB_PASS}" | sudo chpasswd
 
