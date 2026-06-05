@@ -39,7 +39,7 @@
 | Categoria                  | Solução (Open Source)    | Solução (Comercial)             |
 | -------------------------- | ------------------------ | ------------------------------- |
 | CMS                        | [WordPress](/stack/auto-installer.md#wordpress)                | Adobe Experience Manager        |
-| Documentação               | BookStack                | Confluence                      |
+| Documentação               | [BookStack](/stack/auto-installer.md#bookstack)                | Confluence                      |
 | ERP                        | Odoo                     | SAP S/4HANA                     |
 | Automação / IaC            | Ansible                  | Puppet Enterprise               |
 | DevOps / Repositório       | GitLab                   | GitHub Enterprise               |
