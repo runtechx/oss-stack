@@ -3,7 +3,7 @@ set -e
 
 # ============================================================
 #  BookStack Deployment Script — AlmaLinux 10
-#  Installs: Nginx, MariaDB, PHP 8.5 (Remi), BookStack (latest)
+#  Installs: Nginx, MariaDB, PHP (AppStream), BookStack (latest)
 #  Source: https://github.com/runtechx/
 # ============================================================
 
@@ -174,13 +174,9 @@ echo ""
 echo "${MSG_STEP1}"
 log_section "STEP 1: System Update & Prerequisites"
 {
-    dnf install -y epel-release
-    dnf install -y wget curl tar unzip git policycoreutils-python-utils
-    dnf install -y https://rpms.remirepo.net/enterprise/remi-release-10.rpm
-    dnf module reset php -y
-    dnf module enable php:remi-8.5 -y
-    dnf install -y php php-fpm php-cli \
-        php-bcmath php-mbstring php-ldap php-xml php-gd php-mysqlnd php-pecl-zip
+    dnf install -y git php php-cli \
+        php-bcmath php-fpm php-mbstring php-ldap php-xml php-gd php-mysqlnd php-pecl-zip \
+        policycoreutils-python-utils
     php -v
 } >> "$LOG" 2>&1
 
@@ -203,12 +199,9 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 FLUSH PRIVILEGES;
 SQL
 
-    mysql -uroot -p"${MYSQL_ROOT_PASS}" <<EOF
-CREATE DATABASE ${DB_NAME} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE OR REPLACE USER '${DB_USER}'@'localhost' IDENTIFIED BY '${DB_PASS}';
-GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'localhost';
-FLUSH PRIVILEGES;
-EOF
+    mysql -uroot -p"${MYSQL_ROOT_PASS}" -e "CREATE DATABASE ${DB_NAME};"
+    mysql -uroot -p"${MYSQL_ROOT_PASS}" -e "CREATE USER '${DB_USER}'@'localhost' IDENTIFIED BY '${DB_PASS}';"
+    mysql -uroot -p"${MYSQL_ROOT_PASS}" -e "GRANT ALL ON ${DB_NAME}.* TO '${DB_USER}'@'localhost'; FLUSH PRIVILEGES;"
 
     mysql -u"${DB_USER}" -p"${DB_PASS}" "${DB_NAME}" -e "SELECT 1;" > /dev/null
     echo "  Database connectivity confirmed."
@@ -220,7 +213,7 @@ EOF
 echo "${MSG_STEP3}"
 log_section "STEP 3: Install BookStack"
 {
-    # Clone latest release branch from official GitHub mirror
+    # Clone latest release branch
     git clone https://github.com/BookStackApp/BookStack.git \
         --branch release --single-branch "${INSTALL_DIR}"
 
@@ -231,10 +224,10 @@ log_section "STEP 3: Install BookStack"
 
     # Configure environment
     cp .env.example .env
-    sed -i "s@APP_URL=.*\$@APP_URL=http://${ACCESS_URL}@" .env
-    sed -i "s/DB_DATABASE=.*$/DB_DATABASE=${DB_NAME}/"    .env
-    sed -i "s/DB_USERNAME=.*$/DB_USERNAME=${DB_USER}/"    .env
-    sed -i "s/DB_PASSWORD=.*\$/DB_PASSWORD=${DB_PASS}/"   .env
+    sed -i.bak "s@APP_URL=.*\$@APP_URL=http://${ACCESS_URL}@" .env
+    sed -i.bak "s/DB_DATABASE=.*$/DB_DATABASE=${DB_NAME}/"    .env
+    sed -i.bak "s/DB_USERNAME=.*$/DB_USERNAME=${DB_USER}/"    .env
+    sed -i.bak "s/DB_PASSWORD=.*\$/DB_PASSWORD=${DB_PASS}/"   .env
 
     # Generate application key
     php artisan key:generate --no-interaction --force
@@ -242,8 +235,8 @@ log_section "STEP 3: Install BookStack"
     # Run database migrations
     php artisan migrate --no-interaction --force
 
-    # Set ownership and permissions
-    chown -R nginx:nginx "${INSTALL_DIR}"
+    # Set ownership and permissions — apache user matches php-fpm default pool
+    chown -R apache:apache "${INSTALL_DIR}"
     chmod -R 755 "${INSTALL_DIR}"
     chmod -R 775 "${INSTALL_DIR}/bootstrap/cache" \
                  "${INSTALL_DIR}/public/uploads"  \
@@ -279,9 +272,8 @@ server {
     }
 
     location ~ \.php$ {
-        include fastcgi_params;
+        include fastcgi.conf;
         fastcgi_pass unix:/run/php-fpm/www.sock;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
     }
 
     location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff2?)$ {
@@ -305,13 +297,8 @@ NGINXEOF
     setsebool -P httpd_can_network_connect_db on
     setsebool -P httpd_can_sendmail on
 
-    # Fix PHP-FPM socket ownership so nginx can connect to it
-    # listen.acl_users overrides listen.owner/group — must remove it
-    sed -i '/^listen\.acl_users/d' /etc/php-fpm.d/www.conf
-    sed -i '/^;*listen\.owner/d' /etc/php-fpm.d/www.conf
-    sed -i '/^;*listen\.group/d' /etc/php-fpm.d/www.conf
-    echo "listen.owner = nginx" >> /etc/php-fpm.d/www.conf
-    echo "listen.group = nginx" >> /etc/php-fpm.d/www.conf
+    # Add nginx to the php-fpm socket ACL so it can connect
+    sed -i 's/^listen.acl_users = .*/listen.acl_users = apache,nginx/' /etc/php-fpm.d/www.conf
 
     nginx -t
     systemctl enable --now php-fpm nginx
