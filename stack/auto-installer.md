@@ -121,7 +121,7 @@ Log
 tail -f /var/log/deploy-wordpress.log
 ```
 
-## [Bookstack](https://netboxlabs.com/products/free-netbox-cloud) (testing)
+## [Bookstack](https://netboxlabs.com/products/free-netbox-cloud)
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/bookstack_al10.sh -o bookstack.sh && bash bookstack.sh
