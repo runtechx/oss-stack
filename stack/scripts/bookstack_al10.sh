@@ -93,7 +93,6 @@ case "$LANG_CHOICE" in
         MSG_WARN_TIME="L'installation peut prendre plusieurs minutes — veuillez patienter."
         ;;
     *)
-        # Default: English (option 2 or any invalid input)
         MSG_TITLE="BookStack Deployment — AlmaLinux 10"
         MSG_STEP1="[1/5] Updating system and installing prerequisites..."
         MSG_STEP2="[2/5] Installing and configuring MariaDB..."
@@ -130,7 +129,7 @@ case "$LANG_CHOICE" in
 esac
 
 # -----------------------------
-# CONFIGURATION — CHANGE ME
+# CONFIGURATION
 # -----------------------------
 INSTALL_DIR="/var/www/bookstack"
 DB_NAME="bookstack"
@@ -140,7 +139,6 @@ MYSQL_ROOT_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
 LOG="/var/log/deploy-bookstack.log"
 CRED_FILE="/root/bookstack-credentials.txt"
 
-# Helper: log a section header to the log file
 log_section() {
     echo "" >> "$LOG"
     echo "============================================================" >> "$LOG"
@@ -177,11 +175,12 @@ echo "${MSG_STEP1}"
 log_section "STEP 1: System Update & Prerequisites"
 {
     dnf install -y epel-release
-    dnf install -y wget curl tar unzip policycoreutils-python-utils
+    dnf install -y wget curl tar unzip git policycoreutils-python-utils
     dnf install -y https://rpms.remirepo.net/enterprise/remi-release-10.rpm
     dnf module reset php -y
     dnf module enable php:remi-8.5 -y
-    dnf install -y php php-fpm php-{cli,mbstring,mysqlnd,xml,gd,bcmath,ldap,zip,curl,pecl-zip}
+    dnf install -y php php-fpm php-cli \
+        php-bcmath php-mbstring php-ldap php-xml php-gd php-mysqlnd php-pecl-zip
     php -v
 } >> "$LOG" 2>&1
 
@@ -195,7 +194,6 @@ log_section "STEP 2: Install MariaDB"
     systemctl enable --now mariadb
     sleep 5
 
-    # Secure installation — set root password and harden defaults
     mysql <<SQL
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASS}';
 DELETE FROM mysql.user WHERE User='';
@@ -205,7 +203,6 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 FLUSH PRIVILEGES;
 SQL
 
-    # Create BookStack database and user
     mysql -uroot -p"${MYSQL_ROOT_PASS}" <<EOF
 CREATE DATABASE ${DB_NAME} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE OR REPLACE USER '${DB_USER}'@'localhost' IDENTIFIED BY '${DB_PASS}';
@@ -213,7 +210,6 @@ GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
-    # Test connectivity
     mysql -u"${DB_USER}" -p"${DB_PASS}" "${DB_NAME}" -e "SELECT 1;" > /dev/null
     echo "  Database connectivity confirmed."
 } >> "$LOG" 2>&1
@@ -224,35 +220,21 @@ EOF
 echo "${MSG_STEP3}"
 log_section "STEP 3: Install BookStack"
 {
-    # Detect latest release from GitHub API
-    BS_VERSION=$(curl -fsSL https://api.github.com/repos/BookStackApp/BookStack/releases/latest \
-        | grep '"tag_name"' \
-        | cut -d '"' -f4 \
-        | sed 's/^v//')
+    # Clone latest release branch from official GitHub mirror
+    git clone https://github.com/BookStackApp/BookStack.git \
+        --branch release --single-branch "${INSTALL_DIR}"
 
-    if [ -z "$BS_VERSION" ]; then
-        echo "  ERROR: Could not detect latest BookStack version."
-        exit 1
-    fi
-    echo "  Version detected: ${BS_VERSION}"
-
-    # Download and extract tarball directly into INSTALL_DIR
-    wget -q -O /tmp/bookstack.tar.gz \
-        "https://github.com/BookStackApp/BookStack/archive/refs/tags/v${BS_VERSION}.tar.gz"
-    mkdir -p "${INSTALL_DIR}"
-    tar -xzf /tmp/bookstack.tar.gz -C "${INSTALL_DIR}" --strip-components=1
-    rm -f /tmp/bookstack.tar.gz
-
-    # Install Composer dependencies via bundled CLI tool
     cd "${INSTALL_DIR}"
+
+    # Install composer dependencies via bundled CLI tool
     php bookstack-system-cli download-vendor
 
     # Configure environment
     cp .env.example .env
-    sed -i "s@APP_URL=.*\$@APP_URL=http://${ACCESS_URL}@"   .env
-    sed -i "s/DB_DATABASE=.*$/DB_DATABASE=${DB_NAME}/"      .env
-    sed -i "s/DB_USERNAME=.*$/DB_USERNAME=${DB_USER}/"      .env
-    sed -i "s/DB_PASSWORD=.*\$/DB_PASSWORD=${DB_PASS}/"     .env
+    sed -i "s@APP_URL=.*\$@APP_URL=http://${ACCESS_URL}@" .env
+    sed -i "s/DB_DATABASE=.*$/DB_DATABASE=${DB_NAME}/"    .env
+    sed -i "s/DB_USERNAME=.*$/DB_USERNAME=${DB_USER}/"    .env
+    sed -i "s/DB_PASSWORD=.*\$/DB_PASSWORD=${DB_PASS}/"   .env
 
     # Generate application key
     php artisan key:generate --no-interaction --force
@@ -264,17 +246,15 @@ log_section "STEP 3: Install BookStack"
     chown -R nginx:nginx "${INSTALL_DIR}"
     chmod -R 755 "${INSTALL_DIR}"
     chmod -R 775 "${INSTALL_DIR}/bootstrap/cache" \
-                 "${INSTALL_DIR}/public/uploads" \
+                 "${INSTALL_DIR}/public/uploads"  \
                  "${INSTALL_DIR}/storage"
     chmod 740 "${INSTALL_DIR}/.env"
 
     echo "  BookStack installed at: ${INSTALL_DIR}"
 } >> "$LOG" 2>&1
 
-# Capture version outside the log block for use in credentials
-BS_VERSION=$(cat "${INSTALL_DIR}/version" 2>/dev/null || \
-    curl -fsSL https://api.github.com/repos/BookStackApp/BookStack/releases/latest \
-    | grep '"tag_name"' | cut -d '"' -f4 | sed 's/^v//' 2>/dev/null || echo "unknown")
+# Capture version for credentials file
+BS_VERSION=$(cat "${INSTALL_DIR}/version" 2>/dev/null || echo "unknown")
 
 # -----------------------------
 # STEP 4: Configure Nginx, PHP-FPM & SELinux
@@ -284,8 +264,7 @@ log_section "STEP 4: Configure Nginx, PHP-FPM & SELinux"
 {
     dnf install -y nginx
 
-    # Write virtual host configuration
-    cat > /etc/nginx/conf.d/bookstack.conf << EOF
+    cat > /etc/nginx/conf.d/bookstack.conf << NGINXEOF
 server {
     listen 80;
     listen [::]:80;
@@ -313,30 +292,18 @@ server {
     error_log  /var/log/nginx/bookstack_error.log;
     access_log /var/log/nginx/bookstack_access.log combined;
 }
-EOF
+NGINXEOF
 
-    # Harden PHP session cookie
-    cp /etc/php.ini /etc/php.ini.bak
-    sed -i 's/^session.cookie_httponly =.*/session.cookie_httponly = 1/' /etc/php.ini
+    # SELinux contexts
+    semanage fcontext -a -t httpd_sys_content_t    "${INSTALL_DIR}(/.*)?"
+    semanage fcontext -a -t httpd_sys_rw_content_t "${INSTALL_DIR}/storage(/.*)?"
+    semanage fcontext -a -t httpd_sys_rw_content_t "${INSTALL_DIR}/bootstrap/cache(/.*)?"
+    semanage fcontext -a -t httpd_sys_rw_content_t "${INSTALL_DIR}/public/uploads(/.*)?"
+    restorecon -Rv "${INSTALL_DIR}"
 
-    # SELinux — required policies for BookStack on AlmaLinux 10
-    if command -v getenforce >/dev/null 2>&1 && [ "$(getenforce)" != "Disabled" ]; then
-        echo "  Applying SELinux contexts and booleans..."
-
-        semanage fcontext -a -t httpd_sys_content_t    "${INSTALL_DIR}(/.*)?"
-        semanage fcontext -a -t httpd_sys_rw_content_t "${INSTALL_DIR}/storage(/.*)?"
-        semanage fcontext -a -t httpd_sys_rw_content_t "${INSTALL_DIR}/bootstrap/cache(/.*)?"
-        semanage fcontext -a -t httpd_sys_rw_content_t "${INSTALL_DIR}/public/uploads(/.*)?"
-        restorecon -Rv "${INSTALL_DIR}"
-
-        setsebool -P httpd_can_network_connect on
-        setsebool -P httpd_can_network_connect_db on
-        setsebool -P httpd_can_sendmail on
-
-        echo "  SELinux policies applied."
-    else
-        echo "  SELinux is disabled — skipping."
-    fi
+    setsebool -P httpd_can_network_connect on
+    setsebool -P httpd_can_network_connect_db on
+    setsebool -P httpd_can_sendmail on
 
     nginx -t
     systemctl enable --now php-fpm nginx
