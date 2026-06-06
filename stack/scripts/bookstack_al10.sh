@@ -305,6 +305,14 @@ NGINXEOF
     setsebool -P httpd_can_network_connect_db on
     setsebool -P httpd_can_sendmail on
 
+    # Fix PHP-FPM socket ownership so nginx can connect to it
+    # listen.acl_users overrides listen.owner/group — must remove it
+    sed -i '/^listen\.acl_users/d' /etc/php-fpm.d/www.conf
+    sed -i '/^;*listen\.owner/d' /etc/php-fpm.d/www.conf
+    sed -i '/^;*listen\.group/d' /etc/php-fpm.d/www.conf
+    echo "listen.owner = nginx" >> /etc/php-fpm.d/www.conf
+    echo "listen.group = nginx" >> /etc/php-fpm.d/www.conf
+
     nginx -t
     systemctl enable --now php-fpm nginx
     systemctl restart php-fpm nginx
