@@ -47,7 +47,10 @@ Log
 ```bash
 tail -f /var/log/deploy-wazuh.log
 ```
-
+>[!IMPORTANT]
+>A sua VM deve ter o **mínimo recomendado é 4 GB de memória RAM**, para uma configuração de nó único (até 25 agentes).
+>
+>Para ambientes com mais de 100 endpoints, recomenda-se 16 GB de memória RAM.
 
 ## [Passbolt](https://www.passbolt.com/)
 
