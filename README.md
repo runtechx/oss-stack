@@ -98,7 +98,7 @@ OpenFirst/
 Listas de bloqueio de IPs e domínios associados a publicidade abusiva, malware e tracking. Utilizáveis directamente em firewalls, proxies e ferramentas como fail2ban.
 
 ### `guias`
-Documentação técnica e procedimentos operacionais. Inclui guias de preparação de ambientes (Hyper-V, VirtualBox), uso das blocklists e referências de sintaxe.
+Documentação técnica e procedimentos operacionais. Inclui guias de preparação de ambientes (Hyper-V, VirtualBox, Proxmox), uso das blocklists e referências de sintaxe.
 
 ### `labs`
 Laboratórios e ambientes de teste para validação de tecnologias antes da adopção em produção.
