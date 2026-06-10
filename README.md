@@ -1,4 +1,3 @@
-
 <div align="right">
 
 [OpenFirst](/OPENFIRST.md) |
@@ -17,12 +16,51 @@ O OpenFirst é um standard de decisão tecnológica que estabelece critérios es
 
 > Princípio central: **open source é a opção por defeito. Soluções proprietárias são a excepção documentada.**
 
-Para entender o modelo de decisão, critérios de maturidade e princípios operacionais → consulta o documento [OPENFIRST.md](/OPENFIRST.md).
+
+
+## O que encontras neste repositório
+
+Este repositório não é apenas documentação — é um kit operacional completo que acompanha o ciclo de decisão, aprendizagem e implementação de tecnologias open source.
+
+Está organizado em três camadas que se complementam:
+
+```
+Decidir → Aprender → Implementar
+```
+
+| Camada | O que resolve | Onde |
+|---|---|---|
+| **Decidir** | Critérios e modelo estruturado para escolher tecnologias | [`OPENFIRST.md`](/OPENFIRST.md) |
+| **Aprender** | Guias práticos e laboratórios para validar e ganhar competência | [`guias/`](/guias/guides.md) · [`labs/`](/labs/) |
+| **Implementar** | Stack de referência, scripts e automações prontos a usar | [`stack/`](/stack/stack.md) · [`stack/auto-installer.md`](/stack/auto-installer.md) |
+
+E ainda:
+
+| Recurso | O que é | Onde |
+|---|---|---|
+| **Blocklists** | Listas de bloqueio de IPs e domínios para segurança de rede | [`blocklists/`](/blocklists/) |
+
+
+
+## Como usar este repositório
+
+**Se precisas de tomar uma decisão tecnológica →**
+Começa pelo [`OPENFIRST.md`](/OPENFIRST.md). Encontras o modelo de decisão em 4 etapas, critérios de maturidade e um scorecard para avaliar alternativas open source.
+
+**Se precisas de aprender a usar uma tecnologia →**
+Consulta os [`guias/`](/guias/guides.md) para procedimentos operacionais documentados, ou usa os [`labs/`](/labs/) para experimentar em ambiente controlado antes de ir para produção.
+
+**Se precisas de instalar ou configurar um ambiente →**
+Vai directamente ao [`stack/auto-installer.md`](/stack/auto-installer.md) para comandos e automações prontas, ou ao [`stack/stack.md`](/stack/stack.md) para perceber o racional de cada tecnologia adoptada.
+
+**Se precisas de proteger a rede →**
+As [`blocklists/`](/blocklists/) contêm listas de IPs e domínios prontas a integrar com fail2ban, firewalls ou proxies.
 
 
 
 ## Organização do Repositório
 
+Listagem do repositório
 ```
 OpenFirst/
 ├── blocklists/          # Listas de bloqueio de IPs e domínios
