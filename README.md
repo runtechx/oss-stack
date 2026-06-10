@@ -1,11 +1,13 @@
 <div align="right">
 
-[OpenFirst](/OPENFIRST.md) |
+[Início](/README.md) |  [OpenFirst](/OPENFIRST.md) |
 [Stack](/stack/stack.md) |
 [Guias](/guias/guides.md) |
 [Labs](/labs/labs.md) |
 [Comandos](/stack/auto-installer.md)
 
+&nbsp;
+&nbsp;
 </div>
 
 # OpenFirst
@@ -13,9 +15,10 @@
 **Standard de Adopção Tecnológica para infraestruturas TIC.**
 
 O OpenFirst é um standard de decisão tecnológica que estabelece critérios estruturados para avaliação e adopção de tecnologias, com preferência por soluções open source e padrões abertos.
-
+<br>
+<br>
 > Princípio central: **open source é a opção por defeito. Soluções proprietárias são a excepção documentada.**
-
+<br>
 
 
 ## O que encontras neste repositório
