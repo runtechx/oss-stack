@@ -10,7 +10,7 @@
 
 # OpenFirst
 
-**Standard de Adopção Tecnológica para ambientes open source.**
+**Standard de Adopção Tecnológica para infraestruturas TIC.**
 
 O OpenFirst é um standard de decisão tecnológica que estabelece critérios estruturados para avaliação e adopção de tecnologias, com preferência por soluções open source e padrões abertos.
 
