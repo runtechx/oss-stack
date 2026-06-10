@@ -1,3 +1,13 @@
+<div align="right">
+
+[OpenFirst](#) |
+[Stack](#) |
+[Guias](#) |
+[Labs](#) |
+[Comandos](#)
+
+</div>
+
 # OpenFirst — Standard de Adopção Tecnológica
 
 ## O que é o OpenFirst
@@ -6,9 +16,12 @@ O **OpenFirst** é um standard de adopção tecnológica que estabelece um model
 
 O OpenFirst prioriza **transparência, auditabilidade, interoperabilidade e independência tecnológica de longo prazo**, reduzindo a dependência de fornecedores específicos (vendor lock-in) e aumentando o controlo sobre sistemas, dados e infraestrutura crítica.
 
+
+
 ## Princípio Central
 
 > **Open source é a opção por defeito. Soluções proprietárias são a excepção documentada.**
+
 
 
 ## Modelo de Decisão
@@ -61,12 +74,13 @@ Quando não existe alternativa open source viável, a adopção de solução pro
 | **Privacidade e segurança** | Clareza sobre onde os dados são processados e armazenados |
 | **Revisão periódica** | Data de reavaliação agendada (máximo 12 meses) |
 
+---
 
 ## Princípios Operacionais
 
 A implementação do OpenFirst é suportada pelos seguintes princípios de engenharia:
 
-### OpenFirst by Design
+### Open First by Design
 O open source é o ponto de partida por defeito em todas as decisões tecnológicas. A pergunta nunca é "porquê open source?" — é "porquê não open source?"
 
 ### Infrastructure as Code e Automação
@@ -84,6 +98,8 @@ Visibilidade total sobre os sistemas em produção através de métricas, logs e
 ### Escalabilidade e Resiliência
 Sistemas desenhados para crescer horizontalmente e tolerar falhas parciais. Alta disponibilidade como requisito, não como opção.
 
+
+
 ## Critérios de Maturidade Open Source — Referência Rápida
 
 Para avaliações rápidas, use este scorecard (pontuação mínima recomendada: 12/20):
@@ -97,6 +113,26 @@ Para avaliações rápidas, use este scorecard (pontuação mínima recomendada:
 | Historial de segurança | /3 | CVEs resolvidos, disclosure process, auditorias |
 
 
+
+### Exemplo de Avaliação — Nextcloud vs. SharePoint Online
+
+Cenário: uma organização precisa de uma plataforma de partilha de ficheiros e colaboração interna.
+
+| Dimensão | Peso | Nextcloud | Justificação |
+|---|---|---|---|
+| Actividade do projecto | /5 | 5 | Repositório activo; releases regulares; comunidade de contribuidores grande |
+| Qualidade da documentação | /4 | 4 | Docs completas, guias de administração, exemplos de integração |
+| Ecossistema e integrações | /4 | 3 | Marketplace de apps rico; integração LDAP/SSO disponível; algumas integrações empresariais requerem configuração adicional |
+| Modelo de suporte | /4 | 4 | Suporte comercial disponível via Nextcloud GmbH; SLAs empresariais possíveis |
+| Historial de segurança | /3 | 3 | CVEs resolvidos com rapidez; programa de bug bounty activo; auditorias de segurança publicadas |
+| **Total** | **/20** | **19/20** | **✓ Aprovado para adopção** |
+
+**Decisão:** Nextcloud cumpre os critérios de maturidade. Avançar para Etapa 2 (requisitos funcionais).
+
+> O scorecard não substitui a avaliação técnica — é um filtro de entrada. Uma pontuação ≥ 12 justifica investir tempo numa avaliação técnica aprofundada. Uma pontuação < 12 é sinal para procurar alternativas ou considerar a Etapa 4.
+
+
+
 ## Casos de Excepção
 
 O OpenFirst reconhece contextos onde a aplicação estrita pode não ser adequada:
@@ -107,6 +143,7 @@ O OpenFirst reconhece contextos onde a aplicação estrita pode não ser adequad
 | **Tecnologia sem alternativa open source matura** | Adoptar proprietária com exit strategy; monitorizar alternativas activamente |
 | **Prazo crítico de negócio** | Adopção temporária com prazo de reavaliação definido (máximo 6 meses) |
 | **Solução proprietária já existente e consolidada** | Avaliar custo/risco de migração vs. manutenção; definir roadmap gradual |
+
 
 
 ## Valor para o Negócio
@@ -123,6 +160,7 @@ A sua adopção permite às organizações:
 - **Melhorar a autonomia operacional** — equipas com controlo real sobre os sistemas que operam
 
 
+
 ## Métricas de Adopção
 
 Para avaliar se o OpenFirst está a funcionar, monitorizar regularmente:
@@ -132,3 +170,7 @@ Para avaliar se o OpenFirst está a funcionar, monitorizar regularmente:
 - **Nº de decisões de adopção proprietária sem justificação registada** (meta: 0)
 - **Tempo médio para reavaliação de soluções proprietárias** (meta: ≤ 12 meses)
 
+
+<div align="right">
+Source: https://github.com/runtechx/
+</div>
