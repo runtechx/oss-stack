@@ -1,6 +1,6 @@
 <div align="right">
   
-[OpenFirst](https://github.com/runtechx/OpenFirst/blob/main/README.md) |
+[OpenFirst](/OPENFIRST.md) |
 [Stack](/stack/stack.md) |
 [Guias](/guias/guides.md) |
 [Labs](/labs/labs.md) |
