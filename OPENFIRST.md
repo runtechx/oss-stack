@@ -1,7 +1,6 @@
 <div align="right">
 
-[Início](/README.md) |  
-[OpenFirst](/OPENFIRST.md) |
+[Início](/README.md) |  [OpenFirst](/OPENFIRST.md) |
 [Stack](/stack/stack.md) |
 [Guias](/guias/guides.md) |
 [Labs](/labs/labs.md) |
