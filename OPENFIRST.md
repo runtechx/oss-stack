@@ -1,11 +1,14 @@
 <div align="right">
 
-[OpenFirst](#) |
-[Stack](#) |
-[Guias](#) |
-[Labs](#) |
-[Comandos](#)
+[Início](/README.md) |  
+[OpenFirst](/OPENFIRST.md) |
+[Stack](/stack/stack.md) |
+[Guias](/guias/guides.md) |
+[Labs](/labs/labs.md) |
+[Comandos](/stack/auto-installer.md)
 
+&nbsp;
+&nbsp;
 </div>
 
 # OpenFirst — Standard de Adopção Tecnológica
