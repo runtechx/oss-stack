@@ -152,7 +152,7 @@ Deia uma vista de olhos no programa aberto, tente responder estás perguntas;
 A seguir pressione Q para fechar o programa htop e escreva exit para sair da ligacao ssh.
 
 
-**Exercício 2** - Logar-se no servidor 2 apartir da consola
+**Exercício 3** - Logar-se no servidor 2 apartir da consola
 
 **Hyper-v**
 
@@ -170,7 +170,7 @@ No terminal(Admin) do windows cole o comando a baixo para abrir o Gestor Hyper-v
 A seguir selecione o srv2, clique duas vezes por cima da janela do srv2, maximize a janela e faça o login com a conta `labuser` e senha `Qwerty456#`
 
 
-**Exercício 3** - Alternar entre consolas virtuais
+**Exercício 4** - Alternar entre consolas virtuais
 
 No modo gráfico use as seguintes combinações para alternar entre consolas virtuais 
 
@@ -183,7 +183,7 @@ No modo gráfico use as seguintes combinações para alternar entre consolas vir
 | Ctrl + Alt + F5      | Quarta consola virtual (tty5)                            |
 | Ctrl + Alt + F6      | Quinta consola virtual (tty6)                            |
 
-**Exercício 4** - Aceder o Emulador do Terminal no modo gráfico 
+**Exercício 5** - Aceder o Emulador do Terminal no modo gráfico 
 
 No GNOME desktop > vá `Activities`> escreva "terminal" na barra de pesquisa > Clique em `Terminal`
 
