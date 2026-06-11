@@ -188,6 +188,69 @@ No modo gráfico use as seguintes combinações para alternar entre consolas vir
 No GNOME desktop > vá `Activities`> escreva "terminal" na barra de pesquisa > Clique em `Terminal`
 
 
+**Exercício 6** - Entender o formato de um comando Linux
+
+Todo o comando Linux segue esta estrutura:
+
+```text
+comando [opções] [argumentos]
+```
+
+| Parte      | Descrição                                              | Exemplo        |
+| ---------- | ------------------------------------------------------ | -------------- |
+| comando    | O programa a executar                                  | `ls`           |
+| opções     | Modificam o comportamento do comando (começam com `-`) | `-l`, `--all`  |
+| argumentos | O alvo sobre o qual o comando atua (ficheiro, diretório, etc.) | `/etc`  |
+
+**6.1** — Corre o comando sem opções nem argumentos:
+
+```bash
+ls
+```
+
+Mostra os ficheiros do diretório atual. Repara que a saída é simples.
+
+**6.2** — Adiciona uma opção curta (`-l`) para formato longo:
+
+```bash
+ls -l
+```
+
+A opção `-l` modifica o comportamento — agora vês permissões, dono, tamanho e data.
+
+**6.3** — Adiciona um argumento para indicar um diretório diferente:
+
+```bash
+ls /etc
+```
+
+O argumento `/etc` diz ao comando onde atuar em vez do diretório atual.
+
+**6.4** — Combina opção e argumento:
+
+```bash
+ls -l /etc
+```
+
+**6.5** — Usa a opção longa equivalente:
+
+```bash
+ls --all /etc
+```
+
+> [!NOTE]
+> Opções curtas usam um traço (`-l`). Opções longas usam dois traços (`--all`).  
+> Muitas opções curtas podem ser combinadas: `ls -la` é o mesmo que `ls -l -a`.
+
+**6.6** — Descobre o que um comando faz com `--help`:
+
+```bash
+ls --help
+```
+
+Tenta responder:
+* Qual a diferença entre `ls -a` e `ls -A` ? ____
+* O que faz a opção `-h` quando combinada com `-l` ? ____
 
 
 &nbsp;
