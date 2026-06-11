@@ -83,7 +83,7 @@ srv2                      running (hyperv)
 
 ## Formas de ter acesso ao shell
 
-**Exercício 1** - Encontrar o IP do servidor 2 (Disponível apenas em ambiente de laboratório)
+### Exercício 1 - Encontrar o IP do servidor 2 (Disponível apenas em ambiente de laboratório)
 
 Abra o terminal(Admin) do windows, clicando por cima do botao do windows com o botao esquerdo do rato para abrir o menu de contexto e escolher terminal(Admin)
 
@@ -106,7 +106,7 @@ Procura pela placa 2 e parte onde diz ***inet*** e a seguir o IP, neste caso 172
        valid_lft forever preferred_lft forever
 ```
 
-**Exercício 2** - Logar-se no servidor 2 usando ssh
+### Exercício 2 - Logar-se no servidor 2 usando ssh
 
 Agora que temos o IP abra uma outra aba no terminal(Admin) windows e corra
 
@@ -152,7 +152,7 @@ Deia uma vista de olhos no programa aberto, tente responder estás perguntas;
 A seguir pressione Q para fechar o programa htop e escreva exit para sair da ligacao ssh.
 
 
-**Exercício 3** - Logar-se no servidor 2 apartir da consola
+### Exercício 3 - Logar-se no servidor 2 apartir da consola
 
 **Hyper-v**
 
@@ -170,7 +170,7 @@ No terminal(Admin) do windows cole o comando a baixo para abrir o Gestor Hyper-v
 A seguir selecione o srv2, clique duas vezes por cima da janela do srv2, maximize a janela e faça o login com a conta `labuser` e senha `Qwerty456#`
 
 
-**Exercício 4** - Alternar entre consolas virtuais
+### Exercício 4 - Alternar entre consolas virtuais
 
 No modo gráfico use as seguintes combinações para alternar entre consolas virtuais 
 
@@ -183,12 +183,12 @@ No modo gráfico use as seguintes combinações para alternar entre consolas vir
 | Ctrl + Alt + F5      | Quarta consola virtual (tty5)                            |
 | Ctrl + Alt + F6      | Quinta consola virtual (tty6)                            |
 
-**Exercício 5** - Aceder o Emulador do Terminal no modo gráfico 
+### Exercício 5 - Aceder o Emulador do Terminal no modo gráfico 
 
 No GNOME desktop > vá `Activities`> escreva "terminal" na barra de pesquisa > Clique em `Terminal`
 
 
-**Exercício 6** - Entender o formato de um comando Linux
+### Exercício 6 - Entender o formato de um comando Linux
 
 Todo o comando Linux segue esta estrutura:
 
