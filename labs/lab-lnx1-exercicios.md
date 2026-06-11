@@ -144,6 +144,7 @@ Corra
  ```bash
 htop 
 ```
+Tenta responder:
 Deia uma vista de olhos no programa aberto, tente responder estás perguntas;
 * Quantos vcpu vês ? ____
 * Quanto memória está a ser consumida ? ____
