@@ -6,6 +6,7 @@ set -e
 #  Installs: NetBox + PostgreSQL + Valkey (Redis-compatible) + Nginx reverse proxy
 #  Access via HTTPS (self-signed cert) on port 443
 #
+#  Usage: sudo bash netbox_al10.sh
 #  Source: https://github.com/runtechx/
 # ============================================================
 
@@ -142,7 +143,7 @@ esac
 # -----------------------------
 # CONFIGURATION
 # -----------------------------
-NETBOX_VERSION="main"            # or e.g. "v4.2.0" for a specific release
+NETBOX_VERSION="v4.2.0"          # pin to a stable release; update as needed
 NETBOX_INSTALL_DIR="/opt/netbox"
 NETBOX_VENV_DIR="${NETBOX_INSTALL_DIR}/venv"
 NETBOX_DB_NAME="netbox"
@@ -208,10 +209,9 @@ log_section "STEP 1: System Update & Prerequisites"
     dnf install -y \
         curl wget git \
         openssl openssl-devel \
-        python3 python3-pip python3-devel python3-setuptools \
-        libxml2-devel libxslt-devel \
+        python3 python3-pip python3-devel \
         libffi-devel \
-        redhat-rpm-config \
+        libpq-devel \
         nginx \
         policycoreutils-python-utils
 } >> "$LOG" 2>&1
@@ -222,7 +222,7 @@ log_section "STEP 1: System Update & Prerequisites"
 echo "${MSG_STEP2}"
 log_section "STEP 2: PostgreSQL"
 {
-    dnf install -y postgresql postgresql-server libpq-devel
+    dnf install -y postgresql postgresql-server
 
     if [[ ! -f /var/lib/pgsql/data/PG_VERSION ]]; then
         postgresql-setup --initdb
@@ -333,8 +333,9 @@ echo "${MSG_STEP6}"
 log_section "STEP 6: Python venv & dependencies"
 {
     sudo -u netbox python3 -m venv "${NETBOX_VENV_DIR}"
-    sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install --upgrade pip wheel
+    sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install --upgrade pip wheel setuptools
     sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install \
+        "psycopg[c]" \
         -r "${NETBOX_INSTALL_DIR}/requirements.txt"
     sudo -u netbox "${NETBOX_VENV_DIR}/bin/pip" install gunicorn
     echo "  Python dependencies installed."
@@ -405,8 +406,7 @@ NBCONF
 echo "${MSG_STEP8}"
 log_section "STEP 8: Database Migration & Superuser"
 {
-    cd "${NETBOX_INSTALL_DIR}/netbox"
-    MANAGE="${NETBOX_VENV_DIR}/bin/python3 manage.py"
+    MANAGE="${NETBOX_VENV_DIR}/bin/python3 ${NETBOX_INSTALL_DIR}/netbox/manage.py"
 
     sudo -u netbox ${MANAGE} migrate
     sudo -u netbox ${MANAGE} collectstatic --no-input
@@ -455,10 +455,10 @@ User=netbox
 Group=netbox
 WorkingDirectory=${NETBOX_INSTALL_DIR}/netbox
 Environment=PYTHONPATH=${NETBOX_INSTALL_DIR}/netbox
-ExecStart=${NETBOX_VENV_DIR}/bin/gunicorn \\
-    --pid /var/tmp/netbox.pid \\
-    --pythonpath ${NETBOX_INSTALL_DIR}/netbox \\
-    -c /etc/netbox/gunicorn.py \\
+ExecStart=${NETBOX_VENV_DIR}/bin/gunicorn \
+    --pid /var/tmp/netbox.pid \
+    --pythonpath ${NETBOX_INSTALL_DIR}/netbox \
+    -c /etc/netbox/gunicorn.py \
     netbox.wsgi
 Restart=on-failure
 RestartSec=10
@@ -483,7 +483,8 @@ User=netbox
 Group=netbox
 WorkingDirectory=${NETBOX_INSTALL_DIR}/netbox
 Environment=PYTHONPATH=${NETBOX_INSTALL_DIR}/netbox
-ExecStart=${NETBOX_VENV_DIR}/bin/python3 ${NETBOX_INSTALL_DIR}/netbox/manage.py rqworker
+ExecStart=${NETBOX_VENV_DIR}/bin/python3 \
+    ${NETBOX_INSTALL_DIR}/netbox/manage.py rqworker
 Restart=on-failure
 RestartSec=10
 PrivateTmp=true
