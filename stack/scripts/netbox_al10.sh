@@ -236,9 +236,9 @@ log_section "STEP 2: PostgreSQL"
     cp "${PG_HBA}" "${PG_HBA}.bak"
 
     # Set ALL local/loopback entries to trust (handles peer, ident, scram-sha-256)
-    sed -i -E 's/^(local[[:space:]]+all[[:space:]]+all[[:space:]]+)[^[:space:]]+$/\1trust/' "${PG_HBA}" 
-    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+127\.0\.0\.1\/32[[:space:]]+)[^[:space:]]+$/\1trust/' "${PG_HBA}" 
-    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+::1\/128[[:space:]]+)[^[:space:]]+$/\1trust/' "${PG_HBA}" 
+    sed -i -E 's/^(local[[:space:]]+all[[:space:]]+all[[:space:]]+)[^[:space:]]+$/\1trust/' "${PG_HBA}"
+    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+127\.0\.0\.1\/32[[:space:]]+)[^[:space:]]+$/\1trust/' "${PG_HBA}"
+    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+::1\/128[[:space:]]+)[^[:space:]]+$/\1trust/' "${PG_HBA}"
 
     systemctl enable postgresql --now
     systemctl restart postgresql
@@ -262,9 +262,9 @@ PSQL
         -c "GRANT ALL ON SCHEMA public TO ${NETBOX_DB_USER};" 2>/dev/null || true
 
     # Restore secure auth — scram-sha-256 for all local connections
-    sed -i -E 's/^(local[[:space:]]+all[[:space:]]+all[[:space:]]+)trust$/\1scram-sha-256/' "${PG_HBA}" 
-    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+127\.0\.0\.1\/32[[:space:]]+)trust$/\1scram-sha-256/' "${PG_HBA}" 
-    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+::1\/128[[:space:]]+)trust$/\1scram-sha-256/' "${PG_HBA}" 
+    sed -i -E 's/^(local[[:space:]]+all[[:space:]]+all[[:space:]]+)trust$/\1scram-sha-256/' "${PG_HBA}"
+    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+127\.0\.0\.1\/32[[:space:]]+)trust$/\1scram-sha-256/' "${PG_HBA}"
+    sed -i -E 's/^(host[[:space:]]+all[[:space:]]+all[[:space:]]+::1\/128[[:space:]]+)trust$/\1scram-sha-256/' "${PG_HBA}"
 
     systemctl restart postgresql
     echo "  PostgreSQL configured."
@@ -297,7 +297,8 @@ log_section "STEP 4: System User & Directories"
 
     mkdir -p "${NETBOX_INSTALL_DIR}"/{media,reports,scripts}
     chown -R netbox:netbox "${NETBOX_INSTALL_DIR}"
-    chmod 750 "${NETBOX_INSTALL_DIR}"
+    # 755 (not 750) so nginx can traverse into /static/ without being in the netbox group
+    chmod 755 "${NETBOX_INSTALL_DIR}"
     echo "  User and directories ready."
 } >> "$LOG" 2>&1
 
@@ -321,7 +322,7 @@ log_section "STEP 5: Clone NetBox"
         # Create extra subdirs and hand ownership to netbox
         mkdir -p "${NETBOX_INSTALL_DIR}"/{media,reports,scripts}
         chown -R netbox:netbox "${NETBOX_INSTALL_DIR}"
-        chmod 750 "${NETBOX_INSTALL_DIR}"
+        chmod 755 "${NETBOX_INSTALL_DIR}"
         echo "  Repository cloned."
     fi
 } >> "$LOG" 2>&1
@@ -410,6 +411,13 @@ log_section "STEP 8: Database Migration & Superuser"
 
     sudo -u netbox ${MANAGE} migrate
     sudo -u netbox ${MANAGE} collectstatic --no-input
+
+    # Ensure nginx (running as 'nginx', not in netbox group) can read static files
+    chmod -R o+rX "${NETBOX_INSTALL_DIR}/netbox/static"
+
+    # Restore SELinux file contexts on the static directory
+    restorecon -Rv "${NETBOX_INSTALL_DIR}/netbox/static" 2>/dev/null || true
+
     sudo -u netbox ${MANAGE} remove_stale_contenttypes --no-input 2>/dev/null || true
 
     sudo -u netbox ${MANAGE} shell <<PYEOF
