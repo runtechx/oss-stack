@@ -143,6 +143,13 @@ Log
 ```bash
 tail -f /var/log/deploy-netbox.log
 ```
+> [!IMPORTANT]
+>
+> | Descrição                  | vCPU     | Memória RAM | Armazenamento  |
+> | -------------------------- | -------- | ----------- | -------------- |
+> | Não Produção / Laboratório | 2-4 vCPU | 4-16 GB     | 20-50 GB       |
+> | Produção (Recomendado)     | 8 vCPU   | 24 GB       | 100 GB ou mais |
+
 
 
 
