@@ -134,7 +134,7 @@ Log
 tail -f /var/log/deploy-bookstack.log
 ```
 
-## [Netbox](https://netboxlabs.com/products/free-netbox-cloud/) (testing)
+## [Netbox](https://netboxlabs.com/products/free-netbox-cloud/) 
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/runtechx/OpenFirst/master/stack/scripts/netbox_al10.sh -o netbox.sh && bash netbox.sh
