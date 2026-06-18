@@ -4,7 +4,8 @@
 
 **Self-hosted open-source infrastructure, deployed in minutes.**
 
-Deploy a full Open Source Software on a fresh AlmaLinux 10 server with a single command.
+Take a freshly provisioned AlmaLinux server and have a real, working, production-capable service running on it in a few minutes.
+
 No containers, no cloud lock-in, no licensing fees — just clean, reproducible bash scripts
 that do exactly what they say.
 
@@ -20,7 +21,7 @@ self-hosted infrastructure stacks on top of AlmaLinux — the enterprise-grade, 
 Linux distribution.
 
 The goal is simple: take a freshly provisioned AlmaLinux server and have a real, working,
-production-capable service running on it in under 15 minutes — fully configured, firewall open,
+production-capable service running on it in a few minutes — fully configured, firewall open,
 SELinux policies applied, and credentials saved to `/root/`.
 
 This is useful if you:
