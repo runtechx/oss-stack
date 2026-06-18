@@ -4,15 +4,14 @@
 
 **Self-hosted open-source infrastructure, deployed in minutes.**
 
-Deploy a full production lab on a fresh AlmaLinux 10 server with a single command.
+Deploy a full Open Source Software on a fresh AlmaLinux 10 server with a single command.
 No containers, no cloud lock-in, no licensing fees — just clean, reproducible bash scripts
-that do exactly what they say and leave a credentials file when they're done.
+that do exactly what they say.
 
 [Scripts](#scripts) · [Labs](#labs) · [Blocklists](#blocklists) · [Roadmap](#roadmap)
 
 </div>
 
----
 
 ## What is oss-stack?
 
@@ -34,7 +33,7 @@ This is useful if you:
 Every script in this repo is written to be read, not just run. If something goes wrong,
 the deploy log tells you where, and the script logic tells you why.
 
----
+
 
 ## What's in this repo?
 
@@ -45,7 +44,6 @@ oss-stack/
 └── labs/             # Pre-defined lab environments (work in progress)
 ```
 
----
 
 ## Scripts
 
@@ -102,7 +100,7 @@ Everything is written to `/var/log/deploy-<app>.log` so you can audit or debug a
 
 **Zabbix** — uses PostgreSQL 18 from the PGDG repository and Zabbix 7.4 from the official Zabbix repo. EPEL exclusions are applied automatically to prevent package conflicts.
 
----
+
 
 ## Labs
 
@@ -124,7 +122,7 @@ Planned labs include:
 
 Labs are the next phase of this project. Watch this space.
 
----
+
 
 ## Blocklists
 
@@ -144,7 +142,7 @@ blocklists/
 The node shards allow blocklist distribution across multiple enforcement points — each node
 loads only its shard, keeping memory footprint small on constrained hardware.
 
----
+
 
 ## Requirements
 
@@ -159,7 +157,7 @@ loads only its shard, keeping memory footprint small on constrained hardware.
 Most services run comfortably on a 2-vCPU / 2 GB RAM VPS.
 Wazuh Server is the exception — it requires at least 4 cores, 8 GB RAM, and 50 GB free disk.
 
----
+
 
 ## Roadmap
 
@@ -167,7 +165,6 @@ oss-stack is built to grow with AlmaLinux.
 
 ```
 AlmaLinux 10   ████████████░░░░   active — scripts complete, labs incoming
-AlmaLinux 11   ░░░░░░░░░░░░░░░░   planned — scripts will be ported as AL11 matures
 ```
 
 Future additions planned for AL10:
