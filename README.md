@@ -179,7 +179,6 @@ Future additions planned for AL10:
 
 Pull requests and issue reports are welcome.
 
----
 
 ## License
 
