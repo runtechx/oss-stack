@@ -40,7 +40,7 @@ the deploy log tells you where, and the script logic tells you why.
 
 ```
 oss-stack/
-├── scripts/          # Deployment scripts for AlmaLinux 10
+├── scripts/          # Deployment scripts for AlmaLinux 10+
 ├── blocklists/       # Domain and IP blocklists (hosts format + IP shards)
 └── labs/             # Pre-defined lab environments (work in progress)
 ```
@@ -48,7 +48,7 @@ oss-stack/
 
 ## Scripts
 
-Each script deploys a full application stack on a **fresh AlmaLinux 10** install.
+Each script deploys a full application stack on a **fresh AlmaLinux** install.
 Run as root, answer three questions (language, IP, FQDN), and walk away.
 
 | Script | Application | Stack | Default Port |
