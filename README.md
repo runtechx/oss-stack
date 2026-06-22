@@ -40,7 +40,7 @@ the deploy log tells you where, and the script logic tells you why.
 
 ```
 oss-stack/
-├── scripts/          # One-command deployment scripts for AlmaLinux 10
+├── scripts/          # Deployment scripts for AlmaLinux 10
 ├── blocklists/       # Domain and IP blocklists (hosts format + IP shards)
 └── labs/             # Pre-defined lab environments (work in progress)
 ```
