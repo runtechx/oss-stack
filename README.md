@@ -41,28 +41,104 @@ the deploy log tells you where, and the script logic tells you why.
 ```
 oss-stack/
 ├── scripts/          # Deployment scripts for AlmaLinux 10+
-├── blocklists/       # Domain and IP blocklists (hosts format + IP shards)
+├── blocklists/       # Domain and IP blocklists
 └── labs/             # Pre-defined lab environments (work in progress)
 ```
 
+## Quick Install
 
-## Scripts
+Run as `root` on a fresh **AlmaLinux 10** server. The script will prompt for language, IP, and FQDN.
 
-Each script deploys a full application stack on a **fresh AlmaLinux** install.
-Run as root, answer three questions (language, IP, FQDN), and walk away.
+<details>
+<summary><b>BookStack</b> — team wiki</summary>
 
-| Script | Application | Stack | Default Port |
-|---|---|---|---|
-| `bookstack_al10.sh` | [BookStack](https://www.bookstackapp.com/) — team wiki | Nginx · MariaDB · PHP | 80 |
-| `freeipa_al10.sh` | [FreeIPA](https://www.freeipa.org/) — identity & DNS | 389-DS · Kerberos · Dogtag · BIND | 443 |
-| `glpi_al10.sh` | [GLPI](https://glpi-project.org/) — ITSM & asset management | Apache · MariaDB · PHP 8.5 | 80 |
-| `keycloak_al10.sh` | [Keycloak](https://www.keycloak.org/) — SSO & IAM | Java 21 · PostgreSQL | 8080 |
-| `netbox_al10.sh` | [NetBox](https://netbox.dev/) — network source of truth | Nginx · PostgreSQL · Valkey | 443 |
-| `opencloud_al10.sh` | [OpenCloud](https://opencloud.eu/) — file sync & share | Nginx · Go binary | 443 |
-| `passbolt_al10.sh` | [Passbolt](https://www.passbolt.com/) — team password manager | Nginx · MariaDB · PHP 8.3 | 80 |
-| `wazuh_al10.sh` | [Wazuh](https://wazuh.com/) — SIEM & XDR | Indexer · Manager · Dashboard | 443 |
-| `wordpress_al10.sh` | [WordPress](https://wordpress.org/) — CMS | Apache · MariaDB · PHP | 80 |
-| `zabbix_al10.sh` | [Zabbix](https://www.zabbix.com/) — infrastructure monitoring | Nginx · PostgreSQL 18 | 80 |
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/bookstack_al10.sh)
+```
+
+</details>
+
+<details>
+<summary><b>FreeIPA</b> — identity & DNS</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/freeipa_al10.sh)
+```
+
+</details>
+
+<details>
+<summary><b>GLPI</b> — ITSM & asset management</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/glpi_al10.sh)
+```
+
+</details>
+
+<details>
+<summary><b>Keycloak</b> — SSO & IAM</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/keycloak_al10.sh)
+```
+
+</details>
+
+<details>
+<summary><b>NetBox</b> — network source of truth</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/netbox_al10.sh)
+```
+
+</details>
+
+<details>
+<summary><b>OpenCloud</b> — file sync & share</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/opencloud_al10.sh)
+```
+
+</details>
+
+<details>
+<summary><b>Passbolt</b> — team password manager</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/passbolt_al10.sh)
+```
+
+</details>
+
+<details>
+<summary><b>Wazuh</b> — SIEM & XDR</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/wazuh_al10.sh)
+```
+
+</details>
+
+<details>
+<summary><b>WordPress</b> — CMS</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/wordpress_al10.sh)
+```
+
+</details>
+
+<details>
+<summary><b>Zabbix</b> — infrastructure monitoring</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/zabbix_al10.sh)
+```
+
+</details>
+
 
 ### What every script does
 
@@ -103,81 +179,6 @@ Everything is written to `/var/log/deploy-<app>.log` so you can audit or debug a
 
 
 
-## Labs
-
-> The `labs/` directory is where pre-defined environment blueprints will live.
-
-A **lab** is a combination of scripts that together produce a complete, themed infrastructure
-environment on a fresh AlmaLinux 10 server or set of servers. Think of it as a bill of materials
-for a working internal stack.
-
-Planned labs include:
-
-| Lab | Services | Purpose |
-|---|---|---|
-| `lab-itsm` | GLPI + Zabbix + BookStack | IT operations — ticketing, monitoring, documentation |
-| `lab-identity` | FreeIPA + Keycloak | Centralised identity with SSO |
-| `lab-security` | Wazuh + Passbolt | SIEM, XDR, and credential management |
-| `lab-netops` | NetBox + Zabbix | Network source of truth + monitoring |
-| `lab-collab` | OpenCloud + BookStack + WordPress | File sharing, wiki, and web presence |
-
-Labs are the next phase of this project. Watch this space.
-
-
-
-## Blocklists
-
-Maintained IP and domain blocklists for use with firewalls, DNS resolvers, or IPSET rules.
-
-```
-blocklists/
-├── domain-bl.txt        # 0.0.0.0 <domain> format — Pi-hole / AdGuard / /etc/hosts
-├── ip-bl.txt            # Flat IP list — firewall rules / IPSET
-└── nodes/
-    ├── n0.txt           # Sharded IP list — node 0
-    ├── n1.txt           # Sharded IP list — node 1
-    ├── n2.txt           # Sharded IP list — node 2
-    └── n3.txt           # Sharded IP list — node 3
-```
-
-The node shards allow blocklist distribution across multiple enforcement points — each node
-loads only its shard, keeping memory footprint small on constrained hardware.
-
-
-
-## Requirements
-
-| | |
-|---|---|
-| **OS** | AlmaLinux 10 (x86\_64) — fresh minimal install recommended |
-| **User** | `root` or passwordless `sudo` |
-| **Network** | Internet access required during install |
-| **SELinux** | Supported — all required policies are applied by the scripts |
-| **Firewall** | `firewalld` — configured automatically if the service is active |
-
-Most services run comfortably on a 2-vCPU / 2 GB RAM VPS.
-Wazuh Server is the exception — it requires at least 4 cores, 8 GB RAM, and 50 GB free disk.
-
-
-
-## Roadmap
-
-oss-stack is built to grow with AlmaLinux.
-
-```
-AlmaLinux 10   ████████████░░░░   active — scripts complete, labs incoming
-```
-
-Future additions planned for AL10:
-
-- [ ] Gitea — self-hosted Git
-- [ ] Nextcloud — alternative to OpenCloud for broader plugin ecosystem
-- [ ] Grafana + Prometheus — metrics stack
-- [ ] Vaultwarden — Bitwarden-compatible server
-- [ ] Mattermost — team messaging
-- [ ] Lab blueprints (`labs/`)
-
-Pull requests and issue reports are welcome.
 
 
 ## License
