@@ -11,6 +11,10 @@ that do exactly what they say.
 
 [Scripts](#scripts) · [Labs](#labs) · [Blocklists](#blocklists) · [Roadmap](#roadmap)
 
+### Demo
+
+[![asciicast](https://asciinema.org/a/1259067.svg)](https://asciinema.org/a/1259067)
+
 </div>
 
 
@@ -44,6 +48,8 @@ oss-stack/
 ├── blocklists/       # Domain and IP blocklists
 └── labs/             # Pre-defined lab environments (work in progress)
 ```
+
+
 
 ## Quick Install
 
