@@ -49,7 +49,7 @@ oss-stack/
 
 Run as `root` on a fresh **AlmaLinux 10** server. The script will prompt for language, IP, and FQDN.
 
-### Phase 1 – Core Services
+### Group 1 – Core Services
 
 <details>
 <summary><b>FreeIPA</b> — identity & DNS</summary>
@@ -78,7 +78,6 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 </details>
 
-### Phase 2 – Authentication
 
 <details>
 <summary><b>Keycloak</b> — SSO & IAM</summary>
@@ -89,7 +88,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 </details>
 
-### Phase 3 – Operations
+### Group 2 – Operations
 
 <details>
 <summary><b>Zabbix</b> — infrastructure monitoring</summary>
@@ -127,7 +126,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 </details>
 
-### Phase 4 – User Services
+### Group 3 – User Services
 
 <details>
 <summary><b>OpenCloud</b> — file sync & share</summary>
