@@ -194,6 +194,9 @@ Everything is written to `/var/log/deploy-<app>.log` so you can audit or debug a
 
 **Zabbix** — uses PostgreSQL 18 from the PGDG repository and Zabbix 7.4 from the official Zabbix repo. EPEL exclusions are applied automatically to prevent package conflicts.
 
+## Labs 
+
+## Blocklists
 
 ## Roadmap
 Future additions planned for AL10:
