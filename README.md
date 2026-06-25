@@ -11,9 +11,7 @@ that do exactly what they say.
 
 [Scripts](#scripts) · [Labs](#labs) · [Blocklists](#blocklists) · [Roadmap](#roadmap)
 
-### Demo
-
-[![asciicast](https://asciinema.org/a/1259067.svg)](https://asciinema.org/a/1259067)
+![Demo Animation](./assets/bstack.gif)
 
 </div>
 
