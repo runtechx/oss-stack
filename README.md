@@ -54,7 +54,7 @@ oss-stack/
 Run as `root` on a fresh **AlmaLinux 10** server. The script will prompt for language, IP, and FQDN.
 
 >[!NOTE]
-> Collapse/expand each service name to reveal the install commands.
+> Collapse/expand each service name to reveal the quick install command.
 
 ### Group 1 – Core Services
 
