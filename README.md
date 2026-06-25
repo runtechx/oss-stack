@@ -16,7 +16,7 @@ that do exactly what they say.
 
 ## What is oss-stack?
 
-**oss-stack** is a curated collection of deployment scripts and lab definitions for building
+**oss-stack** is a curated collection of deployment scripts, blocklists and lab definitions for building
 self-hosted infrastructure stacks on top of AlmaLinux — the enterprise-grade, RHEL-compatible
 Linux distribution.
 
@@ -189,8 +189,15 @@ Everything is written to `/var/log/deploy-<app>.log` so you can audit or debug a
 **Zabbix** — uses PostgreSQL 18 from the PGDG repository and Zabbix 7.4 from the official Zabbix repo. EPEL exclusions are applied automatically to prevent package conflicts.
 
 
+## Roadmap
+Future additions planned for AL10:
 
-
+- [ ] Cachet
+- [ ] Gitea — self-hosted Git
+- [ ] Nextcloud — alternative to OpenCloud for broader plugin ecosystem
+- [ ] Mattermost — team messaging
+- [ ] MantisB'T
+- [ ] openQA ??
 
 ## License
 
