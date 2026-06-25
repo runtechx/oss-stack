@@ -50,15 +50,6 @@ oss-stack/
 Run as `root` on a fresh **AlmaLinux 10** server. The script will prompt for language, IP, and FQDN.
 
 <details>
-<summary><b>BookStack</b> — team wiki</summary>
-
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/bookstack_al10.sh)
-```
-
-</details>
-
-<details>
 <summary><b>FreeIPA</b> — identity & DNS</summary>
 
 ```bash
@@ -68,10 +59,10 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 </details>
 
 <details>
-<summary><b>GLPI</b> — ITSM & asset management</summary>
+<summary><b>NetBox</b> — network source of truth</summary>
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/glpi_al10.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/netbox_al10.sh)
 ```
 
 </details>
@@ -85,11 +76,21 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 </details>
 
+
 <details>
-<summary><b>NetBox</b> — network source of truth</summary>
+<summary><b>BookStack</b> — team wiki</summary>
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/netbox_al10.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/bookstack_al10.sh)
+```
+
+</details>
+
+<details>
+<summary><b>GLPI</b> — ITSM & asset management</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/glpi_al10.sh)
 ```
 
 </details>
