@@ -95,7 +95,6 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 
 
-
 ### Group 2 – Operations
 
 <details>
@@ -198,12 +197,13 @@ Everything is written to `/var/log/deploy-<app>.log` so you can audit or debug a
 ## Roadmap
 Future additions planned for AL10:
 
-- [ ] Cachet
+- [ ] Cachet — open-source status page
 - [ ] Gitea — self-hosted Git
 - [ ] Nextcloud — alternative to OpenCloud for broader plugin ecosystem
+- [ ] Grafana + Prometheus — metrics and alerting stack
 - [ ] Mattermost — team messaging
-- [ ] MantisB'T
-- [ ] openQA ??
+- [ ] MantisBT — issue and bug tracker
+
 
 ## License
 
