@@ -49,6 +49,8 @@ oss-stack/
 
 Run as `root` on a fresh **AlmaLinux 10** server. The script will prompt for language, IP, and FQDN.
 
+### Phase 1 – Core Services
+
 <details>
 <summary><b>FreeIPA</b> — identity & DNS</summary>
 
@@ -68,6 +70,17 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 </details>
 
 <details>
+<summary><b>Passbolt</b> — team password manager</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/passbolt_al10.sh)
+```
+
+</details>
+
+### Phase 2 – Authentication
+
+<details>
 <summary><b>Keycloak</b> — SSO & IAM</summary>
 
 ```bash
@@ -76,39 +89,13 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 </details>
 
+### Phase 3 – Operations
 
 <details>
-<summary><b>BookStack</b> — team wiki</summary>
+<summary><b>Zabbix</b> — infrastructure monitoring</summary>
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/bookstack_al10.sh)
-```
-
-</details>
-
-<details>
-<summary><b>GLPI</b> — ITSM & asset management</summary>
-
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/glpi_al10.sh)
-```
-
-</details>
-
-<details>
-<summary><b>OpenCloud</b> — file sync & share</summary>
-
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/opencloud_al10.sh)
-```
-
-</details>
-
-<details>
-<summary><b>Passbolt</b> — team password manager</summary>
-
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/passbolt_al10.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/zabbix_al10.sh)
 ```
 
 </details>
@@ -123,6 +110,35 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 </details>
 
 <details>
+<summary><b>GLPI</b> — ITSM & asset management</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/glpi_al10.sh)
+```
+
+</details>
+
+<details>
+<summary><b>BookStack</b> — team wiki</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/bookstack_al10.sh)
+```
+
+</details>
+
+### Phase 4 – User Services
+
+<details>
+<summary><b>OpenCloud</b> — file sync & share</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/opencloud_al10.sh)
+```
+
+</details>
+
+<details>
 <summary><b>WordPress</b> — CMS</summary>
 
 ```bash
@@ -131,14 +147,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 </details>
 
-<details>
-<summary><b>Zabbix</b> — infrastructure monitoring</summary>
 
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/zabbix_al10.sh)
-```
-
-</details>
 
 
 ### What every script does
