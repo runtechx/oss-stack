@@ -63,6 +63,15 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 </details>
 
 <details>
+<summary><b>Keycloak</b> — SSO & IAM</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/keycloak_al10.sh)
+```
+
+</details>
+
+<details>
 <summary><b>NetBox</b> — network source of truth</summary>
 
 ```bash
@@ -81,14 +90,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 </details>
 
 
-<details>
-<summary><b>Keycloak</b> — SSO & IAM</summary>
 
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/keycloak_al10.sh)
-```
-
-</details>
 
 ### Group 2 – Operations
 
