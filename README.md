@@ -2,7 +2,7 @@
 
 # oss-stack
 
-**The open-source stack we use. Packaged so you can deploy it too.**
+**Self-host a professional IT infrastructure with the open-source stack we use.**
 
 
 [Scripts](#scripts) · [Labs](#labs) · [Blocklists](#blocklists) · [Roadmap](#roadmap)
