@@ -14,7 +14,11 @@
 
 oss-stack is a collection of scripts, blocklists, and labs you can run to self-host your own professional IT infrastructure. 
 
+The goal is to take a freshly provisioned AlmaLinux server and have a real, working, production-capable service running on it in a few minutes.
 
+No containers, no cloud lock-in, no licensing fees — just clean, reproducible bash scripts that do exactly what they say.
+
+## What's in this repo?
 ```
 oss-stack/
 ├── scripts/       # One-command deploys for AlmaLinux 10+
