@@ -36,8 +36,8 @@ oss-stack is a good fit if you:
 
 ## Why not use containers exclusively?
 
-Installing directly on the OS gives you a system that behaves exactly as documented — no networking quirks, no volume mounts, no daemon in between. Services run as native systemd units, log to standard paths, and integrate with the OS the way the upstream project intended.
-That makes a difference when something goes wrong. You're not debugging a container layer on top of a misconfiguration — you're looking directly at the service, its config files, and its logs. Easier to understand, easier to audit, easier to hand off to someone else.
+Running services directly on the OS removes an abstraction layer between you and what you're managing. You get native systemd integration, standard log paths, and services that behave exactly as upstream documented — nothing in between. That means more control over configuration, easier troubleshooting, and a clearer picture of what's actually running on your system.
+Some projects in this repo may only be available as containers. Where that's the case, containers are used. But when a native install is viable, that's the default.
 
 
 ## Scripts
