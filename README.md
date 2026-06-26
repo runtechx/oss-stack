@@ -143,7 +143,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 <summary><b>Nextcloud</b> — file sync & share with a broader plugin ecosystem</summary>
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/opencloud_al10.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/nextcloud_al10.sh)
 ```
 
 </details>
