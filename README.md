@@ -19,7 +19,7 @@ oss-stack is a collection of scripts, blocklists, and labs you can run to self-h
 
 ```
 oss-stack/
-├── scripts/       # One-command deploys for AlmaLinux 10+
+├── scripts/       # Deployment scripts for AlmaLinux 10+
 ├── blocklists/    # Domain and IP blocklists for firewalls, fail2ban, and DNS
 └── labs/          # Lab environments to guide you through testing the stack
 ```
