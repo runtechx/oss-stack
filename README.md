@@ -2,8 +2,9 @@
 
 # oss-stack
 
-**Self-host a professional IT infrastructure with the open-source stack we use.**
+**Build your own open-source software stack.**
 
+*Self-host a professional IT infrastructure with the open-source stack we use.*
 
 [Scripts](#scripts) · [Labs](#labs) · [Blocklists](#blocklists) · [Roadmap](#roadmap)
 
@@ -12,20 +13,16 @@
 
 ## What is oss-stack?
 
-oss-stack is a collection of scripts, blocklists, and labs you can run to self-host your own professional IT infrastructure. 
-
-The goal is to take a freshly provisioned AlmaLinux server and have a real, working, production-capable service running on it in a few minutes.
-
-No containers, no cloud lock-in, no licensing fees — just clean, reproducible bash scripts that do exactly what they say.
+oss-stack is a collection of scripts, blocklists, and labs you can run to self-host a professional IT infrastructure.
 
 ## What's in this repo?
+
 ```
 oss-stack/
 ├── scripts/       # One-command deploys for AlmaLinux 10+
 ├── blocklists/    # Domain and IP blocklists for firewalls, fail2ban, and DNS
-└── labs/          # Lab environments to guide you through testing the stack (WIP)
+└── labs/          # Lab environments to guide you through testing the stack
 ```
-
 
 ## Who is this for?
 
@@ -37,9 +34,10 @@ oss-stack is a good fit if you:
 - Want to teach or demo open-source stacks without spending hours on documentation
 
 
-## Why no containers?
+## Why not use containers exclusively?
 
-Every service is installed and configured directly on the OS. No container runtime, no compose files — just a clean system with a running service you can inspect, configure, and troubleshoot without an abstraction layer in the way. That's a deliberate choice: it's easier to understand, audit, and support infrastructure you can see.
+Installing directly on the OS gives you a system that behaves exactly as documented — no networking quirks, no volume mounts, no daemon in between. Services run as native systemd units, log to standard paths, and integrate with the OS the way the upstream project intended.
+That makes a difference when something goes wrong. You're not debugging a container layer on top of a misconfiguration — you're looking directly at the service, its config files, and its logs. Easier to understand, easier to audit, easier to hand off to someone else.
 
 
 ## Scripts
@@ -151,7 +149,6 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 </details>
 
 
-
 ## Labs
 
 Guided lab environments to help you test and understand each element of the stack in context — how the services relate, how to validate them, and what a complete deployment looks like end to end. This section is actively being built.
@@ -173,6 +170,9 @@ blocklists/
 ```
 
 
+## Requirements
+
+Most services run comfortably on a 2-vCPU / 2 GB RAM VPS. Wazuh is the exception — see the note above.
 
 
 ## Roadmap
@@ -187,6 +187,7 @@ Planned additions for AL10:
 - [ ] Nextcloud — alternative to OpenCloud for a broader plugin ecosystem
 
 Pull requests and issue reports are welcome.
+
 
 ## License
 
