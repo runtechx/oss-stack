@@ -140,6 +140,15 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 </details>
 
 <details>
+<summary><b>Nextcloud</b> — file sync & share with a broader plugin ecosystem</summary>
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/opencloud_al10.sh)
+```
+
+</details>
+
+<details>
 <summary><b>WordPress</b> — CMS</summary>
 
 ```bash
@@ -184,7 +193,7 @@ Planned additions for AL10:
 - [ ] Grafana + Prometheus — metrics and alerting
 - [ ] MantisBT — issue and bug tracker
 - [ ] Mattermost — team messaging
-- [ ] Nextcloud — alternative to OpenCloud for a broader plugin ecosystem
+- [X] Nextcloud — alternative to OpenCloud for a broader plugin ecosystem
 
 Pull requests and issue reports are welcome.
 
