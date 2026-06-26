@@ -36,13 +36,11 @@ oss-stack is a good fit if you:
 - Are building a homelab or a customer environment and want a solid, known-good starting point
 - Want to teach or demo open-source stacks without spending hours on documentation
 
----
 
 ## Why no containers?
 
 Every service is installed and configured directly on the OS. No container runtime, no compose files — just a clean system with a running service you can inspect, configure, and troubleshoot without an abstraction layer in the way. That's a deliberate choice: it's easier to understand, audit, and support infrastructure you can see.
 
----
 
 ## Scripts
 
