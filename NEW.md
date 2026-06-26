@@ -12,6 +12,8 @@
 
 ## What is oss-stack?
 
+oss-stack is a collection of scripts, blocklists, and labs you can run to self-host your own professional IT infrastructure. 
+
 
 ```
 oss-stack/
@@ -146,13 +148,12 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 </details>
 
----
+
 
 ## Labs
 
 Guided lab environments to help you test and understand each element of the stack in context — how the services relate, how to validate them, and what a complete deployment looks like end to end. This section is actively being built.
 
----
 
 ## Blocklists
 
@@ -169,13 +170,8 @@ blocklists/
     └── n3.txt         # Shared IP list — node 3
 ```
 
----
 
-## Requirements
 
-Most services run comfortably on a 2-vCPU / 2 GB RAM VPS. Wazuh is the exception — see the note above.
-
----
 
 ## Roadmap
 
@@ -189,8 +185,6 @@ Planned additions for AL10:
 - [ ] Nextcloud — alternative to OpenCloud for a broader plugin ecosystem
 
 Pull requests and issue reports are welcome.
-
----
 
 ## License
 
