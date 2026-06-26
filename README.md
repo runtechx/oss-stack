@@ -1,62 +1,57 @@
 <div align="center">
 
-# runtechx / oss-stack
+# oss-stack
 
-**Self-hosted open-source infrastructure, deployed in minutes.**
+**The open-source stack we use. Packaged so you can deploy it too.**
 
-Take a freshly provisioned AlmaLinux server and have a real, working, production-capable service running on it in a few minutes.
-
-No containers, no cloud lock-in, no licensing fees — just clean, reproducible bash scripts
-that do exactly what they say.
 
 [Scripts](#scripts) · [Labs](#labs) · [Blocklists](#blocklists) · [Roadmap](#roadmap)
-
-![Demo Animation](./assets/bstack.gif)
 
 </div>
 
 
 ## What is oss-stack?
 
-**oss-stack** is a curated collection of deployment scripts, blocklists and lab definitions for building
-self-hosted infrastructure stacks on top of AlmaLinux — the enterprise-grade, RHEL-compatible
-Linux distribution.
+oss-stack is a collection of scripts, blocklists, and labs you can run to self-host your own professional IT infrastructure. 
 
-The goal is simple: take a freshly provisioned AlmaLinux server and have a real, working,
-production-capable service running on it in a few minutes — fully configured, firewall open,
-SELinux policies applied, and credentials saved to `/root/`.
+The goal is to take a freshly provisioned AlmaLinux server and have a real, working, production-capable service running on it in a few minutes.
 
-This is useful if you:
-
-- Run on-premises infrastructure and want reproducible, auditable deployments
-- Need to stand up internal tools (ITSM, monitoring, identity, wiki, SIEM) without paying for SaaS
-- Are building a homelab or a customer environment and want a known-good starting point
-- Want to teach or demo open-source stacks without spending hours on documentation
-
-Every script in this repo is written to be read, not just run. If something goes wrong,
-the deploy log tells you where, and the script logic tells you why.
-
-
+No containers, no cloud lock-in, no licensing fees — just clean, reproducible bash scripts that do exactly what they say.
 
 ## What's in this repo?
-
 ```
 oss-stack/
-├── scripts/          # Deployment scripts for AlmaLinux 10+
-├── blocklists/       # Domain and IP blocklists
-└── labs/             # Pre-defined lab environments (work in progress)
+├── scripts/       # One-command deploys for AlmaLinux 10+
+├── blocklists/    # Domain and IP blocklists for firewalls, fail2ban, and DNS
+└── labs/          # Lab environments to guide you through testing the stack (WIP)
 ```
 
+
+## Who is this for?
+
+oss-stack is a good fit if you:
+
+- Run on-premises infrastructure and want reproducible, auditable deployments
+- Need to stand up internal tools — ITSM, monitoring, identity, wiki, SIEM — without paying for SaaS
+- Are building a homelab or a customer environment and want a solid, known-good starting point
+- Want to teach or demo open-source stacks without spending hours on documentation
+
+
+## Why no containers?
+
+Every service is installed and configured directly on the OS. No container runtime, no compose files — just a clean system with a running service you can inspect, configure, and troubleshoot without an abstraction layer in the way. That's a deliberate choice: it's easier to understand, audit, and support infrastructure you can see.
 
 
 ## Scripts
 
-Run as `root` on a fresh **AlmaLinux 10** server. The script will prompt for language, IP, and FQDN.
+![Demo Animation](./assets/bstack.gif)
 
->[!NOTE]
-> Collapse/expand each service name to reveal the quick install command.
+Run as `root` on a fresh **AlmaLinux 10** server. Each script prompts for the required inputs — language, IP, FQDN — and handles the rest.
 
-### Group 1 – Core Services
+> [!NOTE]
+> Expand each service to reveal the one-line install command.
+
+#### Group 1 — Core services
 
 <details>
 <summary><b>FreeIPA</b> — identity & DNS</summary>
@@ -94,9 +89,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 </details>
 
-
-
-### Group 2 – Operations
+#### Group 2 — Operations
 
 <details>
 <summary><b>Zabbix</b> — infrastructure monitoring</summary>
@@ -113,6 +106,9 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/wazuh_al10.sh)
 ```
+
+> [!NOTE]
+> Wazuh requires a minimum of 4 cores, 8 GB RAM, and 50 GB free disk.
 
 </details>
 
@@ -134,7 +130,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 </details>
 
-### Group 3 – User Services
+#### Group 3 — User services
 
 <details>
 <summary><b>OpenCloud</b> — file sync & share</summary>
@@ -156,58 +152,41 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 
 
+## Labs
 
-### What every script does
+Guided lab environments to help you test and understand each element of the stack in context — how the services relate, how to validate them, and what a complete deployment looks like end to end. This section is actively being built.
 
-All scripts follow the same eight-step pattern:
-
-```
-1  Language selection     PT / EN / FR — prompts and output adapt automatically
-2  User prompts           Server IP, FQDN, any app-specific inputs
-3  System update          dnf update -y before anything is installed
-4  Stack install          Packages, database, web server, app — in order
-5  SELinux                fcontext labels + booleans for every writable path
-6  Firewall               firewall-cmd --permanent rules (if firewalld is active)
-7  Service enable         systemctl enable --now for all required services
-8  Credentials file       /root/<app>-credentials.txt — mode 600 — always
-```
-
-Everything is written to `/var/log/deploy-<app>.log` so you can audit or debug any step.
-
-### Notable design decisions
-
-**BookStack** — uses `bookstack-system-cli download-vendor` so Composer is not required on the host.
-
-**FreeIPA** — derives the Kerberos realm from the domain automatically. A valid FQDN must be set as the system hostname before running.
-
-**GLPI** — installs PHP 8.5 from the Remi repository and runs `bin/console db:install` non-interactively. Loads MariaDB timezone tables and patches the `mysql.time_zone_name` grant.
-
-**Keycloak** — detects the latest GitHub release at runtime. Runs `kc.sh build` before first start and runs as a dedicated system user under systemd.
-
-**NetBox** — uses **Valkey** (the Redis-compatible successor shipped in AlmaLinux 10 AppStream) instead of Redis. Generates a self-signed TLS certificate and serves over HTTPS from day one.
-
-**OpenCloud** — deploys a pre-built Go binary with no PHP or database dependency. Requires HTTPS and a real FQDN because the embedded OIDC issuer is bound to `OC_URL`. The script writes a loopback `/etc/hosts` entry so the internal OIDC callback resolves correctly.
-
-**Passbolt** — installs from source via Composer because the official repo-setup script does not yet support AlmaLinux 10. Generates the GPG server key automatically. Admin account is created through the browser wizard on first visit.
-
-**Wazuh** — supports two modes chosen at runtime: **Server** (Indexer + Manager + Dashboard, all-in-one) or **Agent** (auto-enrolled, points at an existing Manager). The Wazuh repository is disabled after installation to prevent accidental upgrades.
-
-**Zabbix** — uses PostgreSQL 18 from the PGDG repository and Zabbix 7.4 from the official Zabbix repo. EPEL exclusions are applied automatically to prevent package conflicts.
-
-## Labs 
 
 ## Blocklists
 
+Maintained IP and domain blocklists for use with fail2ban, firewalls, and DNS resolvers.
+
+```
+blocklists/
+├── domain-bl.txt      # 0.0.0.0 <domain> format — Pi-hole / AdGuard / /etc/hosts
+├── ip-bl.txt          # Compiled IP list — firewall rules / IPSET
+└── nodes/
+    ├── n0.txt         # Shared IP list — node 0
+    ├── n1.txt         # Shared IP list — node 1
+    ├── n2.txt         # Shared IP list — node 2
+    └── n3.txt         # Shared IP list — node 3
+```
+
+
+
+
 ## Roadmap
-Future additions planned for AL10:
 
-- [ ] Cachet — open-source status page
+Planned additions for AL10:
+
+- [ ] Cachet — status page
 - [ ] Gitea — self-hosted Git
-- [ ] Nextcloud — alternative to OpenCloud for broader plugin ecosystem
-- [ ] Grafana + Prometheus — metrics and alerting stack
-- [ ] Mattermost — team messaging
+- [ ] Grafana + Prometheus — metrics and alerting
 - [ ] MantisBT — issue and bug tracker
+- [ ] Mattermost — team messaging
+- [ ] Nextcloud — alternative to OpenCloud for a broader plugin ecosystem
 
+Pull requests and issue reports are welcome.
 
 ## License
 
