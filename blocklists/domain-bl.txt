@@ -21,3 +21,9 @@
 0.0.0.0 whiskpopclickgetnow.monster
 0.0.0.0 miniroad.store
 0.0.0.0 jerkpopdownloadsecret.monster
+0.0.0.0 snarepopinstantfile.monster
+0.0.0.0 1osb.com
+0.0.0.0 rcdn-web.com
+0.0.0.0 clladss.com
+0.0.0.0 theirgult.cyou
+
