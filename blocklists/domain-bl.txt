@@ -15,3 +15,4 @@
 0.0.0.0 hummerleaked.cyou
 0.0.0.0 rm358.com
 0.0.0.0 bacchiccupule.qpon
+0.0.0.0 shikosharply.shop
