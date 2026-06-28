@@ -6,3 +6,4 @@
 0.0.0.0 784bcct.life
 0.0.0.0 rm358.com
 0.0.0.0 drimzzzz.info
+0.0.0.0 i.ytimg.com
