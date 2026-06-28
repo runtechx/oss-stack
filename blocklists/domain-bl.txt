@@ -10,3 +10,4 @@
 0.0.0.0 datadoghq.com
 0.0.0.0 omegatootler.rest
 0.0.0.0 newsboydurance.cfd
+0.0.0.0 v2006.com
