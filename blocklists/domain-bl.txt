@@ -9,3 +9,4 @@
 0.0.0.0 i.ytimg.com
 0.0.0.0 datadoghq.com
 0.0.0.0 omegatootler.rest
+0.0.0.0 newsboydurance.cfd
