@@ -26,4 +26,5 @@
 0.0.0.0 rcdn-web.com
 0.0.0.0 clladss.com
 0.0.0.0 theirgult.cyou
+0.0.0.0 trappopbuttonrightnow.monster
 
