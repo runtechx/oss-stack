@@ -8,3 +8,4 @@
 0.0.0.0 drimzzzz.info
 0.0.0.0 i.ytimg.com
 0.0.0.0 datadoghq.com
+0.0.0.0 omegatootler.rest
