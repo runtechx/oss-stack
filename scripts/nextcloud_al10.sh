@@ -146,7 +146,7 @@ DB_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
 MYSQL_ROOT_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
 LOG="/var/log/deploy-nextcloud.log"
 CRED_FILE="/root/nextcloud-credentials.txt"
-NC_ARCHIVE_URL="https://download.nextcloud.com/server/releases/latest.tar.bz2"
+NC_ARCHIVE_URL="https://download.nextcloud.com/server/releases/latest.zip"
 
 log_section() {
     echo "" >> "$LOG"
@@ -192,7 +192,7 @@ log_section "STEP 1: System Update & Prerequisites"
 {
     dnf update -y
     dnf install -y \
-        wget curl tar bzip2 unzip \
+        wget curl unzip \
         php php-cli php-fpm \
         php-bcmath php-ctype php-curl php-dom php-exif php-fileinfo \
         php-gd php-gmp php-iconv php-intl php-json php-ldap \
@@ -258,21 +258,21 @@ echo "${MSG_STEP3}"
 log_section "STEP 3: Download & Install Nextcloud"
 {
     mkdir -p /tmp/nc-install
-    wget -q "${NC_ARCHIVE_URL}"        -O /tmp/nc-install/nextcloud-latest.tar.bz2
-    wget -q "${NC_ARCHIVE_URL}.sha256" -O /tmp/nc-install/nextcloud-latest.tar.bz2.sha256
+    wget -q "${NC_ARCHIVE_URL}"        -O /tmp/nc-install/nextcloud-latest.zip
+    wget -q "${NC_ARCHIVE_URL}.sha256" -O /tmp/nc-install/nextcloud-latest.zip.sha256
 
     # Nextcloud's .sha256 file contains only the hash (no filename).
     # Compare it directly against the downloaded archive.
     cd /tmp/nc-install
-    EXPECTED_HASH=$(awk '{print $1}' nextcloud-latest.tar.bz2.sha256)
-    ACTUAL_HASH=$(sha256sum nextcloud-latest.tar.bz2 | awk '{print $1}')
+    EXPECTED_HASH=$(awk '{print $1}' nextcloud-latest.zip.sha256)
+    ACTUAL_HASH=$(sha256sum nextcloud-latest.zip | awk '{print $1}')
     if [[ "$EXPECTED_HASH" != "$ACTUAL_HASH" ]]; then
         echo "  ERROR: Checksum mismatch — aborting."
         exit 1
     fi
     echo "  Checksum verified."
 
-    tar -xjf nextcloud-latest.tar.bz2 -C /var/www/
+    unzip -q nextcloud-latest.zip -d /var/www/
     mv /var/www/nextcloud "${INSTALL_DIR}"
 
     # Dedicated data directory outside web root
