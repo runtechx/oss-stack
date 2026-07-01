@@ -11,7 +11,7 @@ set -e
 # -----------------------------
 # LANGUAGE SELECTION
 # -----------------------------
-clear
+# clear <--- clear: command not found, does not exist on lxc yet
 echo "============================================================"
 echo "  LXC Base Setup — AlmaLinux 10"
 echo "============================================================"
