@@ -164,6 +164,7 @@ log_section "STEP 1: Base Packages"
         less \
         man \
         jq \
+        fastfetch \
         htop \
         atop \
         iotop \
@@ -247,6 +248,7 @@ if [[ "$CONTAINER_TYPE" == "template" ]]; then
 
     # Reset machine-id (regenerated on first boot)
     truncate -s 0 /etc/machine-id
+    mkdir -p /var/lib/dbus
     rm -f /var/lib/dbus/machine-id
     ln -sf /etc/machine-id /var/lib/dbus/machine-id
 
