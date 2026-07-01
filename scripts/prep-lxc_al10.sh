@@ -11,7 +11,6 @@ set -e
 # -----------------------------
 # LANGUAGE SELECTION
 # -----------------------------
-
 echo "============================================================"
 echo "  LXC Base Setup — AlmaLinux 10"
 echo "============================================================"
@@ -238,32 +237,27 @@ if [[ "$CONTAINER_TYPE" == "template" ]]; then
     echo "  ${MSG_NEXTSTEP_TEMPLATE}"
     echo "============================================================"
 
-    {
-        echo "  ${MSG_TEMPLATE_CLEAN}"
+    # Truncate all log files
+    find /var/log -type f -exec truncate -s 0 {} \;
 
-        # Truncate all log files
-        find /var/log -type f -exec truncate -s 0 {} \;
+    # Remove bash history
+    rm -f /root/.bash_history
+    find /home -name ".bash_history" -exec rm -f {} \;
+    history -c
 
-        # Remove bash history
-        rm -f /root/.bash_history
-        find /home -name ".bash_history" -exec rm -f {} \;
-        history -c
+    # Reset machine-id (regenerated on first boot)
+    truncate -s 0 /etc/machine-id
+    rm -f /var/lib/dbus/machine-id
+    ln -sf /etc/machine-id /var/lib/dbus/machine-id
 
-        # Reset machine-id (regenerated on first boot)
-        truncate -s 0 /etc/machine-id
-        rm -f /var/lib/dbus/machine-id
-        ln -sf /etc/machine-id /var/lib/dbus/machine-id
-
-        # Clean package cache and temp files
-        dnf clean all
-        rm -rf /var/cache/dnf
-        rm -rf /tmp/* /var/tmp/*
-
-        echo "  System cleaned. Shutting down."
-    } >> "$LOG" 2>&1
+    # Clean package cache and temp files
+    dnf clean all
+    rm -rf /var/cache/dnf
+    rm -rf /tmp/* /var/tmp/*
 
     echo "  ${MSG_TEMPLATE_SHUTDOWN}"
-    shutdown now
+    sync
+    poweroff -f
 
 else
     echo "  ${MSG_NEXTSTEP_NORMAL}"
