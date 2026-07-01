@@ -11,7 +11,7 @@ set -e
 # -----------------------------
 # LANGUAGE SELECTION
 # -----------------------------
-# clear <--- clear: command not found, does not exist on lxc yet
+
 echo "============================================================"
 echo "  LXC Base Setup — AlmaLinux 10"
 echo "============================================================"
@@ -144,6 +144,16 @@ echo ""
 echo "${MSG_STEP1}"
 log_section "STEP 1: Base Packages"
 {
+    # Fix DNF mirrors — AlmaLinux repo files ship with "# baseurl=" (space
+    # after #) which keeps the broken mirrorlist active. This enables the
+    # official repo.almalinux.org baseurl and disables the mirrorlist.
+    sed -i \
+        -e 's|^mirrorlist=|#mirrorlist=|' \
+        -e 's|^# baseurl=|baseurl=|' \
+        /etc/yum.repos.d/almalinux*.repo
+    dnf clean all
+    echo "  DNF mirrors fixed."
+
     dnf install -y epel-release
     /usr/bin/crb enable
 
@@ -168,7 +178,6 @@ log_section "STEP 1: Base Packages"
         nmap \
         mtr \
         whois \
-        fastfecth \
         ethtool \
         strace \
         lsof \
