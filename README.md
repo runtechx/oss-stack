@@ -56,7 +56,7 @@ Run as `root` on a fresh **AlmaLinux 10** server. Each script prompts for the re
 <summary><b>Prep Almalinux 10</b> — Container</summary>
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/prep-lcx_al10.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scripts/prep-lxc_al10.sh)
 ```
 
 </details>
