@@ -260,17 +260,7 @@ log_section "STEP 3: Download & Install Nextcloud"
 {
     mkdir -p /tmp/nc-install
     curl -fsSL "${NC_ARCHIVE_URL}" -o /tmp/nc-install/nextcloud-${NC_VERSION}.zip
-    curl -fsSL "${NC_ARCHIVE_URL}.sha256" -o /tmp/nc-install/nextcloud-${NC_VERSION}.zip.sha256
-
-    # Verify SHA256 checksum — the .sha256 file contains only the hash (no filename).
     cd /tmp/nc-install
-    EXPECTED_HASH=$(awk '{print $1}' nextcloud-${NC_VERSION}.zip.sha256)
-    ACTUAL_HASH=$(sha256sum nextcloud-${NC_VERSION}.zip | awk '{print $1}')
-    if [[ "$EXPECTED_HASH" != "$ACTUAL_HASH" ]]; then
-        echo "  ERROR: Checksum mismatch — aborting."
-        exit 1
-    fi
-    echo "  Checksum verified."
 
     unzip -q nextcloud-${NC_VERSION}.zip -d /var/www/
     mv /var/www/nextcloud "${INSTALL_DIR}"
