@@ -146,7 +146,8 @@ DB_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
 MYSQL_ROOT_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
 LOG="/var/log/deploy-nextcloud.log"
 CRED_FILE="/root/nextcloud-credentials.txt"
-NC_ARCHIVE_URL="https://download.nextcloud.com/server/releases/latest.zip"
+NC_VERSION="34.0.1"
+NC_ARCHIVE_URL="https://download.nextcloud.com/server/releases/nextcloud-${NC_VERSION}.zip"
 
 log_section() {
     echo "" >> "$LOG"
@@ -258,21 +259,20 @@ echo "${MSG_STEP3}"
 log_section "STEP 3: Download & Install Nextcloud"
 {
     mkdir -p /tmp/nc-install
-    wget -q "${NC_ARCHIVE_URL}"        -O /tmp/nc-install/nextcloud-latest.zip
-    wget -q "${NC_ARCHIVE_URL}.sha256" -O /tmp/nc-install/nextcloud-latest.zip.sha256
+    curl -fsSL "${NC_ARCHIVE_URL}" -o /tmp/nc-install/nextcloud-${NC_VERSION}.zip
+    curl -fsSL "${NC_ARCHIVE_URL}.sha256" -o /tmp/nc-install/nextcloud-${NC_VERSION}.zip.sha256
 
-    # Nextcloud's .sha256 file contains only the hash (no filename).
-    # Compare it directly against the downloaded archive.
+    # Verify SHA256 checksum — the .sha256 file contains only the hash (no filename).
     cd /tmp/nc-install
-    EXPECTED_HASH=$(awk '{print $1}' nextcloud-latest.zip.sha256)
-    ACTUAL_HASH=$(sha256sum nextcloud-latest.zip | awk '{print $1}')
+    EXPECTED_HASH=$(awk '{print $1}' nextcloud-${NC_VERSION}.zip.sha256)
+    ACTUAL_HASH=$(sha256sum nextcloud-${NC_VERSION}.zip | awk '{print $1}')
     if [[ "$EXPECTED_HASH" != "$ACTUAL_HASH" ]]; then
         echo "  ERROR: Checksum mismatch — aborting."
         exit 1
     fi
     echo "  Checksum verified."
 
-    unzip -q nextcloud-latest.zip -d /var/www/
+    unzip -q nextcloud-${NC_VERSION}.zip -d /var/www/
     mv /var/www/nextcloud "${INSTALL_DIR}"
 
     # Dedicated data directory outside web root
@@ -307,11 +307,9 @@ log_section "STEP 3: Download & Install Nextcloud"
     sudo -u apache php "${INSTALL_DIR}/occ" config:system:set \
         default_phone_region --value="PT"
 
-    NC_VERSION=$(sudo -u apache php "${INSTALL_DIR}/occ" --version 2>/dev/null | awk '{print $NF}' || echo "unknown")
     echo "  Nextcloud ${NC_VERSION} installed."
 } >> "$LOG" 2>&1
 
-NC_VERSION=$(sudo -u apache php "${INSTALL_DIR}/occ" --version 2>/dev/null | awk '{print $NF}' || echo "unknown")
 
 # -----------------------------
 # STEP 4: PHP-FPM & Nginx
