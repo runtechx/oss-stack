@@ -207,10 +207,16 @@ log_section "STEP 2: SSH & Firewall"
     systemctl enable --now sshd
     echo "  SSH configured."
 
-    systemctl enable --now firewalld
-    firewall-cmd --permanent --add-service=ssh
-    firewall-cmd --reload
-    echo "  Firewall configured."
+    systemctl enable firewalld
+    systemctl start firewalld || true
+    sleep 3
+    if systemctl is-active --quiet firewalld; then
+        firewall-cmd --permanent --add-service=ssh
+        firewall-cmd --reload
+        echo "  Firewall configured."
+    else
+        echo "  firewalld not running — skipping firewall rules (common in LXC)."
+    fi
 } >> "$LOG" 2>&1
 
 # -----------------------------
