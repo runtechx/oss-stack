@@ -261,12 +261,15 @@ log_section "STEP 3: Download & Install Nextcloud"
     wget -q "${NC_ARCHIVE_URL}"        -O /tmp/nc-install/nextcloud-latest.tar.bz2
     wget -q "${NC_ARCHIVE_URL}.sha256" -O /tmp/nc-install/nextcloud-latest.tar.bz2.sha256
 
-    # The sha256 file references the original versioned filename (e.g. nextcloud-30.0.0.tar.bz2).
-    # Extract that name and create a symlink so sha256sum can find it.
+    # Nextcloud's .sha256 file contains only the hash (no filename).
+    # Compare it directly against the downloaded archive.
     cd /tmp/nc-install
-    NC_ORIG_NAME=$(awk '{print $2}' nextcloud-latest.tar.bz2.sha256)
-    ln -sf nextcloud-latest.tar.bz2 "${NC_ORIG_NAME}"
-    sha256sum -c nextcloud-latest.tar.bz2.sha256
+    EXPECTED_HASH=$(awk '{print $1}' nextcloud-latest.tar.bz2.sha256)
+    ACTUAL_HASH=$(sha256sum nextcloud-latest.tar.bz2 | awk '{print $1}')
+    if [[ "$EXPECTED_HASH" != "$ACTUAL_HASH" ]]; then
+        echo "  ERROR: Checksum mismatch — aborting."
+        exit 1
+    fi
     echo "  Checksum verified."
 
     tar -xjf nextcloud-latest.tar.bz2 -C /var/www/
