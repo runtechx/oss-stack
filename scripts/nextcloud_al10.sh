@@ -58,9 +58,7 @@ case "$LANG_CHOICE" in
         MSG_PROMPT_IP="Endereço IP do servidor"
         MSG_PROMPT_URL="URL de acesso (FQDN ou IP)"
         MSG_PROMPT_ADMINUSER="Utilizador administrador do Nextcloud"
-        MSG_PROMPT_ADMINPASS="Password do administrador (mín. 8 caracteres)"
         MSG_WARN_TIME="A instalação pode demorar vários minutos — por favor aguarde."
-        MSG_ERR_PASS="ERRO: A password deve ter pelo menos 8 caracteres."
         ;;
     3)
         MSG_TITLE="Installation Nextcloud — AlmaLinux 10"
@@ -96,9 +94,7 @@ case "$LANG_CHOICE" in
         MSG_PROMPT_IP="Adresse IP du serveur"
         MSG_PROMPT_URL="URL d'accès (FQDN ou IP)"
         MSG_PROMPT_ADMINUSER="Utilisateur administrateur Nextcloud"
-        MSG_PROMPT_ADMINPASS="Mot de passe administrateur (min. 8 caractères)"
         MSG_WARN_TIME="L'installation peut prendre plusieurs minutes — veuillez patienter."
-        MSG_ERR_PASS="ERREUR : Le mot de passe doit contenir au moins 8 caractères."
         ;;
     *)
         # Default: English (option 2 or any invalid input)
@@ -135,9 +131,7 @@ case "$LANG_CHOICE" in
         MSG_PROMPT_IP="Server IP address"
         MSG_PROMPT_URL="Access URL (FQDN or IP)"
         MSG_PROMPT_ADMINUSER="Nextcloud admin username"
-        MSG_PROMPT_ADMINPASS="Admin password (min. 8 characters)"
         MSG_WARN_TIME="Installation may take several minutes — please wait."
-        MSG_ERR_PASS="ERROR: Password must be at least 8 characters."
         ;;
 esac
 
@@ -182,12 +176,7 @@ ACCESS_URL=${ACCESS_URL:-$(hostname -f)}
 read -rp "  ${MSG_PROMPT_ADMINUSER} (admin): " NC_ADMIN_USER
 NC_ADMIN_USER=${NC_ADMIN_USER:-admin}
 
-while true; do
-    read -rsp "  ${MSG_PROMPT_ADMINPASS}: " NC_ADMIN_PASS
-    echo ""
-    if [ ${#NC_ADMIN_PASS} -ge 8 ]; then break; fi
-    echo "  ${MSG_ERR_PASS}"
-done
+NC_ADMIN_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)
 
 echo ""
 echo "  ${MSG_SERVERIP}: ${SERVER_IP}"  | tee -a "$LOG"
@@ -269,12 +258,15 @@ echo "${MSG_STEP3}"
 log_section "STEP 3: Download & Install Nextcloud"
 {
     mkdir -p /tmp/nc-install
-    wget -q "${NC_ARCHIVE_URL}" -O /tmp/nc-install/nextcloud-latest.tar.bz2
+    wget -q "${NC_ARCHIVE_URL}"        -O /tmp/nc-install/nextcloud-latest.tar.bz2
     wget -q "${NC_ARCHIVE_URL}.sha256" -O /tmp/nc-install/nextcloud-latest.tar.bz2.sha256
 
-    # Verify checksum
+    # The sha256 file references the original versioned filename (e.g. nextcloud-30.0.0.tar.bz2).
+    # Extract that name and create a symlink so sha256sum can find it.
     cd /tmp/nc-install
-    sha256sum -c nextcloud-latest.tar.bz2.sha256 --ignore-missing
+    NC_ORIG_NAME=$(awk '{print $2}' nextcloud-latest.tar.bz2.sha256)
+    ln -sf nextcloud-latest.tar.bz2 "${NC_ORIG_NAME}"
+    sha256sum -c nextcloud-latest.tar.bz2.sha256
     echo "  Checksum verified."
 
     tar -xjf nextcloud-latest.tar.bz2 -C /var/www/
