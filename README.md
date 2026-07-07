@@ -4,7 +4,7 @@
 
 **learn · deploy · operate**
 
-*A public repository dedicated to helping organizations, students, and IT professionals learn, deploy, and operate production-ready on-premises infrastructure through hands-on guides, lab environments, and deployment automation using open-source technologies.*
+*A public repository dedicated to helping organizations, students, and IT professionals learn, deploy, and operate a production-ready, open-source on-premises infrastructure stack through hands-on guides, lab environments, and deployment automation.*
 
 [Scripts](#scripts) · [Labs](#labs) · [Blocklists](#blocklists) · [Roadmap](#roadmap)
 
@@ -13,7 +13,7 @@
 
 ## What is oss-stack?
 
-oss-stack is a public repository dedicated to helping organizations, students, and IT professionals **learn, deploy, and operate** production-ready on-premises infrastructure through hands-on guides, lab environments, and deployment automation using open-source technologies.
+oss-stack is a public repository dedicated to helping organizations, students, and IT professionals **learn, deploy, and operate** a production-ready, **open-source** on-premises infrastructure stack through hands-on guides, lab environments, and deployment automation.
 
 ## What's in this repo?
 
