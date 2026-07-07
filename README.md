@@ -2,9 +2,9 @@
 
 # oss-stack
 
-**Build your own open-source software stack.**
+**learn · deploy · operate**
 
-*Self-host a professional IT infrastructure with the open-source stack we use.*
+*A public repository dedicated to helping organizations, students, and IT professionals learn, deploy, and operate production-ready on-premises infrastructure through hands-on guides, lab environments, and deployment automation using open-source technologies.*
 
 [Scripts](#scripts) · [Labs](#labs) · [Blocklists](#blocklists) · [Roadmap](#roadmap)
 
@@ -13,26 +13,29 @@
 
 ## What is oss-stack?
 
-oss-stack is a collection of scripts, blocklists, and labs you can run to self-host a professional IT infrastructure.
+oss-stack is a public repository dedicated to helping organizations, students, and IT professionals **learn, deploy, and operate** production-ready on-premises infrastructure through hands-on guides, lab environments, and deployment automation using open-source technologies.
 
 ## What's in this repo?
 
 ```
 oss-stack/
-├── assets/        # Images, diagrams, and branding for docs
+├── guides/        # Hands-on guides for learning and operating the stack
 ├── scripts/       # Deployment scripts for AlmaLinux 10+
-├── blocklists/    # Domain and IP blocklists for firewalls, fail2ban, and DNS
-└── labs/          # Lab environments to guide you through testing the stack
+├── labs/          # Lab files for testing the stack
+├── blocklists/    # Domain and IP blocklists to help you reinforce your systems protection
+└── assets/        # Images, diagrams, and other misc files
 ```
 
 ## Who is this for?
 
 oss-stack is a good fit if you:
 
+- Want to **learn** how a production-grade open-source stack is built, piece by piece
 - Run on-premises infrastructure and want reproducible, auditable deployments
 - Need to stand up internal tools — ITSM, monitoring, identity, wiki, SIEM — without paying for SaaS
 - Are building a homelab or a customer environment and want a solid, known-good starting point
 - Want to teach or demo open-source stacks without spending hours on documentation
+- Are a student or IT professional looking for hands-on, guided practice rather than just documentation
 
 
 ## Why not use containers exclusively?
@@ -170,7 +173,9 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 
 ## Labs
 
-Guided lab environments to help you test and understand each element of the stack in context — how the services relate, how to validate them, and what a complete deployment looks like end to end. This section is actively being built.
+Guided lab environments to help you **learn** and **operate** each element of the stack in context — how the services relate, how to validate them, and what a complete deployment looks like end to end.
+
+This folder holds Vagrantfiles, OpenTofu configs, Ansible playbooks, Vagrant provisioning files, and any other tooling aimed at the same goal: spinning up a reproducible lab to practice against. This section is actively being built.
 
 
 ## Blocklists
