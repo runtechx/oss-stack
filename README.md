@@ -1,3 +1,9 @@
+<div align="right">
+
+[![pt](https://img.shields.io/badge/lang-pt-009739?style=flat-square)](README.pt.md) [![fr](https://img.shields.io/badge/lang-fr-0055A4?style=flat-square)](README.fr.md)
+
+</div>
+
 <div align="center">
 
 # oss-stack
