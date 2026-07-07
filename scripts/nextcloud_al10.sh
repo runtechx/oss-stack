@@ -263,7 +263,6 @@ log_section "STEP 3: Download & Install Nextcloud"
     cd /tmp/nc-install
 
     unzip -q nextcloud-${NC_VERSION}.zip -d /var/www/
-    mv /var/www/nextcloud "${INSTALL_DIR}"
 
     # Dedicated data directory outside web root
     mkdir -p "${DATA_DIR}"
@@ -355,23 +354,9 @@ server {
     server_name ${SERVER_IP} ${ACCESS_URL};
 
     root ${INSTALL_DIR}/;
-    index index.php index.html;
+    index index.php;
 
     client_max_body_size 16G;
-    fastcgi_buffers 64 4K;
-
-    gzip on;
-    gzip_vary on;
-    gzip_comp_level 4;
-    gzip_min_length 256;
-    gzip_proxied expired no-cache no-store private no_last_modified no_etag auth;
-    gzip_types application/atom+xml text/javascript application/javascript
-               application/json application/ld+json application/manifest+json
-               application/rss+xml application/vnd.geo+json application/vnd.ms-fontobject
-               application/wasm application/x-font-ttf application/x-web-app-manifest+json
-               application/xhtml+xml application/xml font/opentype image/bmp
-               image/svg+xml image/x-icon text/cache-manifest text/css text/plain
-               text/vcard text/vnd.rim.location.xloc text/vtt text/x-component text/x-cross-domain-policy;
 
     add_header Referrer-Policy                   "no-referrer"       always;
     add_header X-Content-Type-Options            "nosniff"           always;
@@ -382,52 +367,40 @@ server {
 
     fastcgi_hide_header X-Powered-By;
 
-    location = /robots.txt {
-        allow all;
-        log_not_found off;
-        access_log    off;
-    }
-
-    location ^~ /.well-known {
-        location = /.well-known/carddav { return 301 /remote.php/dav/; }
-        location = /.well-known/caldav  { return 301 /remote.php/dav/; }
-        location ^~ /.well-known        { return 301 /index.php\$uri;  }
-        try_files \$uri \$uri/ =404;
-    }
+    location = /robots.txt { allow all; log_not_found off; access_log off; }
 
     location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)(?:\$|/) { return 404; }
-    location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console)                { return 404; }
+    location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console)               { return 404; }
 
-    location ~ ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|oc[ms]-provider/.+|.+/richdocumentscode/proxy)\.php(?:\$|/) {
+    # Rewrite all requests to index.php front controller.
+    # Using rewrite instead of try_files prevents Nginx from serving
+    # physical directories (e.g. /apps/dashboard/) directly as 403.
+    location / {
+        rewrite ^ /index.php\$request_uri;
+    }
+
+    # Generic PHP handler — covers index.php and all app entry points
+    location ~ \.php(?:\$|/) {
         fastcgi_split_path_info ^(.+?\.php)(/.*)$;
         set \$path_info \$fastcgi_path_info;
         try_files \$fastcgi_script_name =404;
-        include        fastcgi_params;
-        fastcgi_param  SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-        fastcgi_param  PATH_INFO       \$path_info;
-        fastcgi_param  HTTPS           off;
-        fastcgi_param  modHeadersAvailable true;
-        fastcgi_param  front_controller_active true;
-        fastcgi_pass   php-handler;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        fastcgi_param PATH_INFO \$path_info;
+        fastcgi_param HTTPS off;
+        fastcgi_param modHeadersAvailable true;
+        fastcgi_param front_controller_active true;
+        fastcgi_pass php-handler;
         fastcgi_intercept_errors on;
         fastcgi_request_buffering off;
         fastcgi_read_timeout 3600;
         fastcgi_send_timeout 3600;
     }
 
-    location ~ ^/(?:updater|oc[ms]-provider)(?:\$|/) {
-        try_files \$uri/ =404;
-        index index.php;
-    }
-
-    location ~ \.(?:css|js|woff2?|svg|gif|map|png|html|ttf|ico|jpg|jpeg|webp)\$ {
+    location ~ \.(?:css|js|woff2?|svg|gif|png|html|ttf|ico|jpg|jpeg|webp|map)\$ {
         try_files \$uri /index.php\$request_uri;
         expires 6M;
         access_log off;
-    }
-
-    location / {
-        try_files \$uri \$uri/ /index.php\$request_uri;
     }
 
     error_log  /var/log/nginx/nextcloud_error.log;
