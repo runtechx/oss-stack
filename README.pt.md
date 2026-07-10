@@ -12,7 +12,7 @@
 
 *Um repositório público dedicado a ajudar organizações, estudantes e profissionais de TI a aprender, implementar e operar uma infraestrutura on-premises open-source e pronta para produção, através de guias práticos, ambientes de laboratório e automação de deployment.*
 
-[Scripts](#scripts) · [Labs](#labs) · [Blocklists](#blocklists) · [Roadmap](#roadmap)
+[Scripts](#scripts) · [Labs](#labs) · [Roadmap](#roadmap)
 
 </div>
 
@@ -28,7 +28,6 @@ oss-stack/
 ├── guides/        # Guias práticos para aprender e operar a stack
 ├── scripts/       # Scripts de deployment para AlmaLinux 10+
 ├── labs/          # Ficheiros de laboratório para testar a stack
-├── blocklists/    # Listas de domínios e IPs para reforçar a proteção dos seus sistemas
 └── assets/        # Imagens, diagramas e outros ficheiros diversos
 ```
 
@@ -182,23 +181,6 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 Ambientes de laboratório guiados para ajudar a **aprender** e **operar** cada elemento da stack em contexto — como os serviços se relacionam, como validá-los, e como é um deployment completo do início ao fim.
 
 Esta pasta contém Vagrantfiles, configurações OpenTofu, playbooks Ansible, ficheiros de provisionamento Vagrant, e qualquer outra ferramenta com o mesmo objetivo: montar um laboratório reprodutível para praticar. Esta secção está em construção ativa.
-
-
-## Blocklists
-
-Listas de IPs e domínios mantidas para uso com fail2ban, firewalls e resolvers DNS.
-
-```
-blocklists/
-├── domain-bl.txt      # Formato 0.0.0.0 <domínio> — Pi-hole / AdGuard / /etc/hosts
-├── ip-bl.txt          # Lista de IPs compilada — regras de firewall / IPSET
-└── nodes/
-    ├── n0.txt         # Lista de IPs partilhada — nó 0
-    ├── n1.txt         # Lista de IPs partilhada — nó 1
-    ├── n2.txt         # Lista de IPs partilhada — nó 2
-    └── n3.txt         # Lista de IPs partilhada — nó 3
-```
-
 
 ## Requisitos
 
