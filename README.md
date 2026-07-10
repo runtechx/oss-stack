@@ -28,7 +28,6 @@ oss-stack/
 ├── guides/        # Hands-on guides for learning and operating the stack
 ├── scripts/       # Deployment scripts for AlmaLinux 10+
 ├── labs/          # Lab files for testing the stack
-├── blocklists/    # Domain and IP blocklists to help you reinforce your systems protection
 └── assets/        # Images, diagrams, and other misc files
 ```
 
@@ -182,22 +181,6 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 Guided lab environments to help you **learn** and **operate** each element of the stack in context — how the services relate, how to validate them, and what a complete deployment looks like end to end.
 
 This folder holds Vagrantfiles, OpenTofu configs, Ansible playbooks, Vagrant provisioning files, and any other tooling aimed at the same goal: spinning up a reproducible lab to practice against. This section is actively being built.
-
-
-## Blocklists
-
-Maintained IP and domain blocklists for use with fail2ban, firewalls, and DNS resolvers.
-
-```
-blocklists/
-├── domain-bl.txt      # 0.0.0.0 <domain> format — Pi-hole / AdGuard / /etc/hosts
-├── ip-bl.txt          # Compiled IP list — firewall rules / IPSET
-└── nodes/
-    ├── n0.txt         # Shared IP list — node 0
-    ├── n1.txt         # Shared IP list — node 1
-    ├── n2.txt         # Shared IP list — node 2
-    └── n3.txt         # Shared IP list — node 3
-```
 
 
 ## Requirements
