@@ -12,7 +12,7 @@
 
 *A public repository dedicated to helping organizations, students, and IT professionals learn, deploy, and operate a production-ready, open-source on-premises infrastructure stack through hands-on guides, lab environments, and deployment automation.*
 
-[Scripts](#scripts) · [Labs](#labs) · [Blocklists](#blocklists) · [Roadmap](#roadmap)
+[Scripts](#scripts) · [Labs](#labs) · [Roadmap](#roadmap)
 
 </div>
 
