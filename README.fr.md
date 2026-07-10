@@ -12,7 +12,7 @@
 
 *Un dépôt public dédié à aider les organisations, les étudiants et les professionnels de l'IT à apprendre, déployer et exploiter une infrastructure on-premises open-source prête pour la production, à travers des guides pratiques, des environnements de labo et de l'automatisation de déploiement.*
 
-[Scripts](#scripts) · [Labs](#labs) · [Blocklists](#blocklists) · [Roadmap](#roadmap)
+[Scripts](#scripts) · [Labs](#labs) · [Roadmap](#roadmap)
 
 </div>
 
@@ -28,7 +28,6 @@ oss-stack/
 ├── guides/        # Guides pratiques pour apprendre et exploiter la stack
 ├── scripts/       # Scripts de déploiement pour AlmaLinux 10+
 ├── labs/          # Fichiers de labo pour tester la stack
-├── blocklists/    # Listes de domaines et d'IP pour renforcer la protection de vos systèmes
 └── assets/        # Images, diagrammes et autres fichiers divers
 ```
 
@@ -182,23 +181,6 @@ bash <(curl -fsSL https://raw.githubusercontent.com/runtechx/oss-stack/main/scri
 Des environnements de labo guidés pour vous aider à **apprendre** et **exploiter** chaque élément de la stack en contexte — comment les services s'articulent entre eux, comment les valider, et à quoi ressemble un déploiement complet de bout en bout.
 
 Ce dossier contient des Vagrantfiles, des configurations OpenTofu, des playbooks Ansible, des fichiers de provisionnement Vagrant, et tout autre outil visant le même objectif : monter un labo reproductible pour s'entraîner. Cette section est en construction active.
-
-
-## Blocklists
-
-Listes d'IP et de domaines maintenues pour une utilisation avec fail2ban, les pare-feux et les résolveurs DNS.
-
-```
-blocklists/
-├── domain-bl.txt      # Format 0.0.0.0 <domaine> — Pi-hole / AdGuard / /etc/hosts
-├── ip-bl.txt          # Liste d'IP compilée — règles de pare-feu / IPSET
-└── nodes/
-    ├── n0.txt         # Liste d'IP partagée — nœud 0
-    ├── n1.txt         # Liste d'IP partagée — nœud 1
-    ├── n2.txt         # Liste d'IP partagée — nœud 2
-    └── n3.txt         # Liste d'IP partagée — nœud 3
-```
-
 
 ## Prérequis
 
